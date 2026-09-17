@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background: linear-gradient(aquamarine, lightblue);
+            min-height: 100vh;
+            margin: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            transition: 0.5s;
+        }
+
+        body:hover {
+            background: linear-gradient(lightblue, aquamarine);
+        }
+
+        .container {
+            border: 3px solid black;
+            border-radius: 20px;
+            padding: 30px;
+            background-color: beige;
+            text-align: center;
+        }
+
+        .Buttons {
+            background-color: orange;
+            color: black;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .click-me {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .click-me:hover {
+            background-color: #059862;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <b>
+            <center>
+
+                <h1 class="Buttons">HTML Buttons</h1>
+
+                <p>
+                    This is a basic HTML button. It can be clicked,
+                    but it will not do anything until you add an action to it.
+                </p>
+
+                <button class="click-me">Click Me</button>
+
+            </center>
+        </b>
+
+    </div>
+
+</body>
+
+</html>

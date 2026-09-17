@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evenly Colored HTML Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, sans-serif;
+        }
+
+        th,
+        td {
+            border: 2px solid black;
+            padding: 10px;
+              padding-top: 10px;
+              padding-bottom: 20px;
+              padding-left: 30px;
+              padding-right: 40px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgb(15, 193, 187);
+        }
+
+        /* Target individual rows one by one on hover with a smooth transition */
+        tbody tr {
+            transition: background-color 0.3s ease;
+        }
+
+        tbody tr:hover {
+            background-color: rgb(52, 106, 187) !important;
+        }
+
+        /* Individual Row Colors */
+        tbody tr:nth-child(1) {
+            background-color: rgb(197, 16, 46);
+        }
+
+        tbody tr:nth-child(2) {
+            background-color: purple;
+        }
+
+        tbody tr:nth-child(3) {
+            background-color: blue;
+        }
+
+        tbody tr:nth-child(4) {
+            background-color: lightskyblue;
+        }
+
+        tbody tr:nth-child(5) {
+            background-color: turquoise;
+        }
+
+        tbody tr:nth-child(6) {
+            background-color: lightseagreen;
+        }
+
+        tbody tr:nth-child(7) {
+            background-color: lightsalmon;
+        }
+
+        tbody tr:nth-child(8) {
+            background-color: lightcyan;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Prayag Gaikwad</td>
+                <td>Developer</td>
+                <td>900000</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Alice Smith</td>
+                <td>Developer</td>
+                <td>70000</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Bob Jones</td>
+                <td>Designer</td>
+                <td>50000</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Charlie Brown</td>
+                <td>Manager</td>
+                <td>20000</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>David Miller</td>
+                <td>Developer</td>
+                <td>85000</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Emma Watson</td>
+                <td>Designer</td>
+                <td>65000</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Frank Castle</td>
+                <td>Manager</td>
+                <td>95000</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Grace Hopper</td>
+                <td>Developer</td>
+                <td>120000</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
