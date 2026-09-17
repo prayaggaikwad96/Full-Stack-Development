@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Makes the website responsive on phones and tablets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Akira by Katsuhiro Otomo - Manga Story">
+    <meta name="theme-color" content="#111111">
+
+    <title>Akira - Manga Story</title>
+
+    <style>
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            background: #ffffff;
+            color: #111111;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            color: inherit;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .header {
+            width: 100%;
+            background: #111111;
+            color: #ffffff;
+            padding: clamp(20px, 4vw, 40px) 20px;
+            border-bottom: 5px solid #e63946;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: clamp(25px, 5vw, 48px);
+            line-height: 1.15;
+            text-transform: uppercase;
+            letter-spacing: clamp(1px, 0.4vw, 4px);
+            font-weight: bold;
+            word-wrap: break-word;
+        }
+
+        .header h3 {
+            margin: 10px 0 0;
+            font-size: clamp(13px, 2vw, 18px);
+            color: #dddddd;
+        }
+
+
+        /* =====================================================
+           PAGE LAYOUT
+        ===================================================== */
+
+        .content {
+            width: min(1400px, 100%);
+            margin: 0 auto;
+            padding: 20px;
+
+            display: grid;
+
+            /*
+                Desktop:
+                Menu   Main Content   Right Sidebar
+                240px  flexible       280px
+            */
+            grid-template-columns:
+                minmax(180px, 240px) minmax(0, 1fr) minmax(220px, 280px);
+
+            gap: 20px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           LEFT MENU
+        ===================================================== */
+
+        .menu {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            position: sticky;
+            top: 20px;
+        }
+
+        .menuitem {
+            display: block;
+            width: 100%;
+
+            padding: 14px 15px;
+
+            background: #eeeeee;
+            border: 2px solid #111111;
+
+            font-weight: bold;
+            text-decoration: none;
+
+            color: #111111;
+
+            transition:
+                background-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .menuitem:hover,
+        .menuitem:focus {
+            background-color: #e63946;
+            color: #ffffff;
+            transform: translateX(5px);
+            outline: none;
+        }
+
+        .menuitem:active {
+            transform: translateX(2px);
+        }
+
+
+        /* =====================================================
+           MAIN CONTENT
+        ===================================================== */
+
+        .main {
+            width: 100%;
+            min-width: 0;
+        }
+
+        .main h2 {
+            margin: 0 0 15px;
+
+            font-size: clamp(22px, 3vw, 32px);
+            line-height: 1.2;
+
+            text-transform: uppercase;
+        }
+
+        .main p {
+            margin: 0 0 15px;
+
+            font-size: clamp(15px, 1.5vw, 18px);
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           MANGA IMAGE
+        ===================================================== */
+
+        .manga-image {
+            display: block;
+
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+
+            border: clamp(3px, 0.5vw, 5px) solid #111111;
+
+            object-fit: contain;
+
+            margin: 20px 0;
+        }
+
+
+        /* =====================================================
+           SPEECH BUBBLE
+        ===================================================== */
+
+        .speech {
+            position: relative;
+
+            width: 100%;
+
+            background: #ffffff;
+
+            border: 3px solid #111111;
+
+            padding: 15px 18px;
+
+            margin: 25px 0;
+
+            font-size: clamp(16px, 2vw, 20px);
+
+            font-weight: bold;
+        }
+
+        .speech::after {
+            content: "";
+
+            position: absolute;
+
+            bottom: -18px;
+            left: 35px;
+
+            width: 0;
+            height: 0;
+
+            border-width: 15px 10px 0;
+            border-style: solid;
+
+            border-color:
+                #111111 transparent transparent transparent;
+        }
+
+
+        /* =====================================================
+           MANGA PANEL
+        ===================================================== */
+
+        .panel {
+            width: 100%;
+
+            border: 4px solid #111111;
+
+            padding: clamp(15px, 3vw, 25px);
+
+            margin-top: 25px;
+
+            background: #ffffff;
+        }
+
+        .panel-title {
+            font-size: clamp(19px, 2.5vw, 24px);
+
+            font-weight: bold;
+
+            border-bottom: 3px solid #111111;
+
+            padding-bottom: 6px;
+
+            margin-bottom: 15px;
+        }
+
+        .panel p {
+            margin-bottom: 15px;
+        }
+
+        .panel p:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* =====================================================
+           RIGHT INFORMATION PANEL
+        ===================================================== */
+
+        .right {
+            width: 100%;
+
+            background: #f4f4f4;
+
+            padding: 20px;
+
+            border: 3px solid #111111;
+
+            margin: 0;
+
+            overflow-wrap: break-word;
+        }
+
+        .right h2 {
+            margin: 0 0 8px;
+
+            color: #e63946;
+
+            font-size: clamp(19px, 2.5vw, 25px);
+
+            text-transform: uppercase;
+        }
+
+        .right p {
+            margin: 0 0 25px;
+
+            font-size: clamp(14px, 1.4vw, 17px);
+
+            line-height: 1.6;
+        }
+
+        .right p:last-child {
+            margin-bottom: 0;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .footer {
+            width: 100%;
+
+            background: #111111;
+
+            color: #ffffff;
+
+            text-align: center;
+
+            padding: 20px;
+
+            margin-top: 20px;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           LARGE DESKTOP
+           1200px+
+        ===================================================== */
+
+        @media (min-width: 1200px) {
+
+            .content {
+                padding: 30px;
+                gap: 30px;
+            }
+
+            .main h2 {
+                font-size: 34px;
+            }
+        }
+
+
+        /* =====================================================
+           LAPTOP / SMALL DESKTOP
+           801px - 1100px
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .content {
+                grid-template-columns:
+                    180px minmax(0, 1fr) 220px;
+
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .right {
+                padding: 15px;
+            }
+
+            .menuitem {
+                padding: 12px;
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+           601px - 800px
+
+           Menu becomes a horizontal navigation bar.
+           Main content gets full width.
+           Sidebar moves below.
+        ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .content {
+                display: grid;
+
+                grid-template-columns: 1fr;
+
+                gap: 15px;
+
+                padding: 15px;
+            }
+
+            /* Menu becomes horizontal */
+
+            .menu {
+                position: static;
+
+                display: grid;
+
+                grid-template-columns: repeat(4, 1fr);
+
+                gap: 8px;
+            }
+
+            .menuitem {
+                text-align: center;
+
+                padding: 12px 8px;
+
+                font-size: 14px;
+            }
+
+            .menuitem:hover,
+            .menuitem:focus {
+                transform: translateY(-3px);
+            }
+
+            .main {
+                width: 100%;
+            }
+
+            .right {
+                width: 100%;
+            }
+        }
+
+
+        /* =====================================================
+           LARGE MOBILE
+           501px - 600px
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 25px 15px;
+            }
+
+            .content {
+                padding: 12px;
+            }
+
+            .menu {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .menuitem {
+                font-size: 14px;
+                padding: 12px 8px;
+            }
+
+            .main h2 {
+                margin-bottom: 12px;
+            }
+
+            .speech {
+                padding: 13px;
+            }
+
+            .panel {
+                padding: 15px;
+            }
+
+            .right {
+                padding: 15px;
+            }
+        }
+
+
+        /* =====================================================
+           SMALL MOBILE
+           500px AND BELOW
+        ===================================================== */
+
+        @media (max-width: 500px) {
+
+            .header h1 {
+                font-size: 27px;
+                letter-spacing: 1px;
+            }
+
+            .header h3 {
+                font-size: 13px;
+            }
+
+            .content {
+                padding: 10px;
+                gap: 12px;
+            }
+
+            /* One menu item per row */
+
+            .menu {
+                grid-template-columns: 1fr;
+                gap: 7px;
+            }
+
+            .menuitem {
+                width: 100%;
+                text-align: center;
+                padding: 13px;
+            }
+
+            .main h2 {
+                font-size: 23px;
+            }
+
+            .main p {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+
+            .manga-image {
+                border-width: 3px;
+                margin: 15px 0;
+            }
+
+            .speech {
+                font-size: 16px;
+                margin: 20px 0;
+            }
+
+            .panel {
+                border-width: 3px;
+                padding: 13px;
+            }
+
+            .panel-title {
+                font-size: 19px;
+            }
+
+            .right {
+                border-width: 2px;
+                padding: 15px;
+            }
+
+            .right h2 {
+                font-size: 20px;
+            }
+
+            .right p {
+                font-size: 15px;
+            }
+
+            .footer {
+                padding: 15px 10px;
+                font-size: 12px;
+            }
+        }
+
+
+        /* =====================================================
+           VERY SMALL PHONES
+           350px AND BELOW
+        ===================================================== */
+
+        @media (max-width: 350px) {
+
+            .header h1 {
+                font-size: 23px;
+            }
+
+            .content {
+                padding: 7px;
+            }
+
+            .main h2 {
+                font-size: 20px;
+            }
+
+            .main p,
+            .right p {
+                font-size: 14px;
+            }
+
+            .menuitem {
+                font-size: 13px;
+                padding: 11px;
+            }
+        }
+
+
+        /* =====================================================
+           ACCESSIBILITY
+        ===================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+
+
+        /* =====================================================
+           PRINT
+        ===================================================== */
+
+        @media print {
+
+            .menu {
+                display: none;
+            }
+
+            .content {
+                display: block;
+                padding: 0;
+            }
+
+            .right {
+                margin-top: 20px;
+            }
+
+            .footer {
+                color: #000000;
+                background: #ffffff;
+                border-top: 1px solid #000000;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header class="header">
+
+        <h1>Akira By Katsuhiro Otomo</h1>
+
+        <h3>
+            A Manga Story • Chapters
+        </h3>
+
+    </header>
+
+
+    <!-- =====================================================
+         PAGE CONTENT
+    ===================================================== -->
+
+    <div class="content">
+
+
+        <!-- =================================================
+             MENU
+        ================================================= -->
+
+        <nav class="menu" aria-label="Main navigation">
+
+            <a class="menuitem" href="https://akiramanga.com/" target="_blank" rel="noopener noreferrer">
+                Chapters
+            </a>
+
+            <a class="menuitem" href="https://akira.fandom.com/wiki/Category:Characters" target="_blank"
+                rel="noopener noreferrer">
+                Characters
+            </a>
+
+            <a class="menuitem" href="https://akira.fandom.com/wiki/Akira_(manga)" target="_blank"
+                rel="noopener noreferrer">
+                Story
+            </a>
+
+            <a class="menuitem" href="https://www.google.com/search?udm=2&q=akira+manga+images" target="_blank"
+                rel="noopener noreferrer">
+                Gallery
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             MAIN MANGA AREA
+        ================================================= -->
+
+        <main class="main">
+
+            <h2 id="story">
+                Chapter No. 1 — The Highway
+            </h2>
+
+            <p>
+                Nine years later, World War III begins.
+            </p>
+
+
+            <!-- =================================================
+                 MANGA IMAGE
+
+                 IMPORTANT:
+                 Make sure this image exists in the Images
+                 folder relative to this HTML file.
+            ================================================= -->
+
+            <img src="../Images/Akira By Katsuhiro Otomo 004.jpg" alt="Akira manga scene" class="manga-image">
+
+
+            <!-- =================================================
+                 SPEECH BUBBLE
+            ================================================= -->
+
+            <div class="speech">
+                "Tonight... everything changes."
+            </div>
+
+
+            <!-- =================================================
+                 MANGA PANEL
+            ================================================= -->
+
+            <section class="panel">
+
+                <div class="panel-title">
+                    CHAPTERS
+                </div>
+
+                <p>
+                    Ren had always believed that he was an ordinary
+                    teenager.
+                </p>
+
+                <p>
+                    But when strange shadows appeared across the city,
+                    an ancient power awakened inside him.
+                </p>
+
+                <p>
+                    Now he must discover where the power came from
+                    before the mysterious organization known as
+                    <strong>Black Moon</strong> finds him.
+                </p>
+
+            </section>
+
+        </main>
+
+
+        <!-- =================================================
+             RIGHT SIDEBAR
+        ================================================= -->
+
+        <aside class="right" id="characters">
+
+            <h2>Who?</h2>
+
+            <p>
+                <strong>Akira</strong><br>
+                Age: 17<br>
+                Role: Main Character
+            </p>
+
+            <p>
+                Akira is a young boy with small eyes and short,
+                black hair where the fringes cover his eyebrows
+                completely.
+            </p>
+
+            <p>
+                When he first appeared, Akira wore short-sleeved
+                hospital scrubs with closed-toe slippers worn by
+                medical patients.
+            </p>
+
+            <p>
+                Unlike the Espers, due to thirty years of cryogenic
+                sleep, Akira is physically still as young as he was
+                the day the original Tokyo was destroyed, though
+                chronologically he is in his late 40s.
+            </p>
+
+
+            <h2>Where?</h2>
+
+            <p>
+                Neo-Tokyo
+            </p>
+
+
+            <h2>Power?</h2>
+
+            <p>
+                Ren possesses an unknown ability called
+                <strong>Shadow Pulse</strong>.
+            </p>
+
+
+            <h2>Mission?</h2>
+
+            <p>
+                Discover the truth behind his power and stop
+                Black Moon.
+            </p>
+
+        </aside>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="footer" id="gallery">
+
+        Akira By Katsuhiro Otomo © 2026
+
+        <br>
+
+        Customize this website however you want.
+
+    </footer>
+
+
+</body>
+
+</html>
+
+
+
+

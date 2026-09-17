@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Tokyo HTML Card</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, #8bbfe5, transparent 35%),
+                radial-gradient(circle at bottom right, #9ccddb, transparent 40%),
+                linear-gradient(135deg, #356df997, #a2c2e1, #020d22);
+
+            min-height: 100vh;
+            padding: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .card {
+            width: 100%;
+            max-width: 1200px;
+            padding: 30px;
+
+            border-radius: 12px;
+            background: rgb(169, 202, 245);
+
+            box-shadow: 0 4px 12px rgba(159, 153, 153, 0.149);
+
+            text-align: center;
+
+            /* Hover animation */
+            transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        /* Card hover */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+
+            object-fit: cover;
+            border-radius: 8px;
+
+            /* Image animation */
+            transition: transform 0.3s ease;
+        }
+
+        /* Image hover */
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card h2 {
+            margin: 15px 0 10px;
+            font-weight: bold;
+            font-size: clamp(24px, 4vw, 40px);
+        }
+
+        .card p {
+            font-weight: bold;
+            font-size: clamp(16px, 2vw, 22px);
+            margin-bottom: 20px;
+        }
+
+        .card button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+
+            background-color: rgb(125, 155, 239);
+            cursor: pointer;
+
+            font-weight: bold;
+            font-size: 16px;
+
+            transition: background-color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .card button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Button hover */
+        .card button:hover {
+            background-color: #2196a3;
+            transform: scale(1.08);
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 15px;
+                border-radius: 8px;
+            }
+
+            .card img {
+                max-height: 60vh;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+
+            .card,
+            .card img,
+            .card button {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <img src="../Images/Guts in Berserk Quote 10-3.jpg" alt="Tokyo">
+
+
+        <h2> Guts in Berserk by Kentaro Miura </h2>
+
+        <p> “YOU’RE GOING TO BE ALL RIGHT. YOU JUST STUMBLED OVER A STONE IN THE ROAD. IT MEANS NOTHING. YOUR GOAL LIES FAR BEYOND
+        THIS. DOESN’T IT? I’M SURE YOU’LL OVERCOME THIS. YOU’LL WALK AGAIN… SOON.”
+        
+         — GUTS. </p>
+
+        <button>
+            <a href="https://mangadex.org/title/801513ba-a712-498c-8f57-cae55b38cc92/berserk?tab=art" target="_blank">
+                Guts in Berserk by Kentaro Miura 
+            </a>
+        </button>
+
+    </div>
+
+</body>
+
+</html>
