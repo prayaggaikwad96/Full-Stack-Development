@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Tokyo HTML Card</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, #8bbfe5, transparent 35%),
+                radial-gradient(circle at bottom right, #9ccddb, transparent 40%),
+                linear-gradient(135deg, #356df997, #a2c2e1, #020d22);
+
+            min-height: 100vh;
+            padding: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .card {
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+
+            border-radius: 12px;
+            background: rgb(169, 202, 245);
+
+            box-shadow: 0 4px 12px rgba(159, 153, 153, 0.149);
+
+            text-align: center;
+
+            /* Hover animation */
+            transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        /* Card hover */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+
+            object-fit: cover;
+            border-radius: 8px;
+
+            /* Image animation */
+            transition: transform 0.5s ease;
+        }
+
+        /* Image hover */
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card h2 {
+            margin: 15px 0 10px;
+            font-weight: bold;
+            font-size: clamp(24px, 4vw, 40px);
+        }
+
+        .card p {
+            font-weight: bold;
+            font-size: clamp(16px, 2vw, 22px);
+            margin-bottom: 20px;
+        }
+
+        .card button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+
+            background-color: rgb(125, 155, 239);
+            cursor: pointer;
+
+            font-weight: bold;
+            font-size: 16px;
+
+            transition: background-color 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .card button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Button hover */
+        .card button:hover {
+            background-color: #2196a3;
+            transform: scale(1.08);
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 15px;
+                border-radius: 8px;
+            }
+
+            .card img {
+                max-height: 60vh;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+
+            .card,
+            .card img,
+            .card button {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <img src="../Images/the-memory-police-1.jpg" alt="Tokyo">
+
+
+        <h2> The Memory Police
+        Novel by Yōko Ogawa </h2>
+
+        <p> “Memories are a lot tougher than you might think. Just like the hearts that hold them.”
+        ― Yōko Ogawa, The Memory Police
+
+        </p>
+
+        <button>
+            <a href="https://www.amazon.in/Memory-Police-Yoko-Ogawa/dp/1784700444/ref=pd_sbs_d_sccl_1_8/521-8292068-6481814?pd_rd_w=ERcpz&content-id=amzn1.sym.d1406b44-aa69-47e4-9270-f613e12d52dc&pf_rd_p=d1406b44-aa69-47e4-9270-f613e12d52dc&pf_rd_r=JQJC63DXFC1RA4A9JBZA&pd_rd_wg=wXTd2&pd_rd_r=92ee62d3-4ee3-4ebe-9d14-5cc9d8109737&pd_rd_i=1784700444&psc=1" target="_blank">
+                The Memory Police
+                Novel by Yōko Ogawa
+            </a>
+        </button>
+
+    </div>
+
+</body>
+
+</html>

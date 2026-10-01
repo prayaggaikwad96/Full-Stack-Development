@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background:
+                linear-gradient(140deg, rgb(227, 151, 151), rgb(169, 169, 235), rgb(181, 231, 181)),
+                radial-gradient(circle at top left, #53ced5, transparent 35%),
+                radial-gradient(circle at bottom right, #58cff4, transparent 40%);
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            width: 400px;
+            padding: 35px;
+            background:
+                radial-gradient(circle at top left, #53ced5, transparent 35%),
+                radial-gradient(circle at bottom right, #58cff4, transparent 40%),
+                linear-gradient(135deg, #8baec1, #236d9b, #92bdde);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            /* Smooth transition for the box hover effect */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Box Hover Effect */
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Input fields styling and hover/focus */
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #53ced5;
+            box-shadow: 0 0 8px rgba(83, 206, 213, 0.6);
+            outline: none;
+        }
+
+        /* Submit Button Styling */
+        input[type="submit"] {
+            background-color: #236d9b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Submit Button Hover Effect */
+        input[type="submit"]:hover {
+            background-color: #1a5276;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <h2>Text field</h2>
+        <p>The <strong>input type="text"</strong> defines a one-line text input field:</p>
+
+        <form>
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="fname"><br><br>
+
+            <label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lname"><br><br>
+
+            <label for="pname">Password:</label><br>
+            <input type="password" id="pname" name="pname"><br><br>
+
+            <label for="number">Password:</label><br>
+            <input type="password" id="pname" name="pname"><br><br>
+
+            <input type="submit" value="Submit">
+
+        </form>
+
+        <p>Note that the form itself is not visible.</p>
+        <p>Also note that the default width of a text field is 20 characters.</p>
+    </div>
+
+</body>
+
+</html>
+
