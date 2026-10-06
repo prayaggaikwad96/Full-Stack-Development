@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JavaScript Class Attribute</title>
+
+    <style>
+        body {
+            /* Two background colors */
+            background: linear-gradient(to right, powderblue, lightyellow);
+
+            text-align: center;
+            font-family: Arial, sans-serif;
+
+            padding: 30px;
+            margin: 0;
+        }
+
+        /* Main heading */
+        h1 {
+            color: darkblue;
+            margin-bottom: 10px;
+        }
+
+        /* Description */
+        .description {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        /* City headings */
+        .city {
+            background-color: tomato;
+            color: white;
+
+            padding: 15px;
+            margin: 20px auto;
+
+            max-width: 500px;
+
+            border: 2px solid darkred;
+            border-radius: 10px;
+
+            transition: 0.3s;
+        }
+
+        /* Hover effect */
+        .city:hover {
+            background-color: orange;
+            color: black;
+
+            transform: scale(1.05);
+
+            cursor: pointer;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Paragraph styling */
+        .city-info {
+            background-color: white;
+
+            max-width: 500px;
+
+            margin: 10px auto 30px;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        /* Paragraph hover */
+        .city-info:hover {
+            background-color: lightcyan;
+
+            transform: scale(1.02);
+
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Button */
+        button {
+            background-color: darkblue;
+            color: white;
+
+            border: none;
+            border-radius: 8px;
+
+            padding: 12px 25px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin: 15px;
+
+            transition: 0.3s;
+        }
+
+        /* Button hover */
+        button:hover {
+            background-color: orange;
+            color: black;
+
+            transform: scale(1.08);
+
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Use of The class Attribute in JavaScript</h1>
+
+    <p class="description">
+        Click the button to hide or show all elements with the class name
+        <b>"city"</b>.
+    </p>
+
+    <button onclick="myFunction()">Hide / Show Cities</button>
+
+    <h2 class="city">London</h2>
+    <p class="city-info">
+        London is the capital of England.
+    </p>
+
+    <h2 class="city">Paris</h2>
+    <p class="city-info">
+        Paris is the capital of France.
+    </p>
+
+    <h2 class="city">Tokyo</h2>
+    <p class="city-info">
+        Tokyo is the capital of Japan.
+    </p>
+
+    <script>
+        function myFunction() {
+
+            // Get all elements with class="city"
+            var x = document.getElementsByClassName("city");
+
+            // Loop through every city element
+            for (var i = 0; i < x.length; i++) {
+
+                if (x[i].style.display === "none") {
+                    x[i].style.display = "block";
+                } else {
+                    x[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

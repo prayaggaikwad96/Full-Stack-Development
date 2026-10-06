@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Form</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+
+            background:
+                radial-gradient(circle at top left, powderblue, transparent 40%),
+                radial-gradient(circle at top right, rgb(232, 152, 232), transparent 40%),
+                linear-gradient(135deg,
+                    rgb(161, 211, 233),
+                    rgb(99, 201, 224),
+                    rgb(143, 173, 241));
+
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .box {
+            width: 100%;
+            max-width: 600px;
+            min-height: 20vh;
+            padding: 20px;
+            background-color: rgba(136, 191, 223, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        .gender {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .gender label {
+            margin-right: 15px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #387ce1;
+            color: white;
+            font-family: inherit;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #245fae;
+        }
+
+        @media (max-width: 500px) {
+            .box {
+                padding: 20px;
+            }
+
+            .gender {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h2>Basic HTML Form</h2>
+
+        <form>
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname"
+                   placeholder="Enter Your First Name" required>
+
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname"
+                   placeholder="Enter Your Last Name" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"
+                   placeholder="Enter Your Password" required>
+
+            <label>Gender:</label>
+
+            <div class="gender">
+                <input type="radio" id="male" name="gender"
+                       value="male" required>
+                <label for="male">Male</label>
+
+                <input type="radio" id="female" name="gender"
+                       value="female">
+                <label for="female">Female</label>
+
+                <input type="radio" id="other" name="gender"
+                       value="other">
+                <label for="other">Other</label>
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html> 

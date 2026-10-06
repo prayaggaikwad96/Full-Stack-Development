@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Borders | HTML Learning</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5d687d;
+      --surface: #ffffff;
+      --page: #eef3f8;
+      --line: #9aabc0;
+      --accent: #176b87;
+      --accent-soft: #e1f1f5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 48px 20px;
+      color: var(--ink);
+      background: radial-gradient(circle at top left, #dceef1, var(--page) 42%);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    main {
+      width: min(920px, 100%);
+      margin: 0 auto;
+      padding: clamp(24px, 5vw, 48px);
+      background: var(--surface);
+      border: 1px solid #d5e0eb;
+      border-radius: 8px;
+      box-shadow: 0 18px 50px rgba(23, 32, 51, 0.1);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.25rem); line-height: 1.05; }
+
+    .intro {
+      max-width: 62ch;
+      margin: 16px 0 32px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.65;
+    }
+
+    .table-frame { overflow-x: auto; border: 3px solid var(--accent); border-radius: 6px; }
+
+    table {
+      width: 100%;
+      min-width: 520px;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+      text-align: left;
+    }
+
+    caption { padding: 14px 18px; color: var(--muted); background: #f8fbfc; font-family: Arial, sans-serif; font-size: 0.9rem; text-align: left; }
+    th, td { padding: 16px 18px; border: 1px solid var(--line); }
+    th { color: #ffffff; background: var(--accent); font-size: 0.82rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    tbody tr:nth-child(even) { background: var(--accent-soft); }
+    tbody tr:hover { background: #d3e9ee; }
+
+    @media (max-width: 600px) {
+      body { padding: 20px 12px; }
+      main { padding: 24px 16px; }
+      th, td { padding: 13px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">CSS borders</p>
+    <h1>Table with a border</h1>
+    <p class="intro">Use the <strong>border</strong> property to separate the table, its headings, and its cells. The outer border frames the table while the lighter inner borders keep each value easy to scan.</p>
+
+    <div class="table-frame">
+      <table>
+        <caption>Team directory</caption>
+        <thead>
+          <tr>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Age</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr>
+        <td>Jill</td>
+        <td>Smith</td>
+        <td>50</td>
+      </tr>
+      <tr>
+        <td>Eve</td>
+        <td>Jackson</td>
+        <td>94</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Doe</td>
+        <td>80</td>
+      </tr>
+      <tr>
+        <td> Mary</td>
+        <td>Johnson</td>
+        <td>28</td>
+      </tr>
+      <tr>                                                
+        <td>Jonathan</td>
+        <td>Williams</td>
+        <td>35</td>
+      </tr>
+      <tr>
+        <td>Michael</td>
+        <td>Brown</td>
+        <td>42</td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+    
+</body>
+</html>

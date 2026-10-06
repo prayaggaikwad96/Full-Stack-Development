@@ -1,0 +1,109 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ID Attribute Example</title>
+
+    <style>
+        /* Full page styling */
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: Arial, sans-serif;
+
+            /* Two-color background */
+            background: linear-gradient(to right, powderblue, lightyellow);
+
+            text-align: center;
+        }
+
+        /* Main heading */
+        h2 {
+            background-color: darkcyan;
+            color: white;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 600px;
+        }
+
+        /* Paragraph styling */
+        p {
+            background-color: white;
+            color: black;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            font-weight: bold;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Styling using the ID */
+        #myHeader {
+            background-color: lightblue;
+            color: black;
+
+            padding: 40px;
+            margin: 30px auto;
+
+            max-width: 600px;
+
+            text-align: center;
+            font-weight: bold;
+
+            border: 3px solid darkblue;
+            border-radius: 15px;
+
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+
+            transition: 0.3s;
+        }
+
+        /* Hover effect */
+        #myHeader:hover {
+            background-color: orange;
+            color: white;
+
+            transform: scale(1.05);
+
+            cursor: pointer;
+
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Hover effect for heading */
+        h2:hover {
+            background-color: teal;
+            transform: scale(1.02);
+            transition: 0.3s;
+        }
+
+        /* Hover effect for paragraph */
+        p:hover {
+            background-color: lightcyan;
+            transform: translateY(-3px);
+            transition: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>The id Attribute</h2>
+
+    <p>
+        Use CSS to style an element with the
+        <strong>id "myHeader"</strong>.
+    </p>
+
+    <h1 id="myHeader">My Header</h1>
+
+</body>
+
+</html>
+```

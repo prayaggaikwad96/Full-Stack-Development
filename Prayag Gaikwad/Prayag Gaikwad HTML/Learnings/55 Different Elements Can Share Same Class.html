@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Same Class Example</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            text-align: center;
+
+            /* Two background colors */
+            background: linear-gradient(to right, powderblue, lightyellow);
+
+            font-family: Arial, sans-serif;
+        }
+
+        .city {
+            background-color: tomato;
+            color: white;
+
+            /* Space inside the element */
+            padding: 15px;
+
+            /* Space outside the element */
+            margin: 15px auto;
+
+            max-width: 600px;
+
+            border: 2px solid black;
+            border-radius: 10px;
+
+            font-weight: bold;
+
+            /* Smooth hover animation */
+            transition: 0.3s;
+        }
+
+        /* Hover effect */
+        .city:hover {
+            background-color: orange;
+            color: black;
+
+            transform: scale(1.05);
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+            cursor: pointer;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Different Elements Can Share Same Class</h2>
+
+    <p>
+        Even if the two elements do not have the same tag name,
+        they can both point to the same class and get the same CSS styling.
+    </p>
+
+    <h2 class="city">Paris</h2>
+
+    <p class="city">
+        Paris is the capital of France.
+    </p>
+
+</body>
+
+</html>
+
