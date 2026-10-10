@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body{
+            background-color: beige;
+        }
+        /* unvisited link */
+        a:link {
+            color: red;
+        }
+
+        /* visited link */
+        a:visited {
+            color: green;
+        }
+
+        /* mouse over link */
+        a:hover {
+            color: hotpink;
+        }
+
+        /* selected link */
+        a:active {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Style a link depending on state</h1>
+
+    <p><a href="https://getadblock.com/en/" target="_blank"> Ad Block </a></p>
+
+    <p><b>Note:</b> :hover must come after :link and :visited in order to be effective.</p>
+    <p><b>Note:</b> :active must come after :hover in order to be effective.</p>
+
+</body>
+
+</html>
