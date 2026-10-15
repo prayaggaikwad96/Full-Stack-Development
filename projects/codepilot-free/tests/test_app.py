@@ -125,6 +125,20 @@ class CodePilotApiTests(unittest.TestCase):
         self.assertTrue(all(item["role"] in {"system", "user", "assistant"} for item in sent["messages"]))
         self.assertNotIn("This role is not accepted from clients", str(sent["messages"]))
 
+    def test_chat_returns_json_error_when_ollama_is_offline(self):
+        original = codepilot.OLLAMA_BASE_URL
+        try:
+            codepilot.OLLAMA_BASE_URL = "http://127.0.0.1:1"
+            status, content_type, body = self.request(
+                "/api/chat", "POST",
+                {"model": "test-coder:latest", "messages": [{"role": "user", "content": "Hi"}]},
+            )
+        finally:
+            codepilot.OLLAMA_BASE_URL = original
+        self.assertEqual(status, 503)
+        self.assertEqual(content_type, "application/json")
+        self.assertIn("Local AI connection failed", json.loads(body)["error"])
+
     def test_invalid_chat_requests_are_rejected(self):
         status, _, body = self.request("/api/chat", "POST", {"model": "", "messages": []})
         self.assertEqual(status, 400)
