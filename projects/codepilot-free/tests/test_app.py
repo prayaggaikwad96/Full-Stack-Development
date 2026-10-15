@@ -55,7 +55,10 @@ class CodePilotApiTests(unittest.TestCase):
         cls.fake_ollama_thread = threading.Thread(target=cls.fake_ollama.serve_forever, daemon=True)
         cls.fake_ollama_thread.start()
         codepilot.OLLAMA_BASE_URL = f"http://127.0.0.1:{cls.fake_ollama.server_port}"
-        cls.server = ThreadingHTTPServer(("127.0.0.1", 0), codepilot.CodePilotHandler)
+        handler_class = getattr(codepilot, "CodePilotHandler", getattr(codepilot, "Handler", None))
+        if handler_class is None:
+            raise RuntimeError("The CodePilot HTTP handler was not found")
+        cls.server = ThreadingHTTPServer(("127.0.0.1", 0), handler_class)
         cls.server_thread = threading.Thread(target=cls.server.serve_forever, daemon=True)
         cls.server_thread.start()
         cls.base = f"http://127.0.0.1:{cls.server.server_port}"
