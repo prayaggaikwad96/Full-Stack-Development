@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import socket
 import threading
 import unittest
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -128,9 +129,23 @@ class CodePilotApiTests(unittest.TestCase):
         self.assertEqual(status, 400)
 
     def test_oversized_body_and_unknown_api_are_rejected(self):
-        status, _, body = self.request("/api/chat", "POST", raw=b"x" * (2 * 1024 * 1024 + 1))
-        self.assertEqual(status, 413)
-        self.assertIn("2 MiB", json.loads(body)["error"])
+        # Send only headers: reject the declared size before reading a body.
+        with socket.create_connection(("127.0.0.1", self.server.server_port), timeout=3) as sock:
+            sock.sendall((
+                "POST /api/chat HTTP/1.1\r\nHost: localhost\r\n"
+                "Content-Type: application/json\r\nContent-Length: 2097153\r\n"
+                "Connection: close\r\n\r\n"
+            ).encode())
+            chunks = []
+            while True:
+                part = sock.recv(4096)
+                if not part:
+                    break
+                chunks.append(part)
+        response = b"".join(chunks)
+        headers, body = response.split(b"\r\n\r\n", 1)
+        self.assertIn(b" 413 ", headers.split(b"\r\n", 1)[0])
+        self.assertIn(b"2 MiB", body)
         status, _, body = self.request("/api/not-a-route")
         self.assertEqual(status, 404)
         self.assertIn("not found", json.loads(body)["error"].lower())
