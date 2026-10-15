@@ -33,7 +33,7 @@ function highlightSource(value,filename){
  let output="",last=0,match;
  while((match=pattern.exec(value))!==null){
   output+=esc(value.slice(last,match.index));const token=match[0],safe=esc(token);let cls="";
-  if(/^(<!--|\/\*|\/\/|#)/.test(token))cls="tok-comment";
+  if(/^(<!--|\/\*|\/\/)/.test(token)||(["Python","Shell","YAML"].includes(language)&&/^#/.test(token)))cls="tok-comment";
   else if(/^(["'])/.test(token))cls="tok-string";
   else if(language==="HTML"&&token.startsWith("<")){output+='<span class="tok-tag">'+safe.replace(/(\s[A-Za-z_:][-\w:.]*)(=)/g,'<span class="tok-attr">$1</span>$2')+'</span>';last=pattern.lastIndex;continue}
   else if(/^#[0-9a-f]{3,8}$/i.test(token)||/^\d/.test(token))cls="tok-number";
