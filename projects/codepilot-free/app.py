@@ -213,8 +213,19 @@ class Handler(SimpleHTTPRequestHandler):
         body = encoded({"model": model.strip(), "messages": clean, "stream": True, "options": {"temperature": 0.2}})
         request = urllib.request.Request(f"{OLLAMA_BASE_URL}/api/chat", data=body,
             headers={"Content-Type": "application/json", "Accept": "application/x-ndjson"}, method="POST")
+        headers_sent = False
         try:
-            with urllib.request.urlopen(request, timeout=240) as response:
+            response = urllib.request.urlopen(request, timeout=240)
+        except urllib.error.HTTPError as exc:
+            detail = exc.read(1200).decode("utf-8", errors="replace")
+            self._send_json(502, {"error": f"Ollama returned HTTP {exc.code}", "detail": detail[:400]})
+            return
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            self._send_json(503, {"error": "Local AI connection failed", "detail": str(exc)[:300]})
+            return
+
+        try:
+            with response:
                 self.send_response(200)
                 self.send_header("Content-Type", "text/event-stream; charset=utf-8")
                 self.send_header("Cache-Control", "no-cache, no-transform")
@@ -222,6 +233,7 @@ class Handler(SimpleHTTPRequestHandler):
                 self.send_header("Connection", "close")
                 self.close_connection = True
                 self.end_headers()
+                headers_sent = True
                 done: dict[str, Any] = {"done": True, "model": model.strip(), "duration_ms": 0}
                 for line in response:
                     if not line.strip():
@@ -232,26 +244,23 @@ class Handler(SimpleHTTPRequestHandler):
                         continue
                     delta = chunk.get("message", {}).get("content", "")
                     if delta:
-                        self.wfile.write(b"data: " + encoded({"delta": delta}) + b"\n\n")
+                        packet = json_bytes({"delta": delta})
+                        self.wfile.write(b"data: " + packet + b"\n\n")
                         self.wfile.flush()
                     if chunk.get("done"):
-                        done = {"done": True, "model": chunk.get("model", model.strip()),
-                            "duration_ms": round(chunk.get("total_duration", 0) / 1_000_000)}
-                self.wfile.write(b"data: " + encoded(done) + b"\n\n")
+                        done = {"done": True, "model": chunk.get("model", model.strip()), "duration_ms": round(chunk.get("total_duration", 0) / 1_000_000)}
+                self.wfile.write(b"data: " + json_bytes(done) + b"\n\n")
                 self.wfile.flush()
-        except urllib.error.HTTPError as exc:
-            detail = exc.read(1200).decode("utf-8", errors="replace")
-            try:
-                self.wfile.write(b"data: " + encoded({"error": f"Ollama returned HTTP {exc.code}: {detail[:400]}"}) + b"\n\n")
-                self.wfile.flush()
-            except (BrokenPipeError, ConnectionResetError, OSError):
-                pass
-        except (urllib.error.URLError, TimeoutError, OSError) as exc:
-            try:
-                self.wfile.write(b"data: " + encoded({"error": f"Local AI connection failed: {str(exc)[:300]}"}) + b"\n\n")
-                self.wfile.flush()
-            except (BrokenPipeError, ConnectionResetError, OSError):
-                pass
+        except (urllib.error.URLError, TimeoutError, OSError, ValueError) as exc:
+            message = {"error": f"Local AI stream interrupted: {str(exc)[:300]}"}
+            if not headers_sent:
+                self._send_json(503, message)
+            else:
+                try:
+                    self.wfile.write(b"data: " + json_bytes(message) + b"\n\n")
+                    self.wfile.flush()
+                except (BrokenPipeError, ConnectionResetError, OSError):
+                    pass
 
     def _export_project(self) -> None:
         payload = self._read_json(MAX_PROJECT_BYTES)
