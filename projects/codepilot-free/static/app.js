@@ -25,13 +25,11 @@ function renderFiles(){
 }
 function openFile(n){if(!(n in state.files))return;state.files[state.active]=$("#codeEditor").value;state.active=n;$("#codeEditor").value=state.files[n];$("#currentFileCrumb").textContent=n;$("#languageLabel").textContent=lang(n);$("#languageFooter").textContent=lang(n);$("#languageIcon").textContent=lang(n).slice(0,3).toUpperCase();$("#previewPanel").hidden=true;renderFiles();metrics();}
 function highlightSource(value,filename){
- const language=lang(filename);
- const keywords="\\b(?:const|let|var|function|return|if|else|for|while|class|new|import|from|export|default|async|await|try|catch|throw|def|print|True|False|None|pass|with|as|yield|lambda|public|private|static|void|int|string|boolean|interface|type|extends|implements|SELECT|FROM|WHERE|INSERT|UPDATE|DELETE)\\b";
- let pattern;
+ const language=lang(filename);let pattern;
  if(language==="HTML")pattern=/(<!--[\\s\\S]*?-->|<!doctype[^>]*>|<\\/?[A-Za-z][^>]*>)/gi;
  else if(language==="CSS")pattern=/(\\/\\*[\\s\\S]*?\\*\\/|"(?:\\\\.|[^"\\\\])*"|'(?:\\\\.|[^'\\\\])*'|#[0-9a-fA-F]{3,8}\\b|\\b[-\\w]+(?=\\s*:)|\\b\\d+(?:\\.\\d+)?(?:px|rem|em|vh|vw|%)?\\b)/g;
- else if(["Python","Shell","YAML"].includes(language))pattern=new RegExp("(#[^\\n]*|\\\"(?:\\\\\\\\.|[^\\\"\\\\\\\\])*\\\"|'(?:\\\\\\\\.|[^'\\\\\\\\])*'|"+keywords+"|\\\\b\\\\d+(?:\\\\.\\\\d+)?\\\\b|\\\\b[A-Za-z_$][\\\\w$]*(?=\\\\s*\\\\())","gi");
- else pattern=new RegExp("(\\\\/\\\\*[\\\\s\\\\S]*?\\\\*\\\\/|\\\\/\\\\/[^\\n]*|\\\"(?:\\\\\\\\.|[^\\\"\\\\\\\\])*\\\"|'(?:\\\\\\\\.|[^'\\\\\\\\])*'|"+keywords+"|\\\\b\\\\d+(?:\\\\.\\\\d+)?\\\\b|\\\\b[A-Za-z_$][\\\\w$]*(?=\\\\s*\\\\())","gi");
+ else if(["Python","Shell","YAML"].includes(language))pattern=/(#[^\\n]*|"(?:\\\\.|[^"\\\\])*"|'(?:\\\\.|[^'\\\\])*'|\\b(?:const|let|var|function|return|if|else|for|while|class|new|import|from|export|default|async|await|try|catch|throw|def|print|True|False|None|pass|with|as|yield|lambda|public|private|static|void|int|string|boolean|interface|type|extends|implements|SELECT|FROM|WHERE|INSERT|UPDATE|DELETE)\\b|\\b\\d+(?:\\.\\d+)?\\b|\\b[A-Za-z_$][\\w$]*(?=\\s*\\())/gi;
+ else pattern=/(\\/\\*[\\s\\S]*?\\*\\/|\\/\\/[^\\n]*|"(?:\\\\.|[^"\\\\])*"|'(?:\\\\.|[^'\\\\])*'|\\b(?:const|let|var|function|return|if|else|for|while|class|new|import|from|export|default|async|await|try|catch|throw|def|print|True|False|None|pass|with|as|yield|lambda|public|private|static|void|int|string|boolean|interface|type|extends|implements|SELECT|FROM|WHERE|INSERT|UPDATE|DELETE)\\b|\\b\\d+(?:\\.\\d+)?\\b|\\b[A-Za-z_$][\\w$]*(?=\\s*\\())/gi;
  let output="",last=0,match;
  while((match=pattern.exec(value))!==null){
   output+=esc(value.slice(last,match.index));const token=match[0],safe=esc(token);let cls="";
@@ -39,7 +37,7 @@ function highlightSource(value,filename){
   else if(/^(["'])/.test(token))cls="tok-string";
   else if(language==="HTML"&&token.startsWith("<")){output+='<span class="tok-tag">'+safe.replace(/(\\s[A-Za-z_:][-\\w:.]*)(=)/g,'<span class="tok-attr">$1</span>$2')+'</span>';last=pattern.lastIndex;continue}
   else if(/^#[0-9a-f]{3,8}$/i.test(token)||/^\\d/.test(token))cls="tok-number";
-  else if(new RegExp("^"+keywords+"$","i").test(token))cls="tok-keyword";
+  else if(/^(const|let|var|function|return|if|else|for|while|class|new|import|from|export|default|async|await|try|catch|throw|def|print|True|False|None|pass|with|as|yield|lambda|public|private|static|void|int|string|boolean|interface|type|extends|implements|SELECT|FROM|WHERE|INSERT|UPDATE|DELETE)$/i.test(token))cls="tok-keyword";
   else if(/^[A-Za-z_$][\\w$]*$/.test(token)&&value[pattern.lastIndex]==="(")cls="tok-function";
   else if(language==="CSS"&&/^[\\w-]+$/.test(token))cls="tok-prop";
   output+=cls?'<span class="'+cls+'">'+safe+'</span>':safe;last=pattern.lastIndex
