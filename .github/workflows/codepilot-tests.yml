@@ -1,0 +1,37 @@
+name: CodePilot tests
+
+on:
+  pull_request:
+    paths:
+      - "projects/codepilot-free/**"
+      - ".github/workflows/codepilot-tests.yml"
+  push:
+    branches: [main]
+    paths:
+      - "projects/codepilot-free/**"
+      - ".github/workflows/codepilot-tests.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: \${{ matrix.python-version }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Check Python syntax
+        working-directory: projects/codepilot-free
+        run: python -m py_compile app.py tests/test_app.py
+      - name: Check browser JavaScript syntax
+        working-directory: projects/codepilot-free
+        run: node --check static/app.js
+      - name: Run API integration tests
+        working-directory: projects/codepilot-free
+        run: python -m unittest discover -s tests -v
