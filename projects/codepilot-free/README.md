@@ -1,0 +1,54 @@
+# CodePilot Free
+
+A local-first AI coding workspace built with plain HTML/CSS/JavaScript and Python's standard library. It includes a browser editor, starter files, live HTML preview, and AI chat through locally installed Ollama models.
+
+## Cost model
+
+CodePilot is free and open source. When you use a local Ollama model, there is no per-token API bill. You still need a compatible computer, storage, electricity, and the time to download a model. Hosted AI free quotas can change; this app does not depend on them.
+
+## Features
+
+- Chat with models already installed in Ollama
+- Include or exclude the active file as context
+- Explain, debug, refactor, and test prompt shortcuts
+- Browser-based multi-file starter workspace, auto-save, download, and live HTML preview
+- No account, API key, telemetry, external JS framework, or CDN required
+- Python backend proxy to avoid browser CORS problems when using local Ollama
+
+## Windows setup
+
+1. Install [Python 3.10+](https://www.python.org/downloads/) and [Ollama](https://ollama.com/download).
+2. In PowerShell run: `ollama pull qwen2.5-coder:7b`
+3. From this folder run: `python app.py` (or `py app.py`).
+4. Open http://127.0.0.1:8000 and refresh the model list.
+
+You can also double-click `run_windows.bat`.
+
+## macOS/Linux
+
+Install Python 3.10+ and Ollama, then run:
+
+```bash
+ollama pull qwen2.5-coder:7b
+python3 app.py
+```
+
+Open http://127.0.0.1:8000.
+
+## Configuration
+
+- `CODEPILOT_HOST` (default `127.0.0.1`)
+- `CODEPILOT_PORT` (default `8000`)
+- `OLLAMA_BASE_URL` (default `http://127.0.0.1:11434`)
+
+Keep the app bound to localhost unless you add suitable authentication and network controls. If you change `OLLAMA_BASE_URL` to a remote server, that server receives model prompts.
+
+## Privacy and limitations
+
+There is no login, analytics, or telemetry. With a local model, prompts go to the local Ollama endpoint. Workspace files and chat history are stored in this browser's local storage; the server does not persist them. Download files you want to keep as browser storage is not a backup.
+
+This is a useful starter, not a full VS Code replacement: the editor is a textarea without syntax highlighting/IntelliSense, it does not open arbitrary folders from disk, and the preview combines `index.html`, `style.css`, and `app.js`.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
