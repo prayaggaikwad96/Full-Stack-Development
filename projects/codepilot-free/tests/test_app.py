@@ -38,7 +38,7 @@ class FakeOllamaHandler(BaseHTTPRequestHandler):
             {"model": "test-coder:latest", "message": {"role": "assistant", "content": "hello "}, "done": False},
             {"model": "test-coder:latest", "message": {"role": "assistant", "content": "from the test model"}, "done": True, "total_duration": 1_500_000_000},
         ]
-        body = b"".join(json.dumps(chunk).encode() + b"\\n" for chunk in chunks)
+        body = b"".join(json.dumps(chunk).encode() + b"\n" for chunk in chunks)
         self.send_response(200)
         self.send_header("Content-Type", "application/x-ndjson")
         self.send_header("Content-Length", str(len(body)))
