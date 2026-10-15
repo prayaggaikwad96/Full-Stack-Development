@@ -27,10 +27,18 @@
   </aside>
   <section class="workspace">
     <div class="workspace-heading"><div><small class="eyebrow">YOUR WORKSPACE</small><h1>Build something better.</h1><p>Write code, ask questions, and iterate with your local AI.</p></div><div class="heading-actions"><button class="button quiet" id="downloadButton">↓ Download</button><button class="button primary" id="previewButton">▷ Preview</button></div></div>
+    <div class="project-tools" aria-label="Project import and export">
+      <button class="project-tool" id="importFolderButton">＋ Import folder</button>
+      <button class="project-tool" id="importZipButton">⇧ Import ZIP</button>
+      <button class="project-tool" id="importGitHubButton">⌘ Public GitHub repo</button>
+      <button class="project-tool export-tool" id="exportProjectButton">↓ Export project ZIP</button>
+      <input id="folderInput" type="file" webkitdirectory directory multiple hidden aria-label="Choose project folder">
+      <input id="zipInput" type="file" accept=".zip,application/zip" hidden aria-label="Choose project ZIP">
+    </div>
     <section class="editor-card">
       <div class="tabs" id="tabStrip" role="tablist"></div>
       <div class="editor-tools"><div><span class="lang-icon" id="languageIcon">HTM</span><span id="languageLabel">HTML</span><em>·</em><span id="saveStatus">Saved locally</span></div><div class="tool-actions"><span class="hint">Ctrl + S</span><button id="copyButton" class="tool">Copy</button><button id="askFromEditor" class="tool accent">✳ Ask AI about this file</button></div></div>
-      <div class="code-area"><pre id="lineNumbers">1</pre><textarea id="codeEditor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Code editor"></textarea></div>
+      <div class="code-area"><pre id="lineNumbers">1</pre><div class="code-stack"><pre class="syntax-highlight" id="syntaxHighlight" aria-hidden="true"><code></code></pre><textarea id="codeEditor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Code editor"></textarea></div></div>
       <section id="previewPanel" class="preview-panel" hidden><header><span>● Live preview <small>codepilot.local/preview</small></span><button id="closePreview" class="tool">Close</button></header><iframe id="previewFrame" title="Code preview" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></section>
       <footer class="statusbar"><span>● Workspace ready</span><span id="lineColumn">Ln 1, Col 1</span><span id="characterCount">0 chars</span><span id="languageFooter">HTML</span></footer>
     </section>
