@@ -1,0 +1,36 @@
+name: Validate root gitignore
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".gitignore"
+      - ".github/workflows/gitignore-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gitignore:
+    name: Validate ignore rules
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure environment templates remain trackable
+        shell: bash
+        run: |
+          git check-ignore -q .env.example && {
+            echo ".env.example must not be ignored"
+            exit 1
+          } || true
+          git check-ignore -q .env.sample && {
+            echo ".env.sample must not be ignored"
+            exit 1
+          } || true
+      - name: Verify representative generated files are ignored
+        shell: bash
+        run: |
+          git check-ignore -q node_modules/example/index.js
+          git check-ignore -q __pycache__/example.pyc
+          git check-ignore -q .env.local
