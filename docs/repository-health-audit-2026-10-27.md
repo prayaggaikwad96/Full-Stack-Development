@@ -1,19 +1,19 @@
 # Repository health audit — 2026-10-27
 
-## Live GitHub status
+## Live GitHub status — refreshed after branch alignment
 
 This audit was refreshed against the live GitHub repository on October 27, 2026. It does not inspect the Windows working copy at `C:\Prayag Gaikwad`; local changes, untracked files, index state, and local branches must still be audited separately before any destructive local synchronization.
 
 - Repository: `prayaggaikw96/Full-Stack-Development`
 - Default branch: `main`
-- `main` and `Developer` are identical at commit `895cfd749c5851c8de9d2a655106d423e305aed7`.
-- `github-sync` and `archive/developer-before-sync-2026-10-27` currently point to that same commit too. They have no unique commit history relative to `main`, but are redundant refs, not a complete independent backup.
+- `main`, `Developer`, `github-sync`, and `archive/developer-before-sync-2026-10-27` currently point to the same commit `0428e0661a8ed6513c51fc47ce2f51ec1a2359da`. The two historical refs have been fast-forwarded rather than deleted.
+- A dedicated branch `backup/legacy-tree-before-cleanup-2026-10-27` retains the previous `main` tip `895cfd749c5851c8de9d2a655106d423e305aed7` before duplicate-tree cleanup. This is a Git reference to the prior tree, not a separate off-site backup.
 - `feat/codepilot-free-app` is intentionally retained. Compared with `main`, it has 34 commits only on that branch and 72 commits only on `main`. It includes a separate CodePilot project, test suite, and workflow. Do not delete it unless this separate work is intentionally retired or preserved elsewhere.
 - No open pull requests were found during this check.
 
 ## Duplicate source trees
 
-The root `Prayag Gaikwad/` tree is the documented canonical location. Existing GitHub tree comparison records:
+The root `Prayag Gaikwad/` tree is the documented canonical location. The nested folder remains preserved in the live tree for now. The current GitHub tree comparison records:
 
 - Canonical tree: 525 files.
 - Nested legacy tree at `Full-Stack-Development/Prayag Gaikwad/`: 526 files.
@@ -40,3 +40,8 @@ One sampled HTML pair became identical after normalizing CRLF to LF, suggesting 
 4. Normalize and compare all 364 shared files before deciding whether the nested copy can be removed.
 5. The two redundant remote refs can be deleted after a separate confirmation that no external workflow, deployment, or collaborator depends on them. This connector does not expose a branch-deletion operation, so they have not been deleted here.
 6. Keep `main` and `Developer` aligned. Retain `feat/codepilot-free-app` while its unique work remains useful.
+
+
+## Status at the end of this remote pass
+
+The branch refs `main`, `Developer`, `github-sync`, and `archive/developer-before-sync-2026-10-27` were verified to match at `0428e0661a8ed6513c51fc47ce2f51ec1a2359da`. The backup branch `backup/legacy-tree-before-cleanup-2026-10-27` is retained at the former `main` commit. `feat/codepilot-free-app` remains separate because it has unique commits and project files. The duplicate source directory and the Windows working copy remain unresolved; these must not be described as fully synchronized until a complete normalized comparison and local working-tree audit have succeeded.
