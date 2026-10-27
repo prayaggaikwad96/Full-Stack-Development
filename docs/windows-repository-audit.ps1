@@ -28,7 +28,7 @@ function Get-FileMap([string]$Root) {
     }
     $rootFull = [System.IO.Path]::GetFullPath($Root).TrimEnd([System.IO.Path]::DirectorySeparatorChar) + [System.IO.Path]::DirectorySeparatorChar
     Get-ChildItem -LiteralPath $Root -File -Recurse -Force | ForEach-Object {
-        $rel = $_.FullName.Substring($rootFull.Length).Replace('', '/')
+        $rel = $_.FullName.Substring($rootFull.Length).Replace([System.IO.Path]::DirectorySeparatorChar, [char]'/')
         $map[$rel] = $_.FullName
     }
     return $map
