@@ -1,6 +1,6 @@
 # Full-Stack Development
 
-A hands-on full-stack learning archive with web-development exercises and CodePilot Free, a local-first coding workspace built with Python, browser JavaScript, and Ollama. CI validates Python 3.12–3.15, browser JavaScript, and API integration tests.
+A hands-on full-stack learning archive with web-development exercises and CodePilot Free, a local-first coding workspace built with Python, browser JavaScript, and Ollama. CI validates Python 3.12–3.15 against Node.js 22 and 24, plus browser JavaScript and API integration tests.
 
 ## Learning path
 
