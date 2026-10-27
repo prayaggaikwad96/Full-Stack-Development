@@ -6,7 +6,7 @@ on:
       - "projects/codepilot-free/**"
       - ".github/workflows/codepilot-tests.yml"
   push:
-    branches: [main, feat/codepilot-free-app]
+    branches: [main, feat/codepilot-free-app, integration/codepilot-free-main-sync]
   workflow_dispatch:
 
 permissions:
