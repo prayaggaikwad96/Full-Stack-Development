@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #panel,
+        .flip {
+            padding: 10px;
+            text-align: center;
+            background-color: #04AA6D;
+            color: white;
+            border: solid 1px #a6d8a8;
+            margin: auto;
+            cursor: pointer;
+        }
+
+        #panel {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p class="flip" onclick="myFunction()">Click to show panel</p>
+
+    <div id="panel">
+        <p>This panel contains a div element, which is hidden by default (display: none).</p>
+        <p>We use JavaScript to show it (display: block).</p>
+        <p>How it works: When the user clicks on the p element, a function called myFunction() is executed, which
+            changes the style of the div with id="panel" from display:none (hidden) to display:block (visible).</p>
+        <p>You will learn more about JavaScript in our JavaScript Tutorial.</p>
+    </div>
+
+    <script>
+        function myFunction() {
+            document.getElementById("panel").style.display = "block";
+        }
+    </script>
+
+</body>
+
+</html>

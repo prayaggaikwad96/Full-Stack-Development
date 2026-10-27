@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+.Python
+.venv/
+venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+
+# Environment variables and local secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Node.js and frontend build output
+node_modules/
+.npm/
+.pnpm-store/
+.next/
+.nuxt/
+.svelte-kit/
+dist/
+coverage/
+
+# Build and temporary output
+build/
+out/
+tmp/
+temp/
+*.log
+
+# Editor and operating-system files
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

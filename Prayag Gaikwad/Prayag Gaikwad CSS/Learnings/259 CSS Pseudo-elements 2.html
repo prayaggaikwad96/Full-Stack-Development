@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CSS Pseudo-elements</title>
+    <style>
+        body {
+            background-color: rgb(196, 239, 246);
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            color: darkblue;
+        }
+
+        h2:hover {
+            color: red;
+            background-color: lightblue;
+        }
+
+        p::first-line {
+            color: blue;
+        }
+
+        p::first-letter {
+            color: red;
+            font-size: 30px;
+        }
+
+        h2::before {
+            content: "★ ";
+            color: orange;
+        }
+
+        h2::after {
+            content: " ★";
+            color: orange;
+        }
+
+        li::marker {
+            color: green;
+            font-size: 20px;
+        }
+
+        li:hover {
+            color: red;
+            background-color: lightblue;
+        }
+
+        p::selection {
+            background-color: yellow;
+            color: black;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: green;
+        }
+
+        ul {
+            display: inline-block;
+            text-align: left;
+        }
+
+        dialog {
+            background-color: lightblue;
+            text-align: center;
+            border: 2px solid blue;
+            border-radius: 10px;
+        }
+
+        dialog::backdrop {
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>CSS Pseudo-elements</h2>
+
+    <p>
+        Welcome to CSS! Pseudo-elements
+        help us style specific parts of text.
+    </p>
+
+    <h3>Types of Pseudo-elements</h3>
+
+    <ul>
+        <li>First Line</li>
+        <li>First Letter</li>
+        <li>Before and After</li>
+        <li>Marker and Selection</li>
+    </ul>
+
+    <br><br>
+
+    <button onclick="document.getElementById('myDialog').showModal()">
+        Open Dialog
+    </button>
+
+    <dialog id="myDialog">
+        <p>This is a dialog box!</p>
+        <button onclick="document.getElementById('myDialog').close()">
+            Close
+        </button>
+    </dialog>
+
+</body>
+
+</html>
