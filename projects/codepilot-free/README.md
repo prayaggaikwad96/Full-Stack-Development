@@ -27,7 +27,7 @@ You can also double-click `run_windows.bat`.
 
 ## macOS/Linux
 
-Install Python 3.10+ and Ollama, then run:
+Install Python 3.12–3.15 (the versions currently tested in CI) and Ollama, then run:
 
 ```bash
 ollama pull qwen2.5-coder:7b
@@ -68,4 +68,4 @@ node --check static/app.js
 python -m unittest discover -s tests -v
 ```
 
-GitHub Actions runs these checks on relevant pull requests and pushes to `main`, plus manual dispatch. The CI matrix tests Python 3.12, 3.13, 3.14, and 3.15 with Node.js 20. The tests verify the static workspace, model discovery, chat proxy, request validation, size limits, and unknown API routes.
+GitHub Actions runs these checks on relevant pull requests and pushes to `main`, plus manual dispatch. The CI matrix tests Python 3.12, 3.13, 3.14, and 3.15 with Node.js 22 and 24. The tests verify the static workspace, model discovery, chat proxy, request validation, size limits, and unknown API routes.
