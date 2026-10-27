@@ -16,6 +16,8 @@ foreach ($repoPath in @($parent, $child)) {
     git -C $repoPath status --short --branch 2>&1
     Write-Host "-- Local refs versus origin --"
     git -C $repoPath remote show origin 2>&1
+    Write-Host "-- Local refs versus origin --"
+    git -C $repoPath remote show origin 2>&1
     git -C $repoPath remote -v 2>&1
     git -C $repoPath branch -vv 2>&1
     git -C $repoPath submodule status 2>&1
@@ -148,6 +150,7 @@ try {
     }
     Write-Host "Full per-file report: $reportPath"
     Write-Host "This script does not change tracked files, branches, commits, or remotes."
+    Write-Host "Review output: dirty/untracked paths, remotes, ahead/behind, submodule status, and file-level differences before synchronizing."
     Write-Host "Review output: dirty/untracked paths, remotes, ahead/behind, submodule status, and file-level differences before synchronizing."
 } catch {
     Write-Error "Tree comparison could not complete: $($_.Exception.Message)"
