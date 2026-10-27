@@ -5,7 +5,7 @@ This document separates live remote GitHub checks from checks that must run on t
 
 ## Verified remote state
 - Repository: `prayaggaikwad96/Full-Stack-Development`; default branch: `main`.
-- At the latest live check for this report, `main` and `Developer` both pointed to `7de29b397f70c27b20f15e9513f4f46a88b83165`; GitHub comparison reported `identical`, 0 commits ahead, and 0 behind.
+- At the latest live check for this report, `main` and `Developer` both pointed to `c23e4a4da4c70f23f909d9aa6b273423a574b399`; GitHub comparison reported `identical`, 0 commits ahead, and 0 behind.
 - The only remaining remote branches were `main`, `Developer`, and `archive/codepilot-feature-history-before-sync-2026-10-27` (archive tip `6c68a09756d30a004f2519dab06c9da7494005c8`).
 - `feat/codepilot-free-app` was deleted after verifying its tip was already contained in `main`; its application/tests had been integrated through [merged PR #8](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/8).
 - The older `backup/legacy-tree-before-cleanup-2026-10-27` ref was also removed after the guarded cleanup verified its tip was an ancestor of `main`. The independent CodePilot archive was preserved because it contains unique history.
@@ -13,10 +13,10 @@ This document separates live remote GitHub checks from checks that must run on t
 
 ## Latest completed CI checkpoint
 All four workflows on commit `7de29b397f70c27b20f15e9513f4f46a88b83165` completed successfully:
-- [CodePilot tests — Python 3.10 and 3.12](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40567711382)
-- [Nested learning-tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40567711526)
-- [Root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40567711689)
-- [Guarded redundant-branch cleanup](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40567711444)
+- [CodePilot tests — Python 3.10 and 3.12](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568193063)
+- [Nested learning-tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568193086)
+- [Root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568193151)
+- [Guarded redundant-branch cleanup](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568193162)
 
 The older `856f3bc` checkpoint also completed successfully for CodePilot tests (Python 3.10 and 3.12), nested-tree audit, .gitignore validation, and guarded cleanup. Those runs are historical evidence, not an indication that their old feature branch still exists.
 
