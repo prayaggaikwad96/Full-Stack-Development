@@ -27,7 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           git fetch --prune origin '+refs/heads/*:refs/remotes/origin/*'
-          for branch in github-sync archive/developer-before-sync-2026-10-27; do
+          for branch in github-sync archive/developer-before-sync-2026-10-27 integration/codepilot-free-main-sync; do
             remote_ref="refs/remotes/origin/$branch"
             if ! git show-ref --verify --quiet "$remote_ref"; then
               echo "Already absent: $branch"
