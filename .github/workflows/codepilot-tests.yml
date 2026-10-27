@@ -6,10 +6,14 @@ on:
       - "projects/codepilot-free/**"
       - ".github/workflows/codepilot-tests.yml"
   push:
-    branches: [main]
+    branches: [main, feat/codepilot-free-app]
     paths:
       - "projects/codepilot-free/**"
       - ".github/workflows/codepilot-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   test:
