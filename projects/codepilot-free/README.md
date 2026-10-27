@@ -18,7 +18,7 @@ CodePilot is free and open source. When you use a local Ollama model, there is n
 
 ## Windows setup
 
-1. Install [Python 3.10+](https://www.python.org/downloads/) and [Ollama](https://ollama.com/download).
+1. Install a supported Python version (3.12–3.15 are currently tested in CI) and [Ollama](https://ollama.com/download).
 2. In PowerShell run: `ollama pull qwen2.5-coder:7b`
 3. From this folder run: `python app.py` (or `py app.py`).
 4. Open http://127.0.0.1:8000 and refresh the model list.
@@ -68,4 +68,4 @@ node --check static/app.js
 python -m unittest discover -s tests -v
 ```
 
-GitHub Actions runs these checks on pull requests for Python 3.10 and 3.12. The tests verify the static workspace, model discovery, chat proxy, request validation, size limits, and unknown API routes.
+GitHub Actions runs these checks on relevant pull requests and pushes to `main`, plus manual dispatch. The CI matrix tests Python 3.12, 3.13, 3.14, and 3.15 with Node.js 20. The tests verify the static workspace, model discovery, chat proxy, request validation, size limits, and unknown API routes.
