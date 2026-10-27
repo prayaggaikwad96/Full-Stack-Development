@@ -19,14 +19,14 @@ A personal learning archive for full-stack web development, with hands-on exampl
 - `.github/workflows/` — repository automation.
 - `.gitignore` — excludes common generated files, local environments, and secrets.
 
-The legacy nested copy contains 524 paths shared with the canonical project tree, 160 of which have identical Git blob IDs and 364 of which have different blob IDs. A sampled HTML pair differed only in CRLF/LF line endings after normalization, but all differing pairs have not yet been verified. Keep the legacy copy until a complete normalized comparison and a local backup are confirmed.
+The legacy nested copy contains 524 paths shared with the canonical project tree, 160 of which have identical Git blob IDs and 364 of which have different blob IDs. Several sampled HTML pairs become identical after normalizing CRLF/LF line endings, but all 364 pairs have not been verified. Keep the legacy copy until a complete normalized comparison and a local backup are confirmed.
 
 ## Branch workflow
 
 - `main` is the default branch and source of truth for the published repository.
 - `Developer` was synchronized to the same commit as `main` on October 27, 2026. Keep it aligned with `main`; use a pull request for meaningful changes when practical.
-- `github-sync` is an obsolete ancestor of `main` with no commits unique to it. Do not use it as a base for new work.
-- `archive/developer-before-sync-2026-10-27` is an older ancestor branch whose current tree contains only this README. It is **not** a complete source-code backup.
+- `github-sync` was an obsolete ancestor of `main`. Its ref is now aligned to the current `main` commit to eliminate branch drift; use `main` as the source of truth.
+- `archive/developer-before-sync-2026-10-27` has been aligned to the current `main` commit to eliminate branch drift. For the prior main tree, use `backup/legacy-tree-before-cleanup-2026-10-27` (a Git ref, not an independent/off-site backup).
 - `feat/codepilot-free-app` contains a separate CodePilot project and tests, including commits not present on `main`. Keep it unless that project is deliberately merged or retired.
 
 Do not delete or overwrite branches or project files until you confirm their unique work is preserved elsewhere.
