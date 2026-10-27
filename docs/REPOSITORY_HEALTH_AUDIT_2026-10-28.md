@@ -2,33 +2,32 @@
 
 Repository: `prayaggaikwad96/Full-Stack-Development`
 
-## Verified live state
+## Verified on the live remote
 
-- Default branch: `main`.
-- `main` and `Developer` both resolve to `57e523ae3ce141fbf1760debcfa5a2ce674be590` (compare status: identical; 0 ahead / 0 behind).
-- Latest audited CI at that commit: nested-tree audit and root `.gitignore` validation passed.
-- Latest available CodePilot test run inspected in this audit passed on commit `c7c6cb47ad7f6ff750e30863c588c14ff03e432a`. This is not the same SHA as current `main`; do not describe it as a test of `57e523a`.
-- The root README identifies `Prayag Gaikwad/` as canonical and `Full-Stack-Development/` as a legacy nested copy. It explicitly advises against automated copying/deletion pending Windows-local repository/submodule and backup checks.
-- Historical branch `archive/codepilot-feature-history-before-sync-2026-10-27` is documented as containing unique commits. Preserve it; do not synchronize or delete merely to make branch lists look uniform.
-- Repository currently has no required branch protection on `main` according to the branch metadata returned by GitHub. This connector could not read detailed protection settings (403), so confirm through GitHub settings before changing them.
+- Default branch is `main`; repository is public and not archived.
+- `main` and `Developer` both resolve to `4efb3d96928847e1fe42bd2d1fce369f50595e7e`. GitHub compare confirms they are identical (0 ahead, 0 behind).
+- The two latest workflows on this commit passed: [nested tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40571597628) and [root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40571597745).
+- There are no open pull requests in this repository according to the connected GitHub search. Ten recent pull requests were returned; they are closed (some merged, some kept closed as superseded or separate work).
+- Historical branch `archive/codepilot-feature-history-before-sync-2026-10-27` remains listed. Preserve it as recovery history; do not move/delete it solely to match `main`.
+- Latest nested-tree audit artifact (run `40571597628`) was inspected. It compared 527 relative paths: 160 identical, 364 differed only by line endings after normalization, zero substantive text differences, zero binary differences, one zero-byte canonical-only placeholder, and two zero-byte nested-only placeholders. Do not copy one tree over the other automatically; only reconcile placeholders if desired after local checks.
+- Latest successful CodePilot Python/Node matrix run found in the visible run history is on commit `c7c6cb47ad7f6ff750e30863c588c14ff03e432a`, not current `main`. The CodePilot test workflow uses path filters, so a docs-only commit does not run that suite.
 
-## Controls already present
+## Existing practices confirmed
 
-- Root `.gitignore` excludes common Python/Node build artifacts and local environment files while keeping `.env.example` and `.env.sample`.
-- CI workflows use `contents: read` permissions for tests/audits.
-- Branch-cleanup workflow is intentionally read-only and reports candidates rather than deleting branches.
-- CodePilot docs warn that it should bind to localhost unless authentication and network controls are added, and that browser local storage is not a backup.
+- Root `.gitignore` handles common Python/Node generated files and local environment files while allowing `.env.example` and `.env.sample`.
+- Current audit/test workflows declare `contents: read`.
+- Branch-cleanup workflow is read-only and requires manual review rather than deleting branch refs.
+- CodePilot docs describe localhost binding, privacy limitations, and the need to download local-storage work as a backup.
 
-## Remaining verification / recommendations
+## Outstanding hardening and verification
 
-1. Enable branch protection or a ruleset for `main` in GitHub settings. Prefer PR review, required passing checks that actually run for PRs, and blocking force pushes/deletion. Confirm exact check names first; current workflows have different path filters and may not emit all checks on every PR.
-2. Run CodePilot CI against the current `main` SHA and confirm every Python/Node matrix job passes. The latest CodePilot test found by this audit is on an earlier commit.
-3. On Windows, inspect all local repos, `.git` / `.gitmodules`, worktrees, uncommitted/untracked files, and local backup branches before changing branch refs or nested folders. GitHub cannot verify those local states.
-4. Download and inspect the latest nested-tree audit artifact before reconciling the 364 historical text differences and placeholder-only paths. Do not overwrite either tree automatically.
-5. Review open-source contribution PRs and branches separately, including upstream forks. Do not merge/close/delete contributions solely to reduce counts; resolve requested changes and CI/maintainer gates first.
-6. Review dependency/security alerts in GitHub's Security tab. This connector did not provide a complete security-alert audit, so no claim is made that there are no vulnerabilities.
-7. Revisit this audit after the current-head CI, branch protection, and local Windows verification are completed.
+1. **Branch protection / rulesets:** GitHub branch metadata reports `protected: false` and no required checks on `main` or `Developer`. Add a `main` ruleset using GitHub settings and select required checks only after verifying the checks actually appear for pull requests. The connected integration could not administer/read protection settings, so this remains a user-side change.
+2. **Current-head CodePilot test:** Run the CodePilot matrix against current `main` through the workflow's manual dispatch, or make a reviewed CodePilot change to trigger it. Do not report older success as current-head success.
+3. **Windows local state:** Inspect local `.git`, `.gitmodules`, worktrees, dirty/untracked files, nested repo state, and local backup branches. Remote tools cannot inspect your Windows working tree.
+4. **Security review:** Inspect GitHub Security/Dependabot/secret-scanning alerts and dependency findings in the GitHub UI. This audit did not have a complete alerts endpoint available, and no “zero vulnerabilities” claim is justified.
+5. **Account-wide categories:** Six owner repositories were visible: `altair`, `Computer-Classes`, `Full-Stack-Development`, `git`, `rea`, and `virtual`. Their branch/CI/security state has not yet all been audited in this document; do not treat the focused repository audit as account-wide completion.
+6. **Open-source contributions:** PRs in upstream projects need their own current maintainer/CI review and cannot be marked complete by synchronizing this learning repository.
 
-## Scope and honesty
+## Scope
 
-This is a remote GitHub snapshot, not proof that every file or local clone is synchronized. It does not certify zero vulnerabilities, zero hidden differences, or a perfect repository. No destructive branch deletion, force-push, merge, or local-file change was performed as part of this audit.
+This report is a remote snapshot and is not certification that every file, clone, security setting, or contribution is perfect. No destructive branch deletion, force-push, nested-folder overwrite, or unrelated PR merge was performed.
