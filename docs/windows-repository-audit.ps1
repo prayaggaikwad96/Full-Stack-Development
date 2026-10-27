@@ -1,27 +1,47 @@
 # Read-only audit for both Windows repositories plus normalized tree comparison.
-# Run this script from PowerShell on the Windows machine that owns the repositories.
-# Git repository state is inspected only. The only file written is a CSV report in $env:TEMP.
+# Run from PowerShell on the Windows machine that owns the repositories.
+# Does not fetch/update refs, change config/remotes, switch branches, commit, or push.
+# The only file written is the CSV comparison report in $env:TEMP.
 $ErrorActionPreference = "Continue"
+$script:auditFailures = New-Object System.Collections.Generic.List[string]
 $parent = "C:\Prayag Gaikwad"
 $child = Join-Path $parent "Full-Stack-Development"
 
+function Invoke-GitReadOnly([string]$RepoPath, [string[]]$GitArgs, [string]$Label) {
+    Write-Host ("-- {0} --" -f $Label) -ForegroundColor DarkCyan
+    $output = & git -C $RepoPath @GitArgs 2>&1
+    $exitCode = $LASTEXITCODE
+    if ($output) { $output | ForEach-Object { Write-Host $_ } }
+    if ($exitCode -ne 0) {
+        $message = "Git command failed (exit $exitCode) in '$RepoPath': git $($GitArgs -join ' ')"
+        Write-Host $message -ForegroundColor Red
+        $script:auditFailures.Add($message)
+    }
+    return $output
+}
+
 foreach ($repoPath in @($parent, $child)) {
     Write-Host "`n===== REPOSITORY: $repoPath =====" -ForegroundColor Cyan
-    if (-not (Test-Path $repoPath)) {
-        Write-Host "PATH MISSING"
+    if (-not (Test-Path -LiteralPath $repoPath -PathType Container)) {
+        $message = "Repository path missing: $repoPath"
+        Write-Host $message -ForegroundColor Red
+        $script:auditFailures.Add($message)
         continue
     }
-    git -C $repoPath rev-parse --show-toplevel 2>&1
-    git -C $repoPath rev-parse --is-inside-work-tree 2>&1
-    git -C $repoPath status --short --branch 2>&1
-    Write-Host "-- Local refs versus origin --"
-    git -C $repoPath remote show origin 2>&1
-    git -C $repoPath remote -v 2>&1
-    git -C $repoPath branch -vv 2>&1
-    git -C $repoPath submodule status 2>&1
-    git -C $repoPath log -1 --oneline --decorate 2>&1
-    Write-Host "`n-- Worktree status porcelain --"
-    git -C $repoPath status --porcelain=v1 --untracked-files=all 2>&1
+
+    Invoke-GitReadOnly $repoPath @("rev-parse", "--show-toplevel") "Git root"
+    Invoke-GitReadOnly $repoPath @("rev-parse", "--is-inside-work-tree") "Worktree check"
+    Invoke-GitReadOnly $repoPath @("status", "--short", "--branch") "Working-tree summary"
+    Write-Host "-- Remotes configured locally --"
+    Invoke-GitReadOnly $repoPath @("remote", "-v") "Remote URLs"
+    Write-Host "-- Live branch refs on origin (read-only; does not update local refs) --"
+    Invoke-GitReadOnly $repoPath @("ls-remote", "--heads", "origin") "Live origin heads"
+    Write-Host "-- Existing local remote-tracking refs (may be stale) --"
+    Invoke-GitReadOnly $repoPath @("for-each-ref", "--format=%(refname:short) %(objectname)", "refs/remotes/origin") "Local origin-tracking refs"
+    Invoke-GitReadOnly $repoPath @("branch", "-vv") "Local branches and tracking state"
+    Invoke-GitReadOnly $repoPath @("submodule", "status") "Submodule state"
+    Invoke-GitReadOnly $repoPath @("log", "-1", "--oneline", "--decorate") "Latest local commit"
+    Invoke-GitReadOnly $repoPath @("status", "--porcelain=v1", "--untracked-files=all") "All dirty/untracked paths"
 }
 
 function Get-FileMap([string]$Root) {
@@ -147,10 +167,20 @@ try {
         Write-Host ("{0,-24} {1,6}" -f $_.Name, $_.Count)
     }
     Write-Host "Full per-file report: $reportPath"
-    Write-Host "This script does not change tracked files, branches, commits, or remotes."
-    Write-Host "Review output: dirty/untracked paths, remotes, ahead/behind, submodule status, and file-level differences before synchronizing."
+    Write-Host "No tracked files, refs, config, branches, commits, or remotes have been changed by this script."
 } catch {
-    Write-Error "Tree comparison could not complete: $($_.Exception.Message)"
+    $message = "Tree comparison could not complete: $($_.Exception.Message)"
+    Write-Host $message -ForegroundColor Red
+    $script:auditFailures.Add($message)
 }
 
+Write-Host "`n===== AUDIT RESULT =====" -ForegroundColor Cyan
+if ($script:auditFailures.Count -gt 0) {
+    Write-Host ("INCOMPLETE: {0} audit error(s) were detected." -f $script:auditFailures.Count) -ForegroundColor Red
+    $script:auditFailures | ForEach-Object { Write-Host (" - {0}" -f $_) -ForegroundColor Red }
+    Write-Host "Resolve reported path, Git, authentication, or remote errors before trusting the comparison."
+    exit 1
+}
+Write-Host "Audit completed without Git-command or comparison errors." -ForegroundColor Green
+Write-Host "Interpret dirty paths, live origin SHAs versus local remote-tracking SHAs, ahead/behind, and file-level differences before any repair."
 Write-Host "`n===== END AUDIT =====" -ForegroundColor Cyan
