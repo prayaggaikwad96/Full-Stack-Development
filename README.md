@@ -25,8 +25,8 @@ The legacy nested copy contains 524 paths shared with the canonical project tree
 
 - `main` is the default branch and source of truth for the published repository.
 - `Developer` was synchronized to the same commit as `main` on October 27, 2026. Keep it aligned with `main`; use a pull request for meaningful changes when practical.
-- `github-sync` was an obsolete ancestor of `main`. Its ref is now aligned to the current `main` commit to eliminate branch drift; use `main` as the source of truth.
-- `archive/developer-before-sync-2026-10-27` has been aligned to the current `main` commit to eliminate branch drift. For the prior main tree, use `backup/legacy-tree-before-cleanup-2026-10-27` (a Git ref, not an independent/off-site backup).
+- `github-sync` and `archive/developer-before-sync-2026-10-27` are historical refs behind `main`; do not use them for new work. They have not been deleted.
+- `backup/legacy-tree-before-cleanup-2026-10-27` is a historical Git recovery ref, not an independent/off-site backup. Preserve it until local backups and the duplicate-tree comparison are confirmed.
 - `feat/codepilot-free-app` contains a separate CodePilot project and tests, including commits not present on `main`. Keep it unless that project is deliberately merged or retired.
 
 Do not delete or overwrite branches or project files until you confirm their unique work is preserved elsewhere.
