@@ -26,7 +26,7 @@ A hands-on full-stack learning archive with web-development exercises and CodePi
 - `.github/workflows/` — repository automation.
 - `.gitignore` — excludes common generated files, local environments, and secrets.
 
-The legacy nested copy has 524 shared file paths with the canonical project tree. GitHub Actions compared every shared file after normalizing CRLF/CR to LF: 160 files were byte-identical and 364 differed only by line endings; no substantive text or binary differences were found in that report. The nested copy has two empty placeholder files that the canonical tree lacks, and the canonical tree has one empty placeholder the nested copy lacks. Keep the nested copy until the Windows repository/submodule state and local backup have been checked.
+The latest archived nested-tree audit report covers 524 shared file paths: 160 files were byte-identical and 364 differed after line-ending normalization; no substantive text or binary differences were found in that report. It also found two empty placeholders only in the nested copy and one only in the canonical tree. These counts describe that audit run, not a guarantee that the trees remain unchanged. Keep the nested copy until Windows repository/submodule state and local backups are checked.
 
 ## Branch workflow
 
