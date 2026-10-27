@@ -16,7 +16,7 @@ This document records the live GitHub-side checks and explicitly separates them 
 
 - `.github/workflows/gitignore-check.yml` now runs on every push to `main`, on pull requests targeting `main`, and on manual dispatch. This deliberately broadens validation so documentation-only pushes also get a fresh run.
 - `.github/workflows/codepilot-tests.yml` on `feat/codepilot-free-app` now runs on pushes to `main` and `feat/codepilot-free-app`, relevant pull requests, and manual dispatch. It performs Python syntax checks, JavaScript syntax checks, and Python integration tests under Python 3.10 and 3.12.
-- The workflow files have been updated on GitHub, but the new workflow versions' successful run results have not yet been verified. Do not call CI complete until a run on the latest commit succeeds.
+- Fresh GitHub Actions runs completed successfully after the workflow updates: root gitignore validation passed on `main` commit `278ebe9e5559c932f15ed59a8d8539ef131ec952` (run [40544775148](https://github.com/prayaggaikw96/Full-Stack-Development/actions/runs/40544775148)); CodePilot tests passed on `feat/codepilot-free-app` commit `6c68a09756d30a004f2519dab06c9da7494005c8` (run [40544782665](https://github.com/prayaggaikw96/Full-Stack-Development/actions/runs/40544782665)). These runs validate the workflow tests, not every learning example or the Windows working copy.
 - GitHub reported `main` and `Developer` as unprotected on the prior live check. Branch protection is an additional recommended safeguard, not proof of synchronization.
 
 ## Nested duplicate project folder
