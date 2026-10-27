@@ -27,7 +27,7 @@ jobs:
         run: |
           set -euo pipefail
           git fetch --prune origin '+refs/heads/*:refs/remotes/origin/*'
-          for branch in github-sync archive/developer-before-sync-2026-10-27 integration/codepilot-free-main-sync; do
+          for branch in github-sync archive/developer-before-sync-2026-10-27; do
             remote_ref="refs/remotes/origin/$branch"
             if ! git show-ref --verify --quiet "$remote_ref"; then
               echo "Already absent: $branch"
@@ -41,3 +41,19 @@ jobs:
               echo "Keeping $branch: it contains history not reachable from main."
             fi
           done
+
+          # Squash-merged integration branch: its code is in main, but its tip
+          # is not a main ancestor. Delete only after verifying PR #8 is merged
+          # and the integrated app files exist on main.
+          if git ls-remote --exit-code --heads origin integration/codepilot-free-main-sync >/dev/null; then
+            pr_json="$(gh api "repos/$REPOSITORY/pulls/8")"
+            merged="$(python -c 'import json,sys; print(str(json.load(sys.stdin).get("merged", False)).lower())' <<<"$pr_json")"
+            if [[ "$merged" == "true" ]] &&                git cat-file -e "refs/remotes/origin/main:projects/codepilot-free/app.py" &&                git cat-file -e "refs/remotes/origin/main:projects/codepilot-free/tests/test_app.py"; then
+              echo "Deleting integration/codepilot-free-main-sync: PR #8 is merged and CodePilot app/tests are present on main."
+              gh api --method DELETE "repos/$REPOSITORY/git/refs/heads/integration/codepilot-free-main-sync"
+            else
+              echo "Keeping integration/codepilot-free-main-sync: merge confirmation or app/test files not found."
+            fi
+          else
+            echo "Already absent: integration/codepilot-free-main-sync"
+          fi
