@@ -22,12 +22,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Python 3.12–3.15 are all explicitly tested; keep 3.12 as the older supported baseline.
-        python-version: ["3.12", "3.14", "3.15"]
+        # Test every supported Python version against both maintained Node.js LTS lines.
+        python-version: ["3.12", "3.13", "3.14", "3.15"]
         node-version: ["22", "24"]
-        include:
-          - python-version: "3.13"
-            node-version: "22"
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
