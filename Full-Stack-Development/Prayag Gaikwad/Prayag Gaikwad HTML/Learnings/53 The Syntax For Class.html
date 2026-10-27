@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Attribute Example</title>
+
+    <style>
+        body {
+            background: linear-gradient(to right, powderblue, lightyellow);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        h1 {
+            transition: 0.3s;
+        }
+
+        h1:hover {
+            color: darkblue;
+            transform: scale(1.05);
+        }
+
+        .city {
+            color: white;
+            padding: 15px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .london {
+            background-color: tomato;
+        }
+
+        .paris {
+            background-color: mediumseagreen;
+        }
+
+        .tokyo {
+            background-color: royalblue;
+        }
+
+        .city:hover {
+            background-color: orange;
+            color: black;
+            transform: scale(1.03);
+            cursor: pointer;
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        p:hover {
+            background-color: white;
+            color: darkred;
+            transform: scale(1.02);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center>
+        <h1><b>The Class Attribute</b></h1>
+
+        <p><b>Use CSS to style elements with different class names:</b></p>
+
+        <h2 class="city london"><b>London</b></h2>
+        <p><b>London is the capital of England.</b></p>
+
+        <h2 class="city paris"><b>Paris</b></h2>
+        <p><b>Paris is the capital of France.</b></p>
+
+        <h2 class="city tokyo"><b>Tokyo</b></h2>
+        <p><b>Tokyo is the capital of Japan.</b></p>
+    </center>
+
+</body>
+
+</html>

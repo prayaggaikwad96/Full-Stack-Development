@@ -1,0 +1,1043 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Top 5 Products</title>
+
+    <style>
+
+        /* ============================= */
+        /* GENERAL PAGE STYLING */
+        /* ============================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(
+                135deg,
+                #eef2f7,
+                #f8fafc
+            );
+            color: #222;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: auto;
+        }
+
+
+        /* ============================= */
+        /* PAGE HEADING */
+        /* ============================= */
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 38px;
+            color: #1f2937;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+
+        /* ============================= */
+        /* TABLE WRAPPER */
+        /* ============================= */
+
+        .table-wrapper {
+            overflow-x: auto;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.10);
+        }
+
+
+        /* ============================= */
+        /* TABLE */
+        /* ============================= */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1200px;
+        }
+
+        thead {
+            background: linear-gradient(
+                135deg,
+                #111827,
+                #374151
+            );
+        }
+
+        th {
+            color: white;
+            padding: 18px 15px;
+            text-align: center;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 18px 15px;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: middle;
+        }
+
+        tbody tr {
+            transition: 0.3s;
+        }
+
+        tbody tr:hover {
+            background: #f8fafc;
+            transform: scale(1.002);
+        }
+
+
+        /* ============================= */
+        /* PRODUCT IMAGE */
+        /* ============================= */
+
+        .product-image {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 2px solid #e5e7eb;
+            padding: 5px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .product-image:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* ============================= */
+        /* PRODUCT NAME */
+        /* ============================= */
+
+        .product-name {
+            font-weight: bold;
+            font-size: 17px;
+            color: #111827;
+        }
+
+
+        /* ============================= */
+        /* DESCRIPTION */
+        /* ============================= */
+
+        .description {
+            max-width: 260px;
+            line-height: 1.6;
+            color: #555;
+            text-align: left;
+        }
+
+
+        /* ============================= */
+        /* PRICE */
+        /* ============================= */
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #111827;
+            white-space: nowrap;
+        }
+
+        .old-price {
+            display: block;
+            margin-top: 5px;
+            color: #9ca3af;
+            font-size: 13px;
+            text-decoration: line-through;
+        }
+
+
+        /* ============================= */
+        /* RATING */
+        /* ============================= */
+
+        .rating {
+            display: inline-block;
+            background: #fff7ed;
+            color: #ea580c;
+            padding: 7px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+
+        /* ============================= */
+        /* STOCK BADGES */
+        /* ============================= */
+
+        .available {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .limited {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .unavailable {
+            display: inline-block;
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+
+        /* ============================= */
+        /* BUTTONS */
+        /* ============================= */
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 115px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .buy-btn {
+            background: #2563eb;
+            color: white;
+        }
+
+        .buy-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .details-btn {
+            background: #111827;
+            color: white;
+        }
+
+        .details-btn:hover {
+            background: #374151;
+            transform: translateY(-2px);
+        }
+
+        .disabled-btn {
+            background: #9ca3af;
+            color: white;
+            cursor: not-allowed;
+        }
+
+
+        /* ============================= */
+        /* VIDEO */
+        /* ============================= */
+
+        video {
+            width: 180px;
+            height: 105px;
+            object-fit: cover;
+            border-radius: 10px;
+            background: black;
+        }
+
+
+        /* ============================= */
+        /* FOOTER */
+        /* ============================= */
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+
+        /* ============================= */
+        /* RESPONSIVE DESIGN */
+        /* ============================= */
+
+        @media (max-width: 768px) {
+
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .table-wrapper {
+                border-radius: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- ============================= -->
+    <!-- PAGE HEADING -->
+    <!-- ============================= -->
+
+    <h1>🛍️ Top 5 Products</h1>
+
+    <p class="subtitle">
+        Compare our recommended products, prices, ratings and availability.
+    </p>
+
+
+    <!-- ============================= -->
+    <!-- PRODUCT TABLE -->
+    <!-- ============================= -->
+
+    <div class="table-wrapper">
+
+        <table>
+
+
+            <!-- TABLE HEADER -->
+
+            <thead>
+
+                <tr>
+
+                    <th>Sr. No.</th>
+
+                    <th>Image</th>
+
+                    <th>Product</th>
+
+                    <th>Description</th>
+
+                    <th>Price</th>
+
+                    <th>Rating</th>
+
+                    <th>Availability</th>
+
+                    <th>Video</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <!-- TABLE BODY -->
+
+            <tbody>
+
+
+                <!-- ================================= -->
+                <!-- PRODUCT 1 -->
+                <!-- ================================= -->
+
+                <tr>
+
+                    <td>1</td>
+
+                    <td>
+
+                        <a
+                            href="https://www.apple.com/in/iphone/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+
+                            <img
+                                src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=300&q=80"
+                                alt="Apple iPhone"
+                                class="product-image"
+                            >
+
+                        </a>
+
+                    </td>
+
+
+                    <td class="product-name">
+
+                        Apple iPhone
+
+                    </td>
+
+
+                    <td class="description">
+
+                        Premium smartphone with powerful performance,
+                        excellent cameras and Apple's iOS ecosystem.
+
+                    </td>
+
+
+                    <td class="price">
+
+                        ₹79,999
+
+                        <span class="old-price">
+                            ₹89,999
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="rating">
+                            ⭐ 4.8
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="available">
+                            ✓ In Stock
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <video
+                            controls
+                            muted
+                            preload="metadata"
+                            poster="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=400&q=80"
+                        >
+
+                            <source
+                                src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                                type="video/mp4"
+                            >
+
+                            Your browser does not support HTML video.
+
+                        </video>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="button-group">
+
+                            <a
+                                href="https://www.apple.com/in/shop/buy-iphone"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn buy-btn"
+                            >
+
+                                🛒 Buy Now
+
+                            </a>
+
+
+                            <a
+                                href="https://www.apple.com/in/iphone/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn details-btn"
+                            >
+
+                                View Details
+
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- ================================= -->
+                <!-- PRODUCT 2 -->
+                <!-- ================================= -->
+
+                <tr>
+
+                    <td>2</td>
+
+                    <td>
+
+                        <a
+                            href="https://www.samsung.com/in/smartphones/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+
+                            <img
+                                src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=300&q=80"
+                                alt="Samsung Galaxy Smartphone"
+                                class="product-image"
+                            >
+
+                        </a>
+
+                    </td>
+
+
+                    <td class="product-name">
+
+                        Samsung Galaxy
+
+                    </td>
+
+
+                    <td class="description">
+
+                        Powerful Android smartphone featuring premium
+                        performance, cameras and a high-quality display.
+
+                    </td>
+
+
+                    <td class="price">
+
+                        ₹69,999
+
+                        <span class="old-price">
+                            ₹74,999
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="rating">
+                            ⭐ 4.7
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="available">
+                            ✓ In Stock
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <video
+                            controls
+                            muted
+                            preload="metadata"
+                            poster="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=400&q=80"
+                        >
+
+                            <source
+                                src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                                type="video/mp4"
+                            >
+
+                            Your browser does not support HTML video.
+
+                        </video>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="button-group">
+
+                            <a
+                                href="https://www.samsung.com/in/smartphones/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn buy-btn"
+                            >
+
+                                🛒 Buy Now
+
+                            </a>
+
+
+                            <a
+                                href="https://www.samsung.com/in/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn details-btn"
+                            >
+
+                                View Details
+
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- ================================= -->
+                <!-- PRODUCT 3 -->
+                <!-- ================================= -->
+
+                <tr>
+
+                    <td>3</td>
+
+                    <td>
+
+                        <a
+                            href="https://www.oneplus.in/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+
+                            <img
+                                src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=300&q=80"
+                                alt="OnePlus Smartphone"
+                                class="product-image"
+                            >
+
+                        </a>
+
+                    </td>
+
+
+                    <td class="product-name">
+
+                        OnePlus Smartphone
+
+                    </td>
+
+
+                    <td class="description">
+
+                        Fast Android smartphone with smooth performance,
+                        premium design and fast charging.
+
+                    </td>
+
+
+                    <td class="price">
+
+                        ₹49,999
+
+                        <span class="old-price">
+                            ₹54,999
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="rating">
+                            ⭐ 4.6
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="limited">
+                            ⚠ Limited Stock
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <video
+                            controls
+                            muted
+                            preload="metadata"
+                            poster="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80"
+                        >
+
+                            <source
+                                src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                                type="video/mp4"
+                            >
+
+                            Your browser does not support HTML video.
+
+                        </video>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="button-group">
+
+                            <a
+                                href="https://www.oneplus.in/store/phone"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn buy-btn"
+                            >
+
+                                🛒 Buy Now
+
+                            </a>
+
+
+                            <a
+                                href="https://www.oneplus.in/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn details-btn"
+                            >
+
+                                View Details
+
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- ================================= -->
+                <!-- PRODUCT 4 -->
+                <!-- ================================= -->
+
+                <tr>
+
+                    <td>4</td>
+
+                    <td>
+
+                        <a
+                            href="https://www.mi.com/in/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+
+                            <img
+                                src="https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&w=300&q=80"
+                                alt="Xiaomi Smartphone"
+                                class="product-image"
+                            >
+
+                        </a>
+
+                    </td>
+
+
+                    <td class="product-name">
+
+                        Xiaomi Smartphone
+
+                    </td>
+
+
+                    <td class="description">
+
+                        Feature-packed smartphone offering excellent
+                        value, modern design and reliable everyday performance.
+
+                    </td>
+
+
+                    <td class="price">
+
+                        ₹29,999
+
+                        <span class="old-price">
+                            ₹34,999
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="rating">
+                            ⭐ 4.4
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="unavailable">
+                            ✕ Out of Stock
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <video
+                            controls
+                            muted
+                            preload="metadata"
+                            poster="https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&w=400&q=80"
+                        >
+
+                            <source
+                                src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                                type="video/mp4"
+                            >
+
+                            Your browser does not support HTML video.
+
+                        </video>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="button-group">
+
+                            <span class="btn disabled-btn">
+
+                                Out of Stock
+
+                            </span>
+
+
+                            <a
+                                href="https://www.mi.com/in/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn details-btn"
+                            >
+
+                                View Details
+
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <!-- ================================= -->
+                <!-- PRODUCT 5 -->
+                <!-- ================================= -->
+
+                <tr>
+
+                    <td>5</td>
+
+                    <td>
+
+                        <a
+                            href="https://www.motorola.in/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+
+                            <img
+                                src="https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=300&q=80"
+                                alt="Motorola Smartphone"
+                                class="product-image"
+                            >
+
+                        </a>
+
+                    </td>
+
+
+                    <td class="product-name">
+
+                        Motorola Smartphone
+
+                    </td>
+
+
+                    <td class="description">
+
+                        Clean Android experience with reliable battery life,
+                        good performance and excellent value for money.
+
+                    </td>
+
+
+                    <td class="price">
+
+                        ₹19,999
+
+                        <span class="old-price">
+                            ₹24,999
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="rating">
+                            ⭐ 4.3
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="available">
+                            ✓ In Stock
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <video
+                            controls
+                            muted
+                            preload="metadata"
+                            poster="https://images.unsplash.com/photo-1556656793-08538906a9f8?auto=format&fit=crop&w=400&q=80"
+                        >
+
+                            <source
+                                src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                                type="video/mp4"
+                            >
+
+                            Your browser does not support HTML video.
+
+                        </video>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="button-group">
+
+                            <a
+                                href="https://www.motorola.in/smartphones"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn buy-btn"
+                            >
+
+                                🛒 Buy Now
+
+                            </a>
+
+
+                            <a
+                                href="https://www.motorola.in/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn details-btn"
+                            >
+
+                                View Details
+
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- FOOTER -->
+    <!-- ============================= -->
+
+    <footer>
+
+        &copy; 2026 Product Comparison Store |
+        Created using HTML & CSS ❤️
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>
+```
