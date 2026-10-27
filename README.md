@@ -31,8 +31,8 @@ The legacy nested copy has 524 shared file paths with the canonical project tree
 ## Branch workflow
 
 - `main` is the default branch and source of truth for the published repository.
-- `Developer` is three commits behind `main` and has no unique commits relative to `main` in the current remote comparison. Do not claim it is synchronized. After confirming local status and backups, fast-forward it to `main` if it is still safe to do so. Use pull requests for meaningful changes when practical.
-- `archive/codepilot-feature-history-before-sync-2026-10-27` contains 36 commits not reachable from `main` and is 131 commits behind. Preserve this recovery branch until its unique work is reviewed and independently backed up.
+- `Developer` and `main` are synchronized at the same commit in the current remote comparison. Re-check both refs before future releases or local pushes. Use pull requests for meaningful changes when practical.
+- `archive/codepilot-feature-history-before-sync-2026-10-27` is a historical recovery branch containing 36 commits not reachable from `main`; its current tip is 137 commits behind `main`. This divergence is intentional for recovery, not synchronization failure. Preserve it until its unique work is reviewed and independently backed up.
 - Preserve recovery references and project-specific feature branches until local backups, unique work, and repository state are verified.
 - Do not delete or overwrite branches or project files until their unique work is preserved elsewhere.
 
