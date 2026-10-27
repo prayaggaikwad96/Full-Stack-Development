@@ -1,45 +1,46 @@
 # Repository health audit — 2026-10-27
 
-## Live GitHub status — refreshed after subsequent branch movement
+## Verified remote state
 
-This audit was checked against live GitHub on October 27, 2026. It does not inspect the Windows working copy at `C:\Prayag Gaikwad`; local changes, untracked files, index state, and local branches remain unverified.
-
-- Repository: `prayaggaikw96/Full-Stack-Development`
+- Repository: `prayaggaikwad96/Full-Stack-Development`
 - Default branch: `main`
-- At the latest comparison, `main` and `Developer` are identical at `72e7ab5cf8ddaf6fe48ab43def40a4422ddabeec`.
-- `github-sync` and `archive/developer-before-sync-2026-10-27` are one commit behind `main`. They have no unique commits according to the compare endpoint, but they no longer point at the current `main` tip.
-- `backup/legacy-tree-before-cleanup-2026-10-27` is two commits behind `main`, retaining an earlier history/tree state. Do not move or delete this ref until its backup purpose has been confirmed.
-- `feat/codepilot-free-app` is intentionally retained. Compared with `main`, it has 34 commits only on that branch and 74 commits only on `main`. It includes a separate CodePilot project, test suite, and workflow. Keep it unless that work is intentionally retired or preserved elsewhere.
-- No open pull requests were found during the latest check.
-- GitHub reports `main` and `Developer` as unprotected.
-- The most recent successful root-gitignore workflow found is run [40542403116](https://github.com/prayaggaikw96/Full-Stack-Development/actions/runs/40542403116), at earlier commit `db5888b235cc3ea1619d2439549e1dc178834041`. No status checks are currently recorded for the latest `main` commit; current-commit validation is not confirmed.
+- `main` and `Developer` are identical at commit `8a96cb8d00fadf40dabebc330167386b42c8c42a`.
+- `github-sync` and `archive/developer-before-sync-2026-10-27` still point to the previously aligned commit `0428e0661a8ed6513c51fc47ce2f51ec1a2359da`; they are ancestors of main, not ahead of it. Branch-deletion operations are not exposed by the current connector, so they have been left intact rather than misrepresented as deleted.
+- `backup/legacy-tree-before-cleanup-2026-10-27` preserves the prior main commit `895cfd749c5851c8de9d2a655106d423e305aed7` before the most recent README/audit edits. It is a Git ref, not an independent off-site backup.
+- `feat/codepilot-free-app` remains separate because it has unique CodePilot files and commits; do not delete it until its code is deliberately integrated or separately preserved.
+- No open pull requests were found.
 
 ## Duplicate source trees
 
-The root `Prayag Gaikwad/` tree is the documented canonical location. The nested folder remains preserved in the live tree for now. The earlier tree comparison recorded:
+The canonical source directory is `Prayag Gaikwad/`. The nested path `Full-Stack-Development/Prayag Gaikwad/` is retained as a legacy copy.
 
-- Canonical tree: 525 files.
-- Nested legacy tree at `Full-Stack-Development/Prayag Gaikwad/`: 526 files.
+- Canonical files: 525.
+- Nested legacy files: 526.
 - Shared paths: 524.
-- Identical Git blob IDs among shared paths: 160.
-- Shared paths with different blob IDs: 364.
-- Legacy-only files: two empty `.gitkeep.txt` placeholders.
-- Canonical-only file: one empty `.gitkeep.txt` placeholder.
+- Same blob IDs: 160.
+- Different blob IDs: 364.
+- Nested-only: two empty `.gitkeep.txt` placeholders under Advanced Projects and Intermediate Projects.
+- Canonical-only: one empty `.gitkeep.txt` placeholder under Projects.
 
-One sampled HTML pair became identical after normalizing CRLF to LF, suggesting line endings explain at least some differences. All 364 differing pairs have not been compared after normalization. Do not delete the nested folder or overwrite either tree until a complete comparison and verified local backup are available.
+Several inspected HTML files become text-identical after normalizing CRLF/LF line endings. The connector's per-turn call limit prevented normalizing all 364 differing files, so the remaining differences are **not certified** as line-ending-only. No bulk overwrite or deletion of either source tree was performed.
 
-## Local PowerShell audit status
+## Validation
 
-The provided PowerShell script is designed to back up both working directories, inspect their status and origin URLs, and fetch remote refs only if both working trees are clean and repository identities match. The user has pasted the script but has not provided its execution output. Therefore it is not established whether the backup was created, either repository passed the clean-tree checks, or the fetch completed. The local `git branch` output alone only establishes that local branch names exist; it does not establish their commit tips, working-tree cleanliness, upstream status, or whether the shown parent and child directories are independent working trees.
+The root `.gitignore` covers common Python cache/virtual environment files, Node/build outputs, logs, editor/OS artifacts, and environment secrets while allowing `.env.example` and `.env.sample`.
 
-## Safe next steps
+The `.github/workflows/gitignore-check.yml` workflow now triggers for relevant pushes to `main`, pull requests targeting `main`, and manual dispatch. A previous run succeeded on commit `db5888b235cc3ea1619d2439549e1dc178834041`; that run predates the latest README/audit-only commits. A fresh run against the final main commit should be confirmed.
 
-1. Run the audit script and share its complete output, particularly the backup path, both `git status --short --branch` results, origin URLs, branch listings, and fetch results. Redact personal tokens if any appear.
-2. Normalize and compare all 364 shared files before deciding whether the nested copy can be removed.
-3. Confirm the purpose and recoverability of the backup branch before changing it.
-4. Consider enabling branch protection for `main` and `Developer` and verifying a workflow run against the latest commit.
-5. Keep `main` and `Developer` aligned. Retain `feat/codepilot-free-app` while its unique work remains useful.
+## Local Windows working copy
 
-## Final assessment
+The local folder `C:\Prayag Gaikwad` and any nested worktree have not been inspected from this GitHub connection. Local index/staging state, untracked files, branch divergence, local edits, and configured remotes remain unverified.
 
-Remote `main` and `Developer` currently match, but the full project is not verified as completely synchronized. The historical refs are behind, current-commit CI is unconfirmed, the branches are unprotected, the 364 differing file pairs are unresolved, and the Windows working copy has not been audited from its execution output. No local folder or historical branch has been deleted by this audit.
+Before destructive local synchronization, run the supplied read-only script `audit-local-repos.ps1` and review `git status --short --branch` for both repositories. Then back up the worktree and a Git bundle, run the supplied `reconcile-legacy-tree.ps1` to classify every paired file after newline normalization, and only then decide whether the nested copy can be removed. The scripts do not modify source files.
+
+## Remaining completion criteria
+
+1. Run a complete normalized compare on the local copy and review every true content mismatch.
+2. Verify the local repository paths/remotes and preserve any uncommitted or unique commits before aligning local branches to remote `main`.
+3. Re-run GitHub Actions on the latest `main` commit.
+4. If desired, delete the two redundant refs via GitHub's branch UI after confirming the local copies no longer depend on them.
+
+This audit describes what is actually verified and does not claim the whole repository or the local PC is fully synchronized while those checks remain outstanding.
