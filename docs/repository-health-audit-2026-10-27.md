@@ -2,16 +2,16 @@
 
 ## Verified remote state
 - Repository: `prayaggaikwad96/Full-Stack-Development`; default branch `main`.
-- `main` and `Developer` are aligned. Re-check current branch heads before relying on the exact SHA after future commits.
-- The CodePilot app was integrated by merged [PR #8](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/8), merge commit `b58350197c9d277c6b5389bb8a0ac1540e5842a4`. Current `main` includes `projects/codepilot-free/` and `.github/workflows/codepilot-tests.yml`.
-- CodePilot syntax and API integration tests passed on Python 3.10 and 3.12 on the integration branch and again after the merge. Latest recorded main test: [run 40553590167](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40553590167).
-- The post-merge nested-tree audit and .gitignore validation also passed: [nested-tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40553298925), [gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40553298805).
-- The obsolete `github-sync` and `archive/developer-before-sync-2026-10-27` branches were deleted after guarded ancestry checks.
-- `backup/legacy-tree-before-cleanup-2026-10-27` remains as an older recovery ref; it is not an off-site backup.
-- The original `feat/codepilot-free-app` branch contains the development history for CodePilot. Its application code and tests are now on `main`; synchronize its active tip to `main` only after archiving the old tip, so the old history remains recoverable.
+- Current `main`, `Developer`, and `feat/codepilot-free-app` all point to `37d7016ec0123e7527396f7d2021501eb1bc53ff`; GitHub compare confirms `main` and `Developer` are identical, and `main` and the CodePilot feature branch are identical.
+- CodePilot Free is integrated on `main` by [merged PR #8](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/8), merge commit `b58350197c9d277c6b5389bb8a0ac1540e5842a4`. It includes the application, tests, MIT license, Windows launcher, and GitHub Actions workflow.
+- CodePilot tests passed on Python 3.10 and 3.12 on `main`: [run 40553807754](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40553807754). They also passed on the synchronized `feat/codepilot-free-app` branch at the same current SHA: [run 40553843179](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40553843179).
+- The latest nested-tree comparison and root gitignore validation passed: [nested tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40553807989), [gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40553807616).
+- The redundant branches `github-sync` and `archive/developer-before-sync-2026-10-27` were deleted after guarded ancestry checks.
+- The original CodePilot feature history remains preserved at `archive/codepilot-feature-history-before-sync-2026-10-27`, tip `6c68a09756d30a004f2519dab06c9da7494005c8`. Its active `feat/codepilot-free-app` branch now matches `main`.
+- `backup/legacy-tree-before-cleanup-2026-10-27` remains an older recovery reference and is not an off-site backup.
 
 ## Nested tree normalized comparison
-Workflow: [Audit nested project tree](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40553298925)
+Workflow: [Audit nested project tree](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40553807989)
 
 Compared `Prayag Gaikwad/` with `Full-Stack-Development/Prayag Gaikwad/`, normalizing CRLF and CR to LF for UTF-8 text and preserving all other characters; binary files were compared byte-for-byte.
 
@@ -27,10 +27,10 @@ Compared `Prayag Gaikwad/` with `Full-Stack-Development/Prayag Gaikwad/`, normal
 
 Download the [normalized comparison artifact](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40551308262/artifacts/12754478961). Exact path/SHA inventories are in [CSV](nested-tree-comparison-2026-10-27.csv), [JSON](nested-tree-comparison-2026-10-27.json), and [differing blob pairs](nested-tree-differing-blobs-2026-10-27.json).
 
-The 364 matching relative file pairs differ only by line endings. The nested root also has an older README and duplicate workflow file outside the compared learning-directory contents. No learning files were deleted.
+All 364 matching relative file pairs differ only by line endings. The nested root also has an older README and duplicate workflow file outside the compared learning-directory contents. No learning files were deleted.
 
 ## Windows local repositories
 GitHub cannot inspect live local working trees. Actual remotes, checked-out commits, dirty files, submodule state, and local backup integrity under `C:\\Prayag Gaikwad` and `C:\\Prayag Gaikwad\\Full-Stack-Development` remain unverified until the local read-only audit is run and its output reviewed: [Windows audit script](windows-repository-audit.ps1). It inspects both repositories and writes a normalized per-file CSV under `%TEMP%`.
 
 ## Completion status
-Verified remotely: CodePilot integration and passing tests, current main/Developer synchronization, normalized nested-tree comparison, and cleanup of redundant historical aliases. Local Windows synchronization remains unverified because the local audit output has not yet been supplied.
+Verified remotely: CodePilot integration, tests on both `main` and the synchronized feature branch, `main`/`Developer`/CodePilot branch synchronization, normalized nested-tree comparison, and cleanup of redundant aliases. Local Windows synchronization remains unverified because the local audit output has not yet been supplied.
