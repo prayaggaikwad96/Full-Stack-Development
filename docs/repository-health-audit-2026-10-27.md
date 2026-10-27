@@ -1,40 +1,29 @@
 # Repository health audit — 2026-10-27
 
-## Current remote state
-
+## Current verified remote state
 - Repository: `prayaggaikwad96/Full-Stack-Development`; default branch `main`.
-- `main`, `Developer`, `github-sync`, and `archive/developer-before-sync-2026-10-27` were compared and aligned to the same SHA: `6ce4d5390d9e13f78b28d77b36f02a77ea5c20a6`.
-- Latest main validation passed on that SHA: [run 40550464016](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40550464016).
-- CodePilot's latest cited workflow run passed on Python 3.10 and 3.12: [run 40544782665](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40544782665). Older failed runs still appear in historical workflow history; later runs passed.
-- `feat/codepilot-free-app` contains separate application/test files and is 36 commits ahead, 85 behind `main`. Keep it; do not force-sync or delete it.
-- `backup/legacy-tree-before-cleanup-2026-10-27` remains an older recovery reference and is not an independent/off-site backup.
+- `main`, `Developer`, `github-sync`, and `archive/developer-before-sync-2026-10-27` currently point to commit `edb4ad2aaf9d154a3b5e78b80a85fc476a66c5a2`; `main` and `Developer` compare as identical.
+- Latest root gitignore validation passed on this commit: [run 40550740609](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40550740609).
+- CodePilot tests passed on `feat/codepilot-free-app` in [run 40544782665](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40544782665) for Python 3.10 and 3.12. Historical failures remain in earlier run history, but later tests passed.
+- `feat/codepilot-free-app` has independent files and 36 commits ahead / 85 behind `main`; preserve it, do not force-sync or delete it.
+- `backup/legacy-tree-before-cleanup-2026-10-27` remains at an older recovery point and is not an off-site backup.
 
-## Nested duplicate tree: exact recursive Git object audit
+## Exact nested-tree inventory
+The recursive Git tree was compared at `71b7eef2e53c8008134053c1a0b05ac48a4ff6d4` between `Prayag Gaikwad/` and `Full-Stack-Development/Prayag Gaikwad/` (the inventory is still valid for the paths and hashes in that commit; latest commits only changed docs).
 
-At the compared main commit, a non-truncated recursive Git tree was compared using relative paths and Git object IDs:
-
-- Canonical prefix: `Prayag Gaikwad/`
-- Nested prefix: `Full-Stack-Development/Prayag Gaikwad/`
-- Canonical entries: 546
-- Nested entries: 549
-- Shared paths: 545
-- Identical Git objects: 177
-- Different shared entries: 368 (364 blob/file entries and 4 tree/directory hashes)
-- Nested-only entries: 4: two empty placeholder files and their parent directories for Advanced Projects and Intermediate Projects.
-- Canonical-only entry: one empty placeholder under `Prayag Gaikwad CSS/Projects/.gitkeep.txt`.
-
-Sample blob contents were fetched from both trees and compared. For `Prayag Gaikwad CSS/Learnings/1 Examples in Each Chapter.html`, the difference was CRLF vs LF line endings; the rendered HTML content matched. This confirms that at least some changed blob IDs are line-ending-only, but does not establish that all 364 files are equivalent.
-
-The nested copy contains real learning files. Do not remove it until all differing blob pairs are normalized to LF, diffed, and substantive differences reviewed. No files have been deleted or overwritten as part of this audit.
+- Canonical entries: 546; nested entries: 549.
+- Shared paths: 545; identical Git objects: 177.
+- Different shared entries: 368 — 364 file blobs and 4 directory/tree hashes.
+- Nested-only entries: 4 (two empty placeholder files plus their two parent directories).
+- Canonical-only entry: one empty placeholder file.
+- These exact path/SHA inventories are available at [comparison JSON](nested-tree-comparison-2026-10-27.json), [comparison CSV](nested-tree-comparison-2026-10-27.csv), and [differing blob pairs](nested-tree-differing-blobs-2026-10-27.json).
+- Sampled file pairs match after normalizing CRLF/CR to LF; only a small sample has been checked this way. The full normalized comparison of all 364 differing blobs is not completed, so do not delete or overwrite the nested tree yet.
 
 ## Windows local repositories
+Remote GitHub inspection cannot read the Windows disk. Actual status, remotes, checked-out commits, dirty worktrees, submodule state, and backup integrity of `C:\\Prayag Gaikwad` and `C:\\Prayag Gaikwad\\Full-Stack-Development` remain unverified until the read-only audit script is run and its output reviewed: [windows audit script](windows-repository-audit.ps1).
 
-GitHub cannot inspect the Windows disk. The actual state of `C:\\Prayag Gaikwad` and `C:\\Prayag Gaikwad\\Full-Stack-Development` (remotes, checked-out commits, dirty worktrees, and any submodule state) remains unverified until the read-only script is run locally and the output inspected. Script: [docs/windows-repository-audit.ps1](https://github.com/prayaggaikwad96/Full-Stack-Development/blob/main/docs/windows-repository-audit.ps1).
-
-## Branch cleanup
-
-The connected GitHub tools expose ref updates but not branch deletion. Branch deletion has therefore not been performed. `github-sync` and `archive/developer-before-sync-2026-10-27` are currently redundant aliases of main, but verify local checkouts/scripts before manually deleting them in the GitHub branches UI. Keep `main`, `Developer`, and `feat/codepilot-free-app`; preserve the older backup ref until an independent backup is confirmed.
+## Branch deletion
+The connected GitHub toolset supports branch ref updates but not branch deletion. No branch was deleted. `github-sync` and `archive/developer-before-sync-2026-10-27` are aligned aliases of main, but check local checkouts/scripts before deleting them in GitHub's branches UI. Keep `main`, `Developer`, and `feat/codepilot-free-app`; retain the older backup until an independent backup is confirmed.
 
 ## Completion status
-
-Remote synchronization and latest main validation are verified. A recursive path/object comparison is complete and a sample confirms a line-ending difference; the full normalized comparison of all 364 differing file blobs is not complete. Windows local repository verification and final branch deletion are not complete or claimed.
+Remote branch synchronization and the latest main validation are verified. The full normalized content comparison, Windows local verification, and final branch deletion are not complete or claimed.
