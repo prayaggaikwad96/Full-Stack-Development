@@ -1,6 +1,6 @@
 # Full-Stack Development
 
-A personal learning archive for full-stack web development, with hands-on examples, practice files, and small projects.
+A hands-on full-stack learning archive with web-development exercises and CodePilot Free, a local-first coding workspace built with Python, browser JavaScript, and Ollama. CI validates Python 3.12–3.15, browser JavaScript, and API integration tests.
 
 ## Learning path
 
