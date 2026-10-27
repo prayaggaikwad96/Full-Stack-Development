@@ -12,11 +12,11 @@ This document separates live remote GitHub checks from checks that must run on t
 - No open pull requests were present at the latest listing. Closed historical PRs remain available as audit records.
 
 ## Latest completed CI checkpoint
-All four workflows on commit `9f08a510591d88b6478798935bd044e6130d803a` completed successfully:
-- [CodePilot tests — Python 3.10 and 3.12](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568415192)
-- [Nested learning-tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568415162)
-- [Root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568415136)
-- [Guarded redundant-branch cleanup](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568415314)
+All four workflows on commit `ad8711cc73ffecf2a09984592987962c53997f29` completed successfully:
+- [CodePilot tests — Python 3.10 and 3.12](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568543373)
+- [Nested learning-tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568543354)
+- [Root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568543792)
+- [Guarded redundant-branch cleanup](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568543386)
 
 ## Nested learning-tree audit result
 The latest uploaded [comparison report artifact](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40568415162) compared `Prayag Gaikwad/` with `Full-Stack-Development/Prayag Gaikwad/`, normalizing only CRLF/CR line endings for UTF-8 text and comparing binary files byte-for-byte:
