@@ -1,4 +1,5 @@
 # Read-only audit for both Windows repositories plus normalized tree comparison.
+# Run this script from PowerShell on the Windows machine that owns the repositories.
 # Git repository state is inspected only. The only file written is a CSV report in $env:TEMP.
 $ErrorActionPreference = "Continue"
 $parent = "C:\Prayag Gaikwad"
@@ -13,6 +14,8 @@ foreach ($repoPath in @($parent, $child)) {
     git -C $repoPath rev-parse --show-toplevel 2>&1
     git -C $repoPath rev-parse --is-inside-work-tree 2>&1
     git -C $repoPath status --short --branch 2>&1
+    Write-Host "-- Local refs versus origin --"
+    git -C $repoPath remote show origin 2>&1
     git -C $repoPath remote -v 2>&1
     git -C $repoPath branch -vv 2>&1
     git -C $repoPath submodule status 2>&1
@@ -145,6 +148,7 @@ try {
     }
     Write-Host "Full per-file report: $reportPath"
     Write-Host "This script does not change tracked files, branches, commits, or remotes."
+    Write-Host "Review output: dirty/untracked paths, remotes, ahead/behind, submodule status, and file-level differences before synchronizing."
 } catch {
     Write-Error "Tree comparison could not complete: $($_.Exception.Message)"
 }
