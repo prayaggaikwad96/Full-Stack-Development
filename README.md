@@ -15,19 +15,19 @@ A personal learning archive for full-stack web development, with hands-on exampl
 ## Repository layout
 
 - `Prayag Gaikwad/` — primary learning materials and exercises.
-- `Full-Stack-Development/` — retained legacy copy from the previous repository/submodule conversion. Its files are not guaranteed to match the primary copy; compare before deleting or consolidating anything.
+- `Full-Stack-Development/` — a retained legacy snapshot from the previous repository/submodule conversion. Files inside it are not guaranteed to match the primary copy.
 - `.github/workflows/` — repository automation.
 - `.gitignore` — excludes common generated files, local environments, and secrets.
 
-**Canonical working directory:** use `Prayag Gaikwad/` for new learning notes and examples unless you are intentionally updating the legacy copy. Keep related assets together and use descriptive filenames.
+**Canonical working directory:** use `Prayag Gaikwad/` for new learning notes and examples. The legacy copy is retained for recovery and comparison; do not copy it over the primary directory automatically because 364 overlapping files have different Git blob contents.
 
 ## Branch workflow
 
 - `main` is the default branch and source of truth for the published repository.
-- `Developer` is retained as the development branch. Update it from `main` before starting new work; merge changes back through a pull request when practical.
-- `archive/developer-before-sync-2026-10-27` is a recovery snapshot. Keep it until the repository's folder history has been reviewed and verified.
-- `github-sync` is a historical synchronization branch. Do not use it as the base for new work.
-- `feat/codepilot-free-app` contains a separate CodePilot project. Preserve it unless the project is deliberately retired or safely relocated.
+- `Developer` is synchronized with `main` as of October 27, 2026. Keep the two aligned by fast-forwarding `Developer` from `main` before beginning new work, then use a pull request for meaningful changes when practical.
+- `archive/developer-before-sync-2026-10-27` preserves the previous development tip for recovery.
+- `github-sync` is an older synchronization branch, 53 commits behind `main`; do not use it as the base for new work.
+- `feat/codepilot-free-app` contains a separate CodePilot project and tests. Keep it separate from the learning archive unless deliberately integrating the project.
 
 Avoid force-pushing or deleting branches as a way to resolve divergent histories. Compare commits and inspect file changes first.
 
@@ -41,6 +41,6 @@ Avoid force-pushing or deleting branches as a way to resolve divergent histories
 
 ## Validation
 
-A GitHub Actions workflow checks representative `.gitignore` rules. Run the relevant tests for any executable project before merging changes.
+The GitHub Actions workflow checks representative `.gitignore` rules. Run the relevant tests for executable projects before merging changes.
 
 This is a learning archive; examples may be educational rather than production-ready. Verify behavior using the toolchain and instructions documented for each project.
