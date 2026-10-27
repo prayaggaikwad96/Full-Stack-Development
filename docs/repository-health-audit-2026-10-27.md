@@ -1,47 +1,37 @@
 # Repository health audit — 2026-10-27
 
-## Current remote state
-
-This document records the live GitHub-side checks and explicitly separates them from the Windows working-copy audit.
+## Verified remote state
 
 - Repository: `prayaggaikwad96/Full-Stack-Development`
 - Default branch: `main`.
-- `main` and `Developer` are the active branches to keep aligned.
-- `github-sync` and `archive/developer-before-sync-2026-10-27` are historical refs behind `main`; neither has unique commits ahead of `main` according to the GitHub comparison. They are candidates for deletion only after local references and user intent are checked.
-- `backup/legacy-tree-before-cleanup-2026-10-27` retains an earlier main tip. It is a Git reference, not a standalone/off-site backup. Preserve until the local backup and comparison review are complete.
-- `feat/codepilot-free-app` contains a separate CodePilot project and 34 unique commits. Keep it. Its test workflow was updated to run on pushes to both `main` and the feature branch, on relevant pull requests, and on manual dispatch.
-- No open pull requests were present during the most recent query.
-
-## GitHub Actions
-
-- `.github/workflows/gitignore-check.yml` now runs on every push to `main`, on pull requests targeting `main`, and on manual dispatch. This deliberately broadens validation so documentation-only pushes also get a fresh run.
-- `.github/workflows/codepilot-tests.yml` on `feat/codepilot-free-app` now runs on pushes to `main` and `feat/codepilot-free-app`, relevant pull requests, and manual dispatch. It performs Python syntax checks, JavaScript syntax checks, and Python integration tests under Python 3.10 and 3.12.
-- Fresh GitHub Actions runs completed successfully after the workflow updates: root gitignore validation passed on `main` commit `278ebe9e5559c932f15ed59a8d8539ef131ec952` (run [40544775148](https://github.com/prayaggaikw96/Full-Stack-Development/actions/runs/40544775148)); CodePilot tests passed on `feat/codepilot-free-app` commit `6c68a09756d30a004f2519dab06c9da7494005c8` (run [40544782665](https://github.com/prayaggaikw96/Full-Stack-Development/actions/runs/40544782665)). These runs validate the workflow tests, not every learning example or the Windows working copy.
-- GitHub reported `main` and `Developer` as unprotected on the prior live check. Branch protection is an additional recommended safeguard, not proof of synchronization.
+- `main` and `Developer` are identical at commit `564b66fa2cf8a1106c4e29d13b1b5bcda186af8e` (confirmed via GitHub compare).
+- The latest root gitignore validation on `main` passed: [run 40544933347](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40544933347).
+- CodePilot tests on `feat/codepilot-free-app` passed on Python 3.10 and 3.12: [run 40544782665](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40544782665).
+- An older CodePilot failure remains in workflow history; later runs passed. Historical failed runs do not mean the latest run failed.
+- The repository currently has six branches: `main`, `Developer`, `feat/codepilot-free-app`, `github-sync`, `archive/developer-before-sync-2026-10-27`, and `backup/legacy-tree-before-cleanup-2026-10-27`.
+- `feat/codepilot-free-app` contains a separate CodePilot app and tests with commits not present on `main`; preserve it unless the project is deliberately retired or integrated.
+- `github-sync` and `archive/developer-before-sync-2026-10-27` are behind `main`, with no unique commits ahead in GitHub compare. They are potential deletion candidates only after local branch references and independent backup are checked.
+- `backup/legacy-tree-before-cleanup-2026-10-27` points to an older commit and is not an independent/off-site backup. Preserve it until local backup integrity is established.
+- Branch-protection status could not be freshly re-read through the connected GitHub integration due to access restrictions. A previous query showed `main` and `Developer` unprotected.
 
 ## Nested duplicate project folder
 
-The canonical root `Prayag Gaikwad/` tree and nested legacy tree `Full-Stack-Development/Prayag Gaikwad/` must not be merged, overwritten, or deleted solely based on matching paths.
+The canonical tree `Prayag Gaikwad/` and nested legacy tree `Full-Stack-Development/Prayag Gaikwad/` both exist on `main`. A prior comparison recorded 524 shared paths, 160 identical Git blob IDs, and 364 differing blob IDs. Some HTML pairs may only differ by line endings, but every differing file pair has not yet been normalized and reviewed. The nested tree contains real learning material (including many CSS/HTML files), so do not delete or overwrite it until the full normalized comparison and a separate backup are verified.
 
-The last recorded tree comparison contained 524 shared paths: 160 Git blob IDs matched and 364 differed. The counts also recorded two empty placeholders only in the nested tree and one empty placeholder only in the canonical tree. A few sampled HTML pairs became identical after CRLF/LF normalization, but all 364 differing pairs have not been checked. A complete normalized comparison and independently verified backup are required before cleanup.
+## Local Windows repositories
 
-## Windows local repositories
-
-The script was provided in chat, but no execution output has been supplied. Consequently this audit cannot establish that `C:\Prayag Gaikwad` and `C:\Prayag Gaikwad\Full-Stack-Development` were backed up, are clean, have the expected remotes, or fetched successfully. The local `git branch` list by itself does not reveal each branch's commit, divergence, or working-tree state.
-
-Run the read-only audit script and review its full output. Stop on any error, unexpected origin, or dirty working tree. Do not reset, force-push, detach a submodule, remove a nested directory, or delete local branches until the output and normalized file comparison are reviewed.
+No recent execution output from the Windows machine is available here. The status, remotes, branch tips, working trees, submodule state, and backup integrity of `C:\\Prayag Gaikwad` and `C:\\Prayag Gaikwad\\Full-Stack-Development` remain unverified. Do not reset, force-push, remove nested files, or delete local branches until the read-only audit and comparison report have been reviewed.
 
 ## Branch cleanup
 
-The GitHub connector used for this audit does not expose a branch-deletion action. The historical branches are therefore not deleted. Use GitHub's branches page to delete only after confirming each branch is redundant, no workflow or collaborator relies on it, and its history is backed up. Keep `main`, `Developer`, and `feat/codepilot-free-app`.
+The connected GitHub actions do not expose a delete-branch operation. The remote branches have not been deleted. Review the [branches page](https://github.com/prayaggaikwad96/Full-Stack-Development/branches) after confirming local branches and backups; retain `main`, `Developer`, and `feat/codepilot-free-app` while the CodePilot project is active.
 
-## Completion criteria
+## Completion checklist
 
-Consider the repository fully synchronized only after:
-1. `main` and `Developer` are confirmed identical at the same SHA.
-2. Both workflows complete successfully on the relevant latest commits.
-3. The local audit confirms expected origins and clean working trees, with backups preserved.
-4. All 364 differing file pairs are normalized and reviewed, and cleanup decisions are made from the comparison report.
-5. Redundant branch refs are removed only after backup and local references are checked, or are intentionally retained and documented.
+1. Keep `main` and `Developer` on the same SHA.
+2. Confirm fresh workflows pass on current relevant commits.
+3. Run the Windows audit and confirm expected remotes, working-tree state, backups, and any submodule relationships.
+4. Compare all differing nested/canonical file pairs after line-ending normalization; preserve all unique content before cleanup.
+5. Delete historical branches only after confirming the exact local ref names, backup integrity, and absence of dependent work—or intentionally retain them and document why.
 
-No claim is made that local repositories or the nested duplicate folder are already reconciled.
+**Status:** Remote active branches and latest workflows are verified; full cross-machine synchronization, nested-tree cleanup, and branch deletion are not yet completed or claimed.
