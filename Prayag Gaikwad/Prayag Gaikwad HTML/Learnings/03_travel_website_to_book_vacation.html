@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roamly | Find your place in Bali</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            color: var(--ink); 
+            background: var(--cream); 
+            font-family: 'DM Sans', sans-serif; 
+            line-height: 1.5; 
+        }
+        
+        .container {
+            width: min(1180px, calc(100% - 40px)); 
+            margin: 0 auto; 
+        }
+        
+        .header {
+            background: var(--paper); 
+            border-bottom: 1px solid rgba(220, 227, 223, .8); 
+        }
+        
+        .header h1 {
+            max-width: 590px; 
+            margin-top: 14px; 
+            color: white; 
+            font-family: 'Playfair Display', Georgia, serif; 
+            font-size: clamp(42px, 6vw, 72px); 
+            line-height: 1.04; 
+            letter-spacing: -.04em; 
+        }
+        
+        .header p {
+            color: rgba(255,255,255,.85); 
+            font-size: 16px; 
+        }
+        
+        .form-container {
+            padding: 54px 0 70px; 
+        }
+        
+        .form-group {
+            display: grid; 
+            grid-template-columns: 1.3fr 1fr 1fr .9fr auto; 
+            align-items: end; 
+            gap: 12px; 
+            padding: 18px; 
+            margin-top: 38px; 
+            background: var(--paper); 
+            border-radius: 8px; 
+            box-shadow: var(--shadow); 
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            width: 100%; 
+            min-width: 0; 
+            padding: 11px 12px; 
+            border: 1px solid var(--line); 
+            border-radius: 5px; 
+            color: var(--ink); 
+            background: #fbfcfa; 
+            outline: none; 
+        }
+        
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus {
+            border-color: var(--coral); 
+            box-shadow: 0 0 0 3px rgba(239,118,93,.15); 
+        }
+        
+        input[readonly] {
+            background-color: #f8f9fa;
+            cursor: not-allowed;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+        
+        .submit-btn {
+            border: 0; 
+            border-radius: 5px; 
+            background: var(--coral); 
+            color: white; 
+            font-weight: 700; 
+            transition: background .2s, transform .2s; 
+        }
+        
+        .submit-btn:hover {
+            background: var(--coral-dark); 
+            transform: translateY(-2px); 
+        }
+        
+        .submit-btn:active {
+            transform: translateY(-2px); 
+        }
+        
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+        :root { --ink: #183330; --muted: #667774; --cream: #f8f7f2; --paper: #fff; --coral: #ef765d; --coral-dark: #d95f49; --sage: #dce9df; --line: #dce3df; --shadow: 0 18px 45px rgba(24, 51, 48, .12); }
+        .shell { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+        header { background: var(--paper); border-bottom: 1px solid var(--line); }
+        .nav { height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+        .logo { color: var(--ink); font-size: 24px; font-weight: 700; letter-spacing: -.06em; text-decoration: none; }
+        .logo span, .footer-logo span { color: var(--coral); }
+        nav { display: flex; gap: 30px; margin-left: auto; }
+        nav a, .host-link { color: var(--muted); font-size: 14px; text-decoration: none; }
+        .nav-actions { display: flex; align-items: center; gap: 14px; }
+        .profile { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; background: #f0e8db; color: var(--ink); font-weight: 700; }
+        .hero { min-height: 485px; padding: 58px 0 80px; background: linear-gradient(90deg, rgba(24,51,48,.92), rgba(24,51,48,.62) 42%, rgba(24,51,48,.05)), url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1800&q=85') center/cover; }
+        .eyebrow { color: #f7c8a6; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+        .hero h1 { max-width: 590px; margin-top: 14px; color: white; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(42px, 6vw, 72px); line-height: 1.04; }
+        .hero-copy { max-width: 460px; margin-top: 18px; color: rgba(255,255,255,.85); font-size: 16px; }
+        .search-card { display: grid; grid-template-columns: 1.3fr 1fr 1fr .9fr auto; align-items: end; gap: 12px; padding: 18px; margin-top: 38px; background: var(--paper); border-radius: 8px; box-shadow: var(--shadow); }
+        .field label { margin: 0 0 7px 4px; color: var(--muted); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+        .field input { padding: 11px 12px; border: 1px solid var(--line); border-radius: 5px; color: var(--ink); background: #fbfcfa; }
+        .search-btn { height: 45px; padding: 0 22px; border: 0; border-radius: 5px; background: var(--coral); color: white; font-weight: 700; }
+        .search-btn:hover { background: var(--coral-dark); }
+        #result { min-height: 22px; margin-top: 12px; color: white; font-size: 14px; font-weight: 600; }
+        main { padding: 54px 0 70px; }
+        .section-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 22px; }
+        .section-heading h2 { font-family: 'Playfair Display', Georgia, serif; font-size: 31px; }
+        .section-heading p, .location, .price small, .promise p { color: var(--muted); font-size: 13px; }
+        .view-link { color: var(--coral-dark); font-size: 14px; font-weight: 700; text-decoration: none; }
+        .stays { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+        .stay { overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); transition: transform .25s, box-shadow .25s; }
+        .stay:hover { transform: translateY(-5px); box-shadow: 0 14px 30px rgba(24,51,48,.1); }
+        .stay-image { position: relative; height: 220px; background-position: center; background-size: cover; }
+        .stay:nth-child(1) .stay-image { background-image: url('https://images.unsplash.com/photo-1582610116397-edb318620f90?auto=format&fit=crop&w=900&q=80'); }
+        .stay:nth-child(2) .stay-image { background-image: url('https://images.unsplash.com/photo-1539367628448-4bc5c9d171c8?auto=format&fit=crop&w=900&q=80'); }
+        .stay:nth-child(3) .stay-image { background-image: url('https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=900&q=80'); }
+        .heart { position: absolute; top: 13px; right: 13px; width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(255,255,255,.9); color: var(--ink); font-size: 18px; }
+        .heart.active { color: var(--coral); }
+        .stay-content { padding: 17px; }
+        .stay-top { display: flex; justify-content: space-between; gap: 12px; }
+        .stay h3 { font-size: 17px; }
+        .rating { font-size: 13px; font-weight: 700; white-space: nowrap; }
+        .rating span { color: #e2a23b; }
+        .price { margin-top: 16px; font-size: 15px; }
+        .price strong { font-size: 17px; }
+        .promise { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 30px 0; margin-top: 58px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .promise-item { display: flex; gap: 13px; align-items: flex-start; }
+        .promise-icon { display: grid; width: 38px; height: 38px; flex: 0 0 38px; place-items: center; border-radius: 50%; background: var(--sage); }
+        .promise h3 { font-size: 14px; }
+        footer { padding: 24px 0; background: var(--ink); color: rgba(255,255,255,.7); font-size: 13px; }
+        .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+        .footer-logo { color: white; font-weight: 700; }
+        @media (max-width: 800px) { nav, .host-link { display: none; } .search-card { grid-template-columns: 1fr 1fr; } .search-btn { grid-column: span 2; } .stays { grid-template-columns: 1fr 1fr; } .stay:last-child { display: none; } }
+        @media (max-width: 560px) { .shell { width: min(100% - 28px, 440px); } .hero { min-height: 590px; padding-top: 48px; } .hero h1 { font-size: 46px; } .search-card { grid-template-columns: 1fr; margin-top: 30px; } .search-btn { grid-column: auto; } .section-heading { align-items: flex-start; flex-direction: column; gap: 6px; } .stays, .promise { grid-template-columns: 1fr; } .stay:last-child { display: block; } .promise { gap: 22px; } .footer-inner { flex-direction: column; } }
+    </style>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+    <header>
+        <div class="shell nav">
+            <a class="logo" href="#top" aria-label="Roamly home">roam<span>ly</span><sup>.</sup></a>
+            <nav aria-label="Main navigation">
+                <a href="#stays">Explore stays</a>
+                <a href="#promise">Why Roamly</a>
+                <a href="#footer">Help</a>
+            </nav>
+            <div class="nav-actions">
+                <a class="host-link" href="#footer">List your place</a>
+                <button class="profile" aria-label="Open profile">AR</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="top">
+        <div class="shell">
+            <p class="eyebrow">Your next chapter starts here</p>
+            <h1>Find your place in Bali.</h1>
+            <p class="hero-copy">Handpicked homes, thoughtful hosts, and the kind of mornings you will remember long after you leave.</p>
+            <form class="search-card" id="bookingForm">
+                <div class="field"><label for="destination">Where</label><input id="destination" type="text" value="Bali, Indonesia" required></div>
+                <div class="field"><label for="checkin">Check in</label><input id="checkin" type="date" required></div>
+                <div class="field"><label for="checkout">Check out</label><input id="checkout" type="date" required></div>
+                <div class="field"><label for="guests">Guests</label><input id="guests" type="number" min="1" max="10" value="2" required></div>
+                <button class="search-btn" type="submit">Search stays</button>
+            </form>
+            <p id="result" role="status" aria-live="polite"></p>
+        </div>
+    </section>
+
+    <main class="shell">
+        <section id="stays" aria-labelledby="stays-title">
+            <div class="section-heading">
+                <div><h2 id="stays-title">Stays worth slowing down for</h2><p>Places our community keeps coming back to.</p></div>
+                <a class="view-link" href="#stays">View all stays <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="stays">
+                <article class="stay"><div class="stay-image"><button class="heart" aria-label="Save Ubud jungle villa">&#9825;</button></div><div class="stay-content"><div class="stay-top"><h3>Jungle villa with a view</h3><p class="rating"><span>&#9733;</span> 4.96</p></div><p class="location">Ubud, Bali</p><p class="price"><strong>$142</strong> night <small>&middot; includes taxes</small></p></div></article>
+                <article class="stay"><div class="stay-image"><button class="heart" aria-label="Save Canggu beach house">&#9825;</button></div><div class="stay-content"><div class="stay-top"><h3>Quiet beach house</h3><p class="rating"><span>&#9733;</span> 4.91</p></div><p class="location">Canggu, Bali</p><p class="price"><strong>$118</strong> night <small>&middot; includes taxes</small></p></div></article>
+                <article class="stay"><div class="stay-image"><button class="heart" aria-label="Save Seminyak pool villa">&#9825;</button></div><div class="stay-content"><div class="stay-top"><h3>Pool villa near the sea</h3><p class="rating"><span>&#9733;</span> 4.88</p></div><p class="location">Seminyak, Bali</p><p class="price"><strong>$176</strong> night <small>&middot; includes taxes</small></p></div></article>
+            </div>
+        </section>
+        <section class="promise" id="promise" aria-label="Roamly benefits">
+            <div class="promise-item"><div class="promise-icon">&#10003;</div><div><h3>Real places, carefully chosen</h3><p>Every stay is reviewed by our local team.</p></div></div>
+            <div class="promise-item"><div class="promise-icon">&#9829;</div><div><h3>Hosts who care</h3><p>Local knowledge comes included.</p></div></div>
+            <div class="promise-item"><div class="promise-icon">&#8599;</div><div><h3>Flexible when plans change</h3><p>Simple cancellation on selected stays.</p></div></div>
+        </section>
+    </main>
+
+    <footer id="footer"><div class="shell footer-inner"><p class="footer-logo">roam<span>ly</span><sup>.</sup></p><p>Made for curious people &middot; Bali and beyond</p><p>&copy; 2025 Roamly</p></div></footer>
+    <script>
+        const bookingForm = document.getElementById('bookingForm');
+        const result = document.getElementById('result');
+        const checkin = document.getElementById('checkin');
+        const checkout = document.getElementById('checkout');
+        const today = new Date().toISOString().split('T')[0];
+        checkin.min = today;
+        checkout.min = today;
+
+        bookingForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            if (new Date(checkout.value) <= new Date(checkin.value)) {
+                result.textContent = 'Choose a check-out date after your check-in date.';
+                result.style.color = '#ffd2c6';
+                return;
+            }
+            result.textContent = `Showing stays in ${document.getElementById('destination').value} for ${document.getElementById('guests').value} guests.`;
+            result.style.color = 'white';
+        });
+
+        document.querySelectorAll('.heart').forEach((heart) => {
+            heart.addEventListener('click', () => {
+                heart.classList.toggle('active');
+                heart.innerHTML = heart.classList.contains('active') ? '&#9829;' : '&#9825;';
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #demo {
+            color: blue;
+        }
+
+        /* weight: 1-0-0 */
+        p#demo {
+            color: orange;
+        }
+
+        /* weight: 1-0-1 WINS! */
+        .test {
+            color: green;
+        }
+
+        /* weight: 0-1-0 */
+        p.test {
+            color: green;
+        }
+
+        /* weight: 0-1-1 */
+        p {
+            color: red;
+        }
+
+        /* weight: 0-0-1 */
+    </style>
+</head>
+
+<body>
+
+    <h2>Specificity Hierarchy/Weight</h2>
+
+    <p id="demo" class="test">Hello World!</p>
+
+</body>
+
+</html>

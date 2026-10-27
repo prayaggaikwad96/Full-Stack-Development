@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The list-style-position Property | Interactive Guide</title>
+    <style>
+        :root {
+            --bg-dark: #140c05;
+            --accent-gold: #ffdeaa;
+            --accent-bronze: #d4a373;
+            --card-border: #8c6239;
+            --text-main: #333333;
+        }
+
+        body {
+            background: linear-gradient(rgba(20, 12, 5, 0.8), rgba(20, 12, 5, 0.9)),
+                url('https://images.unsplash.com/photo-1517256064527-09c73fc73e38?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 50px 20px;
+            color: #f5f5f5;
+        }
+
+        h1 {
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        .subtitle {
+            color: #d1b899;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Explanatory Banner */
+        .info-banner {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--accent-bronze);
+            max-width: 650px;
+            margin: 0 auto 40px auto;
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #fdf8f2;
+        }
+
+        .info-banner strong {
+            color: var(--accent-gold);
+        }
+
+        .section-title {
+            margin-top: 60px;
+            color: var(--accent-gold);
+            border-bottom: 3px solid var(--accent-bronze);
+            display: inline-block;
+            padding-bottom: 6px;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .item-box {
+            background-color: #ffffff;
+            border: 2px solid var(--card-border);
+            border-radius: 14px;
+            padding: 25px;
+            margin: 22px auto;
+            max-width: 500px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+
+        .item-box:hover {
+            transform: translateY(-8px) scale(1.015);
+            box-shadow: 0 16px 35px rgba(212, 163, 115, 0.35);
+            border-color: #ffb703;
+        }
+
+        .item-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 1;
+            transition: background 0.3s ease;
+        }
+
+        .item-box:hover::before {
+            background: rgba(255, 255, 255, 0.97);
+        }
+
+        .item-box>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        .coffee-box {
+            background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .tea-box {
+            background-image: url('https://images.unsplash.com/photo-1597481499750-3e6b22637e12?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .coke-box {
+            background-image: url('https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=600&q=80');
+        }
+
+        .item-box img.profile-img {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            margin-bottom: 15px;
+            background-color: #fff;
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .item-box:hover img.profile-img {
+            transform: scale(1.08) rotate(2deg);
+            border-color: var(--accent-bronze);
+        }
+
+        .item-content {
+            width: 100%;
+        }
+
+        .item-content h3 {
+            margin: 0 0 10px 0;
+            color: #2c1d0c;
+            text-align: center;
+            font-size: 1.6rem;
+        }
+
+        /* List Styling Rules */
+        ul.outside-list {
+            list-style-position: outside;
+            padding-left: 25px;
+        }
+
+        ul.inside-list {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        ul li a {
+            color: #b05700;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        ul li a:hover,
+        ul li a:focus {
+            color: #d68c45;
+            text-decoration: underline;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>The list-style-position Property</h1>
+    <div class="subtitle">Explore interactive beverage cards demonstrating CSS list styling with smooth hover effects.
+    </div>
+
+    <!-- Quick Reference Banner -->
+    <div class="info-banner">
+        <p style="margin: 0 0 8px 0;"><strong>Quick Key Difference:</strong></p>
+        <ul style="margin: 0; padding-left: 20px;">
+            <li><strong>outside (default):</strong> The bullet point hangs outside the flow of the list item's text
+                block.</li>
+            <li><strong>inside:</strong> The bullet point is placed inside the content flow, meaning wrapped text flows
+                underneath the bullet.</li>
+        </ul>
+    </div>
+
+    <!-- OUTSIDE SECTION -->
+    <h2 class="section-title">list-style-position: outside (default)</h2>
+
+    <div class="item-box coffee-box">
+        <img class="profile-img"
+            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=300&q=80"
+            alt="Coffee Cup">
+        <div class="item-content">
+            <h3>Coffee</h3>
+            <ul class="outside-list">
+                <li><a href="https://en.wikipedia.org/wiki/Coffee" target="_blank" rel="noopener">Overview</a>: A brewed
+                    drink prepared from roasted coffee beans, which are the seeds of berries from the Coffea plant.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="item-box tea-box">
+        <img class="profile-img"
+            src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=300&q=80"
+            alt="Tea Cup">
+        <div class="item-content">
+            <h3>Tea</h3>
+            <ul class="outside-list">
+                <li><a href="https://en.wikipedia.org/wiki/Tea" target="_blank" rel="noopener">Overview</a>: An aromatic
+                    beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia
+                    sinensis.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="item-box coke-box">
+        <img class="profile-img"
+            src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=300&q=80"
+            alt="Coca-Cola Drink">
+        <div class="item-content">
+            <h3>Coca-Cola</h3>
+            <ul class="outside-list">
+                <li><a href="https://en.wikipedia.org/wiki/Coca-Cola" target="_blank" rel="noopener">Overview</a>: A
+                    carbonated soft drink produced by The Coca-Cola Company, originally featuring kola nuts and coca
+                    leaves.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- INSIDE SECTION -->
+    <h2 class="section-title">list-style-position: inside</h2>
+
+    <div class="item-box coffee-box">
+        <img class="profile-img"
+            src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=300&q=80"
+            alt="Coffee Cup">
+        <div class="item-content">
+            <h3>Coffee</h3>
+            <ul class="inside-list">
+                <li><a href="https://en.wikipedia.org/wiki/Coffee" target="_blank" rel="noopener">Overview</a>: A brewed
+                    drink prepared from roasted coffee beans, which are the seeds of berries from the Coffea plant.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="item-box tea-box">
+        <img class="profile-img"
+            src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=300&q=80"
+            alt="Tea Cup">
+        <div class="item-content">
+            <h3>Tea</h3>
+            <ul class="inside-list">
+                <li><a href="https://en.wikipedia.org/wiki/Tea" target="_blank" rel="noopener">Overview</a>: An aromatic
+                    beverage commonly prepared by pouring hot or boiling water over cured leaves of the Camellia
+                    sinensis.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="item-box coke-box">
+        <img class="profile-img"
+            src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=300&q=80"
+            alt="Coca-Cola Drink">
+        <div class="item-content">
+            <h3>Coca-Cola</h3>
+            <ul class="inside-list">
+                <li><a href="https://en.wikipedia.org/wiki/Coca-Cola" target="_blank" rel="noopener">Overview</a>: A
+                    carbonated soft drink produced by The Coca-Cola Company, originally featuring kola nuts and coca
+                    leaves.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>
