@@ -19,13 +19,13 @@ A personal learning archive for full-stack web development, with hands-on exampl
 - `.github/workflows/` — repository automation.
 - `.gitignore` — excludes common generated files, local environments, and secrets.
 
-The legacy nested copy contains 524 paths shared with the canonical project tree, 160 of which have identical Git blob IDs and 364 of which have different blob IDs. Several sampled HTML pairs become identical after normalizing CRLF/LF line endings, but all 364 pairs have not been verified. Keep the legacy copy until a complete normalized comparison and a local backup are confirmed.
+The legacy nested copy has 524 shared file paths with the canonical project tree. GitHub Actions compared every shared file after normalizing CRLF/CR to LF: 160 files are byte-identical and 364 differ only by line endings; no substantive text or binary differences were found. The nested copy has two empty placeholder files that the canonical tree lacks, and the canonical tree has one empty placeholder the nested copy lacks. The report is available in the [normalized comparison artifact](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40551308262/artifacts/12754478961). Keep the nested copy until the Windows repository/submodule state and local backup have been checked.
 
 ## Branch workflow
 
 - `main` is the default branch and source of truth for the published repository.
 - `Developer` was synchronized to the same commit as `main` on October 27, 2026. Keep it aligned with `main`; use a pull request for meaningful changes when practical.
-- `github-sync` and `archive/developer-before-sync-2026-10-27` are historical refs behind `main`; do not use them for new work. They have not been deleted.
+- `github-sync` and `archive/developer-before-sync-2026-10-27` are redundant refs currently aligned with `main`; do not use them for new work. Their deletion awaits the local branch-reference check because the connected GitHub integration cannot delete refs.
 - `backup/legacy-tree-before-cleanup-2026-10-27` is a historical Git recovery ref, not an independent/off-site backup. Preserve it until local backups and the duplicate-tree comparison are confirmed.
 - `feat/codepilot-free-app` contains a separate CodePilot project and tests, including commits not present on `main`. Keep it unless that project is deliberately merged or retired.
 
