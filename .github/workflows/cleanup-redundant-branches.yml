@@ -3,14 +3,18 @@ name: Clean up redundant branch aliases
 on:
   push:
     branches: [main]
+    paths:
+      - ".github/workflows/cleanup-redundant-branches.yml"
   workflow_dispatch:
 
+# This workflow is intentionally read-only. Branch deletion requires review of
+# local Git refs and backups; automation cannot inspect the contributor's PC.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  cleanup:
-    name: Delete only verified redundant aliases
+  audit:
+    name: Audit redundant branch aliases without deleting refs
     runs-on: ubuntu-latest
     steps:
       - name: Check out full branch history
@@ -19,10 +23,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Delete aliases only when their history is contained in main
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPOSITORY: ${{ github.repository }}
+      - name: Report aliases already contained in main
         shell: bash
         run: |
           set -euo pipefail
@@ -31,13 +32,9 @@ jobs:
             remote_ref="refs/remotes/origin/$branch"
             if ! git show-ref --verify --quiet "$remote_ref"; then
               echo "Already absent: $branch"
-              continue
-            fi
-
-            if git merge-base --is-ancestor "$remote_ref" refs/remotes/origin/main; then
-              echo "Deleting $branch: its tip is an ancestor of main and has no unique commits."
-              gh api --method DELETE "repos/$REPOSITORY/git/refs/heads/$branch"
+            elif git merge-base --is-ancestor "$remote_ref" refs/remotes/origin/main; then
+              echo "Candidate only: $branch is contained in main; manual local-reference check is still required before deletion."
             else
-              echo "Keeping $branch: it contains history not reachable from main."
+              echo "Preserve: $branch contains commits not reachable from main."
             fi
           done
