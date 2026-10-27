@@ -1,0 +1,127 @@
+const FILES_KEY = "codepilot-free-files-v1";
+const CHAT_KEY = "codepilot-free-chat-v1";
+const starters = {
+ "index.html": "<!doctype html>\n<html lang=\"en\">\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>My project</title><link rel=\"stylesheet\" href=\"style.css\"></head>\n<body><main class=\"card\"><p class=\"eyebrow\">YOUR NEXT IDEA</p><h1>Hello, developer. <span>✦</span></h1><p>A small starting point for something great.</p><button id=\"helloButton\">Make something happen</button><p id=\"result\">Your project starts here.</p></main><script src=\"app.js\"></script></body>\n</html>",
+ "style.css": ":root{font-family:system-ui,sans-serif;color:#202033;background:#f2f0ff}*{box-sizing:border-box}body{min-height:100vh;margin:0;display:grid;place-items:center;padding:24px}.card{max-width:560px;width:100%;padding:42px;background:white;border-radius:24px;box-shadow:0 24px 70px #3e34721f}.eyebrow{color:#7967e8;font-size:12px;letter-spacing:2px;font-weight:800}h1{font-size:clamp(28px,6vw,42px);letter-spacing:-1.5px}h1 span{color:#7967e8}button{margin-top:14px;border:0;border-radius:10px;padding:12px 16px;background:#7967e8;color:white;font-weight:700;cursor:pointer}#result{color:#77758f;font-size:13px;margin-top:20px}",
+ "app.js": "const button = document.querySelector('#helloButton');\nconst result = document.querySelector('#result');\nbutton?.addEventListener('click', () => { result.textContent = 'Nice! You made your first interaction. 🚀'; });",
+ "main.py": "def greet(name: str) -> str:\n    \"\"\"Return a friendly greeting.\"\"\"\n    clean_name = name.strip() or \"developer\"\n    return f\"Hello, {clean_name}!\"\n\nif __name__ == \"__main__\":\n    print(greet(\"developer\"))",
+ "README.md": "# My starter project\n\nEdit the HTML/CSS/JavaScript files, use Preview, then ask CodePilot for suggestions. Files are saved in browser storage; download anything important."
+};
+const $ = s => document.querySelector(s);
+const state = {files: loadFiles(), active:"index.html", models:[], chat:loadChat(), context:true, busy:false};
+function loadFiles(){try{const x=JSON.parse(localStorage.getItem(FILES_KEY));if(x&&Object.keys(x).length)return x;}catch(e){}return JSON.parse(JSON.stringify(starters));}
+function loadChat(){try{const x=JSON.parse(localStorage.getItem(CHAT_KEY));return Array.isArray(x)?x.filter(m=>m&&["user","assistant"].includes(m.role)&&typeof m.content==="string").slice(-24):[]}catch(e){return[]}}
+function saveFiles(){state.files[state.active]=$(" #codeEditor".trim()).value;try{localStorage.setItem(FILES_KEY,JSON.stringify(state.files));$("#saveStatus").textContent="Saved locally"}catch(e){$("#saveStatus").textContent="Storage full";notify("Browser storage is full; download your files.")}}
+function saveChat(){try{localStorage.setItem(CHAT_KEY,JSON.stringify(state.chat.slice(-24)))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function lang(n){return({html:"HTML",htm:"HTML",css:"CSS",js:"JavaScript",ts:"TypeScript",tsx:"TypeScript",jsx:"JavaScript",py:"Python",md:"Markdown",json:"JSON",sql:"SQL",sh:"Shell"}[(n.split(".").pop()||"").toLowerCase()]||"Text")}
+function glyph(n){const l=lang(n);return{HTML:["H","html"],CSS:["#","css"],JavaScript:["JS","js"],TypeScript:["TS","js"],Python:["Py","py"],Markdown:["M","md"]}[l]||["·","md"]}
+function fileIcon(n){const g=glyph(n);return '<span class="glyph '+g[1]+'">'+g[0]+'</span>'}
+function renderFiles(){
+ const names=Object.keys(state.files);
+ $("#fileList").innerHTML=names.map(n=>'<button class="file-item '+(n===state.active?"active":"")+'" data-file="'+esc(n)+'">'+fileIcon(n)+'<span class="file-name">'+esc(n)+'</span></button>').join("");
+ $("#tabStrip").innerHTML=names.filter(n=>n===state.active||["index.html","style.css","app.js"].includes(n)).map(n=>'<button role="tab" aria-selected="'+(n===state.active)+'" class="tab '+(n===state.active?"active":"")+'" data-file="'+esc(n)+'">'+fileIcon(n)+esc(n)+'</button>').join("");
+ document.querySelectorAll("[data-file]").forEach(b=>b.addEventListener("click",()=>openFile(b.dataset.file)));
+}
+function openFile(n){if(!(n in state.files))return;state.files[state.active]=$("#codeEditor").value;state.active=n;$("#codeEditor").value=state.files[n];$("#currentFileCrumb").textContent=n;$("#languageLabel").textContent=lang(n);$("#languageFooter").textContent=lang(n);$("#languageIcon").textContent=lang(n).slice(0,3).toUpperCase();$("#previewPanel").hidden=true;renderFiles();metrics();}
+function highlightSource(value,filename){
+ const language=lang(filename);let pattern;
+ if(language==="HTML")pattern=/(<!--[\s\S]*?-->|<!doctype[^>]*>|<\/?[A-Za-z][^>]*>)/gi;
+ else if(language==="CSS")pattern=/(\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|#[0-9a-fA-F]{3,8}\b|\b[-\w]+(?=\s*:)|\b\d+(?:\.\d+)?(?:px|rem|em|vh|vw|%)?\b)/g;
+ else if(["Python","Shell","YAML"].includes(language))pattern=/(#[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b(?:const|let|var|function|return|if|else|for|while|class|new|import|from|export|default|async|await|try|catch|throw|def|print|True|False|None|pass|with|as|yield|lambda|public|private|static|void|int|string|boolean|interface|type|extends|implements|SELECT|FROM|WHERE|INSERT|UPDATE|DELETE)\b|\b\d+(?:\.\d+)?\b|\b[A-Za-z_$][\w$]*(?=\s*\())/gi;
+ else pattern=/(\/\*[\s\S]*?\*\/|\/\/[^\n]*|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b(?:const|let|var|function|return|if|else|for|while|class|new|import|from|export|default|async|await|try|catch|throw|def|print|True|False|None|pass|with|as|yield|lambda|public|private|static|void|int|string|boolean|interface|type|extends|implements|SELECT|FROM|WHERE|INSERT|UPDATE|DELETE)\b|\b\d+(?:\.\d+)?\b|\b[A-Za-z_$][\w$]*(?=\s*\())/gi;
+ let output="",last=0,match;
+ while((match=pattern.exec(value))!==null){
+  output+=esc(value.slice(last,match.index));const token=match[0],safe=esc(token);let cls="";
+  if(/^(<!--|\/\*|\/\/)/.test(token)||(["Python","Shell","YAML"].includes(language)&&/^#/.test(token)))cls="tok-comment";
+  else if(/^(["'])/.test(token))cls="tok-string";
+  else if(language==="HTML"&&token.startsWith("<")){output+='<span class="tok-tag">'+safe.replace(/(\s[A-Za-z_:][-\w:.]*)(=)/g,'<span class="tok-attr">$1</span>$2')+'</span>';last=pattern.lastIndex;continue}
+  else if(/^#[0-9a-f]{3,8}$/i.test(token)||/^\d/.test(token))cls="tok-number";
+  else if(/^(const|let|var|function|return|if|else|for|while|class|new|import|from|export|default|async|await|try|catch|throw|def|print|True|False|None|pass|with|as|yield|lambda|public|private|static|void|int|string|boolean|interface|type|extends|implements|SELECT|FROM|WHERE|INSERT|UPDATE|DELETE)$/i.test(token))cls="tok-keyword";
+  else if(/^[A-Za-z_$][\w$]*$/.test(token)&&value[pattern.lastIndex]==="(")cls="tok-function";
+  else if(language==="CSS"&&/^[\w-]+$/.test(token))cls="tok-prop";
+  output+=cls?'<span class="'+cls+'">'+safe+'</span>':safe;last=pattern.lastIndex
+ }
+ output+=esc(value.slice(last));if(output.endsWith("\n"))output+=" ";return output
+}
+function renderSyntaxHighlight(){$("#syntaxHighlight").querySelector("code").innerHTML=highlightSource($("#codeEditor").value,state.active)}
+function metrics(){const el=$("#codeEditor"),v=el.value;$("#lineNumbers").textContent=Array.from({length:v.split("\n").length},(_,i)=>i+1).join("\n");$("#characterCount").textContent=v.length.toLocaleString()+" chars";const pre=v.slice(0,el.selectionStart),line=pre.split("\n").length,col=pre.length-pre.lastIndexOf("\n");$("#lineColumn").textContent="Ln "+line+", Col "+col;renderSyntaxHighlight()}
+function notify(s){const el=$("#toast");el.textContent=s;el.classList.add("show");clearTimeout(notify.timer);notify.timer=setTimeout(()=>el.classList.remove("show"),2500)}
+async function copyText(s){try{await navigator.clipboard.writeText(s);notify("Copied to clipboard.")}catch(e){notify("Clipboard access was blocked by the browser.")}}
+function getCode(s){const re=new RegExp(String.fromCharCode(96,96,96)+"(?:[\\w.+-]+)?\\s*\\n([\\s\\S]*?)"+String.fromCharCode(96,96,96));const m=String(s).match(re);return m?m[1].replace(/^\n|\n$/g,""):""}
+function format(s){const fence=String.fromCharCode(96,96,96);const parts=String(s).split(new RegExp(fence+"([^\\n"+fence+"]*)\\n?([\\s\\S]*?)"+fence,"g"));return parts.map((p,i)=>i%3===0?esc(p).replace(/\x60([^\x60]+)\x60/g,"<code>$1</code>").replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>"):i%3===2?"<pre><code>"+esc(p.replace(/^\n|\n$/g,""))+"</code></pre>":"").join("")}
+function renderChat(){
+ const chat=$("#chatMessages");
+ if(!state.chat.length&&!state.busy){chat.innerHTML='<div class="welcome"><div class="spark">✳</div><label>YOUR CODING PARTNER</label><h3>Hey, let\'s build.</h3><p>I can explain code, debug issues, write tests, and turn ideas into working examples.</p><span class="try">TRY ASKING</span><button class="suggestion" data-prompt="Explain the current file in beginner-friendly steps."><span>◉</span> Explain this code <b>↗</b></button><button class="suggestion" data-prompt="Review this file for bugs, edge cases, and security issues. Suggest fixes before changing anything."><span>⌕</span> Find bugs and edge cases <b>↗</b></button><button class="suggestion" data-prompt="Write useful tests for this code and explain how to run them."><span>▦</span> Write tests <b>↗</b></button><button class="suggestion" data-prompt="Suggest a clean refactor for the current file. Keep behavior the same."><span>⤨</span> Refactor this file <b>↗</b></button></div>';}
+ else {chat.innerHTML=state.chat.map((m,i)=>'<article class="message '+m.role+'"><div class="message-meta">'+(m.role==="assistant"?'<span class="message-avatar">✳</span>':"")+'<span>'+(m.role==="user"?"You":"CodePilot")+'</span>'+(m.role==="user"?'<span class="message-avatar">Y</span>':"")+'</div><div class="message-body">'+format(m.content)+'</div>'+(m.role==="assistant"?'<div class="message-tools"><button data-copy-answer="'+i+'">Copy answer</button>'+(getCode(m.content)?'<button data-apply-answer="'+i+'">Apply code to editor</button>':"")+'</div>':"")+'</article>').join("")+(state.busy?'<div class="thinking">✳ Thinking with your local model…</div>':"");}
+ chat.querySelectorAll("[data-prompt]").forEach(b=>b.addEventListener("click",()=>{$("#chatInput").value=b.dataset.prompt;sendMessage()}));
+ chat.querySelectorAll("[data-copy-answer]").forEach(b=>b.addEventListener("click",()=>copyText(state.chat[+b.dataset.copyAnswer]?.content||"")));
+ chat.querySelectorAll("[data-apply-answer]").forEach(b=>b.addEventListener("click",()=>{const code=getCode(state.chat[+b.dataset.applyAnswer]?.content||"");if(code&&confirm("Replace "+state.active+" with generated code? Review before running.")){$("#codeEditor").value=code;saveFiles();metrics();notify("Code inserted. Review it before running.")}}));
+ chat.scrollTop=chat.scrollHeight;
+}
+function setBusy(v){state.busy=v;$("#sendButton").disabled=v;$("#chatInput").disabled=v;$("#sendButton").textContent=v?"…":"↑";renderChat()}
+async function refreshConnection(){
+ try{const r=await fetch("/api/health",{cache:"no-store"}),d=await r.json(),ok=d.ollama==="online";$("#connectionPill").className="connection "+(ok?"online":"offline");$("#connectionPill").querySelector("span").textContent=ok?"Local AI connected":"Local AI offline";$("#assistantOnlineDot").className=ok?"online":"";$("#assistantSubtitle").textContent=ok?d.models.length+" local model(s) available":"Start Ollama to enable chat";state.models=d.models||[];updateModels()}
+ catch(e){state.models=[];updateModels();$("#connectionPill").className="connection offline";$("#connectionPill").querySelector("span").textContent="App server issue"}
+}
+function updateModels(){const sel=$("#modelSelect"),old=sel.value;if(!state.models.length){sel.innerHTML='<option value="">No local models found</option>';return}sel.innerHTML=state.models.map(m=>'<option value="'+esc(m)+'">'+esc(m)+'</option>').join("");if(state.models.includes(old))sel.value=old}
+async function sendMessage(forced){
+ if(state.busy)return;let p=(forced??$("#chatInput").value).trim();if(!p)return;const model=$("#modelSelect").value;if(!model){notify("Install a local model in Ollama first.");openSettings();return}
+ if(state.context)p+="\n\n--- Current file: "+state.active+" ("+lang(state.active)+") ---\n\n"+$("#codeEditor").value+"\n\n--- End current file ---";
+ $("#chatInput").value="";state.chat.push({role:"user",content:p});state.chat=state.chat.slice(-24);saveChat();setBusy(true);
+ let answer="",assistant=null,meta={};
+ try{
+  const r=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:model,messages:state.chat,stream:true})});
+  if(!r.ok){let d={};try{d=await r.json()}catch(e){}throw Error((d.error||"Model request failed")+(d.detail?" — "+d.detail:""))}
+  if(r.body&&r.headers.get("content-type")&&r.headers.get("content-type").includes("text/event-stream")){
+   const reader=r.body.getReader(),decoder=new TextDecoder();let pending="";
+   const handle=raw=>{for(const line of raw.split("\n")){if(!line.startsWith("data:"))continue;let packet;try{packet=JSON.parse(line.slice(5).trim())}catch(e){continue}if(packet.error)throw Error(packet.error);if(typeof packet.delta==="string"&&packet.delta){answer+=packet.delta;if(!assistant){assistant={role:"assistant",content:""};state.chat.push(assistant)}assistant.content=answer;renderChat()}if(packet.done)meta=packet}};
+   while(true){const part=await reader.read();if(part.done)break;pending+=decoder.decode(part.value,{stream:true});const events=pending.split("\n\n");pending=events.pop()||"";for(const event of events)handle(event)}
+   pending+=decoder.decode();if(pending.trim())handle(pending)
+  }else{const d=await r.json();answer=d.answer||"";meta=d}
+  if(!answer.trim())throw Error("The model returned an empty answer. Try again.");
+  if(!assistant){assistant={role:"assistant",content:answer};state.chat.push(assistant)}else assistant.content=answer;
+  state.chat=state.chat.slice(-24);saveChat();if(meta.duration_ms)notify("Reply ready · "+(meta.duration_ms/1000).toFixed(1)+"s")
+ }catch(e){if(assistant&&assistant.content)assistant.content+="\n\n[Stream interrupted: "+e.message+"]";else state.chat.push({role:"assistant",content:"I could not complete the response.\n\n"+e.message+"\n\nCheck Ollama is running and the selected model is installed. Try: ollama pull qwen2.5-coder:7b"});saveChat()}
+ finally{setBusy(false);renderChat()}
+}
+function openSettings(){$("#settingsModal").hidden=false;$("#closeSettingsButton").focus()}
+function closeSettings(){$("#settingsModal").hidden=true}
+function preview(){saveFiles();const html=String(state.files["index.html"]||"<h1>No index.html</h1>"),css=String(state.files["style.css"]||""),js=String(state.files["app.js"]||"");const clean=html.replace(/<link\b(?=[^>]*\bhref\s*=\s*(['"])(?:\.\/)?style\.css(?:\?[^'"]*)?\1)[^>]*>\s*/gi,"").replace(/<script\b(?=[^>]*\bsrc\s*=\s*(['"])(?:\.\/)?app\.js(?:\?[^'"]*)?\1)[^>]*>\s*<\/script>\s*/gi,"");const styled=clean.includes("</head>")?clean.replace(/<\/head>/i,"<style>"+css+"</style></head>"):"<style>"+css+"</style>"+clean;const escaped=js.replace(/<\/script/gi,"<\\/script");const doc=styled.includes("</body>")?styled.replace(/<\/body>/i,"<script>"+escaped+"</script></body>"):styled+"<script>"+escaped+"</script>";$("#previewFrame").srcdoc=doc;$("#previewPanel").hidden=false;$("#previewPanel").scrollIntoView({behavior:"smooth",block:"nearest"})}
+function download(){saveFiles();const url=URL.createObjectURL(new Blob([$("#codeEditor").value],{type:"text/plain;charset=utf-8"})),a=document.createElement("a");a.href=url;a.download=state.active;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);notify("Downloaded "+state.active)}
+function downloadBlob(blob,filename){const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function replaceWorkspace(imported,label){
+ const pairs=Object.entries(imported||{}).filter(([name,value])=>typeof name==="string"&&typeof value==="string"&&name&&!name.startsWith("/")&&!name.split("/").includes("..")&&!name.includes("\\\\")).slice(0,500);
+ const totalBytes=pairs.reduce((sum,[,value])=>sum+new Blob([value]).size,0);
+ if(!pairs.length){notify("No supported text files were found.");return}
+ if(totalBytes>12*1024*1024){notify("Project exceeds the 12 MiB text-project limit.");return}
+ if(!confirm("Import "+pairs.length+" files from "+label+"? This replaces the current browser workspace. Export existing work first if needed."))return;
+ state.files=Object.fromEntries(pairs);state.active=state.files["index.html"]!==undefined?"index.html":pairs[0][0];
+ $("#codeEditor").value=state.files[state.active];$("#currentFileCrumb").textContent=state.active;$("#languageLabel").textContent=lang(state.active);$("#languageFooter").textContent=lang(state.active);$("#languageIcon").textContent=lang(state.active).slice(0,3).toUpperCase();renderFiles();metrics();saveFiles();notify("Imported "+pairs.length+" files.")
+}
+function importFolder(fileList){
+ const supported=/\.(html?|css|[cm]?js|tsx?|jsx?|py|md|txt|json|ya?ml|toml|xml|sql|sh|go|rs|java|c|cpp|php|vue|svelte)$/i;
+ const picked=Array.from(fileList||[]).filter(f=>f.size<=2*1024*1024&&(supported.test(f.name)||["README.md",".gitignore","Dockerfile"].includes(f.name)));
+ if(!picked.length){notify("No supported text files found (individual files must be under 2 MiB).");return}
+ if(picked.length>500){notify("Folder contains more than 500 supported files.");return}
+ if(picked.reduce((sum,f)=>sum+f.size,0)>12*1024*1024){notify("Folder exceeds the 12 MiB text-project limit.");return}
+ let names=picked.map(f=>f.webkitRelativePath||f.name);const roots=names.map(n=>n.split("/")[0]),common=names.every(n=>n.includes("/"))&&roots.every(n=>n===roots[0]);if(common)names=names.map(n=>n.split("/").slice(1).join("/"));
+ Promise.all(picked.map(f=>f.text())).then(contents=>{const files={};names.forEach((n,i)=>{if(n&&!n.split("/").includes("..")&&!n.startsWith("/")&&!n.includes("\\\\"))files[n]=contents[i]});replaceWorkspace(files,"selected folder")}).catch(e=>notify("Could not read folder: "+e.message))
+}
+async function importZip(file){if(!file)return;try{if(file.size>24*1024*1024)throw Error("ZIP must be smaller than 24 MiB");const r=await fetch("/api/project/import-zip",{method:"POST",headers:{"Content-Type":"application/zip"},body:file}),d=await r.json();if(!r.ok)throw Error(d.error||"ZIP import failed");replaceWorkspace(d.files,file.name)}catch(e){notify(e.message)}}
+async function importGitHubRepo(){const url=prompt("Public GitHub repository URL (example: https://github.com/owner/repository):");if(!url)return;notify("Downloading public repository…");try{const r=await fetch("/api/github/import",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({url:url})}),d=await r.json();if(!r.ok)throw Error(d.error||"GitHub import failed");replaceWorkspace(d.files,(d.repository||"GitHub repository")+" ("+(d.branch||"default branch")+")")}catch(e){notify(e.message)}}
+async function exportProjectZip(){saveFiles();try{const r=await fetch("/api/project/export",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({files:state.files})});if(!r.ok){const d=await r.json();throw Error(d.error||"Export failed")}downloadBlob(await r.blob(),"codepilot-project.zip");notify("Project ZIP exported")}catch(e){notify(e.message)}}
+
+function newFile(){const raw=prompt("New file name (example: utils.js):");if(!raw)return;const n=raw.trim().replace(/[\\/:*?"<>|]/g,"").slice(0,100);if(!n||n==="."||n==="..")return notify("Enter a valid filename.");if(n in state.files)return notify("That file already exists.");saveFiles();state.files[n]="";openFile(n);saveFiles();$("#codeEditor").focus();notify("Created "+n)}
+function reset(){if(!confirm("Restore the starter demo? This replaces workspace files saved in this browser."))return;state.files=JSON.parse(JSON.stringify(starters));state.active="index.html";$("#codeEditor").value=state.files[state.active];try{localStorage.removeItem(FILES_KEY)}catch(e){}renderFiles();metrics();saveFiles();notify("Starter workspace restored.")}
+$("#codeEditor").value=state.files[state.active];renderFiles();metrics();renderChat();
+$("#codeEditor").addEventListener("input",()=>{saveFiles();metrics()});$("#codeEditor").addEventListener("click",metrics);$("#codeEditor").addEventListener("keyup",metrics);$("#codeEditor").addEventListener("scroll",()=>{const e=$("#codeEditor"),h=$("#syntaxHighlight");$("#lineNumbers").scrollTop=e.scrollTop;h.scrollTop=e.scrollTop;h.scrollLeft=e.scrollLeft});
+$("#codeEditor").addEventListener("keydown",e=>{if(e.key==="Tab"){e.preventDefault();const el=e.target;el.setRangeText("  ",el.selectionStart,el.selectionEnd,"end");el.dispatchEvent(new Event("input"))}if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="s"){e.preventDefault();saveFiles();notify("Saved in this browser.")}if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();sendMessage("Review this file and suggest the most important improvements.")}});
+$("#downloadButton").addEventListener("click",download);$("#importFolderButton").addEventListener("click",()=>$("#folderInput").click());$("#folderInput").addEventListener("change",e=>{importFolder(e.target.files);e.target.value=""});$("#importZipButton").addEventListener("click",()=>$("#zipInput").click());$("#zipInput").addEventListener("change",e=>{importZip(e.target.files&&e.target.files[0]);e.target.value=""});$("#importGitHubButton").addEventListener("click",importGitHubRepo);$("#exportProjectButton").addEventListener("click",exportProjectZip);$("#copyButton").addEventListener("click",()=>copyText($("#codeEditor").value));$("#previewButton").addEventListener("click",preview);$("#closePreview").addEventListener("click",()=>$("#previewPanel").hidden=true);$("#newFileButton").addEventListener("click",newFile);$("#resetButton").addEventListener("click",reset);
+$("#askFromEditor").addEventListener("click",()=>{$("#chatInput").focus();notify("Ask about the current file.")});$("#starterAskButton").addEventListener("click",()=>sendMessage("Suggest three practical improvements to this starter project and implement a small first step."));$("#chatFocusButton").addEventListener("click",()=>{$("#assistantPanel").scrollIntoView({behavior:"smooth"});$("#chatInput").focus()});
+$("#sendButton").addEventListener("click",()=>sendMessage());$("#chatInput").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendMessage()}});
+$("#toggleContextButton").addEventListener("click",()=>{state.context=!state.context;$("#contextChip").classList.toggle("disabled",!state.context);$("#toggleContextButton").textContent=state.context?"✓":"−";$("#contextChip").querySelector("span").textContent=state.context?"Current file attached":"No file context"});
+$("#refreshModelsButton").addEventListener("click",refreshConnection);$("#settingsButton").addEventListener("click",openSettings);$("#closeSettingsButton").addEventListener("click",closeSettings);$("#closeSettingsDone").addEventListener("click",closeSettings);$("#refreshFromSettings").addEventListener("click",async()=>{await refreshConnection();notify("Connection check complete.")});
+$("#clearChatButton").addEventListener("click",()=>{if(!state.chat.length||confirm("Start a new chat? Previous messages will be removed from this browser.")){state.chat=[];saveChat();renderChat();notify("New chat started.")}});
+$("#settingsModal").addEventListener("click",e=>{if(e.target===$("#settingsModal"))closeSettings()});document.addEventListener("keydown",e=>{if(e.key==="Escape")closeSettings()});document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",()=>copyText(b.dataset.copy)));
+refreshConnection();
