@@ -18,7 +18,7 @@ jobs:
     name: Validate ignore rules
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Ensure environment templates remain trackable
         shell: bash
         run: |
