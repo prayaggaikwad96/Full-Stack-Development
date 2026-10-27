@@ -1,0 +1,43 @@
+name: Clean up redundant branch aliases
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    name: Delete only verified redundant aliases
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out full branch history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Delete aliases only when their history is contained in main
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --prune origin '+refs/heads/*:refs/remotes/origin/*'
+          for branch in github-sync archive/developer-before-sync-2026-10-27; do
+            remote_ref="refs/remotes/origin/$branch"
+            if ! git show-ref --verify --quiet "$remote_ref"; then
+              echo "Already absent: $branch"
+              continue
+            fi
+
+            if git merge-base --is-ancestor "$remote_ref" refs/remotes/origin/main; then
+              echo "Deleting $branch: its tip is an ancestor of main and has no unique commits."
+              gh api --method DELETE "repos/$REPOSITORY/git/refs/heads/$branch"
+            else
+              echo "Keeping $branch: it contains history not reachable from main."
+            fi
+          done
