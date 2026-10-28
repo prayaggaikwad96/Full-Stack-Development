@@ -8,7 +8,7 @@ This document records a remote GitHub snapshot. GitHub API metadata and Actions 
 
 - Repository: [prayaggaikwad96/Full-Stack-Development](https://github.com/prayaggaikwad96/Full-Stack-Development), public and not archived.
 - Default branch: `main`.
-- Current remote `main` and `Developer` point to the same commit: `92e3908e22ba35e070111dc5d2fd45e235c0ec0e`; compare reports 0 commits ahead and 0 behind.
+- Current remote `main` and `Developer` were synchronized after the audit update; both point to commit `e95e8f574b0e6765ecbb98c3a16dab162ad7aae3` (0 commits ahead / 0 behind at verification).
 - [Maintenance PR #11](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/11) merged on 2026-10-28. It adds CodeQL analysis, weekly Dependabot version updates for GitHub Actions, contribution/security documentation, PR checklist guidance, broader PR testing, and audit updates.
 - Current visible CI runs on `main` at `92e3908e22ba35e070111dc5d2fd45e235c0ec0e` all completed successfully:
   - [CodeQL analysis](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40649560792)
@@ -25,8 +25,8 @@ At this verification, GitHub lists these six branches:
 - `Developer` — exact remote mirror of `main`.
 - `archive/codepilot-feature-history-before-sync-2026-10-27` — intentional recovery branch with unique/divergent history. Preserve.
 - `docs/github-profile-readme` — divergent history; preserve until its unique commits and local backups are reviewed.
-- `profile/readme-final` — divergent history; preserve until its unique commits and local backups are reviewed.
-- `chore/github-recommendations-2026-10-28` — older maintenance branch. Review its unique commits and local refs before considering cleanup.
+- `profile/readme-final` — its profile README blob is present on `main` with the same SHA, but the branch has a distinct historical commit and 36 commits of divergence. Candidate for deletion only after confirming local backups.
+- `chore/github-recommendations-2026-10-28` — contains 9 commits not reachable from the current `main` history, including security, CI, and documentation changes subsequently incorporated. Candidate for deletion after confirming all useful work is on `main` and local backups exist.
 
 No branch was deleted by this audit. A clean branch count is not worth losing unique work, unpushed commits, or recovery history.
 
