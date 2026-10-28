@@ -68,4 +68,4 @@ jobs:
           set -euo pipefail
           python -m py_compile projects/codepilot-free/app.py projects/codepilot-free/tests/test_app.py
           node --check projects/codepilot-free/static/app.js
-          python -m unittest discover -s projects/codepilot-free/tests -v
+          PYTHONPATH=projects/codepilot-free python -m unittest discover -s projects/codepilot-free/tests -v
