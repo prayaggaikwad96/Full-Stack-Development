@@ -7,13 +7,13 @@ This is a remote snapshot of the repository after maintenance PR #11 merged on 2
 ## Verified remote state
 
 - Repository: [`prayaggaikwad96/Full-Stack-Development`](https://github.com/prayaggaikwad96/Full-Stack-Development), public and not archived.
-- Default branch: `main`; current snapshot SHA: `9c85c8512effe17c531e1425c1f3393ad3b4e9a1`.
+- Default branch: `main`; current snapshot SHA: `ac622b91c5e294f1d255e6712e3fb7deb2c3ee97`.
 - [PR #11](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/11) merged via squash at 2026-10-28 06:55:01 UTC. It adds CodeQL, weekly GitHub Actions dependency updates, security/contribution documentation, a pull-request checklist, broader PR test coverage, and this audit refresh.
-- `Developer` was fast-forwarded with `force=false` using an expected old SHA. A fresh compare reports `main` and `Developer` identical at `9c85c8512effe17c531e1425c1f3393ad3b4e9a1` (0 commits ahead and 0 behind).
+- `Developer` was fast-forwarded with `force=false` using an expected old SHA. A fresh compare reports `main` and `Developer` identical at `ac622b91c5e294f1d255e6712e3fb7deb2c3ee97` (0 commits ahead and 0 behind).
 - The intentional recovery branch `archive/codepilot-feature-history-before-sync-2026-10-27` remains divergent: 36 commits ahead and 156 behind `main`. Preserve its unique history.
 - `docs/github-profile-readme` remains 2 commits ahead / 26 behind `main`; `profile/readme-final` remains 1 ahead / 21 behind. Their tracked `docs/github-profile/README.md` file is byte-identical to `main` (blob SHA `7ee1b595e76a4b8dc455a0ad950ad6201b60bbbe`). The branches have divergent histories; preserve them until their unique commits, local refs, and backups are reviewed. File equality alone does not make a branch safe to delete.
 - PR #11's [CodePilot test matrix](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646535324) passed all eight Python 3.12–3.15 / Node.js 22 and 24 combinations. Its [CodeQL analysis](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646535563) completed successfully.
-- Post-merge main checks at this audit update: [CodePilot tests](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646784938), [nested-tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646785015), [root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646784911), and [read-only branch audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646784922) all passed on the merged SHA. The post-merge [CodeQL run](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646785094) and the first Dependabot version-update run triggered by its configuration were in progress when this audit was refreshed; inspect their live status before treating those runs as complete.
+- Post-merge checks verified at the current snapshot: [nested-tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646889241), [root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646889196), and [CodeQL analysis](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646889193) all succeeded on `ac622b91c5e294f1d255e6712e3fb7deb2c3ee97`. The CodePilot tests, branch audit, and Dependabot version-update workflow also passed on the immediately preceding `9c85c8512effe17c531e1425c1f3393ad3b4e9a1` commit; that later commit changed only this audit document.
 
 ## Repository quality and supply-chain safeguards
 
@@ -25,14 +25,14 @@ This is a remote snapshot of the repository after maintenance PR #11 merged on 2
 
 ## Branch protection and security settings still requiring manual review
 
-- GitHub reports `main` as unprotected, with required status checks disabled; the repository rulesets endpoint returns an empty list. This connection has read access to those settings but no write action for branch protection or rulesets.
+- GitHub reports `main` as unprotected, with required status checks disabled; the repository rulesets endpoint returns an empty list. The connected GitHub actions expose settings reads but no mutation action for branch protection or rulesets; therefore these controls cannot be enabled from this connection.
 - In repository **Settings → Rules → Rulesets** (or **Branches**), add a ruleset targeting `main`: require pull requests, block force pushes and deletion, and require checks only after confirming their exact successful names. Candidate checks from PR #11 are `CodeQL analysis` and the eight `Python <version> / Node.js <version>` matrix jobs. Consider requiring conversation resolution and linear history as appropriate for your workflow.
 - In **Settings → Advanced Security** (or the available **Security** settings), check secret scanning, push protection, Dependabot alerts, and Dependabot security updates. Their state was not exposed by the read-only public API response, so this audit does not assert they are on or off.
 - The `SECURITY.md` disclosure guide is now present. Availability of GitHub's private vulnerability reporting depends on the repository's security settings.
 
 ## Windows checkout — not remotely verified
 
-No local audit output was supplied. Local uncommitted/untracked files, local-only commits, tracking refs, and submodule state remain unverified. On the Windows PC, run the read-only script [`docs/windows-repository-audit.ps1`](windows-repository-audit.ps1) from PowerShell and inspect the results for both `C:\\Prayag Gaikwad` and `C:\\Prayag Gaikwad\\Full-Stack-Development`. Do not reset, overwrite files, force-push, or delete local branches until differences and backups have been reviewed.
+No local audit output was supplied. The local Windows checkout remains out of scope for this remote GitHub check. Local uncommitted/untracked files, local-only commits, tracking refs, and submodule state remain unverified. On the Windows PC, run the read-only script [`docs/windows-repository-audit.ps1`](windows-repository-audit.ps1) from PowerShell and inspect the results for both `C:\\Prayag Gaikwad` and `C:\\Prayag Gaikwad\\Full-Stack-Development`. Do not reset, overwrite files, force-push, or delete local branches until differences and backups have been reviewed.
 
 ## Licensing
 
