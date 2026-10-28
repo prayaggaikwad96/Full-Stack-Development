@@ -46,6 +46,15 @@ The latest archived nested-tree audit report covers 524 shared file paths: 160 f
 
 ## Validation
 
-GitHub Actions checks the CodePilot Python backend and browser JavaScript, runs integration tests on Python 3.12, 3.13, 3.14, and 3.15, validates representative `.gitignore` rules, and compares the canonical and legacy learning trees.
+GitHub Actions checks the CodePilot Python backend and browser JavaScript, runs integration tests on Python 3.12, 3.13, 3.14, and 3.15, validates representative `.gitignore` rules, and compares the canonical and legacy learning trees. The CodePilot test matrix runs on every pull request so its result remains available when repository branch rules are configured; push-triggered runs for that project remain path-filtered.
 
 This is a learning archive; examples may be educational rather than production-ready. Verify behavior using each project's documented toolchain and instructions.
+
+## Quality, security, and contributions
+
+- [Contributing guide](CONTRIBUTING.md) — branch workflow, local validation commands, and review expectations.
+- [Security policy](SECURITY.md) — how to disclose a vulnerability privately.
+- [Latest repository health audit](docs/repository-health-audit-2026-10-28.md) — remote synchronization, CI, security, and local-verification limits.
+- [CodeQL analysis workflow](.github/workflows/codeql.yml) scans GitHub Actions workflows, JavaScript/TypeScript, and Python on pushes, pull requests, and a weekly schedule.
+- [Dependabot configuration](.github/dependabot.yml) requests weekly GitHub Actions dependency updates. Review its pull requests before merging.
+- Use `.github/pull_request_template.md` to record tests, security hygiene, documentation, and compatibility considerations.
