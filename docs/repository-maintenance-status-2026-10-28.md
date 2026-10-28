@@ -1,18 +1,17 @@
-# Repository maintenance status — 2026-10-28
+# Repository maintenance status — 2026-10-28 (updated)
 
-## Verified remote state
-- `main` and `Developer` both point to `72ec6c01ebd2e72227163cbf7ea79f5c6265b376` after the repository consistency workflow was committed to `main` and `Developer` was fast-forwarded without force.
-- All 11 known pull requests are closed; latest live listing showed no open pull requests.
-- `.github/workflows/repository-consistency.yml` was added. It checks exact `main` / `Developer` SHA equality, required repository hygiene files, CodePilot syntax and unit tests, and explicitly notes the archive's independent history.
-- The intentional CodePilot archive remains divergent with 36 commits not reachable from `main`; preserve it as a recovery point.
-- `docs/github-profile-readme` is 2 commits ahead / 32 behind `main`; `profile/readme-final` is 1 ahead / 27 behind. Their histories diverge. They were not deleted because the connected GitHub tool lacks a delete-ref operation.
-- `chore/github-recommendations-2026-10-28` is 9 commits ahead / 7 behind. It was not deleted because the connected GitHub tool lacks a delete-ref operation and its unique commits should be reviewed before deletion.
-- Neither `main` nor `Developer` currently has branch protection enabled, and the repository rulesets endpoint returns an empty list. The connected GitHub tool has no branch protection / ruleset write operation.
-- The new workflow is committed but no run/status was returned immediately after the commit; its CI execution is pending/not yet confirmed. Do not report it as passed until Actions reports success.
-- A local Windows working tree cannot be verified through this remote connection.
+## Confirmed remote state
+- `main` and `Developer` are exactly synchronized at the latest recorded commit. The repository consistency audit checks this on pushes, pull requests, manual dispatch, and a weekly schedule.
+- The initial run of the repository consistency audit failed because Python's test discovery did not include `projects/codepilot-free` on `PYTHONPATH`. The workflow was corrected to set `PYTHONPATH=projects/codepilot-free` for the test command. The corrected run is currently in progress; do not mark it successful until GitHub Actions reports a successful conclusion.
+- All 11 recorded pull requests are closed, and the latest PR listing reports zero open pull requests.
+- The CodePilot archive branch is intentionally retained. It remains divergent with 36 commits not reachable from `main`; do not delete it.
+- `docs/github-profile-readme` and `profile/readme-final` remain divergent (respectively 2 and 1 commits ahead of `main`). Their README file may be superseded, but their unique commit history should be checked before deletion. No deletion was performed.
+- `chore/github-recommendations-2026-10-28` remains divergent (9 commits ahead of `main`) even though its PR was merged. It has not been deleted.
+- Current branch listing reports `main` and `Developer` as unprotected; rulesets list is empty. The available connected GitHub actions support reading rulesets but do not expose writing branch protection/rulesets or deleting refs.
+- Local Windows checkout cleanliness and backup status cannot be proven by remote API actions.
 
-## Remaining manual GitHub actions
-1. In Settings → Rules → Rulesets (or Settings → Branches), configure protections for `main`: require pull requests, require the checks that exist, block force pushes, and block deletion. Consider whether `Developer` needs the same protections.
-2. Delete the two README branches only after local refs and backups have been checked; do not delete the CodePilot archive.
-3. Review `chore/github-recommendations-2026-10-28` and remove it only after its merged content/history and any use of it as a reference is confirmed.
-4. On the Windows checkout, inspect `git status --short --branch`, fetch, confirm backups, and compare local `main` / `Developer` before any reset or checkout action.
+## Remaining work
+1. Confirm the corrected repository consistency workflow passes in Actions.
+2. Use GitHub Settings → Branches / Rulesets to protect `main` with pull-request requirements, existing appropriate checks, block force-pushes, and block deletions. Decide separately whether to protect `Developer`.
+3. Delete the README branches only after checking local branches and backups. Review the maintenance branch before any deletion. Preserve the CodePilot archive.
+4. Locally, run `git status --short --branch`, fetch, confirm backups, and only then synchronize the Windows checkout.
