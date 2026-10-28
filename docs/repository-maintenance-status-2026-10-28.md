@@ -1,17 +1,16 @@
-# Repository maintenance status — 2026-10-28 (updated)
+# Repository cleanup decision — 2026-10-28
 
-## Confirmed remote state
-- `main` and `Developer` are exactly synchronized at the latest recorded commit. The repository consistency audit checks this on pushes, pull requests, manual dispatch, and a weekly schedule.
-- The initial run of the repository consistency audit failed because Python's test discovery did not include `projects/codepilot-free` on `PYTHONPATH`. The workflow was corrected to set `PYTHONPATH=projects/codepilot-free` for the test command. The corrected run is currently in progress; do not mark it successful until GitHub Actions reports a successful conclusion.
-- All 11 recorded pull requests are closed, and the latest PR listing reports zero open pull requests.
-- The CodePilot archive branch is intentionally retained. It remains divergent with 36 commits not reachable from `main`; do not delete it.
-- `docs/github-profile-readme` and `profile/readme-final` remain divergent (respectively 2 and 1 commits ahead of `main`). Their README file may be superseded, but their unique commit history should be checked before deletion. No deletion was performed.
-- `chore/github-recommendations-2026-10-28` remains divergent (9 commits ahead of `main`) even though its PR was merged. It has not been deleted.
-- Current branch listing reports `main` and `Developer` as unprotected; rulesets list is empty. The available connected GitHub actions support reading rulesets but do not expose writing branch protection/rulesets or deleting refs.
-- Local Windows checkout cleanliness and backup status cannot be proven by remote API actions.
+## Safe cleanup findings
+- `main` and `Developer` are synchronized at the same commit.
+- No PRs are open.
+- `chore/github-recommendations-2026-10-28` has no file paths absent from the current `main` tree, and its associated PR #11 was merged. It is obsolete as a working branch, but deletion is blocked by the connected GitHub integration's lack of a branch-ref deletion operation.
+- `docs/github-profile-readme` and `profile/readme-final` contain earlier profile README commits that are superseded by the merged profile draft. Their histories diverge from `main`, so verify local refs/backups before deleting.
+- Preserve `archive/codepilot-feature-history-before-sync-2026-10-27`: it contains unique CodePilot history.
+- The connected GitHub integration cannot write branch protections/rulesets. Current state remains unprotected with no rulesets.
+- `.github/workflows/repository-consistency.yml` initially failed because unittest could not import `app`; the command is fixed with `PYTHONPATH=projects/codepilot-free`. GitHub Actions run 40649060475 for commit `d15758cc2c1bd1f0e0dad3fd7c20d9de22644b57` completed successfully, including the corrected CodePilot test step.
+- Subsequent commit `10498c190185637dbfe9db3fe5f489edc9b6c4b2` updated this decision note, and `Developer` was fast-forwarded to it. At time of writing, its newer workflow runs were still in progress and need rechecking.
 
-## Remaining work
-1. Confirm the corrected repository consistency workflow passes in Actions.
-2. Use GitHub Settings → Branches / Rulesets to protect `main` with pull-request requirements, existing appropriate checks, block force-pushes, and block deletions. Decide separately whether to protect `Developer`.
-3. Delete the README branches only after checking local branches and backups. Review the maintenance branch before any deletion. Preserve the CodePilot archive.
-4. Locally, run `git status --short --branch`, fetch, confirm backups, and only then synchronize the Windows checkout.
+## Remaining manual actions
+1. Configure branch protection on `main` via repository Settings → Branches/Rulesets. Require pull requests, choose only checks with verified stable names, disallow force pushes, and restrict deletion.
+2. Delete `chore/github-recommendations-2026-10-28`, `docs/github-profile-readme`, and `profile/readme-final` only after confirming local backups/ref state. The GitHub connector cannot perform this deletion in this session.
+3. Verify the Windows checkout with `git status --short --branch`, `git fetch origin`, and compare local/remote refs before any destructive reset.
