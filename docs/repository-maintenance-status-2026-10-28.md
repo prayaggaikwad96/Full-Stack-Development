@@ -1,24 +1,27 @@
 # Repository cleanup and security status — 2026-10-28
 
-## Verified live state
-- Repository: `prayaggaikwad96/Full-Stack-Development`; default branch `main`.
-- `main` and `Developer` point to the same commit, `62fdfed1fec6bcc26bbb2b5b30ae7dc2fdef0b65` (verified by the live compare endpoint after the report update: 0 ahead / 0 behind).
-- No open pull requests were returned by the live PR listing.
-- Latest observed Actions runs for commit `62fdfed1fec6bcc26bbb2b5b30ae7dc2fdef0b65`: nested-tree audit succeeded; root `.gitignore` validation succeeded; CodeQL was still in progress at the time of the follow-up check. The repository consistency audit on the prior commit `d15758cc2c1bd1f0e0dad3fd7c20d9de22644b57` succeeded.
-- The `main` branch endpoint explicitly reports `protected: false` and required-status-check enforcement off. Rulesets endpoint returned an empty list.
-- Existing safeguards present in the repository include CodeQL scanning of GitHub Actions, JavaScript/TypeScript, and Python; weekly Dependabot updates for GitHub Actions; `SECURITY.md`; `CONTRIBUTING.md`; and a PR template. These files being present does not prove that repository-level security features are enabled.
+## Current verified remote state
+- Repository: `prayaggaikwad96/Full-Stack-Development`; public, not archived; default branch is `main`.
+- `main` and `Developer` are synchronized at `629a216ce9fe3294a3e1a7681f19f712b8c80688`; live compare reports 0 ahead / 0 behind.
+- The live pull-request listing currently returns no open PRs.
+- Current commit's Actions: root `.gitignore` validation succeeded; nested-tree audit succeeded; CodeQL remained in progress at latest observation. Earlier CodeQL completed successfully on `c50cf9465984b93ed5b107b489cb20ecbb460fd5`; do not infer current-commit completion until the latest run concludes.
+- Repository branch endpoint reports `main` as `protected: false`, with required status checks enforcement off. The rulesets endpoint returns an empty list.
+- The CodeQL workflow, GitHub Actions Dependabot updates, security policy, contribution guide, PR template, repository consistency audit, CodePilot test matrix, nested-tree audit, and gitignore check are present. Configuration files do not establish that repository-level security switches are enabled.
 
-## Branch cleanup decisions
-- Preserve `archive/codepilot-feature-history-before-sync-2026-10-27`: prior audited comparison showed 36 unique commits not reachable from `main`.
-- `chore/github-recommendations-2026-10-28` is an obsolete working branch whose associated PR #11 has merged and whose tree was previously checked for paths not in `main`. Deletion is not exposed by this connected GitHub integration.
-- `docs/github-profile-readme` and `profile/readme-final` retain divergent history despite the profile file being superseded. Do not delete until local refs and independent backups are checked.
-- No branch was deleted because branch deletion is unavailable through the connected integration and local ref/backup state cannot be checked remotely.
+## Branch-by-branch disposition
+- `main`: canonical default branch; keep.
+- `Developer`: intended mirror; keep and keep synchronized with a fast-forward-only update.
+- `archive/codepilot-feature-history-before-sync-2026-10-27`: preserve. Live comparison reports 36 commits ahead of and 168 behind `main`; unique CodePilot implementation, tests, and docs are present.
+- `chore/github-recommendations-2026-10-28`: not safe to delete automatically. Live comparison reports 9 unique commits ahead of and 13 behind `main`, including the CodeQL/Dependabot/security/PR-template changes even if their content has since landed on `main`. Keep as a recovery ref until local and independent backups are verified.
+- `docs/github-profile-readme`: live comparison reports 2 unique commits ahead and 38 behind `main`. Its `docs/github-profile/README.md` matches the profile file on `main`, but its commits are still divergent. Preserve until backup review.
+- `profile/readme-final`: live comparison reports 1 unique commit ahead and 33 behind `main`. Its `docs/github-profile/README.md` matches `main`, but its commit history diverges. Preserve until backup review.
+- No branches were deleted: the available connected GitHub actions do not expose a delete-branch/ref operation. The local Windows clone and any local-only refs cannot be inspected by this remote integration.
 
-## Remaining security work
-1. In repository Settings → Rules → Rulesets (or Settings → Branches), create a ruleset targeting `main`: require pull requests, block force-pushes and deletion, and require only status checks whose exact names are confirmed from successful Actions runs. Optionally require review-thread resolution and linear history if suitable for this project.
-2. In Settings → Security / Advanced Security, check secret scanning, push protection, Dependabot alerts, and Dependabot security updates. These settings were not exposed for verification in this session.
-3. Confirm private vulnerability reporting availability in the Security tab; `SECURITY.md` describes the disclosure route but does not enable the feature.
-4. On Windows, run read-only checks before changing local state: `git status --short --branch`, `git fetch origin`, inspect local/remote refs, and verify backups. Do not reset, force-push, or delete branches until all local-only work is accounted for.
+## Required security hardening
+1. In repository Settings → Rules → Rulesets, create a branch ruleset for `main`: require pull requests; block force pushes and deletion; require status checks only after confirming their exact names on successful runs. For a solo-maintained learning repository, one required approval may block self-merges, so select review requirements deliberately. Consider requiring conversation resolution and linear history if appropriate.
+2. Verify the stable required check names against the latest successful runs. The CodeQL workflow reports a job named `CodeQL analysis`; the CodePilot matrix jobs are `Python <version> / Node.js <version>`. Do not configure a rule to require a check that cannot run on every relevant PR.
+3. Under Settings → Security / Advanced Security, review and enable where available: secret scanning, push protection, Dependabot alerts, Dependabot security updates, and private vulnerability reporting. The state of these switches is not exposed through the connected read-only endpoints.
+4. On the Windows machine, verify both the working tree and local refs before branch deletion: `git status --short --branch`, `git fetch origin`, inspect `git branch -vv`, and create/verify a local bundle or other independent backup. Do not reset or delete branches until local-only work is accounted for.
 
-## Access limitations
-The connected GitHub integration does not expose mutations for branch protection/rulesets or branch deletion. Branch-protection read access was denied through the protection endpoint, so the branch object’s explicit `protected: false` state is used as the evidence here. No claim is made that all repository security toggles or the Windows checkout are fully verified.
+## Access limitations and completion criteria
+The connected GitHub integration does not expose writes to repository branch rulesets/protection or branch-ref deletion. Reads of the branch protection endpoint require permissions unavailable in this integration, but the branch response itself explicitly indicates `protected: false`. Consequently these platform settings and the branch cleanup cannot be marked complete from this session. Completion requires re-checking the live settings after manual configuration, confirming all current-commit CI runs pass, and reviewing local backups before removing stale refs.
