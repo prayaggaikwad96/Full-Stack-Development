@@ -1,4 +1,4 @@
-name: Clean up redundant branch aliases
+name: Audit redundant branch aliases
 
 on:
   push:
@@ -7,14 +7,14 @@ on:
       - ".github/workflows/cleanup-redundant-branches.yml"
   workflow_dispatch:
 
-# This workflow is intentionally read-only. Branch deletion requires review of
-# local Git refs and backups; automation cannot inspect the contributor's PC.
+# Intentionally read-only: local Git refs and backups cannot be inspected by
+# GitHub Actions. This workflow reports candidates but never deletes branches.
 permissions:
   contents: read
 
 jobs:
   audit:
-    name: Audit redundant branch aliases without deleting refs
+    name: Audit legacy branches without deleting refs
     runs-on: ubuntu-latest
     steps:
       - name: Check out full branch history
@@ -23,18 +23,21 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Report aliases already contained in main
+      - name: Report branch reachability
         shell: bash
         run: |
           set -euo pipefail
           git fetch --prune origin '+refs/heads/*:refs/remotes/origin/*'
-          for branch in github-sync archive/developer-before-sync-2026-10-27 integration/codepilot-free-main-sync feat/codepilot-free-app backup/legacy-tree-before-cleanup-2026-10-27; do
+          # Keep this list explicit. Add a branch only after deciding it is a
+          # legacy candidate; never include the live Developer mirror or the
+          # intentional CodePilot history archive.
+          for branch in github-sync archive/developer-before-sync-2026-10-27 integration/codepilot-free-main-sync feat/codepilot-free-app backup/legacy-tree-before-cleanup-2026-10-27 docs/github-profile-readme profile/readme-final; do
             remote_ref="refs/remotes/origin/$branch"
             if ! git show-ref --verify --quiet "$remote_ref"; then
               echo "Already absent: $branch"
             elif git merge-base --is-ancestor "$remote_ref" refs/remotes/origin/main; then
-              echo "Candidate only: $branch is contained in main; manual local-reference check is still required before deletion."
+              echo "Candidate only: $branch is contained in main; verify local references and backups manually before deletion."
             else
-              echo "Preserve: $branch contains commits not reachable from main."
+              echo "Preserve: $branch has commits not reachable from main. Review its unique history before any deletion."
             fi
           done

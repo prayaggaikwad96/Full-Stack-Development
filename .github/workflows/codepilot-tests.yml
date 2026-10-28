@@ -2,9 +2,7 @@ name: CodePilot tests
 
 on:
   pull_request:
-    paths:
-      - "projects/codepilot-free/**"
-      - ".github/workflows/codepilot-tests.yml"
+    branches: [main]
   push:
     branches: [main]
     paths:
