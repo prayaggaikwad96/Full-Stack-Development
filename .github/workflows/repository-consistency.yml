@@ -39,8 +39,10 @@ jobs:
             echo "::error::This gate intentionally fails until both remote branch histories are reviewed and reconciled. No automatic reset or force-push is allowed."
             if ! git merge-base refs/remotes/origin/main refs/remotes/origin/Developer >/dev/null; then
               echo "::error::main and Developer have no common ancestor. A normal merge/fast-forward is impossible; preserve both histories and reconcile deliberately after local audit and backups."
+              git log --oneline --left-right refs/remotes/origin/main refs/remotes/origin/Developer || true
+            else
+              git log --oneline --left-right refs/remotes/origin/main...refs/remotes/origin/Developer || true
             fi
-            git log --oneline --left-right refs/remotes/origin/main...refs/remotes/origin/Developer || true
             exit 1
           fi
 
