@@ -31,7 +31,7 @@ The latest archived nested-tree audit report covers 524 shared file paths: 160 f
 ## Branch workflow
 
 - `main` is the default branch and source of truth for the published repository.
-- `Developer` is intended to mirror `main`; the remote branch was fast-forwarded to match `main` during the latest audit. Re-check both refs before future releases or local pushes. Use pull requests for meaningful changes when practical.
+- `Developer` is intended to mirror `main`, but the current remote refs are divergent and GitHub's compare endpoint reports no common ancestor. Do not force-push or overwrite either ref. Run `docs/windows-repository-audit.ps1` from the local Windows checkout, confirm backups and the unique commits on both branches, then reconcile intentionally using a new reviewable branch or documented migration. Re-check both refs before future releases or local pushes. Use pull requests for meaningful changes when practical.
 - `archive/codepilot-feature-history-before-sync-2026-10-27` is a historical recovery branch containing 36 commits not reachable from `main`. Its divergent tip is intentional for recovery, not synchronization failure; do not fast-forward or delete it until its unique work has been reviewed and independently backed up.
 - Preserve recovery references and project-specific feature branches until local backups, unique work, and repository state are verified.
 - Do not delete or overwrite branches or project files until their unique work is preserved elsewhere.
