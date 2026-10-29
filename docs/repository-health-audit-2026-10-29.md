@@ -6,20 +6,20 @@ This report uses the latest directly retrieved remote GitHub metadata and Action
 
 ## Live refs and history comparison
 
-- `main`: `cca7e0a84377ea7f51ee4c55f29865f58278a58a` (at the last ref query before this report update).
+- `main`: `b2f4b52bbe65a6ecfb816edf6df14c0c5b8e6d09` (audit-document snapshot before the following final-status commit).
 - `Developer`: `204748099731c3aeb04963e6d8957dcd569daf62`.
 - GitHub compare found common ancestor `db1f8569d21a8bb41baec229fae4326f2c65aa43`. The previously reported no-common-ancestor condition is no longer current.
-- The compare result was `diverged`: 247 commits reachable from Developer but not main, and 2 from main but not Developer at that sample. Ref tips changed during the audit, so rerun compare before any branch mutation.
+- The compare result was `diverged`: 247 commits reachable from Developer but not main, and 4 from main but not Developer at the latest comparison. Ref tips changed during the audit, so rerun compare before any branch mutation.
 - Both recursive trees had 1,097 blob paths, no path unique to either branch, and only one different shared file at the most recent matching tree sample: this audit report. This path/content snapshot is not proof that histories are equivalent.
 - Recovery branch `archive/codepilot-feature-history-before-sync-2026-10-27` remained at `6c68a09756d30a004f2519dab06c9da7494005c8`.
 - The branch ref named `reconciliation/main-files-into-Developer-2026-10-29` does not point to a vetted reconciliation commit; it resolved to the Developer head during audit.
 
 ## CI state on sampled main SHA
 
-For `cca7e0a84377ea7f51ee4c55f29865f58278a58a`:
-- [Nested project tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40925388500): success.
-- [Root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40925388487): success.
-- [CodeQL](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40925388224): in progress at last query; final result not verified.
+For the sampled main snapshot `b2f4b52bbe65a6ecfb816edf6df14c0c5b8e6d09` (the listed run IDs tested the immediately prior documented main commit, not a future commit):
+- [Nested project tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40925388500): success on `cca7e0a84377ea7f51ee4c55f29865f58278a58a`.
+- [Root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40925388487): success on `cca7e0a84377ea7f51ee4c55f29865f58278a58a`.
+- [CodeQL](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40925388224): was in progress on `cca7e0a84377ea7f51ee4c55f29865f58278a58a`; final result not verified in this audit snapshot.
 - The repository consistency workflow deliberately fails when main and Developer are not exact mirrors. Treat that as an outstanding synchronization gate, not a successful check.
 
 These results are tied to the stated SHA. Subsequent commits trigger new runs; always inspect the exact head SHA and conclusion.
