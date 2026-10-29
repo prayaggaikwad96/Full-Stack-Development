@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zomato | Discover the best food & drinks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="brand" href="#top" aria-label="Zomato home">zomato<span>.</span></a>
+            <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="#collections">Discover</a>
+                <a href="#restaurants">Restaurants</a>
+                <a href="#about">About us</a>
+                <div class="nav-actions">
+                    <button class="location-button" type="button">&#9906; <span>New Delhi</span>&#8964;</button>
+                    <a class="login-link" href="#login">Log in</a>
+                    <a class="signup-link" href="#signup">Sign up</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main id="top">
+        <section class="hero-section">
+            <div class="hero-content">
+                <p class="eyebrow">GOOD FOOD. GOOD MOOD.</p>
+                <h1>Find the flavour<br><em>of your moment.</em></h1>
+                <p class="hero-copy">Discover the best restaurants, cafes and bars in your city, all in one delicious place.</p>
+                <form class="search-bar" id="search-form">
+                    <label class="location-search" for="location-input">&#9906; <input id="location-input" type="text" placeholder="New Delhi" aria-label="Location"></label>
+                    <span class="search-divider"></span>
+                    <label class="dish-search" for="dish-input">&#9906; <input id="dish-input" type="search" placeholder="Search for restaurant, cuisine or a dish" aria-label="Search restaurants"></label>
+                    <button type="submit">Search</button>
+                </form>
+                <p class="delivery-note"><span>&#9679;</span> Delivering happiness in 35 minutes or less</p>
+            </div>
+            <div class="hero-image" role="img" aria-label="A colourful spread of food on a table"></div>
+        </section>
+        <section class="quick-links section-wrap" aria-label="Explore Zomato">
+            <a class="quick-link" href="#restaurants"><span class="quick-icon coral">&#9635;</span><span><strong>Order online</strong><small>Stay home and order</small></span><b>&rarr;</b></a>
+            <a class="quick-link" href="#collections"><span class="quick-icon gold">&#9671;</span><span><strong>Dining out</strong><small>Explore the city's best</small></span><b>&rarr;</b></a>
+            <a class="quick-link" href="#collections"><span class="quick-icon green">&#10022;</span><span><strong>Live events</strong><small>Make your evenings special</small></span><b>&rarr;</b></a>
+        </section>
+        <section class="collections section-wrap" id="collections">
+            <div class="section-heading"><div><p class="eyebrow">CURATED FOR YOU</p><h2>Explore our collections</h2></div><a href="#restaurants">See all collections <span>&rarr;</span></a></div>
+            <div class="collection-grid">
+                <a class="collection-card date-night" href="#restaurants"><span>ROMANTIC TABLES</span><strong>Date night, sorted</strong><small>Make it a night to remember &rarr;</small></a>
+                <a class="collection-card street-food" href="#restaurants"><span>LOCAL FAVOURITES</span><strong>Street food stories</strong><small>The city, one bite at a time &rarr;</small></a>
+                <a class="collection-card coffee" href="#restaurants"><span>SLOW MORNINGS</span><strong>Perfect coffee</strong><small>Start your day right &rarr;</small></a>
+            </div>
+        </section>
+        <section class="restaurants section-wrap" id="restaurants">
+            <div class="section-heading"><div><p class="eyebrow">TOP PICKS NEAR YOU</p><h2>Popular restaurants</h2></div><a href="#restaurants">View all <span>&rarr;</span></a></div>
+            <div class="filter-tabs" role="tablist"><button class="active" data-filter="all" role="tab">All</button><button data-filter="north-indian" role="tab">North Indian</button><button data-filter="italian" role="tab">Italian</button><button data-filter="desserts" role="tab">Desserts</button><button data-filter="healthy" role="tab">Healthy</button></div>
+            <div class="restaurant-grid" id="restaurant-grid">
+                <article class="restaurant-card" data-category="north-indian"><div class="restaurant-photo photo-one"><span class="offer">50% OFF</span><button class="heart" type="button" aria-label="Save The Yellow Chilli">&#9825;</button></div><div class="restaurant-info"><div><h3>The Yellow Chilli</h3><p>North Indian &middot; Mughlai</p></div><strong class="rating">4.6 &#9733;</strong><div class="restaurant-meta"><span>&#8377;1,200 for two</span><span>35 min</span></div></div></article>
+                <article class="restaurant-card" data-category="italian"><div class="restaurant-photo photo-two"><span class="offer">20% OFF</span><button class="heart" type="button" aria-label="Save Sorrento">&#9825;</button></div><div class="restaurant-info"><div><h3>Sorrento</h3><p>Italian &middot; Pizza &middot; Pasta</p></div><strong class="rating">4.4 &#9733;</strong><div class="restaurant-meta"><span>&#8377;1,800 for two</span><span>28 min</span></div></div></article>
+                <article class="restaurant-card" data-category="desserts"><div class="restaurant-photo photo-three"><span class="offer">30% OFF</span><button class="heart" type="button" aria-label="Save Sugar Rush">&#9825;</button></div><div class="restaurant-info"><div><h3>Sugar Rush</h3><p>Desserts &middot; Bakery &middot; Cafe</p></div><strong class="rating">4.7 &#9733;</strong><div class="restaurant-meta"><span>&#8377;700 for two</span><span>22 min</span></div></div></article>
+                <article class="restaurant-card" data-category="healthy"><div class="restaurant-photo photo-four"><span class="offer">15% OFF</span><button class="heart" type="button" aria-label="Save Green Theory">&#9825;</button></div><div class="restaurant-info"><div><h3>Green Theory</h3><p>Healthy food &middot; Salads</p></div><strong class="rating">4.5 &#9733;</strong><div class="restaurant-meta"><span>&#8377;950 for two</span><span>30 min</span></div></div></article>
+            </div>
+        </section>
+        <section class="app-banner" id="about"><div class="app-art">~<span>z</span>~</div><div><p class="eyebrow">THE ZOMATO APP</p><h2>Everything you love,<br>in your pocket.</h2><p>Get personalised recommendations, exclusive offers and lightning-fast ordering.</p><div class="app-buttons"><a href="#app">App Store</a><a href="#app">Google Play</a></div></div></section>
+    </main>
+    <footer class="site-footer"><div class="footer-top"><a class="brand" href="#top">zomato<span>.</span></a><div class="footer-selects"><button type="button">India &#8964;</button><button type="button">English &#8964;</button></div></div><div class="footer-links"><div><h4>ABOUT ZOMATO</h4><a href="#about">Who we are</a><a href="#about">Careers</a><a href="#about">Contact us</a></div><div><h4>FOR RESTAURANTS</h4><a href="#signup">Partner with us</a><a href="#about">Apps for you</a><a href="#about">Restaurant benefits</a></div><div><h4>LEARN MORE</h4><a href="#about">Privacy</a><a href="#about">Security</a><a href="#about">Terms</a></div><div><h4>SOCIAL LINKS</h4><div class="social-links"><a href="#social">in</a><a href="#social">X</a><a href="#social">o</a><a href="#social">&gt;</a></div></div></div><p class="copyright">&copy; 2026 Zomato Media Pvt. Ltd. All rights reserved.</p></footer>
+
+    <script src="../JavaScript/script.js"></script>
+</body>
+</html>

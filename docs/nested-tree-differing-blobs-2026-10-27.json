@@ -1,0 +1,2558 @@
+{
+  "repository": "prayaggaikwad96/Full-Stack-Development",
+  "commit": "71b7eef2e53c8008134053c1a0b05ac48a4ff6d4",
+  "canonical_prefix": "Prayag Gaikwad/",
+  "nested_prefix": "Full-Stack-Development/Prayag Gaikwad/",
+  "claim": "Git blob bytes after normalizing CRLF and CR to LF are compared directly. Exact byte-equality is required after line-ending normalization; no whitespace stripping is performed.",
+  "total_different_blobs": 364,
+  "different_blobs": [
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/1 Examples in Each Chapter.html",
+      "nested_sha": "e71c80072abf3f221f6840da5118e9012e8821cb",
+      "canonical_sha": "9583ed075532079883ce4d0b203e39fd5bb79093",
+      "nested_size": 277,
+      "canonical_size": 301
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/10 How To Add Internal CSS.html",
+      "nested_sha": "3236facb919d2b6a8c1066a398042b657833c3c9",
+      "canonical_sha": "d3e90517f2d0ea14bcded6b61781c955578aeb16",
+      "nested_size": 297,
+      "canonical_size": 320
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/100 CSS Text Decoration Styles-Specify a Style for the Decoration Line.html",
+      "nested_sha": "2cc9f7b7fd72224ca486c15d016f3a14cf36b272",
+      "canonical_sha": "aef5a4aae9d6a3f820effdd9f8026b527f7694e4",
+      "nested_size": 1029,
+      "canonical_size": 1080
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/101 CSS Text Decoration Styles- Specify the Thickness for the Decoration Line.html",
+      "nested_sha": "781cd994d1a434af16403e250f9735990b8df8af",
+      "canonical_sha": "3b6903d56168ac08259b6b501019a06fe9437541",
+      "nested_size": 752,
+      "canonical_size": 792
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/102 Text Decoration Styles-The Shorthand Property.html",
+      "nested_sha": "01273a60fe62dfdd79dc44d7ab98ec2b5bc01f14",
+      "canonical_sha": "4815b8d4c669ba8852bb73c0f1f42116fea0c7f9",
+      "nested_size": 467,
+      "canonical_size": 499
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/103 CSS Text Decoration Styles-A Small Tip on Links.html",
+      "nested_sha": "a5a53a9642bbe1fe0287ea906513a3be3b525d49",
+      "canonical_sha": "308b0c5cbbb6a45cadf9c00f5d8adff4f5e4e725",
+      "nested_size": 281,
+      "canonical_size": 301
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/104 CSS Text Transformation.html",
+      "nested_sha": "2da859e77513f370b7084dba976f2a90e0004cee",
+      "canonical_sha": "4b5ff45483b60875c20db7adf7c9b4fffe89840a",
+      "nested_size": 548,
+      "canonical_size": 578
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/105 CSS Text Spacing-Text Indentation.html",
+      "nested_sha": "c2c85d9e1a7c61074fb748a3f91496ffbc915d18",
+      "canonical_sha": "746857c0896782050518de0c8cae3f25d4b1efad",
+      "nested_size": 475,
+      "canonical_size": 497
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/106 CSS Text Spacing- CSS Letter Spacing.html",
+      "nested_sha": "ac5b93522f6f63bbf71167fb4ee5286e6b79a46e",
+      "canonical_sha": "8f3eb7868d4d4e513f6649baa5dae8a9073c5451",
+      "nested_size": 302,
+      "canonical_size": 327
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/107 CSS Text Spacing-CSS Line Height.html",
+      "nested_sha": "4f3f10f7156b8164561d14fd97b9ca5b61295542",
+      "canonical_sha": "d9cfa63880772b82c4ffcbd91d33f727c1567a96",
+      "nested_size": 1384,
+      "canonical_size": 1458
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/108 CSS Text Spacing- CSS Word Spacing.html",
+      "nested_sha": "b359d8f4ccf23c0423fe1757081126524bdcc2c6",
+      "canonical_sha": "ef16fa492594e487545a6478ba41a2044fb01425",
+      "nested_size": 439,
+      "canonical_size": 467
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/109 CSS Text Spacing-CSS White Space.html",
+      "nested_sha": "848e011d9fa86b11d39c9ca50aa49ceecd4dc9a0",
+      "canonical_sha": "7519e26ada73da4a0b3bcc50fd935c784bf0c4a6",
+      "nested_size": 683,
+      "canonical_size": 715
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/11 How To Add Inline CSS.html",
+      "nested_sha": "0998661c324bc8ef57c2677c5567f5932fa53e97",
+      "canonical_sha": "542b0a4a1c34a82c86f8c45404b0e157c79cbc7b",
+      "nested_size": 169,
+      "canonical_size": 179
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/110 CSS Text Shadow- Horizontal and vertical shadow.html",
+      "nested_sha": "131c339978869b7cb727c140457b06ff1fd55cd0",
+      "canonical_sha": "d6fbe02dae80b98c0f11f84ab2d9c4d5ce0c33ef",
+      "nested_size": 141,
+      "canonical_size": 157
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/111 CSS Text Shadow-add a color (red) to the shadow.html",
+      "nested_sha": "29e69561e6e860ebdb92272f6f3db83c2f3ed02d",
+      "canonical_sha": "922b4748adf8bde2680e6e50953776d265971caa",
+      "nested_size": 144,
+      "canonical_size": 159
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/112 CSS Text Shadow-add a blur effect (5px) to the shadow.html",
+      "nested_sha": "ced7f0ced58c82ef06a391b0b66954912a9126c7",
+      "canonical_sha": "ce414026e5238a84d443c6794346a162bec54f9a",
+      "nested_size": 189,
+      "canonical_size": 207
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/113 CSS Text Shadow- Text-shadow on a white text.html",
+      "nested_sha": "c7c211fcbbbf6e26e1b0887e55e4ba8f65d5c20a",
+      "canonical_sha": "5c159d7f3ee12954125859c28ebde91fe117f147",
+      "nested_size": 168,
+      "canonical_size": 184
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/114 CSS Text Shadow-Text-shadow with red neon glow.html",
+      "nested_sha": "9f284aaea0b74a46829147d106e4c6c2b2981b3c",
+      "canonical_sha": "cf6d77e8f635c393c3e30be0329e074ec62f92a4",
+      "nested_size": 201,
+      "canonical_size": 219
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/115 CSS Text Shadow-Multiple Shadows- Text-shadow with red and blue neon glow.html",
+      "nested_sha": "c8d67fb3b0780c35e55825b2ba42c125e7f4bddd",
+      "canonical_sha": "b1febb0618e0979e5602c3c8f28ee9942a1db203",
+      "nested_size": 227,
+      "canonical_size": 245
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/116 CSS Text Shadow-Multiple Shadows-Text-shadow with black, blue and red neon glow.html",
+      "nested_sha": "aef1da3b78d2538ee308d03fd75ed1389e7e2483",
+      "canonical_sha": "b19a5d9740369d791661a64fb818318e1ed110ac",
+      "nested_size": 245,
+      "canonical_size": 264
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/117 CSS Fonts-CSS font-family.html",
+      "nested_sha": "1044486c4b7bdfc1e4768df004060ee3ab6bf842",
+      "canonical_sha": "1586b4a71b92c21242d02191ff4afc12effda0e5",
+      "nested_size": 599,
+      "canonical_size": 628
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/118 CSS Web Safe Fonts-Fallback Fonts.html",
+      "nested_sha": "527e9d767289e9c5c1f0f5f2f97c1fd0d86eda60",
+      "canonical_sha": "73cbca7c909104b07bf81150ea1913bc298f10a0",
+      "nested_size": 270,
+      "canonical_size": 291
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/119 CSS Web Safe Fonts-Arial (sans-serif).html",
+      "nested_sha": "e062f685c62f51106ca66c688c5d3b6cb3d2aa62",
+      "canonical_sha": "df32fcbd1caef0a42bbe50620b2b68aea947ce7b",
+      "nested_size": 271,
+      "canonical_size": 292
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/12 Multiple Style Sheets & Cascading Order- After.html",
+      "nested_sha": "84d9d3af429687ffee6adaf1c7c6fc3ab1cfdceb",
+      "canonical_sha": "d698a2ebeccad7237a4da4580e16331232ee48bb",
+      "nested_size": 335,
+      "canonical_size": 354
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/120 CSS Web Safe Fonts-Verdana (sans-serif).html",
+      "nested_sha": "2ee91af2bb7faf860d44474035fc9ab9eb6ec15a",
+      "canonical_sha": "6a7f3d1a433db9bbb5b2b4a12d1458b64ab045a7",
+      "nested_size": 273,
+      "canonical_size": 294
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/121 CSS Web Safe Fonts-Tahoma (sans-serif).html",
+      "nested_sha": "c4a572c83fc516743040d13c78844b7207fb48b8",
+      "canonical_sha": "be4f6280aa30ea0152349184375a9702be91996c",
+      "nested_size": 272,
+      "canonical_size": 293
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/122 CSS Web Safe Fonts-Trebuchet MS (sans-serif).html",
+      "nested_sha": "f9063d6eedd51edfa53ec383d501a73fd1b6385d",
+      "canonical_sha": "5c34d8200de8d3feb9f030790a36dfdff2561339",
+      "nested_size": 231,
+      "canonical_size": 249
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/123 CSS Web Safe Fonts-Times New Roman (serif).html",
+      "nested_sha": "43e9c423e840cf28c0b1c93979dde2aace1e7144",
+      "canonical_sha": "95faad2b44a1c63d73987a2caf09a9dbaf77cd36",
+      "nested_size": 229,
+      "canonical_size": 247
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/124 CSS Web Safe Fonts-Georgia (serif).html",
+      "nested_sha": "658b6de64579f9351533da38c3bf4af0a74cb4c9",
+      "canonical_sha": "f6cf5ee1cf8a9a27f70bbf418afc70918b992957",
+      "nested_size": 268,
+      "canonical_size": 289
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/125 CSS Web Safe Fonts-Garamond (serif).html",
+      "nested_sha": "2fff11d6ec3abde8fc5d86ef3f8b89e8cafdfc96",
+      "canonical_sha": "0c93e6d83f1deb346ef759adfcd6c7fc46c477df",
+      "nested_size": 275,
+      "canonical_size": 296
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/126 CSS Web Safe Fonts-Courier New (monospace).html",
+      "nested_sha": "7628f93aa65e03d569b33319994da45e838f9e93",
+      "canonical_sha": "347c9c294dfba13a18afb8196079115d0f3eac4b",
+      "nested_size": 278,
+      "canonical_size": 299
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/127 CSS Web Safe Fonts-Brush Script MT (cursive).html",
+      "nested_sha": "7db6ed962587de4e0298791e9d0b7aaf96527b4a",
+      "canonical_sha": "63d0854bedc06d31035f741251dc5ce8403aa78f",
+      "nested_size": 280,
+      "canonical_size": 301
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/128 CSS Font Style.html",
+      "nested_sha": "c7aa872e1841bcdc929065b7e7da28cb8621eb12",
+      "canonical_sha": "dce59cc497a3f10ad934d6c6e546f59452281287",
+      "nested_size": 507,
+      "canonical_size": 537
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/129 CSS Font Weight.html",
+      "nested_sha": "bca9ce3f187488b29194525e5b3fae172e71f72a",
+      "canonical_sha": "4358e0687e4a6867f333f841f935634e1060f423",
+      "nested_size": 563,
+      "canonical_size": 598
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/13 Multiple Style Sheets & Cascading Order- Before.html",
+      "nested_sha": "e0613a896c011ea4f6c1a0d4dc51a2e24a8be8b4",
+      "canonical_sha": "23d13620d649e1b2856bfdfc75785cc72e5f4ea3",
+      "nested_size": 336,
+      "canonical_size": 356
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/130 CSS Font Variant.HTML",
+      "nested_sha": "4d8bd3725ece2cd76799d7d185794a3fa29f5feb",
+      "canonical_sha": "407bfab970f929af12ab9ab785644165e4d63b40",
+      "nested_size": 354,
+      "canonical_size": 379
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/131 CSS Font Size-Set Font Size With Pixels.HTML",
+      "nested_sha": "5fba41a9f202992dbdfdd774107a5701b20fc034",
+      "canonical_sha": "17ddd6dbceea400ea397c4068f502814f8497bc5",
+      "nested_size": 380,
+      "canonical_size": 409
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/132 CSS Font Size-Set Font Size With Em.html",
+      "nested_sha": "fec7de4ee7f156ac8163d75a567910b1bff414ae",
+      "canonical_sha": "c493a053919c7ce5a7c8bfd4e30d0b1fe8ac16c5",
+      "nested_size": 623,
+      "canonical_size": 660
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/133 CSS Font Size-The vw Unit.html",
+      "nested_sha": "30f739754b41d8cae55a43a08ec858fae06ad7b0",
+      "canonical_sha": "55d913fa146dc54288928de54d430b2106f57ee1",
+      "nested_size": 273,
+      "canonical_size": 293
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/134 CSS Google Fonts- Sofia Font.html",
+      "nested_sha": "fd018eb44d616784cb831ffd421fd93a51f0361e",
+      "canonical_sha": "476f0c313496d20bd68fb37017f839f08cec8b50",
+      "nested_size": 274,
+      "canonical_size": 292
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/135 CSS Google Fonts-Trirong Font.html",
+      "nested_sha": "1ae38e70fa3d1f838a2b481efb150e13f604bba7",
+      "canonical_sha": "94bf7c4f3ed5bd0352a36396e719758eaddb4929",
+      "nested_size": 505,
+      "canonical_size": 527
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/136 CSS Google Fonts- Autowide Font.html",
+      "nested_sha": "2355cd5871a2550de5a264a2723f43ddaa71c69d",
+      "canonical_sha": "dd4df81c431402fad2bf3383044be118e084e476",
+      "nested_size": 405,
+      "canonical_size": 428
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/137 Text Direction 2.html",
+      "nested_sha": "b9ec6bb7cb483c9ee4a8efafc39620771001505b",
+      "canonical_sha": "0dec0a8f747165ef1862dd9db58a273ab019eb8c",
+      "nested_size": 293,
+      "canonical_size": 313
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/138 Text Decoration 2.html",
+      "nested_sha": "421e85fdafccb84deec050fd429ded71e4860d5c",
+      "canonical_sha": "ca819a39bd1287fac1a173d696be3484ff58ff26",
+      "nested_size": 708,
+      "canonical_size": 737
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/139 CSS Text Decoration Styles- Specify a Style for the Decoration Line.html",
+      "nested_sha": "bb14b4dd07ed4fc8099a75a14bbaf6c35fcb1185",
+      "canonical_sha": "fdd8b5f61236f2e839655f91952c642884f8380e",
+      "nested_size": 4231,
+      "canonical_size": 4400
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/14 CSS Comments- Single Line Comment.html",
+      "nested_sha": "793e79cb01c718911d4262a7b7451795eb8a0886",
+      "canonical_sha": "c35bd9c8c0b61aa925cb41a6d058599b712b64b0",
+      "nested_size": 303,
+      "canonical_size": 323
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/140 sample.html",
+      "nested_sha": "94466e6acd0ee170a915cfc270032acd5fa3a7d4",
+      "canonical_sha": "e45c4ef0c37c7d89883e237377207313757e02a0",
+      "nested_size": 8147,
+      "canonical_size": 8230
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/142 CSS Icons - Font Awesome.html",
+      "nested_sha": "bf02baf690644caaf0afe3bd96b8ab535780909c",
+      "canonical_sha": "8d4ea9bf9a0186b2393de0e76ff6bba327a4d932",
+      "nested_size": 1020,
+      "canonical_size": 1051
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/143 CSS Icons- Google Fonts Sample1.html",
+      "nested_sha": "f0635eb30dca010e141d43479983c1794f08e90e",
+      "canonical_sha": "60ab2469afda40204412b99c5efd0b2721e6831d",
+      "nested_size": 1013,
+      "canonical_size": 1048
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/144 CSS Icons - Bootstrap 1.html",
+      "nested_sha": "32a793c035107c6773ccd54025aaf8efe2ccdd1e",
+      "canonical_sha": "995199654356762ae04f6279b99535e01e7ab4cc",
+      "nested_size": 909,
+      "canonical_size": 936
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/145 CSS Icons- Bootstrap Icons 2.html",
+      "nested_sha": "1f3ff0cfa450fc14972a6383f52b49e2e231b300",
+      "canonical_sha": "9492c36e7d8ce25c03a9a9a6c5fc5c1d8e3c736d",
+      "nested_size": 5426,
+      "canonical_size": 5483
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/146 CSS Icons - Google 1.html",
+      "nested_sha": "8a8c9434775988b6dc1bb2dc9a73cdb129a80f1f",
+      "canonical_sha": "61d1250fdf0635d81428f71febe57cc73c78dde9",
+      "nested_size": 1397,
+      "canonical_size": 1432
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/147 CSS Links-CSS Styling Links.html",
+      "nested_sha": "9917cabc2de3755c83a4865cf4e7cd5dea9913b0",
+      "canonical_sha": "7f5e4624ce5af769a71bdfe2bf212e45c6cd09f9",
+      "nested_size": 305,
+      "canonical_size": 327
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/148 CSS Links-Styling Links Depending on State.html",
+      "nested_sha": "ce13725940abd72f828e4f601a1f4252ee06f8e8",
+      "canonical_sha": "abac1c1a155acd2ed4d33ddeb4cb494da7c387d8",
+      "nested_size": 784,
+      "canonical_size": 825
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/149 CSS Links-CSS Links - Text Decoration.html",
+      "nested_sha": "b63964a469aa643c2406acde80d923e5e313b518",
+      "canonical_sha": "a03b9e069ec6f96a961e9d245c01fd7a0201d56a",
+      "nested_size": 590,
+      "canonical_size": 626
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/15 CSS Comments- You can add comments wherever you want in the code.html",
+      "nested_sha": "1c5132722e3efe776eadc5c7f7983d8ef890ccd8",
+      "canonical_sha": "1998b4a22f3309734823427db43f4f4125b2ba6b",
+      "nested_size": 300,
+      "canonical_size": 321
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/150 CSS Links-CSS Links - Background Color.html",
+      "nested_sha": "bdcf65c1214c44c1ce2d2dd36520dc7abe4b446e",
+      "canonical_sha": "85cacdddeec9be3a6979f635eb70a098169473dc",
+      "nested_size": 1858,
+      "canonical_size": 1931
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/151 CSS Links-More Examples.html",
+      "nested_sha": "ebf129d65239cccc5b708bddde6123ada4b57f4c",
+      "canonical_sha": "f2e13faf1a7fddf4b3df00e3031d6434d0fa0c4f",
+      "nested_size": 1877,
+      "canonical_size": 1974
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/152 CSS Links-The cursor Property.html",
+      "nested_sha": "711db6eb3cb4e3976eb257602cecc2e7aaae7759",
+      "canonical_sha": "9d7d5fe9f72addf2a08ab0213c38006bf40f96e4",
+      "nested_size": 1035,
+      "canonical_size": 1068
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/153 CSS Cursor Property 2.html",
+      "nested_sha": "f3ea0f21d76aae872bb2fd2d90419672b44251b8",
+      "canonical_sha": "6e95ff3d4a3c7f1caa411ba0506aca7251c29d7a",
+      "nested_size": 1159,
+      "canonical_size": 1194
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/154 CSS Link Buttons 1.html",
+      "nested_sha": "80a1fb8f66bfe8ae91a5c523c5675f69a63b2825",
+      "canonical_sha": "8301ce31e65aa16665d46f1613881a33afd62737",
+      "nested_size": 716,
+      "canonical_size": 753
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/155 CSS Link Buttons 2.html",
+      "nested_sha": "5a43c4ead079b3764c57aba413130a1b6f009c86",
+      "canonical_sha": "52aa308fc1098ef66d567a37781ffcadf40a08ae",
+      "nested_size": 800,
+      "canonical_size": 840
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/156 CSS Lists-CSS Style List-item Markers.html",
+      "nested_sha": "9bb6e9cc44493e1a1d3c41b93dccaade0a2caa6c",
+      "canonical_sha": "e570b30069bbf7403a7d5c396011657192c59847",
+      "nested_size": 1488,
+      "canonical_size": 1579
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/157 CSS Lists-CSS Replace List-item Marker with an Image.html",
+      "nested_sha": "c32769e6ab286e2a09579f8d0957a5413357708d",
+      "canonical_sha": "2209cef7b2543a52889739f11f6b3e29b5a4ee23",
+      "nested_size": 555,
+      "canonical_size": 584
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/158 CSS Styling Lists-CSS Position the List-item Markers.html",
+      "nested_sha": "37f06f8f456540d2e8ae2a51b6ac0a60b698fb55",
+      "canonical_sha": "ae6f88fc842b50be8d673a68e5c2b7eae5eca3a5",
+      "nested_size": 10094,
+      "canonical_size": 10390
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/159 CSS Styling Lists-CSS Remove List-Item Markers.html",
+      "nested_sha": "381fbaf7b4269cc53179112ee999955a0f9de486",
+      "canonical_sha": "c5534d261daf8f43205835d7474ee71b2cde9433",
+      "nested_size": 615,
+      "canonical_size": 653
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/16 CSS Comments- Even in the middle of a code line.html",
+      "nested_sha": "91fb305c56e3f8dcb80c202949197390dbbf6682",
+      "canonical_sha": "6b0eedc1d49bf5b4ef3515b9e1523769bfc8bb53",
+      "nested_size": 300,
+      "canonical_size": 321
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/160 CSS Styling Lists-CSS list-style Shorthand Property.html",
+      "nested_sha": "adc0dd85b554a176d00e125e1def6439d7604f0f",
+      "canonical_sha": "2b286cae9b44c3579616eebed4309599972df9a4",
+      "nested_size": 432,
+      "canonical_size": 458
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/161 CSS Styling Lists-CSS Styling List With Colors.html",
+      "nested_sha": "b404513b7330504ebb16a3610d34f51b2c42b3a9",
+      "canonical_sha": "324b416bbf1da2a7f695019e7b1aa4a4de4a9f52",
+      "nested_size": 861,
+      "canonical_size": 914
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/162 CSS Styling Lists-CSS Styling List With Colors-left red.html",
+      "nested_sha": "5bc40937fd3c1ba5f00d671e599b460397d8d6fc",
+      "canonical_sha": "f248d68af14424266130b737cba9d62bc706e678",
+      "nested_size": 555,
+      "canonical_size": 589
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/163 CSS Styling Lists-A List with Borders.html",
+      "nested_sha": "bfa399f5a6e8aa6b4bff97974b8c17a119d52724",
+      "canonical_sha": "96d340fcadec863323409362f9b4ef36da215fed",
+      "nested_size": 506,
+      "canonical_size": 541
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/164 CSS Tables 1.html",
+      "nested_sha": "434aad418801ea38f802e565d257708bdb3a554b",
+      "canonical_sha": "ca23ffb9554b129b29f233a04eaafca3d9b768aa",
+      "nested_size": 2148,
+      "canonical_size": 2247
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/165 CSS Tables 2.html",
+      "nested_sha": "905ad856a7a243d9ca2d9869ef12e5c50f0f74d5",
+      "canonical_sha": "b53021d4813a23a9a8286a386e646018e49471fa",
+      "nested_size": 3120,
+      "canonical_size": 3255
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/166 CSS Table Borders.html",
+      "nested_sha": "ad383e9f364e7e437f188e7880c00b7c0645b35f",
+      "canonical_sha": "b79be49bc2ca4999497f579be2d28ee7fdbf8ce4",
+      "nested_size": 489,
+      "canonical_size": 524
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/167 CSS Table Color Borders.html",
+      "nested_sha": "cc7cbe1f0aa7cabdae71665aa74649191988ff83",
+      "canonical_sha": "bc90bba8d13a34ff912829d1bb2db7eaafdf8965",
+      "nested_size": 495,
+      "canonical_size": 530
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/168 CSS Collapse Table Borders.html",
+      "nested_sha": "3f67c1acba35e0adf5cba24e4244e0cc4efe2e35",
+      "canonical_sha": "89ee2dc25db9fe5b5fd23f1f2131986f30e29c08",
+      "nested_size": 824,
+      "canonical_size": 871
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/169 CSS Table Padding.html",
+      "nested_sha": "0c7ad3ee449429007fa984b4eeaa2218349eabe0",
+      "canonical_sha": "a9146bab7122da0a5fa37fd0564df3c030d3044d",
+      "nested_size": 646,
+      "canonical_size": 687
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/17 CSS Comments- Comments can also span multiple lines.html",
+      "nested_sha": "4456bd4e65d2d32819951cff5ddbbed240ed3351",
+      "canonical_sha": "abc19989c93c4effb92ffe64af5765aa03c6aa82",
+      "nested_size": 304,
+      "canonical_size": 328
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/170 CSS Border Spacing.html",
+      "nested_sha": "6a073e061a3cea47cfc05e4461ef74d99758cdcf",
+      "canonical_sha": "594eebc9dc7d61c7d695c6d9d6bf9afb0aa2f859",
+      "nested_size": 1288,
+      "canonical_size": 1351
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/171 CSS Outside Table Borders.html",
+      "nested_sha": "614a0e905c74aecd20748e2151b14458df4eb6f1",
+      "canonical_sha": "792878dc7eb8afae88aa159ce96045d0d2334914",
+      "nested_size": 471,
+      "canonical_size": 504
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/172 CSS Table Size (Width and Height)-CSS Table Width in Percent.html",
+      "nested_sha": "1a1c0b38beb19c0d9de052137b292e992d72393c",
+      "canonical_sha": "4058ca33dbc3e7ed5aba9a7bf6b7927905dc31b5",
+      "nested_size": 885,
+      "canonical_size": 939
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/173 CSS Table Size (Width and Height)-Set Table Width to 50%.html",
+      "nested_sha": "75465c5be1eb9a72dc4786a23194b1f61cece571",
+      "canonical_sha": "1525050a29e724c0f56fbf0b721f25e76a8bdd27",
+      "nested_size": 604,
+      "canonical_size": 655
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/174 CSS Table Size (Width and Height)-CSS Table Width in a Fixed Width.html",
+      "nested_sha": "e9bd206e1e2705deb22d9f79698ccf0d7046db66",
+      "canonical_sha": "6e981720ad6509e2e02809b4dff5d03d7bcf843b",
+      "nested_size": 886,
+      "canonical_size": 939
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/175 CSS Table Size (Width and Height)-CSS Table Width Using auto.html",
+      "nested_sha": "c5a0fe9487fb7edf1cb1c58d06270adf110969d3",
+      "canonical_sha": "660d4a0c01bcf6d25bebefe1f78ad2da32ede990",
+      "nested_size": 884,
+      "canonical_size": 937
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/176 CSS Table Size (Width and Height)-CSS Table Height.html",
+      "nested_sha": "63eaaac7593e0c9f87520a6d69fc00fef58771e4",
+      "canonical_sha": "d40ee551d3a3226f6eeb042d9aecca6663f7624d",
+      "nested_size": 938,
+      "canonical_size": 995
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/177 CSS Table Alignment-The text-align Property.html",
+      "nested_sha": "dcaff7f3ead3d5d03d12fe5d02887767042a64a4",
+      "canonical_sha": "b919aa4d6fd2817ee967c1068e44d3e688eefb73",
+      "nested_size": 1054,
+      "canonical_size": 1113
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/178 CSS Table Alignment-Vertical Alignment.html",
+      "nested_sha": "9381c31b07c11dbacf69ef2ee7d21fc0303fb055",
+      "canonical_sha": "8310665977316fb3497586c314a55da0439706e3",
+      "nested_size": 1019,
+      "canonical_size": 1079
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/179 CSS Table Styling- CSS Table Padding.html",
+      "nested_sha": "8307e280f5e36a832fc5e24c83afb99e031838b5",
+      "canonical_sha": "85ce95c8e4e693f8026842432f7a5523f3337df9",
+      "nested_size": 2084,
+      "canonical_size": 2206
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/18 HTML and CSS Comments.html",
+      "nested_sha": "a4bb8101e97f6fe8710e59c30f1190ae50623fa2",
+      "canonical_sha": "c24f663aec9752caacc63a14b5b05df30c1d1283",
+      "nested_size": 376,
+      "canonical_size": 400
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/180 CSS Table Styling-CSS Horizontal Dividers.html",
+      "nested_sha": "a4b32d744b5cf6113ec2647ac9e474cddff17637",
+      "canonical_sha": "f0783c60e5bc4035c7dd82f31c0723db838ec73f",
+      "nested_size": 1011,
+      "canonical_size": 1066
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/181 CSS Table Styling-CSS Hoverable Table.html",
+      "nested_sha": "7d91ea4b4c36edb77f858531de8abe6dd2fbabd6",
+      "canonical_sha": "004459b5b71b320a05a06979687c469c56f052ed",
+      "nested_size": 733,
+      "canonical_size": 790
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/182 CSS Table Styling-CSS Zebra-striped Table.html",
+      "nested_sha": "d1d407d851bf81684431e210e77126b3b4ee89b8",
+      "canonical_sha": "f4885e4c17210f53df9076e3eee0ad660bd026fd",
+      "nested_size": 1099,
+      "canonical_size": 1159
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/183 CSS Table Styling-CSS Table Color.html",
+      "nested_sha": "88dafcd7d57e4ab036759b2d7c32aa20f5e47d3f",
+      "canonical_sha": "ef8bd79332cc59c2b597608981fe9a4cc8f64766",
+      "nested_size": 703,
+      "canonical_size": 762
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/184 CSS Responsive Tables.html",
+      "nested_sha": "4d01a83cdcdfbcc1da72bbaeade089e96f00aa0a",
+      "canonical_sha": "c165f8c1c51fbb528b979b56f7117ddd3d9af380",
+      "nested_size": 1754,
+      "canonical_size": 1851
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/185 CSS The display Property- Override the Default Display Value.html",
+      "nested_sha": "a8759b4de7850861c1f66694d762834f29970f76",
+      "canonical_sha": "ec0dfebf0f543b48b4bc6ef9c670b750f762f987",
+      "nested_size": 602,
+      "canonical_size": 637
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/186 CSS The display Property-Display span elements as block elements.html",
+      "nested_sha": "0a64d32736e4f9749e5eca4f41941cb8bb888eef",
+      "canonical_sha": "25c2a12711584f322834e0327a1b9b31bbb12456",
+      "nested_size": 404,
+      "canonical_size": 427
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/187 CSS The display Property-Display links as block elements.html",
+      "nested_sha": "8b8d1065935f8d465545410173f63d0d9b36f09a",
+      "canonical_sha": "123bae481d7ecac611bfc62db4a7ceedab79e5ed",
+      "nested_size": 359,
+      "canonical_size": 381
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/188 CSS The display Property-Example of More Display Values.html",
+      "nested_sha": "ee1876ef9cda30b30908086a435c3eecea978015",
+      "canonical_sha": "254c94a29bec4322879881a72c0a31456c3334d4",
+      "nested_size": 1059,
+      "canonical_size": 1129
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/189 Info File 1.html",
+      "nested_sha": "c42e1fb8d456c13cc39c2f155c6cfe0bb34c991b",
+      "canonical_sha": "5f123ef41c3085bcb723dfd19b1dd18ff5a3285a",
+      "nested_size": 317,
+      "canonical_size": 345
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/19 CSS Errors- Missing Semicolons.html",
+      "nested_sha": "ad6f5fcaf888d04e101ff72aeef21a11c31a01fa",
+      "canonical_sha": "2fe0a87c56926ead27d34fb7c6d3153bc51e15fe",
+      "nested_size": 262,
+      "canonical_size": 283
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/190 CSS Hide Elements 1.html",
+      "nested_sha": "75e371bcaa844dda1ecf923ba91495278cf259f0",
+      "canonical_sha": "587dffd75a8df0441e82db79e74b32367fa91f78",
+      "nested_size": 1112,
+      "canonical_size": 1155
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/191 CSS Hide Elements 2.html",
+      "nested_sha": "e1370586b536917b177c685a1bb0b6a5588e8e54",
+      "canonical_sha": "0ec043e2072c54d01ffb3bb4a490f5b4ff5fab70",
+      "nested_size": 1037,
+      "canonical_size": 1084
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/192 Info File 2.html",
+      "nested_sha": "f6c3a4d27aba0f65b088949d0949d13b30af36c4",
+      "canonical_sha": "6d4b04cbbdf343e0b52e25d7e060f4c7718c93cf",
+      "nested_size": 8881,
+      "canonical_size": 9199
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/193 CSS Hide Elements-Difference between display-none and visiblity- hidden.html",
+      "nested_sha": "ba0ebc0f35311f509a0373a17aea6fd291ef1ef1",
+      "canonical_sha": "206bcf028b87938420e7177c5053b65ca789fb1e",
+      "nested_size": 1883,
+      "canonical_size": 1945
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/194 CSS Hide Elements-This is a visible heading.html",
+      "nested_sha": "cc1a3ca503995aca45c35a94be29b159044c586f",
+      "canonical_sha": "112b7161bef20466acac78ed280171bc6619ee91",
+      "nested_size": 425,
+      "canonical_size": 448
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/195 CSS The max-width Property-CSS Max-width.html",
+      "nested_sha": "1ce22f71b2463215690eaced8413f48a0a3ced0b",
+      "canonical_sha": "1935b085dc9c17b41fbc94ff9755d6bb84b53018",
+      "nested_size": 745,
+      "canonical_size": 784
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/196 CSS The max-width Property-The width Property.html",
+      "nested_sha": "81c0a1e48b78f763445677a5a464f397e4e32184",
+      "canonical_sha": "dde02ede5287a3db865776baf56ecec083415964",
+      "nested_size": 1884,
+      "canonical_size": 1934
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/197 CSS The position Property- Using position-static.html",
+      "nested_sha": "fdb0848487e006b339cf1da09ffb9f7067714e2b",
+      "canonical_sha": "5d3eaae4713d8d2bee54aa461b6088706c11b5b2",
+      "nested_size": 420,
+      "canonical_size": 444
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/198 Info File 3.html",
+      "nested_sha": "16f399adecb5f4c6cae77fec8623e68417b65b72",
+      "canonical_sha": "ed2e36e6a2f137c97a38da793a9e6f75115c53ae",
+      "nested_size": 2380,
+      "canonical_size": 2468
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/199 CSS The position Property-CSS position-relative.html",
+      "nested_sha": "f09ab7743ccfcb53d3cee8038c2a3acd4135be0f",
+      "canonical_sha": "5baa8a56b2fbc030ea699e697272f0b1bd2f04a7",
+      "nested_size": 441,
+      "canonical_size": 467
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/2 Why Use CSS.html",
+      "nested_sha": "936bfc65758ce4e0e1cdb3966dd40ba7eb70992d",
+      "canonical_sha": "120ffd1980c0ef2898edb2113b2671b0da3a11d5",
+      "nested_size": 390,
+      "canonical_size": 418
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/20 CSS Errors- Invalid Property Names.html",
+      "nested_sha": "36ef6ba0c98e01ac5c58c0fcea82b38248e8c594",
+      "canonical_sha": "699068a848f9c15c1fdda3d2a1b33bc0661be8fd",
+      "nested_size": 257,
+      "canonical_size": 277
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/200 CSS Fixed and Absolute Positioning-CSS position-fixed.html",
+      "nested_sha": "13890ab7867c36555f67d2f83ecb8fd9de13a64c",
+      "canonical_sha": "8676eef56f65e419c398323d9e9a0d9e5250b7d5",
+      "nested_size": 573,
+      "canonical_size": 602
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/201 200 CSS Fixed and Absolute Positioning-CSS position-absolute.html",
+      "nested_sha": "54f09dd011ed3ca0e88ca0d14e7bce4363533cef",
+      "canonical_sha": "5d3474ebfa497164c9bb41300150ec692d998882",
+      "nested_size": 917,
+      "canonical_size": 959
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/202 CSS Fixed and Absolute Positioning-Positioning Text On an Image-Top Left.html",
+      "nested_sha": "99d16a752861d49340327c6a49755059fe820d03",
+      "canonical_sha": "28334c5bd3358b6f2036d1233697fbebf4a0148b",
+      "nested_size": 703,
+      "canonical_size": 741
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/203 CSS Fixed and Absolute Positioning-Top Right.html",
+      "nested_sha": "a98b1ffae424e33fd8b030f9755f9acc4975cc48",
+      "canonical_sha": "04928d7d561b5c8982678822f5cc6c3774f65037",
+      "nested_size": 708,
+      "canonical_size": 746
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/204 CSS Fixed and Absolute Positioning-Bottom Left.html",
+      "nested_sha": "540e5ecc4ece438653e12939b96ad1b193932170",
+      "canonical_sha": "90ae9835beabada5b6b883c453016054908c0b12",
+      "nested_size": 718,
+      "canonical_size": 756
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/205 CSS Fixed and Absolute Positioning-Bottom Right.html",
+      "nested_sha": "7e2d34db2b41f32b1ecfc1543d196aa0acf1d20d",
+      "canonical_sha": "a27ede8a266f5ffdf1a9ef23f76cc1356e4798e3",
+      "nested_size": 722,
+      "canonical_size": 759
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/206 CSS Fixed and Absolute Positioning-Centered.html",
+      "nested_sha": "5b3ab34455426f07ef2cbd2ceddb70ddd8b995c4",
+      "canonical_sha": "075fb0940159b94ec1090e64266a350a0161f551",
+      "nested_size": 725,
+      "canonical_size": 764
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/207 CSS Sticky Positioning.html",
+      "nested_sha": "e3da7af6b03fb226f714ab91d251ab4a640c78bc",
+      "canonical_sha": "3f527412934276937d1ae02995aa7df11bf2cabd",
+      "nested_size": 1673,
+      "canonical_size": 1714
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/208 CSS Position Offsets-Top Left.html",
+      "nested_sha": "c4826fc8d744dd663f749516a2f85918f5e46f37",
+      "canonical_sha": "9c9ae9e9c57a2ad5cb425373a29b38f871200c1c",
+      "nested_size": 765,
+      "canonical_size": 805
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/209 Position Offsets-Top Right.html",
+      "nested_sha": "ed7dfc76855fa8ecaecd3a43c7f3a2fa8c9a9327",
+      "canonical_sha": "e10424b9a658fa46685340c4e7049610b6db5295",
+      "nested_size": 770,
+      "canonical_size": 811
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/21 CSS Errors- Invalid Values.html",
+      "nested_sha": "809039fca02781c41e851fd548c870f83f2a016e",
+      "canonical_sha": "2411a093e2323a54ac9fe0a1f1d6668fdf495196",
+      "nested_size": 250,
+      "canonical_size": 271
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/210 CSS Position Offsets- Bottom Left.html",
+      "nested_sha": "8f44544f0df7308ce754c02840c97afe10de1a78",
+      "canonical_sha": "bd263060f098e7eb1dd93895c1d86712e6f2670b",
+      "nested_size": 733,
+      "canonical_size": 771
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/211 CSS Position Offsets- Bottom Right.html",
+      "nested_sha": "1573bb47d19c410c40497c1a14a65ab364170420",
+      "canonical_sha": "01207e86eb188a92b4c83d26c2a3407b5211ef4a",
+      "nested_size": 744,
+      "canonical_size": 781
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/212 CSS Position Offsets- Centered.html",
+      "nested_sha": "5b3ab34455426f07ef2cbd2ceddb70ddd8b995c4",
+      "canonical_sha": "075fb0940159b94ec1090e64266a350a0161f551",
+      "nested_size": 725,
+      "canonical_size": 764
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/213 CSS The z-index Property.html",
+      "nested_sha": "f1c28ebed9e43afa234d725e08b7b0f784ac2bf1",
+      "canonical_sha": "b7557ed886fdf4a6a398e7d07404a99f4a529dd7",
+      "nested_size": 341,
+      "canonical_size": 366
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/214 CSS The z-index Property-Another z-index Example.html",
+      "nested_sha": "19fac1a87fffcd42f823faab5a565b8f6c5b333b",
+      "canonical_sha": "8becc0692ee2b3437e1680e10ab4de97d186f7b4",
+      "nested_size": 1340,
+      "canonical_size": 1400
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/215 CSS The z-index Property-Without z-index.html",
+      "nested_sha": "342de78794bcde2083fe4c8fc39847d4eb11738f",
+      "canonical_sha": "759fd1d789e296df2827fd08c3cd1999347a2e82",
+      "nested_size": 1200,
+      "canonical_size": 1256
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/216 CSS The overflow Property-The CSS overflow Property.html",
+      "nested_sha": "1bf03943500de5fbe2c2425aaabcd929161182cf",
+      "canonical_sha": "58bc46e709e4812c95fefef293c5a308e8904f89",
+      "nested_size": 1289,
+      "canonical_size": 1323
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/217 CSS The overflow Property-CSS overflow-visible.html",
+      "nested_sha": "2c47a82300b86cc3578a0bc806db44b2ba7cd036",
+      "canonical_sha": "1cd38af1beb7eaa664f835d7afd6690f8108863d",
+      "nested_size": 691,
+      "canonical_size": 722
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/218 CSS The overflow Property-CSS overflow-hidden.html",
+      "nested_sha": "70829a59069d07d51c48bf5e42960973076301f0",
+      "canonical_sha": "dfaba5913af8252ed77f4dcb72fb65017c33f327",
+      "nested_size": 775,
+      "canonical_size": 807
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/219 CSS The overflow Property-CSS overflow-scroll.html",
+      "nested_sha": "84f3b01c547a7f268366857e783efd0fda419b0c",
+      "canonical_sha": "f0be599504535159afa2f13e61e94fa48da850d8",
+      "nested_size": 864,
+      "canonical_size": 896
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/22 CSS Errors-Unclosed Braces.html",
+      "nested_sha": "593bf63bbc52cd10eff92dd14c472d2ab064bae9",
+      "canonical_sha": "e9e865c6c53e5344670b115622534dbe60004d17",
+      "nested_size": 251,
+      "canonical_size": 272
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/220 CSS The overflow Property-CSS overflow-auto.html",
+      "nested_sha": "15b6f9e3d57c5e8d53279e8776ad7236d50a956c",
+      "canonical_sha": "fcba23fb63259f56276340e4bfa647443e56cc7b",
+      "nested_size": 697,
+      "canonical_size": 728
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/221 CSS overflow-x and overflow-y.html",
+      "nested_sha": "a79a9ea3ae127dc31f0cf8413f421311df0c3558",
+      "canonical_sha": "b22034adf40e0b72d1e2a5559b20621fa67c495b",
+      "nested_size": 798,
+      "canonical_size": 829
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/222 CSS Float- CSS Float- Right.html",
+      "nested_sha": "83d6c0b4d05250511b29c63f176ac109db106b68",
+      "canonical_sha": "54537baa4e4b86c3c3012855b27e990356b491af",
+      "nested_size": 1237,
+      "canonical_size": 1271
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/223 CSS Float- CSS Float- Left.html",
+      "nested_sha": "da91f003cd6fcb8dab1784606996d3ce72c6c989",
+      "canonical_sha": "419e8fd451815a455e1c29e11e030d3d01f08cda",
+      "nested_size": 1235,
+      "canonical_size": 1269
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/224 CSS Float-CSS float-none Example.html",
+      "nested_sha": "44ba0c89c2562ecba50eaebf1a38c6c99a48094a",
+      "canonical_sha": "23e3d5a01c12eff0f852384e712295d22f3fb230",
+      "nested_size": 1178,
+      "canonical_size": 1211
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/225 CSS Float- CSS Float Next To Each Other.html",
+      "nested_sha": "6364b7d1d801222d50c7b9ffea16b998d353e850",
+      "canonical_sha": "14ecee0b0b821958dcd6af5908b0ffe76cb667a8",
+      "nested_size": 688,
+      "canonical_size": 729
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/226 CSS clear and Clearfix Hack-The CSS clear Property.html",
+      "nested_sha": "9f6c197ebb9c223a9c3872ae73ad703d59ddff04",
+      "canonical_sha": "373920d04793b6ed74887da5a0db88ed7c736389",
+      "nested_size": 831,
+      "canonical_size": 881
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/227 CSS clear and Clearfix Hack-The CSS Clearfix Hack.html",
+      "nested_sha": "11c8112a9d48d4cc66fd53905ec7887d4613688e",
+      "canonical_sha": "3914c46289691bdaec77e721af6f8c8f0c5619ed",
+      "nested_size": 1222,
+      "canonical_size": 1275
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/228 CSS Float Examples-Create Equal Width Boxes.html",
+      "nested_sha": "7850f631cafc8c1379fa258ed011a617639cbcaf",
+      "canonical_sha": "d644c6be037688ea8f7c1fe30444784634902331",
+      "nested_size": 1183,
+      "canonical_size": 1235
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/229 CSS Float Examples-Images Side By Side.html",
+      "nested_sha": "b37e69fd5fff945cf0a12be003612eb30d73656d",
+      "canonical_sha": "c73cfe68abcbee1c828b78b66ee587a8266c9eb4",
+      "nested_size": 1217,
+      "canonical_size": 1269
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/23 CSS Errors- Extra Colons or Braces.html",
+      "nested_sha": "55f69ced9455d95a2743b01de958fc2c71824d46",
+      "canonical_sha": "e2877198c9a9c5e1fa237a63e45ede4d166f85bc",
+      "nested_size": 230,
+      "canonical_size": 250
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/230 CSS Float Examples-Create Boxes With Equal Heights.html",
+      "nested_sha": "56840326a465402ff6ed630554a5346ba346a5b9",
+      "canonical_sha": "79b5f957236f678068189b1b206c7baea7b10a30",
+      "nested_size": 1415,
+      "canonical_size": 1466
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/231 CSS Float Examples-Flexible Boxes.html",
+      "nested_sha": "93c3c3bb924cc00f7d248a0bec565e671aeb1dd0",
+      "canonical_sha": "b6a628a74819071de7b76366e374e1b637988683",
+      "nested_size": 941,
+      "canonical_size": 982
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/232 CSS Float Examples-Navigation Menu.html",
+      "nested_sha": "39c52c9c7cc1c3e83b5d025bfa55aece1afd2624",
+      "canonical_sha": "32437ebded14e80efdbdb81529cf1c2de36f0e13",
+      "nested_size": 680,
+      "canonical_size": 732
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/233 CSS display- inline-block-The display Property.html",
+      "nested_sha": "15d904291d7cf4005a858f78a7ba956df48fac98",
+      "canonical_sha": "94212c8673513864993292dcf370b2506da8a569",
+      "nested_size": 1757,
+      "canonical_size": 1813
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/234 CSS display- inline-block- Create a Horizontal Navigation Menu.html",
+      "nested_sha": "abf9c4974302754cdc8096e75e8306b1cd98384d",
+      "canonical_sha": "2bfbfed7fff2fee821fff95267d44a096f413628",
+      "nested_size": 874,
+      "canonical_size": 912
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/235 CSS Center Align.html",
+      "nested_sha": "412f73fd252fc35da99a6cb9130a05a20db1ca3f",
+      "canonical_sha": "f2599a1541e503ee812ab2609fea7510e9541813",
+      "nested_size": 683,
+      "canonical_size": 716
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/236 CSS Horizontal Align-Center Align Block Elements.html",
+      "nested_sha": "77adc49eb3c8d42b10a73686b01fe5d2a6d6307d",
+      "canonical_sha": "33b9a9f5b7e00b5fb3eb6c77d7945a3ab72f0eb7",
+      "nested_size": 537,
+      "canonical_size": 567
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/237 CSS Horizontal Align-Center Align Text.html",
+      "nested_sha": "381052ed992714f7608c8e76ece8c6f22be55c6f",
+      "canonical_sha": "27d5f6ae6c4acf0340fea4e6597b4c16a6eb7bef",
+      "nested_size": 501,
+      "canonical_size": 534
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/238 CSS Horizontal Align-Center Align an Image.html",
+      "nested_sha": "ed5c313959ad7e03dc8b6cb35c3e8665f4418f9d",
+      "canonical_sha": "deb5dacede950441f93b788d3a758d047c575c6e",
+      "nested_size": 403,
+      "canonical_size": 427
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/239 CSS Horizontal Align-Left and Right Align - Using position.html",
+      "nested_sha": "28f3754b2180b9f47104a0f2035e0fd546fdd20c",
+      "canonical_sha": "60bbbe5572cf367fa8a560027c11f543221d1695",
+      "nested_size": 596,
+      "canonical_size": 625
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/24 CSS Colors-CSS Color Names.html",
+      "nested_sha": "64a7202d069334c17435a93473154499457f0359",
+      "canonical_sha": "66621b79f58a9495c909301f5220e0712438707b",
+      "nested_size": 505,
+      "canonical_size": 521
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/240 CSS Horizontal Align-Left and Right Align - Using float.html",
+      "nested_sha": "f203fd88153c48702e08e108bf820f7a8c2a5d02",
+      "canonical_sha": "6a262a26d24e86b2867075406d05d44b14f98dae",
+      "nested_size": 548,
+      "canonical_size": 576
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/241 CSS Vertical Align-Centering with Flexbox.html",
+      "nested_sha": "f72d786ed9caaa591cae89e396f6188a1bb11394",
+      "canonical_sha": "bd6e535a1303b8a3d40b1c65920570ed504121e0",
+      "nested_size": 577,
+      "canonical_size": 606
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/242 CSS Vertical Align-Center Align with Grid.html",
+      "nested_sha": "030c7cb43fbe7928b4e3f0df236c447c688c2cc2",
+      "canonical_sha": "157b2d15cc3f88cdcc3786d1c7343169e2a9b3b3",
+      "nested_size": 506,
+      "canonical_size": 534
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/243 CSS Vertical Align-Center Align with position and transform.html",
+      "nested_sha": "bf16751f8415a82894c5c1b47a3f22ddfc8ad717",
+      "canonical_sha": "49545846aa25b20fb09a97e92f4748246ee51b27",
+      "nested_size": 660,
+      "canonical_size": 694
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/244 CSS Combinators-Descendant Combinator (space).html",
+      "nested_sha": "823a7555fa3e3b83a476754cd832542ad142496c",
+      "canonical_sha": "7527b8f79aa672ad9fa7b1b71a2a34a21e318834",
+      "nested_size": 769,
+      "canonical_size": 805
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/245 CSS Combinators-Child Combinator- Greater Than.html",
+      "nested_sha": "2f15bf326f6c897da1bcf208b6506f8edf508b3f",
+      "canonical_sha": "e81585c30cd93d8eac3c644f331a6f22925b6a78",
+      "nested_size": 746,
+      "canonical_size": 780
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/246 CSS Combinators-Next Sibling Combinator.html",
+      "nested_sha": "f6f0572a555e3ec9f7d25a842998a2948d310d41",
+      "canonical_sha": "ef2a1a7dc40ea1361ff8e17fc75f8c031b3c8493",
+      "nested_size": 767,
+      "canonical_size": 804
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/247 CSS Combinators-Subsequent-sibling Combinator.html",
+      "nested_sha": "c4f8f423daa5e2e38aa53c6e8edae3405828ca1d",
+      "canonical_sha": "897ae39ebcb4a66188938f9a8ae6fad44fd05e9e",
+      "nested_size": 565,
+      "canonical_size": 596
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/248 CSS Pseudo-classes.html",
+      "nested_sha": "4db3ad863d406a2817e1d3e571b845c7820e4125",
+      "canonical_sha": "6bff8e614163e48e9e6e03b31c47488a43b42a64",
+      "nested_size": 511,
+      "canonical_size": 540
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/249 CSS Interactive Pseudo-classes- Styling a link depending on state.html",
+      "nested_sha": "b9167dae2bb3ebe68d8a592d3d99bf3d42296121",
+      "canonical_sha": "ca63f72080cb0bde3c3b54716d03f67c8a63ee0a",
+      "nested_size": 866,
+      "canonical_size": 909
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/25 CSS Colors- CSS Background Color.html",
+      "nested_sha": "cb82df9dada80c15e4b2c22016c68dae25dd89ca",
+      "canonical_sha": "f9d426e314be6babc8c794c2c0e1030d463f1b83",
+      "nested_size": 468,
+      "canonical_size": 485
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/250 CSS Interactive Pseudo-classes- hover on div.html",
+      "nested_sha": "d650bbbb1d2470b49ef32a3516abd1da1018c77a",
+      "canonical_sha": "44f275aa784b3c2269ea763a0df5cc61332ea992",
+      "nested_size": 555,
+      "canonical_size": 588
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/251 CSS Interactive Pseudo-classes- focus on input.html",
+      "nested_sha": "bc3a6d255766f8bdad225e3583a451045e69d4ef",
+      "canonical_sha": "8ec70205859fc410d1c750069e7e91a035cb7122",
+      "nested_size": 596,
+      "canonical_size": 626
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/252 CSS Interactive Pseudo-classes- Pseudo-classes and HTML Classes.html",
+      "nested_sha": "855a9e0d83336a49905d994401f049cf43cfdea0",
+      "canonical_sha": "612837851b19276974622ba0326aaa4b69715bb3",
+      "nested_size": 450,
+      "canonical_size": 477
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/253 CSS Interactive Pseudo-classes- Simple Tooltip Hover.html",
+      "nested_sha": "7bfb94d517084b3077641b889cba5278bcc3c3c0",
+      "canonical_sha": "36b618e4301ca4106a15e7cd9fde3df80c1c59d6",
+      "nested_size": 515,
+      "canonical_size": 547
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/254 CSS Structural Pseudo-classes- First child.html",
+      "nested_sha": "c86a909f708eea631acccdb4d6d04f8e6fbed170",
+      "canonical_sha": "5d8a3d5392fa4d20b68e9c38d2285e0c915e0821",
+      "nested_size": 490,
+      "canonical_size": 530
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/255 CSS Structural Pseudo-classes-Use p em-first-child.html",
+      "nested_sha": "0df399f1015070df4696e48b6f6fbc84c558c877",
+      "canonical_sha": "9e5deab9e6116d52159a20200fe49aec701033f8",
+      "nested_size": 490,
+      "canonical_size": 517
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/256 CSS Structural Pseudo-classes-Use p-first-child em.html",
+      "nested_sha": "02ad587d4ddcccc9f23d3fb30348beb32a6e3903",
+      "canonical_sha": "ffa030d9a11bec6647b4fd999dd3d9226bd73fa9",
+      "nested_size": 697,
+      "canonical_size": 729
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/257 CSS Structural Pseudo-classes-The CSS -lang() Pseudo-class.html",
+      "nested_sha": "fabb47c171fcff4a0bd85ef2f3245321c12cf1d5",
+      "canonical_sha": "db3cf009881a4d84cc64a58e916c409c6ff423da",
+      "nested_size": 343,
+      "canonical_size": 365
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/258 CSS Pseudo-elements.html",
+      "nested_sha": "74dfd5470272e3b25c7f248482047d247d9be760",
+      "canonical_sha": "b54490acf4672ca9adf3c8c49cc165c04e8f849f",
+      "nested_size": 329,
+      "canonical_size": 349
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/259 CSS Pseudo-elements 2.html",
+      "nested_sha": "6395318f72693a305e6971c4d6cff322fd52bb77",
+      "canonical_sha": "cd037469ec150f304197490b344ee91604bab02e",
+      "nested_size": 2279,
+      "canonical_size": 2399
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/26 CSS Colors- CSS Text Color.html",
+      "nested_sha": "80213f4464f9ca61a9fbc86a4b081d524576de9e",
+      "canonical_sha": "3aa72ae8b3c46656566ffab5dc2b5fcc2736da7f",
+      "nested_size": 489,
+      "canonical_size": 504
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/260 CSS Pseudo-elements for Text-The CSS -first-line Pseudo-element.html",
+      "nested_sha": "86368ec602bcce8bfc527674eb975892834e9dd3",
+      "canonical_sha": "bb527eb1bfe66f7da01428337f1350eafc4dabe8",
+      "nested_size": 518,
+      "canonical_size": 542
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/261 CSS Pseudo-elements for Text- The CSS -first-letter Pseudo-element.html",
+      "nested_sha": "ef857f6da8ed6bb689a8455d88ed6b4271727623",
+      "canonical_sha": "52d6c207a1fb345d0e9972703991a31e20293d97",
+      "nested_size": 457,
+      "canonical_size": 483
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/262 CSS Pseudo-elements for Text-Multiple Pseudo-elements.html",
+      "nested_sha": "c6fad5604b6c8626785eda84d7c378bcb98dd3e9",
+      "canonical_sha": "3dacb1d136301ad7b38c75b041e6eb9e3bbdfb5e",
+      "nested_size": 471,
+      "canonical_size": 501
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/263 CSS Pseudo-elements for Content- The CSS - before Pseudo-element.html",
+      "nested_sha": "3a1e57f9e1361f9e65895ca36fe50da1a593f560",
+      "canonical_sha": "de2fc2144608208c6032220aa9941e94af6ef561",
+      "nested_size": 325,
+      "canonical_size": 354
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/264 CSS Pseudo-elements for Content- The CSS - after Pseudo-element.html",
+      "nested_sha": "1217418ed29a1fbfd6f3b21deee324b5c1620e4b",
+      "canonical_sha": "f24baa1ef09220d469b8816d2c2ebec1bb083eb1",
+      "nested_size": 305,
+      "canonical_size": 326
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/265 CSS Pseudo-elements for Content- The CSS - marker Pseudo-element.html",
+      "nested_sha": "2e2132d959ae341a2d0f5daa11ceecaccfeb2060",
+      "canonical_sha": "9fa8c67d6a359f128f0d439b94f639f2dd111e90",
+      "nested_size": 393,
+      "canonical_size": 424
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/266 CSS Pseudo-elements for Content- The CSS - selection Pseudo-element.html",
+      "nested_sha": "be9569171f40e2ed7f4c867151ba1bee0549696e",
+      "canonical_sha": "286078ac1924d2695977e2b758e9c55fa6421a9a",
+      "nested_size": 276,
+      "canonical_size": 299
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/267 CSS Pseudo-elements for Content- The CSS- backdrop Pseudo-element.html",
+      "nested_sha": "e9030b09cc78062bdfe44a61e09870041c36202b",
+      "canonical_sha": "502d232cbcda09ef867b4deca02666ebd6a08292",
+      "nested_size": 815,
+      "canonical_size": 855
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/268 CSS Opacity- CSS Image Opacity.html",
+      "nested_sha": "914570f663e793aaf241b5e9c40ca09cc6947d9d",
+      "canonical_sha": "af569e97a3c70f945bfa35d1ed8b62831f9cccd7",
+      "nested_size": 389,
+      "canonical_size": 412
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/269 CSS Opacity- Opacity and hover.html",
+      "nested_sha": "6a056d14176886439e4aa841c966008f97070153",
+      "canonical_sha": "2209d9e678d0802d9cd1948003e2ad754836cc29",
+      "nested_size": 765,
+      "canonical_size": 796
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/27 CSS Colors- CSS Border Color.html",
+      "nested_sha": "5c4ecaa77109ffda49f989bea96b7342bdcae84f",
+      "canonical_sha": "e29dd582f607a5f687ff2b7e3f04d6f12023b7b5",
+      "nested_size": 233,
+      "canonical_size": 247
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/270 CSS Opacity- Reversed Hover Effect.html",
+      "nested_sha": "9ce73f144ba4f72ea00b115ee1d073287747c653",
+      "canonical_sha": "f4d21fc48c1070de401855d09864adc45c457842",
+      "nested_size": 420,
+      "canonical_size": 443
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/271 CSS Opacity- Transparent Boxes.html",
+      "nested_sha": "f97cb8d89c520d49e09a742c28468891007bbe4d",
+      "canonical_sha": "754a1091c8d157b5d0c8292f209814b5aa900eb8",
+      "nested_size": 647,
+      "canonical_size": 685
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/272 CSS Opacity- Transparency using background-color.html",
+      "nested_sha": "2284cddf2d7d81af4eb40b0b9e7fdf8ac2db1581",
+      "canonical_sha": "943cb0638a26c6acc20ca83f9ee572c6040e22b1",
+      "nested_size": 1094,
+      "canonical_size": 1154
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/273 CSS Opacity- Text in Transparent Box.html",
+      "nested_sha": "8bb33f02e775b5663126a37ec683d02b65a476d3",
+      "canonical_sha": "f366eabdcda536e2e880b76804f330e8e659d46e",
+      "nested_size": 919,
+      "canonical_size": 959
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/274 CSS Navigation Bars- Navigation Bar = List of Links.html",
+      "nested_sha": "71fb6d4c378708870834cbe065d52968ca3369c7",
+      "canonical_sha": "a8003f373f546658e8ba56dd9f8eb81065a29eb5",
+      "nested_size": 1045,
+      "canonical_size": 1097
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/275 CSS Navigation Bars- Now let's remove the bullets and the margins and padding from the ul element.html",
+      "nested_sha": "0ffc43dd5411a655a62a73616d98a9d0a1998f9a",
+      "canonical_sha": "4206e9912cb2c8a207b8ac7898101366c85fc892",
+      "nested_size": 524,
+      "canonical_size": 553
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/276 CSS Vertical Navigation Bar.html",
+      "nested_sha": "42032c9f3777f6360b99781d0fca2bb0c38bbc47",
+      "canonical_sha": "b292ea79e86dbc3a1b68c6418591d5e6464f1751",
+      "nested_size": 899,
+      "canonical_size": 944
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/277 CSS Vertical Navigation Bar- Active State.html",
+      "nested_sha": "aacdc4adf8d9e836430e5699863e3b67d0e2bad8",
+      "canonical_sha": "5950fc04181ae3670a3377d7d5c983c51f4ba60e",
+      "nested_size": 1097,
+      "canonical_size": 1150
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/278 CSS Vertical Navigation Bar-Center Navbar Links & Add Borders.html",
+      "nested_sha": "328fe32d347c93e50d83211ba88a873240e73545",
+      "canonical_sha": "b949ac6b92a9e935b158bb17b0e60b45f6a213b8",
+      "nested_size": 1194,
+      "canonical_size": 1252
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/279 CSS Vertical Navigation Bar- Full-height Vertical Navbar.html",
+      "nested_sha": "176be2a247e8ddf820e7407134d32a3ebb0d83cd",
+      "canonical_sha": "b727ba7de2da9e634d6c9c30f0457148916bd204",
+      "nested_size": 1789,
+      "canonical_size": 1882
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/28 CSS Colors- CSS Color Values.html",
+      "nested_sha": "eb76917842ef91ece220c46dbd588b9e27398bc8",
+      "canonical_sha": "9317ec94442ea975b9d91798c44bc7fd13801deb",
+      "nested_size": 696,
+      "canonical_size": 717
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/280 CSS Horizontal Navigation Bar- Horizontal Navbar Using Float.html",
+      "nested_sha": "7b742a4dc32f6b5563386acd46ec53ff05c6ed47",
+      "canonical_sha": "07ddb2785952250687a76112460591c8567bae0f",
+      "nested_size": 902,
+      "canonical_size": 963
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/281 CSS Horizontal Navigation Bar- Horizontal Navbar Using Flex.html",
+      "nested_sha": "00c42289c3c251a55b33fa00454394519e8d5998",
+      "canonical_sha": "0aec53a6dec297660be55489bc4de7ab240ca227",
+      "nested_size": 896,
+      "canonical_size": 948
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/282 CSS Horizontal Navigation Bar- Horizontal Centered Navbar Using Flex.html",
+      "nested_sha": "9ff91ffad3441090810bb51f748f274c12860e13",
+      "canonical_sha": "ea42388262419f06f72b48601184692b2d2d29cc",
+      "nested_size": 1066,
+      "canonical_size": 1124
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/283 CSS Horizontal Navigation Bar- Active State.html",
+      "nested_sha": "4b11e03608e6364ac87bcdb0567dfe5127abfc71",
+      "canonical_sha": "2663165b3bbb13702038be9aa16f3e07a9cdcf9a",
+      "nested_size": 1001,
+      "canonical_size": 1057
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/284 CSS Horizontal Navigation Bar- Gray Horizontal Navbar.html",
+      "nested_sha": "14373287b33f86dbf90f4ae63dc41842a9146376",
+      "canonical_sha": "43914c9c5828e9b54bf4def28d7fd46736856a83",
+      "nested_size": 732,
+      "canonical_size": 788
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/285 CSS Horizontal Navigation Bar- Right-align Last Link.html",
+      "nested_sha": "0669a2ff076533ff1987eac60d4028f12ff349e3",
+      "canonical_sha": "41afe18d4f523220456eeb50857d92a211b6780f",
+      "nested_size": 1025,
+      "canonical_size": 1082
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/286 CSS Horizontal Navigation Bar- Border Dividers.html",
+      "nested_sha": "24aa0c849b58d29a66195390d0f3c889decde8b7",
+      "canonical_sha": "3f7be491684d4da8acb08e794ee45893671d0277",
+      "nested_size": 1120,
+      "canonical_size": 1182
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/287 CSS Horizontal Navigation Bar- Fixed Navigation Bar- Fixed Top.html",
+      "nested_sha": "fca5cdce1d7dea895d9b7ad813ce999ddf0e9907",
+      "canonical_sha": "083722987ea7c737aab0940c39007c738047a950",
+      "nested_size": 2351,
+      "canonical_size": 2440
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/288 CSS Horizontal Navigation Bar- Fixed Bottom.html",
+      "nested_sha": "e7b2288ba433427233004fcd1c4412a99a2f4cbe",
+      "canonical_sha": "6ea79395b1e729300c62f7ee651e8807025c6067",
+      "nested_size": 2360,
+      "canonical_size": 2449
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/289 CSS Horizontal Navigation Bar- Sticky Navigation Bar.html",
+      "nested_sha": "c3da58e891800f1e98da5d5285763b5979186f15",
+      "canonical_sha": "8312ed7633fde135583e4e88288ff5ea801a0cea",
+      "nested_size": 3604,
+      "canonical_size": 3695
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/29 CSS RGB and RGBA Colors- Specify colors using RGB values.html",
+      "nested_sha": "747f3bb30c27184341a00d28b94932e7b18b7e46",
+      "canonical_sha": "dd7856adf0cd7165c69ba349761eacbd8cca1397",
+      "nested_size": 534,
+      "canonical_size": 551
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/290 CSS Horizontal Navigation Bar- Dropdown Menu in Navigation Bar.html",
+      "nested_sha": "9df0fce1cc684c57141bee7b91a7dbae98062397",
+      "canonical_sha": "1a75fadf2e686fa5c4804294017340a44a6105b2",
+      "nested_size": 1337,
+      "canonical_size": 1425
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/291 CSS Horizontal Navigation Bar- Responsive Navbar.html",
+      "nested_sha": "62bbdff7d34d33461992068f258d78b47265ffac",
+      "canonical_sha": "fdf1489664c5a570ba7838f40fa914d3d1f71166",
+      "nested_size": 1230,
+      "canonical_size": 1288
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/292 CSS Dropdowns- CSS Dropdown Box with Text.html",
+      "nested_sha": "8d843df5f981b25af29313bc443af9f58f5d0dc0",
+      "canonical_sha": "2de120004513ff147e033affe4ff198572772e4c",
+      "nested_size": 803,
+      "canonical_size": 843
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/293 CSS Dropdowns-CSS Dropdown Menu.html",
+      "nested_sha": "49d4c79cc7dedb3447138116dfd64f52b72a9324",
+      "canonical_sha": "3f11c737aba922ccebb4990546b86e08f052f5a8",
+      "nested_size": 1211,
+      "canonical_size": 1286
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/294 CSS Advanced Dropdowns- Aligned Dropdown Content.html",
+      "nested_sha": "742874951304e20be5703878b3718b72bd189726",
+      "canonical_sha": "d51af611c8153ee20b47ac86e5f2853c37f357a3",
+      "nested_size": 1905,
+      "canonical_size": 1986
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/295 CSS Advanced Dropdowns- CSS Dropdown Image.html",
+      "nested_sha": "e6f631d730c1a31203e86fc83901805192b952a1",
+      "canonical_sha": "d078f7af09ffcbc5dad3436a11695722f11f31c7",
+      "nested_size": 1092,
+      "canonical_size": 1140
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/296 CSS Advanced Dropdowns- CSS Dropdown Navbar.html",
+      "nested_sha": "a7f6cde2d4dbb342a3b18c6f8d6271a4733ab5d4",
+      "canonical_sha": "30ac7032058cb51b3e5df9634095a94cb5ffca55",
+      "nested_size": 1936,
+      "canonical_size": 2029
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/297 CSS Image Gallery.html",
+      "nested_sha": "427f9b6cabd90b3e4d67a123c73cace731cdbcbe",
+      "canonical_sha": "380d3a835a95d51de658c4f1d97964c65aad815b",
+      "nested_size": 3002,
+      "canonical_size": 3146
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/298 CSS Image Gallery- CSS Responsive Image Gallery.html",
+      "nested_sha": "688f04c31cdece0dbcc64ebf0986faf873e39647",
+      "canonical_sha": "fe941cb3f22efeab34937b99b2e2566cae306634",
+      "nested_size": 2018,
+      "canonical_size": 2114
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/299 CSS Image Sprites- Example.html",
+      "nested_sha": "c8cd1eeff88472c0bb406b933040fe7954df9e5f",
+      "canonical_sha": "f358c45d079404e37a711a8be5de7a1814f93202",
+      "nested_size": 826,
+      "canonical_size": 865
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/3 CSS Syntax.html",
+      "nested_sha": "60b234c2de80fcc00a7d1d85f78edcd5e46ffdde",
+      "canonical_sha": "cc8389842d9984317157f70159f6e47e697c6f2b",
+      "nested_size": 241,
+      "canonical_size": 260
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/30 CSS RGB and RGBA Colors- Shades of gray.html",
+      "nested_sha": "66b8d115d7bef6957df55598a9a92dd3160d1ec1",
+      "canonical_sha": "24b12333e92d95a70925e5b4eebb829152625345",
+      "nested_size": 628,
+      "canonical_size": 647
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/300 CSS Image Sprites- Image Sprites in a Navigation List.html",
+      "nested_sha": "e66c472820703e77fd7a25e2f181abb7973e9589",
+      "canonical_sha": "26bac70054ee43ad653a497497adbc5fad7405f2",
+      "nested_size": 720,
+      "canonical_size": 775
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/301 CSS Image Sprites- Image Sprites - Hover Effect.html",
+      "nested_sha": "85a8c1b46d3974c0fe1aba08cc5889e99296f2f0",
+      "canonical_sha": "0c654bcb24302bac0a6c09b462da2220dd138067",
+      "nested_size": 1355,
+      "canonical_size": 1423
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/302 CSS Attribute Selectors- CSS [attribute] Selector.html",
+      "nested_sha": "1eb7e7356555457427dc627d38506c9173a37b3f",
+      "canonical_sha": "b19e4dfd0cacfed97764ba0b4310755bdb0796f3",
+      "nested_size": 460,
+      "canonical_size": 484
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/303 CSS Attribute Selectors- CSS [attribute~=value] Selector.html",
+      "nested_sha": "246c73d8777949541bb52f4f8befcb278dedbac8",
+      "canonical_sha": "f242129671d368c60eb8fc14a35457b14ff5677c",
+      "nested_size": 573,
+      "canonical_size": 598
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/304 CSS Attribute Selectors- CSS [attribute=value] Selector.html",
+      "nested_sha": "8fd846ae3ebec9e2f42f49ee21650ed69a156c89",
+      "canonical_sha": "2bb5d7b3f77af17e25e0ac7aea7cd6a0947c8762",
+      "nested_size": 365,
+      "canonical_size": 389
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/305 CSS Advanced Attribute Selectors- CSS [attribute^=value] Selector.html",
+      "nested_sha": "5830db9a63d585b31bef2feedda7a009f86d0449",
+      "canonical_sha": "f582a33fd3dfbe4e64f7af3345201004d786a7c5",
+      "nested_size": 401,
+      "canonical_size": 426
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/306 CSS Advanced Attribute Selectors- CSS [attribute$=value] Selector.html",
+      "nested_sha": "8a743cc0033ef0e96f9d8dc9bc1d914e28824067",
+      "canonical_sha": "55ecf9382b0b4e30094533d120c70486fcd6268a",
+      "nested_size": 432,
+      "canonical_size": 455
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/307 CSS Advanced Attribute Selectors- CSS [attribute=value] Selector.html",
+      "nested_sha": "0daafdc4ea0fee44fc16d5da0073b55b413d6d5f",
+      "canonical_sha": "c80ca7d621a7562b2fd299b470d1b9803d85ecbb",
+      "nested_size": 466,
+      "canonical_size": 492
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/308 CSS Advanced Attribute Selectors- Style Form Elements With Attribute Selectors.html",
+      "nested_sha": "657886c9fcb6d7a5d2d0d4c57d180a75af478836",
+      "canonical_sha": "46a6309897e32caedb54c33f454576d26fbcaa56",
+      "nested_size": 713,
+      "canonical_size": 746
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/309 CSS Forms- Style an HTML Form with CSS.html",
+      "nested_sha": "ea86177c4b4e5ed4151e1fb080619faf24964dfb",
+      "canonical_sha": "e791cba7d16a4254747d5a66b3b6649e21b4646a",
+      "nested_size": 1408,
+      "canonical_size": 1472
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/31 RGBA Value- Make transparent colors with RGBA.html",
+      "nested_sha": "1cf1cacb0b376a7f168396204ef0969150ba0178",
+      "canonical_sha": "51365d3f2ef88b2f3220b56d1d9fa005f2320623",
+      "nested_size": 600,
+      "canonical_size": 617
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/310 CSS Form Inputs- A Full-width Input Field.html",
+      "nested_sha": "f588845d8bd914e672222b5794f634a181877e85",
+      "canonical_sha": "625924e9047bb37e1f25914167513f6f55fc0771",
+      "nested_size": 245,
+      "canonical_size": 268
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/311 CSS Form Inputs Style Input Padding.html",
+      "nested_sha": "4fda2da28613a9d3de8558e158c41fcb5714bc4e",
+      "canonical_sha": "7172e59ff61eb2f6a1770ffdcfc767ff392df681",
+      "nested_size": 664,
+      "canonical_size": 701
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/312 CSS Form Inputs- Style Input Border.html",
+      "nested_sha": "b9c8cf0184c98032358cd10fcab8966efae060d1",
+      "canonical_sha": "6c24e6b48ed12fad66c7e7eb501e73697ed3224d",
+      "nested_size": 568,
+      "canonical_size": 604
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/313 Logo File 1.html",
+      "nested_sha": "e71d4a86f619984b36052d338882d17bf4da927c",
+      "canonical_sha": "645fb89fff472f1ad3412a269e1292439f743f17",
+      "nested_size": 5563,
+      "canonical_size": 5804
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/314 Logo File 2.html",
+      "nested_sha": "e8d758e26a5e1c6cdfe13bfb2f6570c2294a22a6",
+      "canonical_sha": "7b95f3873f895b72079a266fe0a8e4aaf48296bd",
+      "nested_size": 4345,
+      "canonical_size": 4545
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/315 Logo File 3.html",
+      "nested_sha": "35c5628aec57fb3bf5c52b7b0b0b93327a089d94",
+      "canonical_sha": "e8e713a7f03593ca66a7417b89de3ac4f3188c2a",
+      "nested_size": 4006,
+      "canonical_size": 4175
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/316 Logo File 4.html",
+      "nested_sha": "4fc1ba7e36d629858083b57286c479735115fa8f",
+      "canonical_sha": "f508ea32cfcd2f08a14639894e6d35ac0ea795ae",
+      "nested_size": 3734,
+      "canonical_size": 3889
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/317 Logo File 5.html",
+      "nested_sha": "f1b4ee361e98190c17682a2ff209e55377068122",
+      "canonical_sha": "5ae012b2cb9cbdbf0b1da380922adf9c2a2930ac",
+      "nested_size": 3756,
+      "canonical_size": 3910
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/318 Logo File 6.html",
+      "nested_sha": "06586bfd258f8555e3f1909ab0360eb01bed4417",
+      "canonical_sha": "bed6d97806e1e84c9bbdf929121ad4b808281f0a",
+      "nested_size": 4466,
+      "canonical_size": 4672
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/319 CSS Form Inputs- Style Input Padding.html",
+      "nested_sha": "3f83124ba2880765b7fd45eff80762c07d379571",
+      "canonical_sha": "90ba7dadffd3b99ebdcf9ca6ca0864a5fd345432",
+      "nested_size": 634,
+      "canonical_size": 670
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/32 CSS HEX and HEXA Colors- Specify colors using HEX values.html",
+      "nested_sha": "bccef81e112d36952dbbe660316d1309ffae5a55",
+      "canonical_sha": "eede7c676ab9854bdb62f0f1b7256f9fceb2fd4b",
+      "nested_size": 426,
+      "canonical_size": 443
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/320 CSS Form Inputs- Style Input Border.html",
+      "nested_sha": "49fbee81506d5189e17d204c54574613bf90e151",
+      "canonical_sha": "70217e164aafc481e7ca8189d95ab3fd2c8dbbd5",
+      "nested_size": 545,
+      "canonical_size": 577
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/321 CSS Form Inputs- Input Fields with Bottom Border.html",
+      "nested_sha": "f51534127e202bd4e8d7bc6626b1abbda9eb37bb",
+      "canonical_sha": "02b959be0861ffd9577300bc6c8ea1623ba6b99f",
+      "nested_size": 631,
+      "canonical_size": 665
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/322 CSS Form Inputs- Style Input Background Color and Color.html",
+      "nested_sha": "0d8892120a690919238193ac64cfdd3f89ad01ab",
+      "canonical_sha": "3c58e7436ef09236f95ff29527cd0ac34c498bc6",
+      "nested_size": 697,
+      "canonical_size": 732
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/323 CSS Form Focus and Icons- Input fields with color on- focus.html",
+      "nested_sha": "a16ba3b3be259dac1cec0d86e63cef4fd1e7a706",
+      "canonical_sha": "af2239d95c910bb52c6cda693e52ec9052b33d95",
+      "nested_size": 817,
+      "canonical_size": 857
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/324 CSS Form Focus and Icons- Input fields with black border o- focus.html",
+      "nested_sha": "43a729c9c7a5c5c03db15d271f8b7b6f9aef2217",
+      "canonical_sha": "797781704151badffe4ceed17c6ecbbb046fed04",
+      "nested_size": 995,
+      "canonical_size": 1037
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/325 Logo File 7.html",
+      "nested_sha": "d144aeebdc587841c9faa78cab934bf63d957103",
+      "canonical_sha": "6adca1fd8f254aa95f70bca3b729b343082d27a6",
+      "nested_size": 2651,
+      "canonical_size": 2757
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/326 CSS Form Focus and Icons- Animated Search Input.html",
+      "nested_sha": "a0a5558ebba8ca6656764026e7f364116e6a09a1",
+      "canonical_sha": "a9962a655a37a0477d0dd0d5a09b74b4281d7ffd",
+      "nested_size": 1149,
+      "canonical_size": 1194
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/327 CSS Form Elements- Styling textarea.html",
+      "nested_sha": "1b6b871e4e78c1d385ec7fb51c3a00e77d29eb45",
+      "canonical_sha": "5718b204a27c2274087208ffd91f14db711dd1a4",
+      "nested_size": 757,
+      "canonical_size": 794
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/328 CSS Form Elements- Style a Dropdown Menu.html",
+      "nested_sha": "ba2e1988c2b88102c62374f5f6c18e4d80156fae",
+      "canonical_sha": "68d8410338af7212299c457ef873de391143500b",
+      "nested_size": 625,
+      "canonical_size": 658
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/329 CSS Form Elements- Style Form Buttons.html",
+      "nested_sha": "5f125b73b0bf5e38225d414c1022c545799d30e0",
+      "canonical_sha": "6619979922019de6c4cfcf3e87e3371d85493762",
+      "nested_size": 699,
+      "canonical_size": 736
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/33 CSS HEX and HEXA Colors- Shades of gray.html",
+      "nested_sha": "a43cabf61d2d2bf1bfb86844a69e3a219970fe1e",
+      "canonical_sha": "3e11d438aeeda54e042423f0dcd830b3052d6e3b",
+      "nested_size": 507,
+      "canonical_size": 525
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/330 CSS Form Elements- CSS Responsive Form.html",
+      "nested_sha": "a14d716de85a0cfe192dfd1a8ee39625cb3adffd",
+      "canonical_sha": "f6e63daeb8e9b36853f5e73cc9a0ba0f0dc069a6",
+      "nested_size": 2688,
+      "canonical_size": 2797
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/331 CSS Counters- CSS Increase and Decrease Counter.html",
+      "nested_sha": "c649efa43127921707f9a330fb27198e53c8edc6",
+      "canonical_sha": "83e57bc0333c4396ae485dfd63314d675730ecfd",
+      "nested_size": 743,
+      "canonical_size": 786
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/332 CSS Counters- Decrementing a Counter.html",
+      "nested_sha": "1f1b5d05b551162c9f4f13d1b1706b5749ac0126",
+      "canonical_sha": "9de6dfecd8453b15a7fa97fd94dd0fa36bb6883f",
+      "nested_size": 640,
+      "canonical_size": 678
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/333 CSS Counters- Incrementing by Custom Values.html",
+      "nested_sha": "1c3ccc4dd38805a55e6742e91f5a590a1f77352b",
+      "canonical_sha": "a92e5e2d65bfdca270f1353fda92a0f704329bd8",
+      "nested_size": 593,
+      "canonical_size": 639
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/334 CSS Nested Counters- CSS Using Two Counters.html",
+      "nested_sha": "3d1aa05c8ac86171349d8fd89c7339a1ef59c2d5",
+      "canonical_sha": "94a54bb5a766106584779747955968563f4663d0",
+      "nested_size": 881,
+      "canonical_size": 933
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/335 CSS Nested Counters- The CSS counters() Function.html",
+      "nested_sha": "b8af7fce4abfc74fc49fe3e23acf67b532e6c5c6",
+      "canonical_sha": "b762c7bb81d5d176d83d81c77d073ef8c387f4c7",
+      "nested_size": 802,
+      "canonical_size": 867
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/336 CSS Units- CSS Absolute Units- Pixels.html",
+      "nested_sha": "b28aead5555ecb32afe0e9e5cc0be4333b97474d",
+      "canonical_sha": "5a1a6443f757a9967dbbcbd8d9a4331d5707e4dd",
+      "nested_size": 918,
+      "canonical_size": 982
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/337 CSS Units- CSS Absolute Units- Centimeters.html",
+      "nested_sha": "5418f103aa95c024a75e91172ed19acff46425ef",
+      "canonical_sha": "a70363458bb43874a3f3a7ce21c91c483ac8739f",
+      "nested_size": 510,
+      "canonical_size": 545
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/338 CSS Units- CSS Absolute Units- Millimeters.html",
+      "nested_sha": "684c82693c3414554c441f2b19aed3184bb5aa58",
+      "canonical_sha": "c02b43812a6812ff66bd3e5d19494d298e17a4b7",
+      "nested_size": 501,
+      "canonical_size": 535
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/339 CSS Units- CSS Absolute Units- Inches.html",
+      "nested_sha": "73fd334cce6d72fd70b1a53461b720870e6be236",
+      "canonical_sha": "0bb1d015a1f940234a5df3bcc1f7c41a2e60b2bf",
+      "nested_size": 373,
+      "canonical_size": 401
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/34 CSS HEX and HEXA Colors- 3 Digit HEX Value.html",
+      "nested_sha": "3d9830dd854775c277edf2b6316e5465d90e0d40",
+      "canonical_sha": "2a068b030c20294e26a35dd19471360a1cea38ce",
+      "nested_size": 417,
+      "canonical_size": 447
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/340 CSS Units- CSS Absolute Units- Points.html",
+      "nested_sha": "96a7abe64393238313014118987cd02024f22ebe",
+      "canonical_sha": "92154bba8fe765e9250ae73c4a3a9908b1ed7399",
+      "nested_size": 509,
+      "canonical_size": 544
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/341 CSS Units- CSS Absolute Units- Picas.html",
+      "nested_sha": "189d6946776e51ecb7b54be0a31156722324b5e9",
+      "canonical_sha": "2cc74307af37e6d96815ccc305cfc365aaddbf2f",
+      "nested_size": 504,
+      "canonical_size": 538
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/342 CSS Units- CSS Absolute Units- Set Font Size With Px.html",
+      "nested_sha": "552b7c69413fb92332c2bbf7507240fab4f78a01",
+      "canonical_sha": "07377b8f6beb58aca43ab9f6ae8b12f1906eb8f7",
+      "nested_size": 436,
+      "canonical_size": 468
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/343 CSS Responsive Image Gallery.html",
+      "nested_sha": "1cbf2dfd81537244cd460e5da587d3d6bc3f9bc3",
+      "canonical_sha": "aa670d787ffd3387c348934ef0cd37601b2a8bbb",
+      "nested_size": 3895,
+      "canonical_size": 4002
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/344 CSS Units- CSS Relative Units- em.html",
+      "nested_sha": "52542c209f002cdc3ef997daf40ce120695d1921",
+      "canonical_sha": "652eae8bde36b5275d54d9e2e64e1eeffe3131b1",
+      "nested_size": 723,
+      "canonical_size": 764
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/345 CSS Units- CSS Relative Units- rem.html",
+      "nested_sha": "a883977f1ead6cf96b6cf7356c272df64055b7d2",
+      "canonical_sha": "30ecd48100c15545bc272a40fdc49c5ac4a9ea93",
+      "nested_size": 636,
+      "canonical_size": 673
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/346 CSS Units- CSS Relative Units- vw.html",
+      "nested_sha": "2f70b6b33b9166650113b8c206d3533e4dab208f",
+      "canonical_sha": "9df205920c08858e0e7877cceb15c60ec144269f",
+      "nested_size": 1437,
+      "canonical_size": 1493
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/347 CSS Units- CSS Relative Units- The fr Unit.html",
+      "nested_sha": "7abb4fb4c5eca2d3276d9178ca1be8e2c842dd8f",
+      "canonical_sha": "e3d6576f62083a22140a05234f859bb7ac57d965",
+      "nested_size": 722,
+      "canonical_size": 761
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/348 CSS Units- CSS Relative Units- ch.html",
+      "nested_sha": "9d0ee502e1d5c02f1cf81c3df7da23c2cbadd6e1",
+      "canonical_sha": "2c96332945a04b6fbe9c55c1b95cb5dd231383d4",
+      "nested_size": 519,
+      "canonical_size": 549
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/349 CSS Inheritance- Inherited Properties.html",
+      "nested_sha": "52dae234b3d0fae5ae3346e2bc2f6efd926a28bd",
+      "canonical_sha": "5166df0570f446f450cbf6cbc5e0bbba4fd5cb65",
+      "nested_size": 276,
+      "canonical_size": 297
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/35 CSS HEX and HEXA Colors- HEXA Value- Specify colors using HEXA values.html",
+      "nested_sha": "e8d7855854e37f10104261b3c129123b4c358187",
+      "canonical_sha": "6aa12d5c7f4f82b8cd9166b2a9d4f65c09ccfe6b",
+      "nested_size": 450,
+      "canonical_size": 466
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/350 CSS Inheritance- Non-inherited Properties.html",
+      "nested_sha": "6794e7bd0cf337177fff9fcd7f5363c89ef05901",
+      "canonical_sha": "4f63b76762b1a4a76c2b681b0c760a9b7de510e0",
+      "nested_size": 261,
+      "canonical_size": 281
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/351 CSS Inheritance- The inherit Keyword.html",
+      "nested_sha": "fe03ad3588087e57e91b5e02fed03994b091dc63",
+      "canonical_sha": "213f5b0f3b98cc1c1ee714319f90769e7bd27ecc",
+      "nested_size": 313,
+      "canonical_size": 337
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/352 CSS Specificity 1.html",
+      "nested_sha": "cf60eda97256d6adbeb892bf1fb214d32cd282f6",
+      "canonical_sha": "411b6720bda7a643cbc21d2c9d9f99ee8fb01ce4",
+      "nested_size": 161,
+      "canonical_size": 179
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/353 CSS Specificity 2.html",
+      "nested_sha": "2b4c49fcdfe6aa3da416cf96fe95e5a5de63c001",
+      "canonical_sha": "39487b018ba6ef74990e090be47f9472264ea125",
+      "nested_size": 227,
+      "canonical_size": 249
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/354 CSS Specificity- CSS Specificity Hierarchy- Calculate the Specificity Weight.html",
+      "nested_sha": "866e4a4c22e6fe96a15034a7a31039a66c008105",
+      "canonical_sha": "f171e0f81bb4dd8f4d12cf7473b0469a90346f2b",
+      "nested_size": 587,
+      "canonical_size": 628
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/355 CSS Specificity Hierarchy- More Specificity Examples- Equal specificity- the latest rule wins.html",
+      "nested_sha": "c70139d934014affa9f7b9e6693019627f44fc3b",
+      "canonical_sha": "f5cbe7674eef290b94039ed1c4d5f3cc79874ba5",
+      "nested_size": 241,
+      "canonical_size": 262
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/356 CSS Specificity Hierarchy- More Specificity Examples- ID selectors beat attribute selectors.html",
+      "nested_sha": "c9a5c5bffff777faea17ee646f848a0c903821dc",
+      "canonical_sha": "f0656925a22ac689607a2985b55ad768332403b3",
+      "nested_size": 267,
+      "canonical_size": 289
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/357 CSS Specificity Hierarchy- More Specificity Examples- A class selector beats element selectors.html",
+      "nested_sha": "8832d576e62b19946ce1a0ae95c3c7c54b7c0c21",
+      "canonical_sha": "508140e9b410b52492d667d9f32095a6ebc84884",
+      "nested_size": 260,
+      "canonical_size": 282
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/358 CSS Specificity Hierarchy- More Specificity Examples- The universal selector.html",
+      "nested_sha": "8e4a93a5d234d5c8acbfa3acc696fdb180d5d630",
+      "canonical_sha": "0f47e433cecf9db8731839c5cb866392b2e76759",
+      "nested_size": 241,
+      "canonical_size": 263
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/359 CSS The !important Rule- Using the !important Rule.html",
+      "nested_sha": "2f3a47e31862080aea54aeca3a81c9ed660c3cc5",
+      "canonical_sha": "cad95f05dd598e74d65c34f35ad9a04f3a7ead3e",
+      "nested_size": 488,
+      "canonical_size": 520
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/36 CSS HSL and HSLA Colors- HSL Value- Specify colors using HSL values.HTML",
+      "nested_sha": "cb53c04546e1affdfac2649be08505b788bc9a4a",
+      "canonical_sha": "f399bfd0a1a176a8602aaa9e66e68f2b2db1cf0f",
+      "nested_size": 557,
+      "canonical_size": 573
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/360 CSS The !important Rule- Use !important Sparingly.html",
+      "nested_sha": "79b6c7a223c8d24286625c0d12d1d1d9c6a4cf83",
+      "canonical_sha": "38698717719579fac5577a2cbacd429808a06c0a",
+      "nested_size": 475,
+      "canonical_size": 507
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/361 CSS The !important Rule- Respect User Preferences.html",
+      "nested_sha": "8e42f2aed7dfec12b0590d4855dceac263243fc5",
+      "canonical_sha": "9734f3e4f6e46ed126eb3930d4e7b95312016bc5",
+      "nested_size": 1318,
+      "canonical_size": 1386
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/362 CSS The !important Rule- Now, if we put a link button inside another element with higher specificity, the properties might get in conflict. Here is an example of this.html",
+      "nested_sha": "e678ed3b2f778a38e88396accf62073e5afb5dbc",
+      "canonical_sha": "459694a9b62478024676a99df81ae2f97ae407a5",
+      "nested_size": 646,
+      "canonical_size": 678
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/363 CSS The !important Rule- To force all buttons to have the same look, no matter what, we can add the !important rule to the properties of the button, like this.html",
+      "nested_sha": "d661f467bd9472587909d22760b4e755db8c898b",
+      "canonical_sha": "a1e8b94541a8dbf419a4d9a30da7d06512de17ad",
+      "nested_size": 701,
+      "canonical_size": 733
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/364 CSS Math Functions- The CSS calc() Function.html",
+      "nested_sha": "e64dc3836d236027bc18272dd8c5a67ee2a5c87b",
+      "canonical_sha": "3997e8404be08c9886f163e3788442f4e0c788a9",
+      "nested_size": 647,
+      "canonical_size": 677
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/37 CSS HSL and HSLA Colors- HSL Value- HSL Saturation.HTML",
+      "nested_sha": "603c2d2ef54548354a81ba1a3e06b9d9e470064e",
+      "canonical_sha": "15e408a984a2e9ffd3cd9833ee208e47757eea32",
+      "nested_size": 638,
+      "canonical_size": 656
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/38 CSS HSL and HSLA Colors- HSL Value- HSL Lightness.HTML",
+      "nested_sha": "afd9372597990202f8cae59cc5631e459d31ac01",
+      "canonical_sha": "e76b48d9ef8013da2ac660b623fc5a81b9d7e138",
+      "nested_size": 630,
+      "canonical_size": 649
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/39 CSS HSL and HSLA Colors- HSL Value- Shades of gray.html",
+      "nested_sha": "bd020f7245a8d7592ae01f0f72abc57b3fc9a3ca",
+      "canonical_sha": "b7a7f15dfd110d52354580ae3d069f4a3898ca25",
+      "nested_size": 633,
+      "canonical_size": 652
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/4 CSS Selectors- The CSS element Selector.html",
+      "nested_sha": "0d60fb11d50d7a983f3d6d642b99a5264d964759",
+      "canonical_sha": "78d5e5638a2a968372b75fb78ca816648dba2a2b",
+      "nested_size": 275,
+      "canonical_size": 295
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/40 CSS HSL and HSLA Colors- HSLA Value- Make transparent colors with HSLA.html",
+      "nested_sha": "a109af745b0f4f01a15d6f5338d5f4b6ac6cb933",
+      "canonical_sha": "52fef6411ed4f52a472e99a39847e06faa42643a",
+      "nested_size": 612,
+      "canonical_size": 629
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/41 CSS Backgrounds- CSS background-color.html",
+      "nested_sha": "acf08f53038a8bf87ae8418ad8fa9f4029dfa5e7",
+      "canonical_sha": "0b7f7178b21fecba0968516fc5129b1f962bc3ca",
+      "nested_size": 239,
+      "canonical_size": 258
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/42 CSS Backgrounds- Other Elements.html",
+      "nested_sha": "c017b3ae98839746329af33e8a05e8bb7f62e808",
+      "canonical_sha": "a51b35551152586cdfc3d64e1614e86cbdf3b576",
+      "nested_size": 511,
+      "canonical_size": 541
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/43 CSS Backgrounds- Opacity or Transparency- Transparent Boxes.html",
+      "nested_sha": "c3df1380571e190b49f5ca20d5f80dcfc4c0f25e",
+      "canonical_sha": "41fe216f50b3d61a9849bfc580208c516c6cb0d0",
+      "nested_size": 841,
+      "canonical_size": 889
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/44 CSS Backgrounds- Transparency using RGBA- Tansparent Boxes 2.html",
+      "nested_sha": "97c46b54b7d0dcc8262bb2e7752605b912fa953e",
+      "canonical_sha": "d67d9f22b77e587ab0fb7c2803a0281f533b1ef1",
+      "nested_size": 1241,
+      "canonical_size": 1311
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/45 CSS Background Image.html",
+      "nested_sha": "d0a0b084a9bfb87bbb08cb92045d9d65eb5b975e",
+      "canonical_sha": "f54bd9007c427f2a42bcf43e44979dc7e9d3c18a",
+      "nested_size": 481,
+      "canonical_size": 505
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/46 CSS Background Image- Bad Combination.html",
+      "nested_sha": "29ba2615b3f579e87c819aa4d39d8e6ee3600251",
+      "canonical_sha": "39f5de19928da97302ac799c5861a11a5b43b720",
+      "nested_size": 260,
+      "canonical_size": 279
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/47 CSS Background Image- Using p element of html.html",
+      "nested_sha": "cc1a6a0b0b9d27842ef7a7264e8e6e2ed01a6969",
+      "canonical_sha": "e256eeaa2a08e381c18cfd1849c337dabc910bc5",
+      "nested_size": 245,
+      "canonical_size": 264
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/48 CSS Background Image Repeat.html",
+      "nested_sha": "c4aacea6d4ddc82b9dcb51b3a7184d354cc04c0b",
+      "canonical_sha": "55f8033dded2dc127f413332b77c370b4abc5604",
+      "nested_size": 467,
+      "canonical_size": 490
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/49 CSS Background Attachment.html",
+      "nested_sha": "99066a669c6e97b3b4d02b379942cc198ada4692",
+      "canonical_sha": "5f4cda8eec78694ad59b1899ca09d324bb2abdd6",
+      "nested_size": 2205,
+      "canonical_size": 2254
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/5 CSS Selectors- The CSS id Selector.html",
+      "nested_sha": "dc104a5084c55891f122d1c0082c8cc538f8d92e",
+      "canonical_sha": "f9ca30bacd00f3139048dedca5ef3156fa4c94ca",
+      "nested_size": 265,
+      "canonical_size": 285
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/50 CSS Background Shorthand.html",
+      "nested_sha": "b217050c55cc1a553bfcd5f3420007b89c419dea",
+      "canonical_sha": "390e6176e0849bc7833fc4156eca5641f2efbd3e",
+      "nested_size": 664,
+      "canonical_size": 693
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/51 CSS Borders- The border-style Property.html",
+      "nested_sha": "6071054c9789bde2b34c57e076c5b115846db5eb",
+      "canonical_sha": "6d6489483fbf75e4c8e978eeff4452f796121bed",
+      "nested_size": 1364,
+      "canonical_size": 1434
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/52 CSS Border Width-The border-width Property.html",
+      "nested_sha": "38c6bc6f1308357105721d547f8857817ed0a0be",
+      "canonical_sha": "bcd2fd7f52c13e4a9bac24ead1d5d2cb34daac0f",
+      "nested_size": 1130,
+      "canonical_size": 1184
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/53 CSS Border Width- Specific Side Widths.html",
+      "nested_sha": "7ac5344b5e3801534db5bbea69864ab57455d611",
+      "canonical_sha": "5647da49341d53da480cadc5d9dbf0877343baec",
+      "nested_size": 860,
+      "canonical_size": 897
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/54 CSS Borders-CSS Border Color.html",
+      "nested_sha": "93372543ec7167856885652b4731f71cbaeb019a",
+      "canonical_sha": "9f27e312f2fcd705c9c4e8ab848da65c894f04ea",
+      "nested_size": 760,
+      "canonical_size": 796
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/55 CSS Borders- Specific Side Colors.html",
+      "nested_sha": "b89e84aa7b823a12a2962448125ec728004576a4",
+      "canonical_sha": "953f03370550132f5ac79f4a09513b00d10ec59a",
+      "nested_size": 559,
+      "canonical_size": 582
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/56 CSS Borders- HEX Values.html",
+      "nested_sha": "359fcb045aa837e3940bcd35c57586a09e5ecc80",
+      "canonical_sha": "2a26fcaaa6233459c7b9baa23ff5262297ab2288",
+      "nested_size": 704,
+      "canonical_size": 740
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/57 CSS Borders- RGB Values.html",
+      "nested_sha": "7288af061304d8d16ea448e4679e47270f0fe135",
+      "canonical_sha": "ff7f01cf08c30f844ea18533a61c878c2faa0099",
+      "nested_size": 714,
+      "canonical_size": 750
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/58 CSS Borders-HSL Values.html",
+      "nested_sha": "1cbd7f43edae98558f6950f161f5f40a926a985b",
+      "canonical_sha": "15a782a6d29c48a77c879db15672c578e3d2b686",
+      "nested_size": 719,
+      "canonical_size": 755
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/59 CSS Border Sides-CSS Border - Individual Sides.HTML",
+      "nested_sha": "ba4bc58e819fd97a3ca844ccab6319aa6d65f29c",
+      "canonical_sha": "e96c7b3ba35882cc5cb0010b6652b2d79cd4c6f6",
+      "nested_size": 343,
+      "canonical_size": 364
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/6 CSS Selectors- The CSS class Selector.html",
+      "nested_sha": "77e2ac8ebde54e49b68f119e34705a38477322c8",
+      "canonical_sha": "57b1f5fef3bffa1a64524c70938da30a9451f28b",
+      "nested_size": 294,
+      "canonical_size": 314
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/60 CSS Border Sides-shorthand border-style property.html",
+      "nested_sha": "2a1b96a091f518a1fc312f6b8c8cd595b33ac995",
+      "canonical_sha": "5b9675a4ea5c763cf4fcd1debf5d5cf10a9cd867",
+      "nested_size": 228,
+      "canonical_size": 247
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/61 CSS Border Sides-Individual Border Sides.html",
+      "nested_sha": "b0484ece54bc1c0f7c9c80485ba7761e70c96a0e",
+      "canonical_sha": "62778558abedb5db96faeac855a6794a1e634806",
+      "nested_size": 764,
+      "canonical_size": 805
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/62 CSS Shorthand Border Property.html",
+      "nested_sha": "53e7168bbd52630de6d9793467fa4a3398997599",
+      "canonical_sha": "2cee9d5fc90ca10c28b476480723e791b5ceac9f",
+      "nested_size": 280,
+      "canonical_size": 299
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/63 CSS Shorthand Border Property-The border-left Property.HTML",
+      "nested_sha": "026bb1e8fddb575f536224b8d01d06ebf1e2e123",
+      "canonical_sha": "39f32168758b4da8d1ab1fa29989b1cdb4d3949d",
+      "nested_size": 345,
+      "canonical_size": 364
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/64 CSS Shorthand Border Property- The border-bottom Property.HTML",
+      "nested_sha": "554f73eebf74be398cb078f1c5c029f205ace9b4",
+      "canonical_sha": "359b1c3759a05a8991031127dac3e04447efdb31",
+      "nested_size": 355,
+      "canonical_size": 374
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/65 CSS Rounded Borders-The border-radius Property.html",
+      "nested_sha": "f698ec1aa4d938849722229921986fffe3051a8f",
+      "canonical_sha": "ad888ca26bf08d91650ce5f0658fdceb89687cd0",
+      "nested_size": 824,
+      "canonical_size": 866
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/66 CSS Margins- Margin - Individual Sides.html",
+      "nested_sha": "7751a2862f3dd0a8b42dca5e541189659eae4f97",
+      "canonical_sha": "4e3d76d9868e4f8b413be7395393d46c80da63ac",
+      "nested_size": 515,
+      "canonical_size": 540
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/67 CSS Margins-Margin - Shorthand Property.html",
+      "nested_sha": "15503c7f1c7e568f4150a42c347b54cf0aa1f33e",
+      "canonical_sha": "cee2c73a6157e89d56a35521c0123fb4ed2a91e8",
+      "nested_size": 442,
+      "canonical_size": 466
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/68 CSS Margins-The auto Value.html",
+      "nested_sha": "d4b6c13c35a823df9e2f4807c5d5e07bc73bb100",
+      "canonical_sha": "7faa96658afc9d5ab9e0298b277d8b7a815a327a",
+      "nested_size": 589,
+      "canonical_size": 615
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/7 CSS Grouping Selectors-The CSS Universal Selector.html",
+      "nested_sha": "1ce0c50352f019e7264bd0fd34cc81f8dcb3640b",
+      "canonical_sha": "af32ef5683f7acc2b31ba3f420cae9eef68ba8da",
+      "nested_size": 313,
+      "canonical_size": 335
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/70 CSS Margin Collapse.html",
+      "nested_sha": "7b7431b510f6c7dc022519398fd50c7037bdcad1",
+      "canonical_sha": "4cb7bbc591e44f96f0d6b9dbcf665a45608ef5d1",
+      "nested_size": 1122,
+      "canonical_size": 1178
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/71 CSS Padding-Padding - Individual Sides.html",
+      "nested_sha": "d65f6ca5047cbd0e3fa7d066b5c1e8e60031153e",
+      "canonical_sha": "86473d8b91a54ca47d05602e777c98bcdf17cc8c",
+      "nested_size": 519,
+      "canonical_size": 545
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/72 CSS Padding-Padding - Shorthand Property.html",
+      "nested_sha": "d3b63fae21043196c3f11d4cd856c52bde130629",
+      "canonical_sha": "88e0ab9160750e24c364c5f93dbb2de6c1e16e88",
+      "nested_size": 438,
+      "canonical_size": 460
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/73 CSS Padding and box-sizing-Padding and Element Width.html",
+      "nested_sha": "a93d6949ea4e1ceef5159dfc6ecdef4c5c9ac0d8",
+      "canonical_sha": "eacd635f5beca901bc1fc859bc7675149007867f",
+      "nested_size": 512,
+      "canonical_size": 541
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/74 CSS Padding and box-sizing.html",
+      "nested_sha": "ccb4558725cbc4ffd1b8f5a63d94e49efa3b755b",
+      "canonical_sha": "19b136e128f1f4542e34b3d9326039803fb6dd6f",
+      "nested_size": 643,
+      "canonical_size": 676
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/75 CSS Height and Width-Set the height and width of an element.html",
+      "nested_sha": "d1c760443c735d9e67aae2e350020c89ed8e6f97",
+      "canonical_sha": "6880a7766760b6447d9cb2b60f3c0c1882a9ded6",
+      "nested_size": 334,
+      "canonical_size": 355
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/76 Set the height and width of an element- Div.html",
+      "nested_sha": "29511bd840e5de4f3c45183cfcd66e4570a5742e",
+      "canonical_sha": "8bfbd2911b54c03728bdc45f4c67871a55836fbd",
+      "nested_size": 339,
+      "canonical_size": 361
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/77 CSS Min & Max Height and Width-Max-width vs. width of an element.html",
+      "nested_sha": "cee5f1f1087ca976c57ea9e0c6cc428fc27fa9d5",
+      "canonical_sha": "5f3b1153b3b12662a7667f55ac870e2cc7bfd98a",
+      "nested_size": 619,
+      "canonical_size": 653
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/78 CSS Min & Max Height and Width-Using both max-width and width.html",
+      "nested_sha": "573f6e6d3302cd7350cacd5eda6863b932834642",
+      "canonical_sha": "fd8d3aafc7e431329f863d31d8dfad17e4dff6eb",
+      "nested_size": 618,
+      "canonical_size": 651
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/79 CSS Box Model.html",
+      "nested_sha": "12d492605f7eee08ddf92de63a6a93f0fe3ae416",
+      "canonical_sha": "c360bc1bf41c4622a3ae4acd300607cc6894a962",
+      "nested_size": 1064,
+      "canonical_size": 1099
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/8 CSS Grouping Selectors- The CSS Grouping Selector.html",
+      "nested_sha": "18033d65373678deec3a6a0651139cf186defaf3",
+      "canonical_sha": "e74f288ce314e9f0ccf0e3381248fa2f2b660f0f",
+      "nested_size": 281,
+      "canonical_size": 304
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/80 CSS Outline.html",
+      "nested_sha": "dd1082f7eae7f21d3e8c7dd7062fde2f01f698fb",
+      "canonical_sha": "ba1c81da689ebc8b74086a9302d29ede945470a3",
+      "nested_size": 389,
+      "canonical_size": 411
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/81 CSS Outline-The outline-style Property.html",
+      "nested_sha": "118e3591d85f694a2a9524f44eadfd5ebfd67a17",
+      "canonical_sha": "11480a352b8bcfd86f37d95db5cabf7160aef919",
+      "nested_size": 1260,
+      "canonical_size": 1319
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/82 CSS Outline Width.html",
+      "nested_sha": "5b67a3c7dc7d1d335f8ac454aff18014e34c8066",
+      "canonical_sha": "caa63948bef7c9737dbcac7538b4663cdb344cfc",
+      "nested_size": 653,
+      "canonical_size": 693
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/83 CSS Outline Color.html",
+      "nested_sha": "8bf0a12f8e4c0107394fc4dad66eee54c6b47359",
+      "canonical_sha": "e332265dd41dc7f757eb1fbeba20ccb84d386202",
+      "nested_size": 782,
+      "canonical_size": 826
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/84 CSS Outline Color-HEX Values.html",
+      "nested_sha": "ff339e996c44ddad8cff43d89ef2ed64059bc459",
+      "canonical_sha": "20a11923fddca11d23f66d79bcedade3c95aa95d",
+      "nested_size": 905,
+      "canonical_size": 947
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/85 Outline Color-RGB Values.html",
+      "nested_sha": "c6f9eca304e4b2cb99d29e196328697b96cb433b",
+      "canonical_sha": "1cc0f3ab02c1d23840e88f09ce3c87d88ccdfc99",
+      "nested_size": 918,
+      "canonical_size": 963
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/86 Outline Color HSL Value.html",
+      "nested_sha": "4d403805ea428aed0c306faa572d83d6419a1923",
+      "canonical_sha": "c1401b1b3d8cdb8db32577ad2639994987cf13d4",
+      "nested_size": 920,
+      "canonical_size": 962
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/87 CSS Outline Shorthand.html",
+      "nested_sha": "a2a0dd7bce93c4c1e37838edc6d30933eb586927",
+      "canonical_sha": "55b719d2c1ba0f09eb37b37e8e0e3c14d1ef2f81",
+      "nested_size": 620,
+      "canonical_size": 659
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/88 CSS Outline With Rounded Corners.html",
+      "nested_sha": "3bdcb264ce2abbc6da60baa52bea0ca3c74c03a9",
+      "canonical_sha": "96548bbdec345f14cb348225ea9b1ac234e38bd6",
+      "nested_size": 936,
+      "canonical_size": 985
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/89 CSS Outline Offset.html",
+      "nested_sha": "861723f3c46b9fef4f384423fbb05d9c4d4dd443",
+      "canonical_sha": "d66cba97794f0604063c64b2490446e163c6ca53",
+      "nested_size": 406,
+      "canonical_size": 429
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/9 How To Add CSS- External CSS.html",
+      "nested_sha": "13d95c3ffc9175651ad6922855109edfcf0c8192",
+      "canonical_sha": "77da90562f4dec606ef3b4f51035ca949335d853",
+      "nested_size": 161,
+      "canonical_size": 173
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/90 CSS Outline Offset with Negative Value.html",
+      "nested_sha": "525bb026bbf21b6f60494cf334167d693c7bfa41",
+      "canonical_sha": "39538542736e8e1d0721ebf25a856b4ba29dff14",
+      "nested_size": 439,
+      "canonical_size": 465
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/91 CSS Text Color-CSS Text Formatting.html",
+      "nested_sha": "7f7c153b92d5a7b3566e42e41dd331013f868da3",
+      "canonical_sha": "d210ab0b54680f30f86f3742a4c4009d1fd6f0e1",
+      "nested_size": 979,
+      "canonical_size": 1023
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/92 CSS Text Color.html",
+      "nested_sha": "b54a96172b5f99ae6d7ca57b917aebffbe118d1a",
+      "canonical_sha": "01f58c498e8de1651feb84ddc116907ef86bf36c",
+      "nested_size": 469,
+      "canonical_size": 499
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/93 CSS Text Color and Background Color.html",
+      "nested_sha": "5d3c8626b3143f8f6cd3b8574a89229f59a08fee",
+      "canonical_sha": "768730de7e21b05715efd0bb232391f06bdb606e",
+      "nested_size": 482,
+      "canonical_size": 512
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/94 CSS Text Alignment.html",
+      "nested_sha": "cf628ff9bf66d5805418fe309cda3361ea0fc826",
+      "canonical_sha": "9e16c44a0a1b98569a892c654635476ad75e2c4c",
+      "nested_size": 421,
+      "canonical_size": 451
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/95 Text Align Last.html",
+      "nested_sha": "36ca75ac13999b6e4a26c2161c9aeed76361761c",
+      "canonical_sha": "93a77dd6ba64fa3c08cf7f39e990b8c2bb97fed7",
+      "nested_size": 1092,
+      "canonical_size": 1130
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/96 Vertical Alignment.html",
+      "nested_sha": "08837d35eb4c318876cfbf213fdc4baf6f21a0e2",
+      "canonical_sha": "39284c222e3c3ef476f43d3e436cef72af6190f9",
+      "nested_size": 1168,
+      "canonical_size": 1216
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/97 Text Direction.html",
+      "nested_sha": "4c3b5e5a5cfa34587f12e948f8d5ebb28b2d4a4e",
+      "canonical_sha": "e96ebad700732d6d448dd6f470ae54ba0c26847b",
+      "nested_size": 295,
+      "canonical_size": 316
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/98 CSS Text Decoration.html",
+      "nested_sha": "e2e7774688453780adbc3205082d91417eebd710",
+      "canonical_sha": "d2a188ff94696716062d92af6f53b7e1b38e94e9",
+      "nested_size": 678,
+      "canonical_size": 714
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Learnings/99 CSS Text Decoration-Specify a Color for the Decoration Line.html",
+      "nested_sha": "229b539b2c9d029d42abea616e7d2c173816d92e",
+      "canonical_sha": "aaf72ce4462acdbf543741c24a22d9b3650f687c",
+      "nested_size": 712,
+      "canonical_size": 749
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Practice/1 Examples in Each Chapter.html",
+      "nested_sha": "7f7e5a6fecc8366195e5582f537d279e4f5918bd",
+      "canonical_sha": "0aba1caecd06b6fb501ed3040b99f48f05f92dec",
+      "nested_size": 459,
+      "canonical_size": 485
+    },
+    {
+      "relative_path": "Prayag Gaikwad CSS/Practice/2 Info File 1.html",
+      "nested_sha": "d19fb5eff560e7b8a1973146ed887e81370b6ea3",
+      "canonical_sha": "cdc70b17d2b3a0f4b41f882f8cd2b42723c9a324",
+      "nested_size": 2379,
+      "canonical_size": 2466
+    }
+  ]
+}

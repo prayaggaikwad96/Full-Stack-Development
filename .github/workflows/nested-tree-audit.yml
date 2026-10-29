@@ -1,0 +1,156 @@
+name: Audit nested project tree
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths:
+      - "Prayag Gaikwad/**"
+      - "Full-Stack-Development/Prayag Gaikwad/**"
+      - ".github/workflows/nested-tree-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare:
+    name: Compare canonical and nested learning trees
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Compare every file after line-ending normalization
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          import hashlib
+          import json
+          import os
+          import sys
+          from pathlib import Path
+
+          repo = Path.cwd()
+          canonical = repo / "Prayag Gaikwad"
+          nested = repo / "Full-Stack-Development" / "Prayag Gaikwad"
+          out = repo / "audit-artifacts"
+          out.mkdir(exist_ok=True)
+
+          for path in (canonical, nested):
+              if not path.is_dir():
+                  print(f"Missing comparison directory: {path}", file=sys.stderr)
+                  sys.exit(2)
+
+          def file_map(root):
+              return {
+                  path.relative_to(root).as_posix(): path
+                  for path in root.rglob("*")
+                  if path.is_file()
+              }
+
+          def read_file(path):
+              data = path.read_bytes()
+              exact_sha = hashlib.sha256(data).hexdigest()
+              is_text = b"\0" not in data
+              if is_text:
+                  try:
+                      data.decode("utf-8-sig", errors="strict")
+                  except UnicodeDecodeError:
+                      is_text = False
+              normalized = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n") if is_text else data
+              return data, exact_sha, normalized, hashlib.sha256(normalized).hexdigest(), is_text
+
+          c_map, n_map = file_map(canonical), file_map(nested)
+          results = []
+          counts = {
+              "identical": 0,
+              "line_ending_only": 0,
+              "content_different": 0,
+              "binary_different": 0,
+              "canonical_only": 0,
+              "nested_only": 0,
+          }
+
+          for rel in sorted(set(c_map) | set(n_map), key=str.casefold):
+              c_path, n_path = c_map.get(rel), n_map.get(rel)
+              row = {
+                  "relative_path": rel,
+                  "status": "",
+                  "canonical_size": None,
+                  "nested_size": None,
+                  "canonical_sha256": None,
+                  "nested_sha256": None,
+              }
+              if c_path is None:
+                  row["status"] = "nested_only"
+                  row["nested_size"] = n_path.stat().st_size
+                  row["nested_sha256"] = hashlib.sha256(n_path.read_bytes()).hexdigest()
+              elif n_path is None:
+                  row["status"] = "canonical_only"
+                  row["canonical_size"] = c_path.stat().st_size
+                  row["canonical_sha256"] = hashlib.sha256(c_path.read_bytes()).hexdigest()
+              else:
+                  c_data, c_sha, c_norm, c_norm_sha, c_text = read_file(c_path)
+                  n_data, n_sha, n_norm, n_norm_sha, n_text = read_file(n_path)
+                  row["canonical_size"], row["nested_size"] = len(c_data), len(n_data)
+                  row["canonical_sha256"], row["nested_sha256"] = c_sha, n_sha
+                  if c_data == n_data:
+                      row["status"] = "identical"
+                  elif c_text and n_text and c_norm == n_norm:
+                      row["status"] = "line_ending_only"
+                  elif c_text and n_text:
+                      row["status"] = "content_different"
+                  else:
+                      row["status"] = "binary_different"
+              counts[row["status"]] += 1
+              results.append(row)
+
+          report = {
+              "canonical_root": canonical.relative_to(repo).as_posix(),
+              "nested_root": nested.relative_to(repo).as_posix(),
+              "counts": counts,
+              "files_compared": len(results),
+              "normalization": "For UTF-8 text, normalize CRLF and CR to LF only; preserve all other characters. Binary files are compared byte-for-byte.",
+              "files": results,
+          }
+          json_path = out / "nested-tree-normalized-comparison.json"
+          csv_path = out / "nested-tree-normalized-comparison.csv"
+          json_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+          with csv_path.open("w", newline="", encoding="utf-8-sig") as handle:
+              writer = csv.DictWriter(handle, fieldnames=[
+                  "relative_path", "status", "canonical_size", "nested_size",
+                  "canonical_sha256", "nested_sha256"
+              ])
+              writer.writeheader()
+              writer.writerows(results)
+
+          summary = os.environ.get("GITHUB_STEP_SUMMARY")
+          if summary:
+              with open(summary, "a", encoding="utf-8") as handle:
+                  handle.write("# Nested project tree comparison\n\n")
+                  handle.write(f"- Canonical files: {len(c_map)}\n- Nested files: {len(n_map)}\n- Union compared: {len(results)}\n\n")
+                  handle.write("| Status | Files |\n|---|---:|\n")
+                  for key, value in counts.items():
+                      handle.write(f"| {key} | {value} |\n")
+                  substantive = [x for x in results if x["status"] in ("content_different", "binary_different", "canonical_only", "nested_only")]
+                  if substantive:
+                      handle.write("\n## Differences requiring review (first 100)\n\n| Status | Relative path |\n|---|---|\n")
+                      for row in substantive[:100]:
+                          handle.write(f"| {row['status']} | `{row['relative_path'].replace('|', '%7C')}` |\n")
+
+          print(json.dumps({"canonical_files": len(c_map), "nested_files": len(n_map), "files_compared": len(results), "counts": counts}, indent=2))
+          print(f"JSON report: {json_path}")
+          print(f"CSV report: {csv_path}")
+          PY
+
+      - name: Upload comparison reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: nested-tree-normalized-comparison
+          path: audit-artifacts/
+          if-no-files-found: error
+          retention-days: 30

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="D:\Prayag Gaikwad 1\Prayag Gaikwad CSS\Projects\CSS Files\7 How to Create Image Gallery using JavaScript.css">
+</head>
+<style>
+    body{
+        background-color: powderblue;
+        text-align: center;
+    }
+</style>
+<body>
+    <!-- Heading Name -->
+    <div class="heading">
+        <h1>Image Gallery</h1>
+    </div>
+    <!-- Image Gallery section all images in one div -->
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240311163321/Types-of-Wastes-(Banner).webp"
+                onclick="openModal(
+'https://media.geeksforgeeks.org/wp-content/uploads/20240311163321/Types-of-Wastes-(Banner).webp')"
+                alt="Image 1">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240311125007/Invertebrates-(Banner).webp"
+                onclick="openModal(
+'https://media.geeksforgeeks.org/wp-content/uploads/20240311125007/Invertebrates-(Banner).webp')"
+                alt="Image 2">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240311120816/GBlog-banner.webp"
+                onclick="openModal(
+'https://media.geeksforgeeks.org/wp-content/uploads/20240311120816/GBlog-banner.webp')"
+                alt="Image 3">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240308123700/Layers-of-Atmosphere-Banner-02.webp"
+                onclick="openModal(
+'https://media.geeksforgeeks.org/wp-content/uploads/20240308123700/Layers-of-Atmosphere-Banner-02.webp')"
+                alt="Image 4">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240307180031/List-of-Rocket-Launching-Stations-in-India---banner.webp"
+                onclick="openModal(
+'https://media.geeksforgeeks.org/wp-content/uploads/20240307180031/List-of-Rocket-Launching-Stations-in-India---banner.webp')"
+                alt="Image 5">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240215134226/Russia-Banner-copy-2.webp"
+                onclick="openModal(
+'https://media.geeksforgeeks.org/wp-content/uploads/20240215134226/Russia-Banner-copy-2.webp')"
+                alt="Image 6">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240226155245/girl-dog-names-banner.webp"
+                onclick="openModal(
+'https://media.geeksforgeeks.org/wp-content/uploads/20240226155245/girl-dog-names-banner.webp')"
+                alt="Image 7">
+        </div>
+        <div class="gallery-item">
+            <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240215151423/Types-of-Microscope-(Banner).png"
+                onclick="openModal(
+'https://media.geeksforgeeks.org/wp-content/uploads/20240215151423/Types-of-Microscope-(Banner).png')"
+                alt="Image 8">
+        </div>
+    </div>
+    <!-- Modal for Image Display -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    <!-- JavaScript for Modal -->
+    <script>
+        function openModal(src) {
+            document.getElementById("modalImage").src = src;
+            document.getElementById("myModal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>

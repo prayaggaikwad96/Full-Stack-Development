@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Company Table</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ========================= 1. BODY ========================= */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* ========================= 2. MAIN HEADING ========================= */
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+            font-size: 42px;
+            font-weight: 700;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: 1px;
+        }
+
+        /* ========================= 3. DESCRIPTION ========================= */
+        .description {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 35px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* ========================= 4. TABLE CONTAINER ========================= */
+        .table-container {
+            max-width: 1100px;
+            margin: auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            overflow-x: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        /* ========================= 5. TABLE ========================= */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+
+        /* ========================= 6. TABLE HEADER ========================= */
+        thead tr {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        th {
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========================= 7. TABLE CELLS ========================= */
+        td {
+            padding: 16px 18px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 15px;
+        }
+
+        /* ========================= 8. ALTERNATING COLORS ========================= */
+        tbody tr:nth-child(odd) {
+            background-color: #f9f7ff;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #e8f5ff;
+        }
+
+        /* ========================= 9. HOVER EFFECT ========================= */
+        tbody tr {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        tbody tr:hover {
+            background-color: #fff3cd !important;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        /* ========================= 10. COMPANY NAME ========================= */
+        .company {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 16px;
+        }
+
+        /* ========================= 11. COUNTRY BADGE ========================= */
+        .country {
+            display: inline-block;
+            padding: 8px 14px;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+            color: #667eea;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .country:hover {
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+            transform: scale(1.05);
+        }
+
+        /* ========================= 12. STATUS BADGES ========================= */
+        .active {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .active:hover {
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            transform: scale(1.05);
+        }
+
+        .pending {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .pending:hover {
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* ========================= 13. FOOTER ========================= */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ========================= 14. RESPONSIVE DESIGN ========================= */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 32px;
+                margin-bottom: 15px;
+            }
+
+            .description {
+                font-size: 14px;
+                margin-bottom: 25px;
+            }
+
+            .table-container {
+                padding: 15px;
+                border-radius: 15px;
+            }
+
+            th, td {
+                padding: 12px;
+                font-size: 13px;
+            }
+
+            th {
+                font-size: 14px;
+            }
+
+            .company {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 26px;
+            }
+
+            .table-container {
+                padding: 10px;
+            }
+
+            th, td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+
+            .country, .active, .pending {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <h1>🌈 Company Information</h1>
+
+    <p class="description">
+        A modern, responsive table showcasing companies, contacts, countries, and their operational status
+    </p>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>🏢 Company</th>
+                    <th>👤 Contact</th>
+                    <th>🌍 Country</th>
+                    <th>📊 Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td class="company">Alfreds Futterkiste</td>
+                    <td>Maria Anders</td>
+                    <td><span class="country">🇩🇪 Germany</span></td>
+                    <td><span class="active">Active</span></td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td class="company">Centro comercial Moctezuma</td>
+                    <td>Francisco Chang</td>
+                    <td><span class="country">🇲🇽 Mexico</span></td>
+                    <td><span class="active">Active</span></td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td class="company">Ernst Handel</td>
+                    <td>Roland Mendel</td>
+                    <td><span class="country">🇦🇹 Austria</span></td>
+                    <td><span class="pending">Pending</span></td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td class="company">Island Trading</td>
+                    <td>Helen Bennett</td>
+                    <td><span class="country">🇬🇧 UK</span></td>
+                    <td><span class="active">Active</span></td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td class="company">Laughing Bacchus Winecellars</td>
+                    <td>Yoshi Tannamuri</td>
+                    <td><span class="country">🇨🇦 Canada</span></td>
+                    <td><span class="pending">Pending</span></td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td class="company">Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td><span class="country">🇮🇹 Italy</span></td>
+                    <td><span class="active">Active</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Company Information Portal | Created with ❤️ using HTML and CSS</p>
+    </footer>
+</body>
+</html>

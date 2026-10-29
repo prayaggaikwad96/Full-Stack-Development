@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101116">
+  <meta name="description" content="Free local-first AI coding workspace powered by Ollama.">
+  <title>CodePilot Free — Local AI Coding Workspace</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span class="logo">C<span>P</span></span><span><b>CodePilot</b><small>FREE · LOCAL-FIRST</small></span></a>
+  <div class="crumb">● <span>Starter workspace</span> / <b id="currentFileCrumb">index.html</b></div>
+  <div class="top-actions"><span id="connectionPill" class="connection"><i></i><span>Checking AI…</span></span><button class="icon" id="settingsButton" aria-label="Setup">⚙</button></div>
+</header>
+<main class="layout">
+  <aside class="sidebar">
+    <div class="section-label">WORKSPACE</div>
+    <button class="nav active" data-nav="files">▤ &nbsp; Explorer</button>
+    <button class="nav" id="chatFocusButton">✳ &nbsp; AI assistant</button>
+    <button class="nav" id="resetButton">↺ &nbsp; Reset demo</button>
+    <div class="side-rule"></div>
+    <div class="files-heading"><span class="section-label">PROJECT FILES</span><button class="icon small" id="newFileButton" title="Create file">＋</button></div>
+    <nav id="fileList" class="file-list"></nav>
+    <div class="free-card"><span class="infinity">∞</span><b>No subscription</b><p>Use local AI without per-token billing. The app is free and open source.</p><small>● YOUR DEVICE, YOUR CODE</small></div>
+    <div class="profile"><span class="profile-logo">CP</span><span><b>Local workspace</b><small>Saved in this browser</small></span></div>
+  </aside>
+  <section class="workspace">
+    <div class="workspace-heading"><div><small class="eyebrow">YOUR WORKSPACE</small><h1>Build something better.</h1><p>Write code, ask questions, and iterate with your local AI.</p></div><div class="heading-actions"><button class="button quiet" id="downloadButton">↓ Download</button><button class="button primary" id="previewButton">▷ Preview</button></div></div>
+    <div class="project-tools" aria-label="Project import and export">
+      <button class="project-tool" id="importFolderButton">＋ Import folder</button>
+      <button class="project-tool" id="importZipButton">⇧ Import ZIP</button>
+      <button class="project-tool" id="importGitHubButton">⌘ Public GitHub repo</button>
+      <button class="project-tool export-tool" id="exportProjectButton">↓ Export project ZIP</button>
+      <input id="folderInput" type="file" webkitdirectory directory multiple hidden aria-label="Choose project folder">
+      <input id="zipInput" type="file" accept=".zip,application/zip" hidden aria-label="Choose project ZIP">
+    </div>
+    <section class="editor-card">
+      <div class="tabs" id="tabStrip" role="tablist"></div>
+      <div class="editor-tools"><div><span class="lang-icon" id="languageIcon">HTM</span><span id="languageLabel">HTML</span><em>·</em><span id="saveStatus">Saved locally</span></div><div class="tool-actions"><span class="hint">Ctrl + S</span><button id="copyButton" class="tool">Copy</button><button id="askFromEditor" class="tool accent">✳ Ask AI about this file</button></div></div>
+      <div class="code-area"><pre id="lineNumbers">1</pre><div class="code-stack"><pre class="syntax-highlight" id="syntaxHighlight" aria-hidden="true"><code></code></pre><textarea id="codeEditor" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="Code editor"></textarea></div></div>
+      <section id="previewPanel" class="preview-panel" hidden><header><span>● Live preview <small>codepilot.local/preview</small></span><button id="closePreview" class="tool">Close</button></header><iframe id="previewFrame" title="Code preview" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe></section>
+      <footer class="statusbar"><span>● Workspace ready</span><span id="lineColumn">Ln 1, Col 1</span><span id="characterCount">0 chars</span><span id="languageFooter">HTML</span></footer>
+    </section>
+    <div class="starter"><span>✦</span><div><b>Not sure where to start?</b><p>Ask AI to build a feature, explain a concept, or find a bug.</p></div><button id="starterAskButton">Start with AI →</button></div>
+  </section>
+  <aside class="assistant" id="assistantPanel">
+    <header class="assistant-head"><span class="assistant-logo">✳</span><div><b>AI Assistant</b><small><i id="assistantOnlineDot"></i><span id="assistantSubtitle">Local model · Private by design</span></small></div><button id="clearChatButton" class="icon" title="New chat">＋</button></header>
+    <div class="model-row"><label for="modelSelect">MODEL</label><select id="modelSelect"><option value="">Checking models…</option></select><button id="refreshModelsButton" class="icon small" title="Refresh models">↻</button></div>
+    <div class="chat" id="chatMessages" aria-live="polite"></div>
+    <div class="composer-wrap"><div id="contextChip" class="context-chip">⌘ &nbsp; <span>Current file attached</span><button id="toggleContextButton" title="Toggle context">✓</button></div><div class="composer"><textarea id="chatInput" rows="2" placeholder="Ask CodePilot anything…" aria-label="Message assistant"></textarea><div><small>Enter to send · Shift + Enter for newline</small><button id="sendButton" aria-label="Send">↑</button></div></div><p class="privacy">♢ Local model selected — prompts stay on this device.</p></div>
+  </aside>
+</main>
+<div id="settingsModal" class="backdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><header><div><small class="eyebrow">GET STARTED</small><h2 id="settingsTitle">Make AI yours.</h2></div><button id="closeSettingsButton" class="icon">✕</button></header><p>CodePilot has no account, subscription, or API key. Use Ollama for local AI without per-token fees.</p><div class="step"><b>01 · Install Ollama</b><p>Download it from <a href="https://ollama.com/download" target="_blank" rel="noreferrer">ollama.com/download ↗</a></p></div><div class="step"><b>02 · Download a coding model</b><code>ollama pull qwen2.5-coder:7b</code><button class="copy-command" data-copy="ollama pull qwen2.5-coder:7b">Copy command</button></div><div class="step"><b>03 · Start CodePilot</b><code>python app.py</code><p>Open <code>http://127.0.0.1:8000</code> and refresh the model list.</p></div><div class="privacy-box"><b>Privacy</b><p>Local-model prompts go to Ollama on your computer. The app has no analytics or third-party scripts. Workspace and recent chat are kept in this browser's local storage.</p></div><footer><button id="refreshFromSettings" class="button quiet">Check connection</button><button id="closeSettingsDone" class="button primary">Got it</button></footer></section></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="app.js" defer></script>
+</body></html>

@@ -1,0 +1,71 @@
+name: Repository consistency audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/repository-consistency.yml"
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "30 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Verify required branch and repository invariants
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out full history
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Compare main and Developer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main Developer
+          main_sha="$(git rev-parse refs/remotes/origin/main)"
+          developer_sha="$(git rev-parse refs/remotes/origin/Developer)"
+          echo "main=$main_sha"
+          echo "Developer=$developer_sha"
+          if [[ "$main_sha" != "$developer_sha" ]]; then
+            echo "::error::Developer is not an exact mirror of main. Review differences before syncing; do not force-push automatically."
+            git log --oneline --left-right refs/remotes/origin/main...refs/remotes/origin/Developer || true
+            exit 1
+          fi
+
+      - name: Check required repository hygiene files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in .gitignore SECURITY.md CONTRIBUTING.md .github/pull_request_template.md .github/dependabot.yml .github/workflows/codeql.yml .github/workflows/codepilot-tests.yml .github/workflows/cleanup-redundant-branches.yml; do
+            if [[ ! -f "$path" ]]; then
+              echo "::error::Missing required repository file: $path"
+              exit 1
+            fi
+          done
+
+      - name: Confirm archive branch is not silently treated as redundant
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin archive/codepilot-feature-history-before-sync-2026-10-27
+          if git merge-base --is-ancestor refs/remotes/origin/archive/codepilot-feature-history-before-sync-2026-10-27 refs/remotes/origin/main; then
+            echo "Archive is contained in main now; verify this change and the recovery plan."
+          else
+            echo "Archive contains history not reachable from main; preserved by design."
+          fi
+
+      - name: Validate CodePilot sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile projects/codepilot-free/app.py projects/codepilot-free/tests/test_app.py
+          node --check projects/codepilot-free/static/app.js
+          PYTHONPATH=projects/codepilot-free python -m unittest discover -s projects/codepilot-free/tests -v
