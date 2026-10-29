@@ -26,7 +26,7 @@ A hands-on full-stack learning archive with web-development exercises and CodePi
 - `.github/workflows/` — repository automation.
 - `.gitignore` — excludes common generated files, local environments, and secrets.
 
-The latest archived nested-tree audit report covers 524 shared file paths: 160 files were byte-identical and 364 differed after line-ending normalization; no substantive text or binary differences were found in that report. It also found two empty placeholders only in the nested copy and one only in the canonical tree. These counts describe that audit run, not a guarantee that the trees remain unchanged. Keep the nested copy until Windows repository/submodule state and local backups are checked.
+The archived nested-tree audit report covers 524 shared file paths: 160 files were byte-identical and 364 differed after line-ending normalization; no substantive text or binary differences were found in that report. It also found two empty placeholders only in the nested copy and one only in the canonical tree. These counts describe that audit run, not a guarantee that the trees remain unchanged. Keep the nested copy until Windows repository/submodule state and local backups are checked.
 
 ## Branch workflow
 
@@ -54,7 +54,7 @@ This is a learning archive; examples may be educational rather than production-r
 
 - [Contributing guide](CONTRIBUTING.md) — branch workflow, local validation commands, and review expectations.
 - [Security policy](SECURITY.md) — how to disclose a vulnerability privately.
-- [Latest repository health audit](docs/repository-health-audit-2026-10-28.md) — remote synchronization, CI, security, and local-verification limits.
+- [Latest repository health audit](docs/repository-health-audit-2026-10-28.md) — current branch-history divergence, CI, security, and local-verification limits.
 - [CodeQL analysis workflow](.github/workflows/codeql.yml) scans GitHub Actions workflows, JavaScript/TypeScript, and Python on pushes, pull requests, and a weekly schedule.
 - [Dependabot configuration](.github/dependabot.yml) requests weekly GitHub Actions dependency updates. Review its pull requests before merging.
 - Use `.github/pull_request_template.md` to record tests, security hygiene, documentation, and compatibility considerations.
