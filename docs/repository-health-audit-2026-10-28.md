@@ -41,3 +41,12 @@ Not complete: main/Developer synchronization, local Windows working-tree verific
 - The repository consistency workflow is expected to fail while the heads differ; it correctly reports this instead of force-updating branch refs. No branch deletion or branch reset was performed.
 - No rulesets are returned by the rulesets endpoint; branch refs remain reported as unprotected. Branch protection settings cannot be queried successfully or changed through the connected integration permissions.
 - Local Windows status, uncommitted work, backup status, private security feature toggles, and upstream/fork-specific PR state still require separate verification. Do not describe the repository as fully synchronized yet.
+
+
+## Latest follow-up — 2026-10-29 17:40 UTC
+
+- The repository consistency workflow was updated to permit manual invocation and to emit a distinct diagnostic when the branches have no merge base. It remains a deliberate failing safety gate while synchronization is unresolved; see [run 4](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923535118).
+- The latest consistency workflow file is on `main`. Its check confirms the mismatch and does not update refs automatically.
+- Latest verified normal CI results from the preceding head: CodeQL, nested-tree audit, and root .gitignore validation succeeded at `dfd6f27bcb87d62f65f6071f141674b65cf97e9c`. New CodeQL and hygiene runs triggered after the workflow correction; their final results should be checked in Actions.
+- The rulesets endpoint continues to return an empty list, and the GitHub integration cannot access the branch protection endpoint. Owner action remains required.
+- Neither `main` nor `Developer` has been rewritten or deleted. Full synchronization, local Windows cleanliness, backups, and owner-side security settings remain incomplete.
