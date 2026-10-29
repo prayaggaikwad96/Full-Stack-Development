@@ -1,37 +1,37 @@
-# Repository health audit — 2026-10-29 (verified follow-up)
+# Repository health audit — 2026-10-29 (latest verified remote state)
 
-## Scope
+## Scope and limits
 
-This report records remote GitHub metadata and workflow results from the connected integration. It does not prove that the local Windows worktree is clean, that settings unavailable to the integration are enabled, or that all upstream pull requests are complete.
+This is a remote GitHub snapshot. It cannot verify a local Windows checkout, local-only/uncommitted work, or private security settings that the connected integration cannot read/write.
 
-## Branch-history reconciliation
+## Branch reconciliation (safe, non-force)
 
-- The original `main` and `Developer` heads had unrelated histories; GitHub's compare endpoint returned 404 (no common ancestor).
-- To preserve both histories without a force-push, `Developer` was updated using an expected-old-SHA check to a two-parent reconciliation commit:
-  - New `Developer` head: `4f0d22339554ea90dbd425011fc99e1cc4709b67`
-  - First parent preserves old Developer head: `229dff7713c8019af304e395c60799a6e997b0f8`
-  - Second parent is the then-current main head: `6038d98482e6589624e09f50c4d946cc27a4ec4`
-- The current `main` head subsequently advanced to `1421dad72c2cc41091848617a176e3584e753e74`.
-- GitHub's comparison endpoint now recognizes a merge base (`6038d98482e6589624e09f50c4d946cc27a4ec4`). `Developer` and `main` still have diverged commit histories (246 commits ahead and 2 behind in GitHub's compare response), so they are not exact same-head mirrors.
-- A recursive tree comparison at this follow-up found 1,158 entries on each branch, no paths missing from either tree, and 2 differing file contents: `.github/workflows/repository-consistency.yml` and `docs/repository-health-audit-2026-10-28.md`. The branch histories and files remain preserved; no branches were deleted, and no pull requests were merged.
+- Original `main` and `Developer` histories had no common ancestor; GitHub's compare endpoint returned 404.
+- Created a two-parent reconciliation commit `4f0d22339554ea90dbd425011fc99e1cc4709b67` on `Developer` using a normal ref update with an expected-old-SHA guard and no force push.
+- The commit has both prior Developer head `229dff7713c8019af304e395c60799a6e997b0f8` and prior main head `6038d98482e6589624e09f50c4d946cc27a4ec4` as parents. This preserves commit-history reachability for both branches.
+- The `main` head subsequently advanced to `fd0a8d1d9dfec729e38e410e395ac8d8c505d4cb`.
+- Current compare recognizes merge base `6038d98482e6589624e09f50c4d946cc27a4ec4`; GitHub reports `main` and `Developer` diverged by commit count. They are **not exact same-head mirrors**.
+- Recursive trees at the checked heads each contained 1,158 entries, with no missing paths on either side. Two paths have differing blob content: `.github/workflows/repository-consistency.yml` and `docs/repository-health-audit-2026-10-28.md`. This remaining difference is intentional/documented; review before choosing whether Developer should be advanced to latest main.
 
-## Current checks
+## Check results
 
-- On commit `6038d98482e6589624e09f50c4d946cc27a4ec4`, CodeQL finished successfully: [run 40923608325](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923608325).
-- On the same commit, root ignore validation passed: [run 40923608175](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923608175).
-- On the same commit, nested-tree audit passed: [run 40923608149](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923608149).
-- On the then-current `main` commit `1421dad72c2cc41091848617a176e3584e753e74`, root ignore validation passed: [run 40923769822](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923769822) and nested-tree audit passed: [run 40923769848](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923769848).
-- CodeQL for `1421dad72c2cc41091848617a176e3584e753e74` was still running at the time of this update: [run 40923769864](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923769864).
-- The repository consistency workflow intentionally fails while `main` and `Developer` are not exact mirrors. This is a guardrail reporting unfinished synchronization, not a failed CodeQL or application test.
+- CodeQL passed on main head `6038d98482e6589624e09f50c4d946cc27a4ec4`: [run 40923608325](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923608325).
+- Root ignore validation passed on the same head: [run 40923608175](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923608175).
+- Nested-tree audit passed on the same head: [run 40923608149](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923608149).
+- CodeQL passed on later main head `1421dad72c2cc41091848617a176e3584e753e74`: [run 40923769864](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923769864); its check run returned completed/success.
+- Root ignore validation passed on `1421dad72c2cc41091848617a176e3584e753e74`: [run 40923769822](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923769822).
+- Nested-tree audit passed on `1421dad72c2cc41091848617a176e3584e753e74`: [run 40923769848](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40923769848).
+- Latest main head `fd0a8d1d9dfec729e38e410e395ac8d8c505d4cb`: root ignore validation passed [run 40924045918](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924045918); nested-tree audit passed [run 40924045859](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924045859); CodeQL [run 40924045975](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924045975) was still in progress at last poll.
+- Repository consistency audit intentionally remains red while `main` and `Developer` are not exact mirrors; it is a guardrail, not a CodeQL or application-test failure. Do not remove that guard just to get a green badge.
 
-## Remaining owner/local verification
+## Remaining blockers
 
-1. Check the final CodeQL result for current `main` run 40923769864.
-2. Review the new two-parent reconciliation on the local Windows checkout and verify local-only/uncommitted work, backup refs, remotes, and nested repository/submodule state before treating synchronization as complete.
-3. Branch metadata currently reports `protected: false` for `main` and `Developer`. The connected integration did not provide branch-protection write access; configure a `main` ruleset in GitHub Settings, require pull requests and appropriate check contexts, and block force pushes/deletion after confirming actual check names.
-4. Verify secret scanning, push protection, Dependabot alerts/security updates, and other security settings in GitHub Settings; their enabled state is not established by these checks.
-5. Separately audit other owner repositories and upstream/fork pull requests; this task did not establish that every repository/PR is complete.
+1. Recheck CodeQL run `40924045975` to confirm its final result for the latest main head.
+2. Branch metadata reports `protected: false` for `main` and `Developer`. The integration could not configure branch protection/rulesets. In GitHub Settings, protect `main`, require pull requests, block force pushes/deletion, and require only check contexts verified on an actual PR.
+3. Verify Dependabot alerts/security updates, secret scanning, and push protection in repository Security settings; their state is not established here.
+4. Run `docs/windows-repository-audit.ps1` on the Windows checkout and review local changes, local-only commits, backups, remotes, and nested-repository/submodule state before final branch mirroring.
+5. Other owner repositories and upstream/fork PRs require separate audits; this run did not establish they are complete.
 
-## Honest completion status
+## Completion statement
 
-Remote history has been connected with a non-force, two-parent reconciliation and the branch trees currently match except for the two identified files. Exact `main`/`Developer` head synchronization, latest CodeQL completion, local Windows verification, branch protection, and owner-side security settings are not yet all confirmed. No claim of 100% completion should be made until these items are verified.
+A non-force, two-parent history reconciliation has been performed and verified. Current tree paths exist on both branches; two tracked files still differ, the branch heads are not identical, latest CodeQL is pending at last poll, and local/owner-side controls remain unverified. **Do not describe the entire GitHub environment as 100% complete yet.** No branches were deleted and no PRs were merged in this operation.
