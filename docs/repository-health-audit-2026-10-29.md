@@ -1,29 +1,36 @@
-# Repository synchronization checklist — 2026-10-29
+# Repository health and synchronization audit — 2026-10-29
 
-## Verified branch state
+## Scope
 
-- `main`: `f801eebd4eba43e2b520dee21c27a85ba2b1dc4b`
-- `Developer`: `4f0d22339554ea90dbd425011fc99e1cc4709b67`
-- GitHub compare reports a shared merge base of `6038d98482e6589624e09f50c4d946cc27a4ec4c`; the earlier "no common ancestor" condition is no longer the current state.
-- Branches are still diverged: `main` has 7 commits not reachable from Developer and Developer has 246 commits not reachable from main, relative to their shared base.
-- A recursive current-tree comparison found 1,097 blob paths on each branch, no path unique to either branch, and three common paths with different blob SHAs: the repository-consistency workflow and two audit reports. Equal path sets do not establish that the file content or historical commits are equivalent.
-- The remote archive branch remains preserved at `6c68a09756d30a004f2519dab06c9da7494005c8`.
+This is a remote-only GitHub audit. It cannot prove that the Windows working tree is clean, that local-only commits are backed up, or that owner-only Security/Rules settings are enabled. It does not claim a perfect or zero-error state.
 
-## CI at the sampled current main head
+## Current verified refs
 
-On `f801eebd4eba43e2b520dee21c27a85ba2b1dc4b`:
-- [Root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924275946): success.
-- [Nested project tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924275819): success.
-- [Repository consistency audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924275788): failure, expected because the branches are not exact mirrors. Its job confirms both have a shared ancestor now and refuses to align divergent refs automatically.
-- [CodeQL](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924275779): still in progress at the time of this record; no final conclusion is claimed.
+- `main`: `b63d85f70138dea4d78b2d4fd4592c1bdecde409`.
+- `Developer`: `4f0d22339554ea90dbd425011fc99e1cc4709b67`.
+- Historical recovery branch `archive/codepilot-feature-history-before-sync-2026-10-27` remains at `6c68a09756d30a004f2519dab06c9da7494005c8`.
+- GitHub compare now finds common ancestor `6038d98482e6589624e09f50c4d946cc27a4ec4c`. The earlier “no common ancestor” finding is no longer current.
+- The branches are still diverged: there are 246 commits reachable from Developer but not main and 12 reachable from main but not Developer, according to the live compare response. Do not treat this as synchronized.
+- Current branch trees each contain 1,097 blob paths, with no path unique to either branch. Four shared paths have different blob SHAs: `.github/workflows/repository-consistency.yml`, `README.md`, and the 2026-10-28 and 2026-10-29 health audit documents. Matching path counts do not prove equivalent file contents or histories.
+- The ref called `reconciliation/main-files-into-Developer-2026-10-29` resolves to the same commit as Developer rather than the intended staged reconciliation candidate. Do not rely on it as a verified candidate. Existing main, Developer, and archive refs have not been force-updated by this audit.
 
-## What remains
+## Latest observed CI
 
-1. Review the seven commits on main and 246 commits on Developer against the shared base. Determine which side is canonical and whether the divergent history should remain accessible via a migration/recovery branch.
-2. Inspect the actual Windows worktree with `docs/windows-repository-audit.ps1`, plus local-only commits, remotes, nested repo/submodule state, modified/untracked files, and backups. Remote APIs cannot verify these.
-3. Only after that review, prepare an explicit merge/reconciliation on a new review branch. Validate content diff and test suite, then merge by PR after review. Do not force-update or reset either original branch based on matching path lists alone.
-4. Check repository Rulesets and Security settings manually. The connected integration returned an empty rulesets list and could not configure protections; whether branch protection, secret scanning, push protection, and Dependabot security alerts are enabled remains unverified.
+On main commit `b63d85f70138dea4d78b2d4fd4592c1bdecde409`, these runs were still in progress at the last query:
+- [CodeQL](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924529839)
+- [Nested project tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924529834)
+- [Root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924529813)
+
+On the preceding main commit `f801eebd4eba43e2b520dee21c27a85ba2b1dc4b`, nested-tree and .gitignore checks passed; [the consistency run failed](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40924275788) at its explicit guard because the branch refs are not exact mirrors. That is the expected blocker, not a passing result. A recent CodeQL run on an earlier commit succeeded, but it does not substitute for the run on the current commit.
+
+## Remaining work — do not mark complete
+
+1. Inspect the 246/12 divergent commits against the shared base; select the intended authoritative content and prepare a reviewable merge/reconciliation on a properly verified new branch.
+2. Run `docs/windows-repository-audit.ps1` on the real Windows checkout. Review local/remote heads, status, dirty/untracked files, remotes, nested repository/submodule state, local-only commits, and backups before resetting or updating branch refs.
+3. Check current CI conclusions against the exact commit tested. Do not use the status of an older SHA as evidence for the current SHA.
+4. Review repository Settings → Rules/Rulesets and Security Analysis. The Rulesets API returned an empty list and the connected integration could not configure branch protection. Verify main-branch PR requirements, actual required check names, force-push/deletion restrictions, secret scanning, push protection, and Dependabot security alerts/updates manually.
+5. Review PR #12 while it remains an open draft; do not merge it merely to make CI green. Review any upstream or forked project PRs independently.
 
 ## Conclusion
 
-The branch comparison is no longer "no common ancestor", but synchronization remains unresolved. The two file trees have the same paths, some tracked files differ, and commit histories differ substantially. Do not describe the repository as fully synchronized or perfectly complete until the reconciliation, final CI, local audit, and owner-side settings review are verified.
+The original no-common-ancestor error has cleared, but `main` and `Developer` are not synchronized. Their histories remain divergent and four tracked shared paths differ. Latest CI on current main was still running at the final query. Local state and owner-side security settings remain unverified; do not describe the repository as fully complete until these are resolved and verified.
