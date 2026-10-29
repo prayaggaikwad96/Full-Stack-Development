@@ -8,6 +8,7 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  workflow_dispatch:
   schedule:
     - cron: "30 3 * * 1"
 
@@ -35,7 +36,11 @@ jobs:
           echo "main=$main_sha"
           echo "Developer=$developer_sha"
           if [[ "$main_sha" != "$developer_sha" ]]; then
-            echo "::error::Developer is not an exact mirror of main. Review differences before syncing; do not force-push automatically."
+            echo "::error::Developer is not an exact mirror of main."
+            echo "::error::This gate intentionally fails until both remote branch histories are reviewed and reconciled. No automatic reset or force-push is allowed."
+            if ! git merge-base refs/remotes/origin/main refs/remotes/origin/Developer >/dev/null; then
+              echo "::error::main and Developer have no common ancestor. A normal merge/fast-forward is impossible; preserve both histories and reconcile deliberately after local audit and backups."
+            fi
             git log --oneline --left-right refs/remotes/origin/main...refs/remotes/origin/Developer || true
             exit 1
           fi
