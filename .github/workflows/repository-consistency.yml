@@ -36,11 +36,12 @@ jobs:
           echo "Developer=$developer_sha"
           if [[ "$main_sha" != "$developer_sha" ]]; then
             echo "::error::Developer is not an exact mirror of main."
-            echo "::error::This gate intentionally fails until both remote branch histories are reviewed and reconciled. No automatic reset or force-push is allowed."
+            echo "::error::This gate intentionally fails while branch synchronization is unresolved. No automatic reset or force-push is permitted."
             if ! git merge-base refs/remotes/origin/main refs/remotes/origin/Developer >/dev/null; then
-              echo "::error::main and Developer have no common ancestor. A normal merge/fast-forward is impossible; preserve both histories and reconcile deliberately after local audit and backups."
+              echo "::error::main and Developer have no common ancestor. Preserve both histories and reconcile only after reviewing unique commits and local backups."
               git log --oneline --left-right refs/remotes/origin/main refs/remotes/origin/Developer || true
             else
+              echo "Both branch histories have a common ancestor; compare the divergent commits and trees before any further ref update."
               git log --oneline --left-right refs/remotes/origin/main...refs/remotes/origin/Developer || true
             fi
             exit 1
