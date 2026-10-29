@@ -1,50 +1,43 @@
-# Repository health audit — 2026-10-28 (latest remote verification)
+# Repository health audit — 2026-10-29 (remote verification)
 
 ## Scope and confidence
 
-This document records a remote GitHub snapshot. GitHub API metadata and Actions results establish remote state only; they cannot prove that a Windows working tree is clean or synchronized. Settings that the connected GitHub integration cannot mutate are explicitly left for owner-side configuration.
+This is a remote GitHub snapshot. GitHub metadata and Actions results cannot prove local Windows worktree cleanliness or synchronization. Branches are preserved until the local audit and backup review is complete.
 
 ## Verified remote state
 
-- Repository: [prayaggaikwad96/Full-Stack-Development](https://github.com/prayaggaikwad96/Full-Stack-Development), public and not archived.
-- Default branch: `main`.
-- Current remote `main` and `Developer` were synchronized after the cleanup audit update; both point to the same audit commit (0 commits ahead / 0 behind at verification).
-- [Maintenance PR #11](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/11) merged on 2026-10-28. It adds CodeQL analysis, weekly Dependabot version updates for GitHub Actions, contribution/security documentation, PR checklist guidance, broader PR testing, and audit updates.
-- Current visible CI runs on `main` at `92e3908e22ba35e070111dc5d2fd45e235c0ec0e` all completed successfully:
-  - [CodeQL analysis](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40649560792)
-  - [Nested-tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40649560824)
-  - [Root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40649560781)
-- PR #11's [CodePilot test matrix](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40646535324) previously passed all eight Python 3.12–3.15 / Node.js 22 and 24 combinations. The current push-triggered CodePilot test is path-filtered, so a documentation-only commit does not necessarily rerun it.
-- Workflow files are present for CodeQL, CodePilot tests, .gitignore validation, nested-tree audit, repository consistency, and read-only branch audit. Dependabot configuration requests weekly GitHub Actions version updates. This is not proof that security alerts or security updates are enabled.
+- Repository: [prayaggaikwad96/Full-Stack-Development](https://github.com/prayaggaikwad96/Full-Stack-Development); public, not archived; default branch `main`.
+- At this audit, `main` points to `b01b9ec866c1b0a3885b8590c8dd35f2517da9e0` and `Developer` points to `3b58a9678b579473812541af44a27df6b28ed1ad`.
+- GitHub's compare endpoint returns 404: no common ancestor between `main` and `Developer`. Both histories must be preserved and reconciled intentionally. Do not reset, force-push, or overwrite either ref.
+- On the current `main` commit, [nested-tree audit](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40921872368) and [root .gitignore validation](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40921872387) passed. [CodeQL](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/40921872281) was still in progress at the last check; its final conclusion remains to be checked.
+- Previous CodePilot matrix run passed eight Python 3.12–3.15 / Node.js 22 and 24 combinations on PR #11's head. A documentation-only commit may not trigger the path-filtered push matrix.
+- Workflow/config files exist for CodeQL, CodePilot tests, .gitignore validation, nested-tree audit, repository consistency, read-only legacy-branch audit, and weekly Dependabot GitHub Actions version updates. The presence of configuration does not prove security alert toggles are enabled.
+- [PR #11](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/11) is merged. [PR #12](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/12) remains open/draft at the time of this audit; documentation checks do not replace application test validation.
 
 ## Branch inventory and preservation
 
-At this verification, GitHub lists these six branches:
+GitHub branch listing returned: `main`, `Developer`, `archive/codepilot-feature-history-before-sync-2026-10-27`, `chore/github-recommendations-2026-10-28`, `docs/github-profile-readme`, `docs/github-recommendations-2026-10-29`, and `profile/readme-final`.
 
-- `main` — current source of truth.
-- `Developer` — exact remote mirror of `main`.
-- `archive/codepilot-feature-history-before-sync-2026-10-27` — intentional recovery branch with unique/divergent history. Preserve.
-- `docs/github-profile-readme` — divergent history; preserve until its unique commits and local backups are reviewed.
-- `profile/readme-final` — its profile README blob is present on `main` with the same SHA, but the branch has a distinct historical commit and 36 commits of divergence. Candidate for deletion only after confirming local backups.
-- `chore/github-recommendations-2026-10-28` — contains 9 commits not reachable from the current `main` history, including security, CI, and documentation changes subsequently incorporated. Candidate for deletion after confirming all useful work is on `main` and local backups exist.
+- `main`: published source of truth.
+- `Developer`: intended mirror, presently unrelated history. Its README and prior audit contained a stale claim that it had been synchronized; those statements have been corrected in this commit.
+- `archive/codepilot-feature-history-before-sync-2026-10-27`: intentional recovery branch; preserve.
+- Profile, documentation, and maintenance branches: do not delete by name alone. Review branch-specific commits and local backups first.
+- No branches have been deleted by this audit.
 
-Pull-request audit: no open PRs. PR #9 is superseded by merged PR #10; PR #5 is superseded by merged PR #6. PR #4’s CodePilot project was integrated through PR #8 and its original feature history is preserved by the divergent archive branch. GitHub's pull-request records are retained as history. Three branch refs are cleanup candidates (`docs/github-profile-readme`, `profile/readme-final`, and `chore/github-recommendations-2026-10-28`); however, the connected GitHub tools do not expose a branch-delete operation. The profile README content is already on `main`, and the maintenance branch’s useful changes were merged through PR #11. Delete these candidate refs in GitHub after confirming local backups. Keep `main` and `Developer` as the only active development branches and preserve `archive/codepilot-feature-history-before-sync-2026-10-27`, which contains 36 unique commits not reachable from `main`.
+## Outstanding hardening
 
-## Confirmed outstanding repository hardening
+- All queried branch refs reported `protected: false`; the rulesets endpoint returned an empty list. The connected integration cannot configure branch protection/rulesets, and direct protection settings returned 403 due to integration permission limits.
+- Owner action: review [Settings → Rules → Rulesets](https://github.com/prayaggaikwad96/Full-Stack-Development/settings/rules). Consider protecting `main`, requiring pull requests, blocking force pushes/deletion, and requiring check names verified on an actual pull-request run.
+- Owner action: review [Settings → Security](https://github.com/prayaggaikwad96/Full-Stack-Development/settings/security_analysis) for secret scanning, push protection, Dependabot alerts, and security updates. Current toggles are not verifiable through this connection.
+- Local Windows state remains unverified. Run the read-only [Windows repository audit](windows-repository-audit.ps1) from PowerShell on both `C:\Prayag Gaikwad` and `C:\Prayag Gaikwad\Full-Stack-Development`. Review working-tree changes, local-only commits, remotes, tracking refs, submodules, and tree comparisons. Back up unique work before any reconciliation.
+- The same integration cannot inspect local uncommitted files, so remote consistency is not proof of a clean local checkout.
 
-- **Branch protection / rulesets are not configured.** GitHub's branch listing reports `protected: false` for the six branches, and the repository rulesets endpoint returns an empty list. The connected GitHub integration exposes read calls but no write action for branch protection or rulesets, so this cannot be completed from the connector.
-- From repository [Settings → Rules → Rulesets](https://github.com/prayaggaikwad96/Full-Stack-Development/settings/rules), configure a ruleset targeting `main`: require a pull request, block force pushes and deletion, and require checks only after verifying the exact check names in a real PR. Consider requiring conversation resolution. Do not require a check name based only on a workflow display name; matrix job names should be confirmed from PR check runs first.
-- **Security feature toggles remain unverified.** From [Settings → Security](https://github.com/prayaggaikwad96/Full-Stack-Development/settings/security_analysis), review secret scanning, push protection, Dependabot alerts, and Dependabot security updates. The connected public API result did not disclose their states. Availability may depend on repository eligibility and GitHub plan.
-- `SECURITY.md` gives responsible disclosure instructions. Private vulnerability reporting availability depends on the repository's security settings.
+## Other open risks
 
-## Windows local checkout — not verified
+- [REA fork](https://github.com/prayaggaikwad96/rea): an open draft sync PR is described as stale. Keep it draft until the head and upstream changes are reviewed; port only verified useful work.
+- [TanStack/virtual PR #1321](https://github.com/TanStack/virtual/pull/1321) is open/draft with mergeability and focused test/CI concerns. Do not mark ready or merge until conflicts and required tests are resolved.
+- Previously prioritized REA upstream PRs #6027 and #6025 are closed without merge; do not revive without confirming the issue remains valid.
 
-No local audit output was supplied, so local uncommitted/untracked files, local-only commits, tracking refs, remotes, and submodule state remain unverified. On the Windows machine, run the read-only [Windows repository audit script](windows-repository-audit.ps1) in PowerShell for both `C:\Prayag Gaikwad` and `C:\Prayag Gaikwad\Full-Stack-Development`. The script writes its CSV comparison report under the temporary directory. Review results and preserve backups before making destructive changes. Do not reset, overwrite, force-push, or delete branches based on remote status alone.
+## Completion status
 
-## Licensing
-
-No root license was added because this is a mixed learning archive with legacy material of uncertain provenance and license intent. Keep project-specific license notices (including CodePilot Free's MIT license) and review ownership before applying a repository-wide license.
-
-## Completion criterion
-
-Remote code-analysis and hygiene checks are green, and `main`/ `Developer` are synchronized. The repository is **not yet fully hardened** until owner-side branch rules and security toggles are verified and the local Windows audit is reviewed. Do not describe these unverified categories as complete.
+Some repository checks pass, but complete synchronization and hardening are **not finished**. Remaining work: local Windows audit and safe history reconciliation; check CodeQL's final result; verify owner-side rules/security settings; review active fork PRs and branch-specific unique work. No branch was deleted and no PR was merged by this audit.
