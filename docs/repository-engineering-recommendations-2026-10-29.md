@@ -77,7 +77,7 @@ Do not have several agents concurrently edit the same branch. Keep generated fil
 ## Synchronization and release checklist
 
 - [ ] Verify repository default branch and exact head SHA.
-- [ ] Current Full-Stack-Development snapshot (2026-10-30): `main` = `202b050c6b2af9606db8dff0a9b4278d658fd437`; `Developer` = `204748099731c3aeb04963e6d8957dcd569daf62`; shared merge base = `db1f8569d21a8bb41baec229fae4326f2c65aa43`; Developer 247 ahead / main 15 ahead.
+- [ ] For Full-Stack-Development, use the live GitHub comparison of `main` and `Developer` before every synchronization operation. The two branches share a merge base but remain diverged in the latest reviewed snapshot; ahead/behind counts and commit SHAs change as new commits land. Never rely on a copied count or reset/force-push to make the refs appear synchronized.
 - [ ] Verify candidate branch SHA and compare base/head; inspect merge base and unique commits.
 - [ ] Check open PRs, duplicate upstream PRs, review threads and workflow/check runs.
 - [ ] Review changed files and generated/dependency artifacts.
