@@ -1,6 +1,6 @@
 # Repository engineering and synchronization recommendations
 
-Last reviewed: 2026-10-29
+Last reviewed: 2026-10-30
 
 This document is a practical maintenance checklist, not a claim that every GitHub setting is enabled. Verify remote state and required checks before each high-risk operation. Local working trees, secrets settings, and administration-only controls may not be observable through the connected integration.
 
@@ -22,7 +22,7 @@ This document is a practical maintenance checklist, not a claim that every GitHu
 ### Full-Stack-Development
 
 - Keep `main` as the publishing source of truth.
-- Treat `Developer` as a mirror only after proving its history is safe to fast-forward. If GitHub reports no common ancestor, stop: do not reset, force-push, or attempt a merge until the branch histories and unique trees have been reconciled.
+- The live GitHub comparison on 2026-10-30 finds a shared merge base `db1f8569d21a8bb41baec229fae4326f2c65aa43`; `Developer` is 247 commits ahead of `main`, while `main` is 15 commits ahead. The branches are diverged, not synchronized. Do not treat `Developer` as a mirror or reset, force-push, or merge it until the local Windows audit, unique-commit inventory, backups, and candidate reconciliation are complete.
 - Preserve `archive/codepilot-feature-history-before-sync-2026-10-27` and other recovery references until local backups and unique commits have been checked.
 - Continue CodePilot's existing Python syntax, browser-JavaScript syntax, API integration tests, and Python 3.12–3.15 / Node.js 22 and 24 matrix.
 - Add browser-level tests for workspace load, editor state, preview, chat streaming, import/export and visible error states before expanding features that depend on the UI.
@@ -46,7 +46,7 @@ This document is a practical maintenance checklist, not a claim that every GitHu
 ### rea (fork of morluto/rea)
 
 - Treat upstream synchronization as a code-review event, not an administrative fast-forward. Compare merge base, ahead/behind counts, changed files, generated metadata, contracts, dependencies, and test changes.
-- The sync branch and `main` have diverged in the latest inspected comparison (4 commits ahead on the candidate side and 2 behind, with no safe basis to treat this as a simple fast-forward). Do not merge or force-update until the two fork-only commits and complete delta have been identified.
+- Historical observation: the last inspected REA sync comparison showed 4 commits ahead on the candidate side and 2 behind. Recheck live upstream and fork refs before any synchronization action; do not treat this as current state. Do not merge or force-update until the two fork-only commits and complete delta have been identified.
 - Keep historical/superseded contribution branches until each has been compared to current upstream and its unique value assessed.
 - Use the existing validation pipeline rather than inventing a parallel one: `npm run check:changed` for focused development, and the project’s relevant typecheck, lint, format, tests, docs checks and provider-specific verification before a contribution is called complete.
 - For integrations involving runtime execution, process attachment, instrumentation, target mutation or capability boundaries, record authority, side effects, limits, cancellation, cleanup, and actual provider coverage.
@@ -77,6 +77,7 @@ Do not have several agents concurrently edit the same branch. Keep generated fil
 ## Synchronization and release checklist
 
 - [ ] Verify repository default branch and exact head SHA.
+- [ ] Current Full-Stack-Development snapshot (2026-10-30): `main` = `202b050c6b2af9606db8dff0a9b4278d658fd437`; `Developer` = `204748099731c3aeb04963e6d8957dcd569daf62`; shared merge base = `db1f8569d21a8bb41baec229fae4326f2c65aa43`; Developer 247 ahead / main 15 ahead.
 - [ ] Verify candidate branch SHA and compare base/head; inspect merge base and unique commits.
 - [ ] Check open PRs, duplicate upstream PRs, review threads and workflow/check runs.
 - [ ] Review changed files and generated/dependency artifacts.
