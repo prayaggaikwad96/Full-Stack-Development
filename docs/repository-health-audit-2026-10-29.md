@@ -5,29 +5,29 @@ Remote-only audit of the public repository using GitHub metadata, commit compari
 
 ## Verified repository state
 - Default branch: `main`.
-- Main head at audit time: `4fe0a46d407aa337ae2523e11c301d1f8b6433c8`.
+- Main head at audit time: `67598cf08e207bf6db746ff157d7963fd7d0cefd`.
 - Developer head at audit time: `204748099731c3aeb04963e6d8957dcd569daf62`.
 - GitHub compare reports a shared merge base: `db1f8569d21a8bb41baec229fae4326f2c65aa43`.
-- Compare `main...Developer`: Developer is 247 commits ahead and main is 10 commits ahead; status is `diverged`. The reverse comparison confirms main is 10 commits ahead and Developer 247 commits ahead.
+- Compare `main...Developer`: Developer is 247 commits ahead and main is 14 commits ahead; status is `diverged`. The reverse comparison confirms main is 14 commits ahead and Developer 247 commits ahead.
 - Therefore, the branches are not synchronized. The previous "no common ancestor" assertion is incorrect for this live snapshot.
-- Both refs are unprotected. The repository rulesets endpoint returned an empty list.
+- Both refs report `protected: false` in the branch metadata response. The repository rulesets endpoint returned an empty list.
 - The `archive/codepilot-feature-history-before-sync-2026-10-27` recovery branch remains at `6c68a09756d30a004f2519dab06c9da7494005c8`. Preserve it.
 - Open PR #12 is a draft documentation checklist; it is not a synchronization candidate and should not be merged merely to reduce the open-PR count.
 - Previous audit documents and PR comments contain stale branch heads/counts. Revalidate before using them for any ref mutation.
 
 ## Latest CI evidence on exact main head
-Commit: `4fe0a46d407aa337ae2523e11c301d1f8b6433c8`.
-- CodeQL run #40925837188: completed successfully.
-- Nested project-tree audit run #40925837073: completed successfully.
-- Root .gitignore validation was listed as successful in the latest Actions records for this SHA; verify the exact run if used as a required status check.
-- The Actions workflow-run listing and job details identify the commit SHA. These successes do not prove all application tests or security alerts are clean.
+Commit: `67598cf08e207bf6db746ff157d7963fd7d0cefd`.
+- CodeQL run #41036777597: completed successfully.
+- Nested project-tree audit run #41036777612: completed successfully.
+- Root .gitignore validation run #41036777635: completed successfully.
+- All three check-runs above identify exact head SHA `67598cf…`. These successes do not prove all application tests or security alerts are clean.
 - The CodePilot workflow matrix remains configured for Python 3.12–3.15 and Node.js 22/24. No claim is made here that this matrix was executed on this exact SHA unless a corresponding run is independently confirmed.
 
 ## Security and quality controls
 - CodeQL workflow exists and passed on the latest main head.
 - Dependabot weekly GitHub Actions update configuration exists.
 - SECURITY.md and CONTRIBUTING.md exist.
-- Branch protection is disabled on main and Developer.
+- Branch metadata reports `protected: false` for both `main` and `Developer`; required checks are not enforced by these branch refs.
 - Rulesets list is empty.
 - Secret scanning, push protection, Dependabot security alerts/security updates, private vulnerability reporting availability, and alert inventory were not verified.
 - Main commit signature verification reports unsigned. This is not proof of compromise, but commit signing can be considered as a hygiene improvement.
