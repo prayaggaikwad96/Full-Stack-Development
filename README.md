@@ -54,7 +54,7 @@ This is a learning archive; examples may be educational rather than production-r
 
 - [Contributing guide](CONTRIBUTING.md) — branch workflow, local validation commands, and review expectations.
 - [Security policy](SECURITY.md) — how to disclose a vulnerability privately.
-- - [Latest repository health and synchronization audit](docs/repository-health-audit-2026-10-29.md) — live snapshot reviewed 2026-10-30; `main` and `Developer` share a merge base but remain diverged (Developer 247 commits ahead; main 10 ahead). Includes exact tested CI runs and outstanding local/security checks.
+- [Latest repository health and synchronization audit](docs/repository-health-audit-2026-10-29.md) — live snapshot reviewed 2026-10-30; `main` and `Developer` share a merge base but remain diverged (Developer 247 commits ahead; main 10 ahead). Includes exact tested CI runs and outstanding local/security checks.
 - [CodeQL analysis workflow](.github/workflows/codeql.yml) scans GitHub Actions workflows, JavaScript/TypeScript, and Python on pushes, pull requests, and a weekly schedule.
 - [Dependabot configuration](.github/dependabot.yml) requests weekly GitHub Actions dependency updates. Review its pull requests before merging.
 - Use `.github/pull_request_template.md` to record tests, security hygiene, documentation, and compatibility considerations.
