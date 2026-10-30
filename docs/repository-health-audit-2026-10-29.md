@@ -6,16 +6,25 @@ This is a remote-only GitHub audit performed on 2026-10-30. It checks public rep
 
 Treat this document as a dated snapshot. Ahead/behind counts and check-run states change when branches are updated. Always rerun the compare and inspect the exact head SHA before a ref mutation.
 
-## Verified primary branch state
-
-- Repository: `prayaggaikwad96/Full-Stack-Development`
-- Default branch: `main`
-- Audited `main` head: `34d203868e609401f1a454203bfefd3f46bb1ac3`
-- Audited `Developer` head: `204748099731c3aeb04963e6d8957dcd569daf62`
+## Latest verified remote state — 2026-10-30
+- Default/published branch: `main`
+- `main`: `66173f2547d600baa62d0650f238d70d554585b9`
+- `Developer`: `33eb13cf83db41825e3184d4bb4314d0a4750630`
 - Shared merge base: `db1f8569d21a8bb41baec229fae4326f2c65aa43`
-- Live comparison `main...Developer`: 247 commits ahead on `Developer`, 23 commits ahead on `main`; status `diverged`.
-- These refs share history; the older no-common-ancestor diagnosis for these two refs was incorrect. They are not synchronized.
-- Keep `main` as the published/default branch. Do not reset, force-push, or overwrite either primary ref merely to eliminate the count.
+- Live comparison `main...Developer`: status `diverged`; Developer is 248 commits ahead and main is 26 commits ahead.
+- Comparison changed-tree summary: Developer relative to main changes `.github/workflows/repository-consistency.yml` (10 additions, 9 deletions); main relative to Developer has three paths differing (`.github/workflows/repository-consistency.yml`, `README.md`, and `docs/repository-health-audit-2026-10-29.md`). Recheck current refs before any merge because counts and diffs can change.
+
+## CI evidence on exact branch heads
+- Developer head `33eb13cf83db41825e3184d4bb4314d0a4750630`: repository consistency audit passed (run 41039119858), CodePilot test matrix passed (run 41039119948; all eight Python 3.12–3.15 / Node.js 22 and 24 combinations), and CodeQL passed (run 41039119885).
+- Main head `66173f2547d600baa62d0650f238d70d554585b9`: repository consistency audit, nested project tree audit, root gitignore validation, and CodeQL all passed (run set 41038908042 / 41038908078 / 41038908151 / 41038908331).
+- These CI results do not prove local Windows working-tree state or guarantee all historical branches are redundant.
+
+## Current reconciliation gates
+- Keep PR #13 draft. Do not merge it yet. The remote branches are substantially divergent (248 commits each way when comparing opposite base directions: main...Developer = 248 ahead, 26 behind). Review all divergent commits and the complete resulting tree, not only the PR changed-file summary.
+- Keep PR #12 draft until its exact head checks and review are complete.
+- Run `docs/windows-repository-audit.ps1` on the actual Windows checkout; verify dirty/untracked files, remotes, worktrees, local-only commits, nested repositories/submodules, and offline backups.
+- Preserve primary branches and safety refs. No force-push, reset, or deletion is justified by the currently available evidence.
+- Branch protection and owner-side security settings remain unverified; integration lacks required administration read/write scope.
 
 ## Remote recovery snapshots
 
