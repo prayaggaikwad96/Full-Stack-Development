@@ -1,67 +1,100 @@
 # Repository health and branch synchronization audit — 2026-10-30
 
-## Scope
-Remote-only audit of the public repository using GitHub metadata, commit comparisons, Actions workflow runs, pull request metadata, and repository files. This does not verify the owner's local Windows worktree, local-only commits/backups, nested repository configuration, or account/repository security-alert settings.
+## Scope and confidence
 
-## Verified repository state
+This is a remote-only GitHub audit performed on 2026-10-30. It checks public repository metadata, remote refs and comparisons, pull-request metadata, and recent GitHub Actions runs. It does not inspect the owner's Windows working tree, local-only commits, local backup copies, nested repository state, or all account security-alert settings.
 
-**Rechecked 2026-10-30:** at main head `0bbf192f301959f09f7f0978091d08cdd832532f`, the comparison `main...Developer` is 247 commits ahead on Developer and 22 commits ahead on main. Shared merge base is `db1f8569d21a8bb41baec229fae4326f2c65aa43`. The behind count changes with new main commits; rerun the comparison before any ref mutation.
-- Default branch: `main`.
-- Main head at audit time: `0bbf192f301959f09f7f0978091d08cdd832532f`.
-- Developer head at audit time: `204748099731c3aeb04963e6d8957dcd569daf62`.
-- GitHub compare reports a shared merge base: `db1f8569d21a8bb41baec229fae4326f2c65aa43`.
-- Compare `main...Developer`: Developer is 247 commits ahead and main is 22 commits ahead; status is `diverged`. The reverse comparison confirms main is 22 commits ahead and Developer 247 commits ahead.
-- Therefore, the branches are not synchronized. The previous "no common ancestor" assertion is incorrect for this live snapshot.
-- Both refs report `protected: false` in the branch metadata response. The repository rulesets endpoint returned an empty list.
-- The `archive/codepilot-feature-history-before-sync-2026-10-27` recovery branch remains at `6c68a09756d30a004f2519dab06c9da7494005c8`. GitHub compare currently returns no common ancestor between this branch and `main`; preserve it.
-- Open PR #12 is a draft documentation checklist; it is not a synchronization candidate and should not be merged merely to reduce the open-PR count.
-- Previous audit documents and PR comments contain stale branch heads/counts. Revalidate before using them for any ref mutation.
+Treat this document as a dated snapshot. Ahead/behind counts and check-run states change when branches are updated. Always rerun the compare and inspect the exact head SHA before a ref mutation.
 
-## Latest CI evidence on exact main head
-Commit: `0bbf192f301959f09f7f0978091d08cdd832532f`.
-- CodeQL run on this SHA is still in progress at final recheck.
-- Nested-tree audit run #41038576318 for this SHA is in progress at final recheck.
-- Root `.gitignore` validation run #41038576273 for this SHA is in progress at final recheck.
-- The three previous checks plus CodeQL all completed successfully on parent SHA `08cbdc0…`; the new runs on this exact SHA remain in progress.
-- The CodePilot test workflow remains configured for Python 3.12–3.15 and Node.js 22/24. Its successful run on the open PR head is separate from the main-head result; check exact run SHA before treating its matrix as validation of main.
+## Verified primary branch state
 
-## Security and quality controls
-- CodeQL workflow exists; the run against the latest main head was still in progress when this report was refreshed.
-- Dependabot weekly GitHub Actions update configuration exists.
-- SECURITY.md and CONTRIBUTING.md exist.
-- Branch metadata reports `protected: false` for both `main` and `Developer`; required checks are not enforced by these branch refs.
-- Rulesets list is empty.
-- Secret scanning, push protection, Dependabot security alerts/security updates, private vulnerability reporting availability, and alert inventory were not verified.
-- Main commit signature verification reports unsigned. This is not proof of compromise, but commit signing can be considered as a hygiene improvement.
-- Configure branch protections/rulesets in GitHub Settings. Require PRs, appropriate checks, resolved conversations, and block force-push/deletion. Only select required checks using exact names observed on completed PR runs.
+- Repository: `prayaggaikwad96/Full-Stack-Development`
+- Default branch: `main`
+- Audited `main` head: `34d203868e609401f1a454203bfefd3f46bb1ac3`
+- Audited `Developer` head: `204748099731c3aeb04963e6d8957dcd569daf62`
+- Shared merge base: `db1f8569d21a8bb41baec229fae4326f2c65aa43`
+- Live comparison `main...Developer`: 247 commits ahead on `Developer`, 23 commits ahead on `main`; status `diverged`.
+- These refs share history; the older no-common-ancestor diagnosis for these two refs was incorrect. They are not synchronized.
+- Keep `main` as the published/default branch. Do not reset, force-push, or overwrite either primary ref merely to eliminate the count.
+
+## Remote recovery snapshots
+
+The following two safety refs were checked against the current primary heads after the snapshot update:
+
+- `safety/backup-main-latest-2026-10-30` matches `main` exactly at `34d203868e609401f1a454203bfefd3f46bb1ac3`.
+- `safety/backup-developer-2026-10-30` matches `Developer` exactly at `204748099731c3aeb04963e6d8957dcd569daf62`.
+
+These are remote Git refs, not a substitute for a local/offline clone backup. Keep both safety refs until reconciliation is complete and independently verified.
+
+## Remote branches
+
+The remote branch inventory currently contains eleven refs:
+
+- `main`
+- `Developer`
+- `archive/codepilot-feature-history-before-sync-2026-10-27`
+- `chore/github-recommendations-2026-10-28`
+- `docs/github-profile-readme`
+- `docs/github-recommendations-2026-10-29`
+- `profile/readme-final`
+- `reconciliation/main-files-into-Developer-2026-10-29`
+- `safety/backup-developer-2026-10-30`
+- `safety/backup-main-2026-10-30`
+- `safety/backup-main-latest-2026-10-30`
+
+No historical or safety branch was deleted in this audit.
+
+### Branch preservation decisions
+
+- Preserve `archive/codepilot-feature-history-before-sync-2026-10-27`. Comparison against current `Developer` shows it is diverged and has 36 commits not reachable from `Developer`; its compared file delta includes the CodePilot app, license, README, launcher, frontend assets, tests, and workflow.
+- Preserve `reconciliation/main-files-into-Developer-2026-10-29`. It points to a separate merge/reconciliation commit and is not identical to `Developer`.
+- Preserve `chore/github-recommendations-2026-10-28`, `docs/github-profile-readme`, and `profile/readme-final` until their unique contents are reviewed or independently backed up. The profile branches have no common ancestor with current `main` in the direct compare, so a simple ancestry test cannot prove redundancy.
+- Preserve `docs/github-recommendations-2026-10-29` while PR #12 remains open.
+- The three `safety/backup-*` refs are deliberate recovery snapshots, not cleanup candidates.
+
+## Pull request inventory
+
+- PR #12: open draft documentation/engineering checklist; keep draft pending full PR-head checks and review.
+- PR #11: merged security, CI, contribution, and audit changes.
+- PR #10: merged curated profile README.
+- PR #9: closed unmerged and superseded by #10; retain history until its source branch is independently preserved.
+- PR #8: merged CodePilot integration into `main`.
+- PR #7: merged archive/snapshot contribution; do not confuse this PR merge with permission to delete the separate archive branch.
+- PR #6: merged root `.gitignore` and validation workflow.
+- PR #5: closed unmerged duplicate superseded by #6.
+- PR #4: closed unmerged original CodePilot feature PR. Its source branch has separate historical ancestry and should be preserved until its commits are accounted for.
+- PRs #1–#3: merged historical changes.
+
+Only PR #12 is open in the reviewed list. Closed PRs #5 and #9 are historical duplicates already superseded by merged PRs #6 and #10 respectively. Do not delete branch refs solely because their PR is closed.
+
+## GitHub Actions evidence
+
+At audited `main` head `34d203868e609401f1a454203bfefd3f46bb1ac3`:
+
+- Root `.gitignore` validation run #41038619889 completed successfully on this exact SHA.
+- Other workflows, including CodeQL and the nested-tree audit, must be checked by matching their run's `head_sha` to this exact main SHA before being reported as passed. Older successful runs are not evidence for this newer SHA.
+- The CodePilot test matrix is configured for Python 3.12–3.15 and Node.js 22/24; this configuration statement is not a claim that every matrix combination ran successfully on this audited main head.
+- No Actions run sample was returned for branch `Developer`; do not infer that Developer has passing CI from main's runs.
+
+## Repository protection and security settings
+
+- Branch metadata reports `protected: false` for both `main` and `Developer`.
+- The repository rulesets endpoint returns an empty list.
+- The connected GitHub integration does not provide the administration permission needed to read or configure branch-protection settings directly. Confirm them in GitHub Settings.
+- Secret scanning, push protection, Dependabot alerts/security updates, vulnerability reporting configuration, and the full alert inventory were not verified.
+- Commit signature checks observed on sampled commits report unsigned; this is a hygiene observation, not evidence of compromise.
 
 ## Safe reconciliation plan
-1. Run `docs/windows-repository-audit.ps1` on the real Windows checkout.
-2. Confirm clean/dirty/untracked state, all remotes, local-only commits, worktrees, .gitmodules, nested repositories/submodules, and verified backups.
-3. Preserve both current branch heads and archive references.
-4. Inventory unique commits on both sides relative to the shared merge base; review commit subjects, patches, trees, generated files, dependencies, tests, and CodePilot project content.
-5. Build a new reconciliation candidate branch; do not reset, force-push, or overwrite either shared branch as a shortcut.
-6. Run the documented checks on the exact candidate SHA and inspect the complete diff.
-7. Merge through a reviewed pull request only after unique work is accounted for and all applicable checks pass.
-8. Recompare refs and confirm the intended relationship afterward.
 
-## Other account repositories sampled
-- Computer-Classes: main and Developer unprotected; no PRs or recent Actions runs returned in the sample.
-- virtual (TanStack/virtual fork): branches remain unprotected; fork PR #1 is closed/draft and upstream PR #1321 needs focused tests and required CI. Upstream PR #1335 is recorded as merged in prior audit context.
-- rea (morluto/rea fork): multiple topic branches; open draft PRs #11 and #12 are not a complete upstream synchronization. Upstream #6027 and #6025 still record missing focused local tests and required CI; #6026 records validation gaps; #6265 is described as superseded upstream.
-- altair: CodeQL passed on the sampled master head; Scorecard run #40511367244 failed while pulling the Scorecard action container image, before analysis. A separate main workflow run #40107547203 also failed and requires diagnosis from its exact failed job.
-- git: master branch unprotected; no PRs or recent Actions runs returned in the sample.
-- This is a prioritised sample, not a complete audit of every file, workflow, dependency, release, or security alert in all repositories.
-
-## What remains unverified
-- Local Windows checkout and backups.
-- Full CI across all projects and current PR heads.
-- Repository security alert inventory and owner-side Settings toggles.
-- Complete review of all 247/10 divergent commits.
-- Complete upstream contribution readiness and human maintainer decisions.
-
-## CI workflow correction
-The previous `Repository consistency audit` workflow failed on PR #12 because it treated any unequal `main` and `Developer` heads as a failure and printed an obsolete no-common-ancestor branch. The live refs share a merge base. The workflow was updated on main at `922c98f781cc6c0060c861532dfcc73576f9f571` to report ordinary divergence as a warning, preserve the archive, validate required hygiene files, and run CodePilot source/tests without automatically changing refs. Its first run on this commit was still in progress at report time.
+1. Run `docs/windows-repository-audit.ps1` on the actual Windows checkout.
+2. Confirm clean/dirty/untracked state, remotes, worktrees, local-only commits, `.gitmodules`, nested repositories/submodules, and offline backups.
+3. Preserve both exact primary heads and all recovery refs.
+4. Review the complete 247 Developer-only and 23 main-only commit sets from the shared merge base, including full diffs, file/tree changes, tests, dependencies, generated files, and CodePilot history.
+5. Create a candidate branch from the selected integration base; do not rewrite `main` or `Developer` as a shortcut.
+6. Run all applicable CI on the exact candidate SHA and inspect the complete diff.
+7. Merge only through a reviewed PR after all unique work is accounted for.
+8. Compare the resulting refs again; call them synchronized only when the intended relationship is proven by Git.
 
 ## Conclusion
-Useful CI and documentation controls are in place, but the repository is not fully synchronized or fully hardened. Do not call synchronization complete until the 247/22 divergence has been reconciled after local backup and unique-history review, checks complete on the exact current main head, and owner-side security/rules settings are verified. No branch ref, recovery branch, or PR was merged or deleted during this audit.
+
+The remote repository has verified recovery refs for both primary heads and a shared merge base between `main` and `Developer`. The branches remain diverged (247 commits on Developer-only side; 23 on main-only side). The repository is not yet fully synchronized or fully hardened. Local Windows state, full candidate validation, branch protection, and owner-side security settings remain outstanding. No primary ref was reset or force-pushed, no historical branch was deleted, and PR #12 was not merged.
