@@ -32,7 +32,7 @@ The archived nested-tree audit report covers 524 shared file paths: 160 files we
 
 - `main` is the default branch and source of truth for the published repository.
 - `Developer` is not currently synchronized with `main`. The latest GitHub comparison confirms a shared merge base but divergent branch tips; ahead/behind counts are live values and can change with every push. Compare the exact refs before any integration. Do not force-push, reset, or overwrite either ref. Run `docs/windows-repository-audit.ps1` from the local Windows checkout, verify backups and unique commits on both sides, then reconcile intentionally through a reviewable candidate and tests.
-- `archive/codepilot-feature-history-before-sync-2026-10-27` is a historical recovery branch containing work not yet accounted for in the reconciliation. Preserve it until its unique work has been reviewed and independently backed up.
+- `archive/codepilot-feature-history-before-sync-2026-10-27` is a historical recovery branch containing CodePilot files and history not reachable from the current `main` comparison. PR #8 integrated a CodePilot implementation into `main`, but that does not make this separate historical branch disposable. Preserve it until its unique commits are reviewed and independently backed up.
 - Preserve recovery references and project-specific feature branches until local backups, unique work, and repository state are verified.
 - Do not delete or overwrite branches or project files until their unique work is preserved elsewhere.
 
