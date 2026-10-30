@@ -32,7 +32,7 @@ Remote refs are not a substitute for an offline clone or local backup. Keep all 
 
 ## Remote branch inventory
 
-The remote inventory contained 15 branches after adding the current Developer recovery snapshot:
+The remote inventory contained 16 branches after adding the current Developer recovery snapshot and this documentation-review branch:
 
 - `main`
 - `Developer`
@@ -51,7 +51,6 @@ The remote inventory contained 15 branches after adding the current Developer re
 - `safety/backup-main-pre-pr13-2026-10-30`
 - `safety/backup-main-pre-reconcile-2026-10-30`
 
-Correction: the inventory above contains 16 names if the audit branch is counted. The pre-creation inventory contained 14 branches; adding the Developer snapshot and this documentation branch yields 16 total.
 
 ### Preservation / cleanup decisions
 
