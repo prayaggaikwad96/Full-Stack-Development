@@ -11,10 +11,10 @@ This report is a dated snapshot. Re-run all comparisons and inspect the exact ex
 - Repository: `prayaggaikwad96/Full-Stack-Development`
 - Visibility: public; archived: false.
 - Default/publishing branch: `main`.
-- Audited `main` head: `66173f2547d600baa62d0650f238d70d554585b9`.
+- Audited `main` head: `e34111048e9081df982fb71c474a6ea608b56091`.
 - Audited `Developer` head: `33eb13cf83db41825e3184d4bb4314d0a4750630`.
 - Shared merge base: `db1f8569d21a8bb41baec229fae4326f2c65aa43`.
-- Live comparison `main...Developer`: status `diverged`; 248 commits are reachable from `Developer` but not `main`, and 26 commits are reachable from `main` but not `Developer`.
+- Live comparison `main...Developer`: status `diverged`; 248 commits are reachable from `Developer` but not `main`, and 28 commits are reachable from `main` but not `Developer`.
 - The earlier no-common-ancestor diagnosis for the current `main` and `Developer` refs is stale. The branches share history but are not synchronized.
 - Keep `main` as the publishing source of truth. Do not reset, force-push, squash, or overwrite either primary branch merely to remove the ahead/behind counts.
 
@@ -22,8 +22,9 @@ This report is a dated snapshot. Re-run all comparisons and inspect the exact ex
 
 Exact head checks confirmed:
 
-- `safety/backup-main-latest-2026-10-30` matches current `main` at `66173f2547d600baa62d0650f238d70d554585b9`.
-- `safety/backup-main-pre-pr13-2026-10-30` also matches current `main`.
+- `safety/backup-main-current-2026-10-30` matches current `main` at `e34111048e9081df982fb71c474a6ea608b56091`.
+- `safety/backup-main-current-2026-10-30`
+- `safety/backup-main-latest-2026-10-30` and `safety/backup-main-pre-pr13-2026-10-30` both preserve the prior main head `66173f2547d600baa62d0650f238d70d554585b9`.
 - `safety/backup-developer-latest-2026-10-30` was created during this audit and verified at current `Developer` head `33eb13cf83db41825e3184d4bb4314d0a4750630`.
 - `safety/backup-developer-2026-10-30` remains at the prior `Developer` head `204748099731c3aeb04963e6d8957dcd569daf62`; it is intentionally retained as the earlier snapshot.
 - Other older main recovery refs are also retained. Their presence is not evidence that they match the current head.
@@ -32,7 +33,7 @@ Remote refs are not a substitute for an offline clone or local backup. Keep all 
 
 ## Remote branch inventory
 
-The remote inventory contained 16 branches after adding the current Developer recovery snapshot and this documentation-review branch:
+The remote inventory contained 17 branches after adding the current Developer recovery snapshot, this documentation-review branch, and the latest-main recovery snapshot:
 
 - `main`
 - `Developer`
@@ -75,12 +76,12 @@ The remote inventory contained 16 branches after adding the current Developer re
 
 ## CI evidence — exact tested heads
 
-On current `main` head `66173f2547d600baa62d0650f238d70d554585b9`:
+On current `main` head `e34111048e9081df982fb71c474a6ea608b56091`:
 
-- Repository consistency audit: success — run [41038908331](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/41038908331).
-- Root `.gitignore` validation: success — run [41038908151](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/41038908151).
-- Nested project-tree audit: success — run [41038908078](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/41038908078).
-- CodeQL: success — run [41038908042](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/41038908042).
+- Repository consistency audit: success — run [41039481543](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/41039481543).
+- Root `.gitignore` validation: success — run [41039481395](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/41039481395).
+- Nested project-tree audit: success — run [41039481353](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/41039481353).
+- CodeQL: run [41039481572](https://github.com/prayaggaikwad96/Full-Stack-Development/actions/runs/41039481572) was in progress at the last check; do not claim it passed until its final conclusion is successful.
 
 On current `Developer` head `33eb13cf83db41825e3184d4bb4314d0a4750630`:
 
