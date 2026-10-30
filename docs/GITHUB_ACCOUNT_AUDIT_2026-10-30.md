@@ -2,78 +2,96 @@
 
 ## Scope and method
 
-This report records a remote-only audit of the six public repositories returned by the connected GitHub account for `prayaggaikwad96`. Repository metadata, default branches, recent pull requests, selected branch heads, PR diffs, workflow runs, and relevant workflow job logs were inspected through the GitHub connection. This is not a full account history export and does not inspect the user's local Windows filesystems.
+This report records a remote-only audit of the six public repositories returned by the connected GitHub account for `prayaggaikwad96`. Repository metadata, default branches, selected branch heads, recent pull requests, branch comparisons, and GitHub Actions runs were inspected through the GitHub connection. This is not a full account history export and does not inspect the user's local Windows filesystems.
 
 ## Account inventory
 
-| Repository | Default branch |
-| --- | --- |
-| Full-Stack-Development | `main` |
-| Computer-Classes | `main` |
-| virtual | `main` |
-| rea | `main` |
-| altair | `master` |
-| git | `master` |
+| Repository | Default branch | Remote synchronization finding |
+| --- | --- | --- |
+| Full-Stack-Development | `main` | `main` and `Developer` diverged at the latest compare |
+| Computer-Classes | `main` | `main` and `Developer` identical |
+| virtual | `main` | Fork default branch matches current TanStack upstream `main` |
+| rea | `main` | Fork default branch includes current upstream `main` as merge parent |
+| altair | `master` | Fork default branch matches current upstream `master` |
+| git | `master` | Default branch inspected; no PRs found in the recent inventory |
 
-All six repositories are public, unarchived, and have administrator permissions for the connected account.
+All six repositories are public, unarchived, and report administrator permissions for the connected account.
 
-## Key findings
+## Freshly verified results — 2026-10-30
 
 ### Full-Stack-Development
 
-- `main` = `e34111048e9081df982fb71c474a6ea608b56091`.
-- `Developer` = `33eb13cf83db41825e3184d4bb4314d0a4750630`.
+- Latest `main` = `56f33b6128e0c4531782dbbcf5e5bd1bef078964`.
+- Latest `Developer` = `33eb13cf83db41825e3184d4bb4314d0a4750630`.
 - Shared merge base = `db1f8569d21a8bb41baec229fae4326f2c65aa43`.
-- GitHub compare reports divergence: 28 commits on main-only side and 248 on Developer-only side.
-- PR #13 remains open and draft; it must not be merged until the local Windows audit, full unique-commit review, backup checks, and exact-head CI gates are complete.
-- The PR #13 diff only shows the repository-consistency workflow change; do not mistake the small file diff for an integrated or reconciled commit graph.
-- PR #14's current inspected head `a85b219bba8f65a637e036ae696669d0b3c83f0a` passed the repository consistency audit, CodePilot test matrix (8/8 jobs), and CodeQL.
-- `main` and `Developer` were both reported unprotected by branch metadata. Configure rules in repository Settings after deciding appropriate review and required-check policy.
-- Keep recovery/archive refs until local backups and unique content are verified.
+- GitHub compare reports `diverged`: 30 commits ahead on `Developer` relative to `main`, and 248 commits behind (30 main-only, 248 Developer-only).
+- Both primary refs report `protected: false`; observed branch-protection state is disabled. Rulesets and required branch controls have not been configured through this integration.
+- PR #13 remains open/draft and is not safe to merge: it uses a stale base SHA and the full histories have not been reviewed or reconciled. Its one-file PR diff is not a representation of the full commit-graph divergence.
+- PR #14 remains open/draft as the audit documentation review.
+- Exact-head Actions runs on current `main` SHA `56f33b6...`: root gitignore validation, nested project-tree audit, repository-consistency audit, and CodeQL all completed successfully.
+- Exact-head Actions runs on `Developer` SHA `33eb13c...`: CodePilot test matrix, repository-consistency audit, and CodeQL all completed successfully.
+- The latest Actions evidence supports passing remote checks on those exact heads; it does not replace full diff/commit review or local Windows verification.
+- Preserve primary refs, archive and recovery branches until local backups and unique commits are independently verified.
+
+### Computer-Classes
+
+- `main` and `Developer` both point to `e53a39c85f7b3395f793c8cea61dd0955974fbcf`.
+- GitHub compare reports `identical`, zero ahead/behind, and no changed files.
+- Both branch metadata records report unprotected refs. No open PRs were returned in the reviewed inventory.
+- Local checkout cleanliness and security-alert settings remain unverified.
 
 ### REA fork
 
-- Fork main snapshot = `602468df998508a5a748036cce1e2becc6a51d15`.
-- Candidate PR #13 head = `25859d0eb36cdce0ac9f18a946a3f45524f7e8cd`.
-- Candidate is a large upstream synchronization range with four fork-only documentation commits. Keep draft until every changed path, the upstream commit range, CI, and fork-only work are reviewed.
-- PR #13 now has an audit comment describing the unresolved gates.
+- Fork `main` = `dcb7bc72b2bc49898957c33a452bc0b98d0f2f1a`.
+- Current upstream `morluto/rea` `main` = `cd878ad57d3e27e835d0db533c9603b24ae8607a`.
+- Fork `main` is a merge commit whose parents are previous fork head `602468df998508a5a748036cce1e2becc6a51d15` and current upstream `cd878ad...`.
+- Direct comparison shows fork `main` contains current upstream `main`, with five fork commits ahead; the five-commit list includes the four-document history and merge commit. The only net tree difference against the upstream parent in that comparison is the added `docs/fork-sync-audit-2026-10-28.md`.
+- The open draft PR #13 is now stale: it targets old fork base `602468d...` and candidate `25859d0...`. Do not merge it over the already-synchronized default branch.
+- Previously open staging PRs #1–#10 and #11–#12 were not reopened. Closed PR history and topic branches remain preserved pending branch-by-branch unique-work review.
+- Upstream PR status and CI for other topic branches must be checked independently. No claim that all staged fixes were merged or accepted upstream is made.
 
 ### TanStack Virtual fork
 
-- Fork main = `51b06cd5e078a289fe1cbf25a8d2e647aa98bfff`.
-- PR #1 is closed, unmerged, and not validated against the complete required exact-head test suite per its recorded comment. Preserve branch and patch; do not delete it or call the contribution complete.
+- Fork `prayaggaikwad96/virtual` `main` and current upstream `TanStack/virtual` `main` both point to `51b06cd5e078a289fe1cbf25a8d2e647aa98bfff`.
+- The default branches therefore match exactly at this snapshot.
+- Upstream PR #1321 remains open/draft and reports non-mergeable. Its head is 1 commit ahead and 4 behind current upstream per its recorded comparison; focused typecheck, anchor-end tests, scroll-trace snapshots, and Marko Playwright E2E were still outstanding in the PR description.
+- Fork topic branches remain preserved; do not call the feature contribution complete until refreshed and validated.
 
 ### Altair fork
 
-- PRs #1 and #2 are duplicate two-line theme-aware textarea changes; both are closed and unmerged. Preserve their branch/history. The upstream PR #3341 is the contribution review source of truth.
-- Latest inspected CodeQL run passed.
-- Scorecard workflow failed before analysis because its container image pull from Google Container Registry was denied with a billing-enabled-project error. Re-running alone will not resolve that external registry condition.
-- The release workflow had successful platform tests/builds in the inspected run, but the Docker publish job failed at Docker Hub login; the Linux Electron build also failed. The logs do not establish a fix. Investigate credentials/registry access and platform build failure before retrying.
+- Fork `master` = `2deae0675ebf170e0bc8eac743de609a1c7dd07d`, matching current upstream `altair-graphql/altair` `master` at the same SHA.
+- Upstream PR #3341 remains open and is the source of truth for the theme-aware Import from cURL textarea change; it reports one commit ahead of its base and its author-described checks passed, but it awaits upstream maintainer disposition.
+- Fork PRs #1 and #2 are closed duplicate proposals. Preserve the corresponding branch/history; no reason to merge the fork duplicates.
+- Earlier inspected workflow failures remain separate outstanding investigation items: Scorecard container-image access, Docker Hub publishing authentication, and Linux Electron packaging. A green CodeQL run does not close those failures.
 
-### Computer-Classes and git
+### git repository
 
-- Both repositories have a default branch and remote commit head.
-- The inspected recent PR listings contained no PRs.
-- No code-quality or security health conclusion is made without reviewing their workflow files and current check runs.
+- Default branch `master` head inspected at `b9e5cff1803ab24582201ef059516eb16014b9d9`.
+- No open PRs were returned in the reviewed inventory.
+- The current scan did not establish comprehensive CI, dependency, or security-alert health.
 
 ## Work performed
 
 - Confirmed authenticated account and six owned public repositories.
-- Inspected recent PR inventory across repositories.
-- Compared critical branch refs and PR patch content.
-- Inspected recent GitHub Actions runs and relevant job steps/logs.
-- Added audit comments to Full-Stack-Development #13 and REA #13 to document safe merge gates.
-- Did not merge PRs, delete branches, force-update refs, rewrite history, or modify project code.
+- Inspected live repository metadata, default branches, selected remote refs, recent PR inventory, and exact branch comparisons for the principal repositories.
+- Verified latest Full-Stack-Development CI results on the current exact `main` and `Developer` heads.
+- Verified exact default-branch synchronization for Computer-Classes, Virtual fork, and Altair fork.
+- Verified REA fork `main` is a merge of current upstream `main`; identified old draft PR #13 as stale rather than attempting to merge it.
+- Prior audit comments on Full-Stack-Development #13 and REA #13 record the safety gates.
+- Did not merge an unverified PR, delete branches, force-update refs, rewrite primary history, or modify application code.
 
-## Outstanding
+## Outstanding — do not describe as completed
 
-1. Run `docs/windows-repository-audit.ps1` on the actual Windows checkout and review status, untracked files, remotes, worktrees, local-only commits, nested repositories/submodules, and offline backups.
-2. Configure branch protection/rulesets, required checks, and security settings in GitHub repository Settings. The connected API could read branch protection but was denied access to the protected endpoint and does not expose administrative writes.
-3. Review and validate the full PR #13 and REA #13 change ranges on their exact current heads.
-4. Validate the Virtual fix using focused unit/type checks, adapter integration tests, browser/E2E checks, and the appropriate upstream contribution process.
-5. Diagnose Altair Scorecard registry access, Docker Hub authentication, and Linux Electron packaging failure before rerunning workflows.
-6. Review Computer-Classes and git workflow/security/configuration inventory before claiming every category is complete.
+1. Run `docs/windows-repository-audit.ps1` on the actual Windows checkout and inspect both local worktrees, dirty/untracked files, remotes, worktrees, local-only commits, nested repositories/submodules, and offline backups.
+2. Resolve Full-Stack-Development `main` / `Developer` divergence only after full commit/tree review and local backup verification. Do not merge PR #13 as currently configured.
+3. Close or replace stale REA fork PR #13 only after deciding whether to retain a history-only audit record; it is not a current synchronization candidate.
+4. Refresh and test Virtual PR #1321 against current upstream before requesting review.
+5. Monitor upstream Altair PR #3341 and separately diagnose the previously observed Scorecard, Docker publishing, and Linux Electron workflow failures.
+6. Review all branches in REA, Altair, Virtual, and Full-Stack-Development for unique work before any deletion. Closed PRs do not prove their source branches are disposable.
+7. Configure appropriate default-branch protection/rulesets, required checks, security features, secret scanning/push protection, and Dependabot settings in GitHub repository Settings. Current unprotected-ref evidence shows this is not complete.
+8. Inspect workflow, dependency, vulnerability, release, and security-alert state for Computer-Classes and git before making an account-wide quality claim.
+9. Validate local clones and any nested repository/submodule state; GitHub remote refs cannot prove local disk synchronization.
 
 ## Status
 
-Remote inventory and selected checks are audited. Account-wide synchronization, local checkout synchronization, branch protection, complete dependency/security remediation, and all CI health are **not complete**. No claim of perfect or zero-error state is made.
+Remote inventory and selected exact-head comparisons/checks are updated. Three fork/default branches are verified to match upstream or include upstream history; Computer-Classes primary refs are identical. Full-Stack-Development remains divergent; Virtual's feature contribution remains unvalidated; Altair awaits upstream PR review and has other recorded workflow failures. Branch protection/security hardening, complete dependency remediation, full PR and topic-branch review, and local Windows synchronization are **not complete**. No claim of perfect or zero-error state is made.
