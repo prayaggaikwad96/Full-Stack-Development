@@ -59,15 +59,15 @@ The remote inventory contained 17 branches after adding the current Developer re
 - Preserve the reconciliation candidate branch until its exact tree, commits, and purpose are reviewed; comparison still shows it is diverged from current `main`.
 - PR #9's `docs/github-profile-readme` branch is closed/unmerged and superseded by merged PR #10. `profile/readme-final` is the merged PR #10 source branch. These may be cleanup candidates only after their source history and current contents are confirmed backed up.
 - PR #11 merged the changes from `chore/github-recommendations-2026-10-28`; retain the branch until its unrelated/no-common-ancestor history is checked.
-- Keep `docs/github-recommendations-2026-10-29` while PR #12 remains open and its unique document is either reviewed or moved to a replacement PR.
+- Preserve `docs/github-recommendations-2026-10-29` as the source branch for closed/superseded PR #12 until local branch/worktree cleanup is verified. Its unique recommendations document is now included in PR #14.
 - Keep all `safety/*` refs until reconciliation is finished.
 - No branch was deleted in this audit.
 
 ## Pull request state
 
 - PR #13 — open draft; `Developer` to `main`; one changed file in the PR diff (`.github/workflows/repository-consistency.yml`). CodePilot tests, CodeQL, and repository-consistency checks passed on exact head `33eb13cf83db41825e3184d4bb4314d0a4750630`. Its PR metadata last reported base SHA `66173f2547d600baa62d0650f238d70d554585b9`, which is behind current `main` `e34111048e9081df982fb71c474a6ea608b56091`; refresh mergeability against the latest base before any merge. Keep draft until the Windows audit and full merge review are done.
-- PR #14 — open draft documentation-only audit PR. It adds the current 2026-10-30 remote audit and marks the earlier multi-snapshot audit as superseded for live decisions. Review its exact latest head and all checks before marking ready or merging.
-- PR #12 — open draft; documentation/engineering recommendations. Its current head is `1032072134cab9a0b4969eb7e7e8949af29a4439`; its base SHA is older than current `main`. Its workflow edit overlaps the same repository-consistency workflow change in PR #13. The unique engineering-recommendations document has been refreshed to remove stale hard-coded Full-Stack-Development refs/counts and direct readers to a fresh live comparison. CodePilot tests, repository consistency, and CodeQL all passed on this PR head. Keep draft until its base/head relationship and the overlapping workflow change are resolved.
+- PR #14 — open draft documentation review. It adds the 2026-10-30 remote audit, marks the earlier multi-snapshot audit as historical, and now includes the engineering-recommendations document copied from PR #12. Review its exact latest head and all checks before marking ready or merging.
+- PR #12 — closed as superseded by PR #14. Its unique engineering-recommendations document was refreshed to remove stale Full-Stack-Development refs/counts and copied into PR #14. Its workflow change overlaps the consistency-workflow correction represented by PR #13/current `main`. The original source branch remains preserved pending local cleanup verification.
 - PR #11 merged security/CI/contribution changes.
 - PR #10 merged the curated profile README; PR #9 is closed and superseded by #10.
 - PR #8 merged the CodePilot integration.
@@ -106,11 +106,11 @@ These results establish successful remote checks on the stated commit SHAs. They
 2. Compare the local output with the live remote SHAs in this report. Do not overwrite local changes or run a reset/force-push to make the output look clean.
 3. Review the full `main`/ `Developer` merge graph and candidate tree, including the CodePilot app, learning archive, generated files, dependencies, tests, and any local-only content.
 4. Keep PR #13 draft until the local audit is reviewed. If approved, merge with a normal merge commit to preserve both histories; then update `Developer` only by a verified fast-forward and confirm identical final SHAs.
-5. Review PR #12's updated engineering recommendations document and its CodeQL result. Its workflow overlap with PR #13 is intentional and should be consolidated through a reviewed merge, not by duplicating workflow maintenance.
+5. Review the consolidated audit and engineering-recommendations documents in PR #14; keep it draft until the latest-head CodeQL result is successful and the documentation is reviewed.
 6. Configure branch rules for `main` (and optionally `Developer`), using actual stable check names from successful PR runs. Recommended safeguards: require PRs, require the relevant successful checks, block force pushes and branch deletion, and prevent bypass except for an intentional administrator emergency.
 7. Inspect Security settings for secret scanning, push protection, Dependabot alerts and security updates.
 8. Re-audit the branch inventory. Remove only branches proven redundant after preserving unique commits/content and verifying no active PR, local worktree, or recovery need depends on them.
 
 ## Conclusion
 
-The remote CI state is green on audited `main` head `e34111048e9081df982fb71c474a6ea608b56091` and Developer head `33eb13cf83db41825e3184d4bb4314d0a4750630`, and exact remote recovery refs exist for both tips. However, the primary branches remain substantially diverged (248 Developer-only; 28 main-only at this snapshot), protection/rulesets are not configured, PRs #12, #13, and #14 remain drafts, and the Windows local state is not verified. The repository is recoverable and reviewable, but it is not yet fully synchronized or fully hardened.
+The remote CI state is green on audited `main` head `e34111048e9081df982fb71c474a6ea608b56091` and Developer head `33eb13cf83db41825e3184d4bb4314d0a4750630`, and exact remote recovery refs exist for both tips. However, the primary branches remain substantially diverged (248 Developer-only; 28 main-only at this snapshot), protection/rulesets are not configured, PR #12 is closed as superseded with its unique document preserved in PR #14; PRs #13 and #14 remain drafts, and the Windows local state is not verified. The repository is recoverable and reviewable, but it is not yet fully synchronized or fully hardened.
