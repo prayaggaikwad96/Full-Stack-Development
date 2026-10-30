@@ -31,7 +31,7 @@ The archived nested-tree audit report covers 524 shared file paths: 160 files we
 ## Branch workflow
 
 - `main` is the default branch and source of truth for the published repository.
-- `Developer` is not currently synchronized with `main`. The latest verified GitHub comparison on 2026-10-30 finds a shared merge base; `Developer` is 247 commits ahead of `main`, while `main` is 10 commits ahead of `Developer`. Do not force-push, reset, or overwrite either ref. Run `docs/windows-repository-audit.ps1` from the local Windows checkout, verify backups and unique commits on both sides, then reconcile intentionally through a reviewable candidate and tests.
+- `Developer` is not currently synchronized with `main`. The latest verified GitHub comparison on 2026-10-30 finds a shared merge base; `Developer` is 247 commits ahead of `main`, while `main` is 14 commits ahead of `Developer`. Do not force-push, reset, or overwrite either ref. Run `docs/windows-repository-audit.ps1` from the local Windows checkout, verify backups and unique commits on both sides, then reconcile intentionally through a reviewable candidate and tests.
 - `archive/codepilot-feature-history-before-sync-2026-10-27` is a historical recovery branch containing work not yet accounted for in the reconciliation. Preserve it until its unique work has been reviewed and independently backed up.
 - Preserve recovery references and project-specific feature branches until local backups, unique work, and repository state are verified.
 - Do not delete or overwrite branches or project files until their unique work is preserved elsewhere.
@@ -54,7 +54,7 @@ This is a learning archive; examples may be educational rather than production-r
 
 - [Contributing guide](CONTRIBUTING.md) — branch workflow, local validation commands, and review expectations.
 - [Security policy](SECURITY.md) — how to disclose a vulnerability privately.
-- [Latest repository health and synchronization audit](docs/repository-health-audit-2026-10-29.md) — live snapshot reviewed 2026-10-30; `main` and `Developer` share a merge base but remain diverged (Developer 247 commits ahead; main 10 ahead). Includes exact tested CI runs and outstanding local/security checks.
+- [Latest repository health and synchronization audit](docs/repository-health-audit-2026-10-29.md) — live snapshot reviewed 2026-10-30; `main` and `Developer` share a merge base but remain diverged (Developer 247 commits ahead; main 14 ahead). Includes exact tested CI runs and outstanding local/security checks.
 - [CodeQL analysis workflow](.github/workflows/codeql.yml) scans GitHub Actions workflows, JavaScript/TypeScript, and Python on pushes, pull requests, and a weekly schedule.
 - [Dependabot configuration](.github/dependabot.yml) requests weekly GitHub Actions dependency updates. Review its pull requests before merging.
 - Use `.github/pull_request_template.md` to record tests, security hygiene, documentation, and compatibility considerations.
