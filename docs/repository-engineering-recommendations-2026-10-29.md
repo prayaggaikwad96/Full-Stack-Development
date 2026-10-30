@@ -22,7 +22,7 @@ This document is a practical maintenance checklist, not a claim that every GitHu
 ### Full-Stack-Development
 
 - Keep `main` as the publishing source of truth.
-- The live GitHub comparison on 2026-10-30 finds a shared merge base `db1f8569d21a8bb41baec229fae4326f2c65aa43`; `Developer` is 247 commits ahead of `main`, while `main` is 15 commits ahead. The branches are diverged, not synchronized. Do not treat `Developer` as a mirror or reset, force-push, or merge it until the local Windows audit, unique-commit inventory, backups, and candidate reconciliation are complete.
+- `main` and `Developer` share history but remain diverged in the latest remote audit. Ahead/behind counts, merge-base SHAs, and branch-tip SHAs are volatile; do not hard-code them in this evergreen checklist. Before any reconciliation, fetch the live refs, record the exact compare output and recovery-ref SHAs in a dated audit, and complete the local Windows audit and unique-commit review. Do not treat `Developer` as a mirror or reset, force-push, or merge it merely to remove divergence.
 - Preserve `archive/codepilot-feature-history-before-sync-2026-10-27` and other recovery references until local backups and unique commits have been checked.
 - Continue CodePilot's existing Python syntax, browser-JavaScript syntax, API integration tests, and Python 3.12–3.15 / Node.js 22 and 24 matrix.
 - Add browser-level tests for workspace load, editor state, preview, chat streaming, import/export and visible error states before expanding features that depend on the UI.
