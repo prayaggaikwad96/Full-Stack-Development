@@ -1,5 +1,20 @@
 # Repository health and branch synchronization audit — 2026-10-30
 
+## Current primary branch state — 2026-10-30 (refreshed)
+- Default/published branch: `main`.
+- `main` at time of latest check: `bf114fbfc80460e9ae80a143e6d4a5fda995131a` (this audit refresh commit).
+- `Developer`: `33eb13cf83db41825e3184d4bb4314d0a4750630`.
+- Shared merge base: `db1f8569d21a8bb41baec229fae4326f2c65aa43`.
+- Live compare `main...Developer`: status `diverged`; Developer is 248 commits ahead and main is 27 commits ahead (latest compare after this document refresh).
+- Main-side diff relative to Developer includes three paths: `.github/workflows/repository-consistency.yml`, `README.md`, and this audit document. Developer-side changes the workflow file.
+- The branches are not synchronized. Do not force-push, reset, or merge until the complete history and tree changes are reviewed.
+
+## Exact-head CI evidence — 2026-10-30
+- Main at `66173f2547d600baa62d0650f238d70d554585b9`: repository invariants, nested-tree comparison, ignore validation, and CodeQL all passed.
+- Developer `33eb13cf83db41825e3184d4bb4314d0a4750630`: CodeQL, repository invariants, and all eight CodePilot test-matrix combinations (Python 3.12–3.15 and Node.js 22/24) passed.
+- The new main commit created by this refresh requires its own CI run; do not infer checks passed for a newer SHA.
+
+
 ## Scope and confidence
 
 This is a remote-only GitHub audit performed on 2026-10-30. It checks public repository metadata, remote refs and comparisons, pull-request metadata, and recent GitHub Actions runs. It does not inspect the owner's Windows working tree, local-only commits, local backup copies, nested repository state, or all account security-alert settings.
