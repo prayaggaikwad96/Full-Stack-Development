@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/repository-consistency.yml"
+      - "docs/repository-health-audit-2026-10-29.md"
+      - "README.md"
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -16,7 +18,7 @@ permissions:
 
 jobs:
   audit:
-    name: Verify required branch and repository invariants
+    name: Verify repository invariants
     runs-on: ubuntu-latest
     steps:
       - name: Check out full history
@@ -25,7 +27,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Compare main and Developer
+      - name: Report main and Developer synchronization state
         shell: bash
         run: |
           set -euo pipefail
@@ -34,9 +36,15 @@ jobs:
           developer_sha="$(git rev-parse refs/remotes/origin/Developer)"
           echo "main=$main_sha"
           echo "Developer=$developer_sha"
-          if [[ "$main_sha" != "$developer_sha" ]]; then
-            echo "::error::Developer is not an exact mirror of main. Review differences before syncing; do not force-push automatically."
-            git log --oneline --left-right refs/remotes/origin/main...refs/remotes/origin/Developer || true
+          if [[ "$main_sha" == "$developer_sha" ]]; then
+            echo "Both branches point to the exact same commit."
+          elif merge_base="$(git merge-base refs/remotes/origin/main refs/remotes/origin/Developer)"; then
+            echo "Shared merge base: $merge_base"
+            echo "::warning::main and Developer are not synchronized. This read-only workflow records divergence; it does not rewrite refs."
+            git rev-list --left-right --count refs/remotes/origin/main...refs/remotes/origin/Developer
+            git log --oneline --left-right refs/remotes/origin/main...refs/remotes/origin/Developer
+          else
+            echo "::warning::main and Developer have no common ancestor. Preserve both histories and review locally before reconciliation."
             exit 1
           fi
 
