@@ -5,12 +5,12 @@ Remote-only audit of the public repository using GitHub metadata, commit compari
 
 ## Verified repository state
 
-**Rechecked 2026-10-30:** at main head `08cbdc09f25c18410964c4359bfea75cb3118834`, the comparison `main...Developer` is 247 commits ahead on Developer and 20 commits ahead on main. Shared merge base is `db1f8569d21a8bb41baec229fae4326f2c65aa43`. The behind count changes with new main commits; rerun the comparison before any ref mutation.
+**Rechecked 2026-10-30:** at main head `456e5a2238fb00efc05d00bd872fb5975b741fb3`, the comparison `main...Developer` is 247 commits ahead on Developer and 21 commits ahead on main. Shared merge base is `db1f8569d21a8bb41baec229fae4326f2c65aa43`. The behind count changes with new main commits; rerun the comparison before any ref mutation.
 - Default branch: `main`.
-- Main head at audit time: `08cbdc09f25c18410964c4359bfea75cb3118834`.
+- Main head at audit time: `456e5a2238fb00efc05d00bd872fb5975b741fb3`.
 - Developer head at audit time: `204748099731c3aeb04963e6d8957dcd569daf62`.
 - GitHub compare reports a shared merge base: `db1f8569d21a8bb41baec229fae4326f2c65aa43`.
-- Compare `main...Developer`: Developer is 247 commits ahead and main is 20 commits ahead; status is `diverged`. The reverse comparison confirms main is 20 commits ahead and Developer 247 commits ahead.
+- Compare `main...Developer`: Developer is 247 commits ahead and main is 21 commits ahead; status is `diverged`. The reverse comparison confirms main is 21 commits ahead and Developer 247 commits ahead.
 - Therefore, the branches are not synchronized. The previous "no common ancestor" assertion is incorrect for this live snapshot.
 - Both refs report `protected: false` in the branch metadata response. The repository rulesets endpoint returned an empty list.
 - The `archive/codepilot-feature-history-before-sync-2026-10-27` recovery branch remains at `6c68a09756d30a004f2519dab06c9da7494005c8`. GitHub compare currently returns no common ancestor between this branch and `main`; preserve it.
@@ -18,11 +18,11 @@ Remote-only audit of the public repository using GitHub metadata, commit compari
 - Previous audit documents and PR comments contain stale branch heads/counts. Revalidate before using them for any ref mutation.
 
 ## Latest CI evidence on exact main head
-Commit: `08cbdc09f25c18410964c4359bfea75cb3118834`.
+Commit: `456e5a2238fb00efc05d00bd872fb5975b741fb3`.
 - CodeQL run on this SHA is still in progress at final recheck.
-- Nested project-tree audit run #41038427638: completed successfully.
-- Root .gitignore validation run #41038427533: completed successfully.
-- The repository consistency audit (#41038427647), nested-tree audit (#41038427638), and root ignore validation (#41038427533) all passed on exact SHA `08cbdc0…`; CodeQL was still running at final recheck.
+- Nested project-tree audit run #41038427638 completed on parent SHA `08cbdc0`; a fresh run for `456e5a2` is still queued.
+- Root .gitignore validation run #41038427533 completed on parent SHA `08cbdc0`; a fresh run for `456e5a2` is still queued.
+- The repository consistency audit (#41038427647), nested-tree audit (#41038427638), and root ignore validation (#41038427533) passed on parent SHA `08cbdc0…`. The exact SHA `456e5a2…` check runs were queued at final recheck; CodeQL remains pending/in progress on recent main pushes.
 - The CodePilot test workflow remains configured for Python 3.12–3.15 and Node.js 22/24. Its successful run on the open PR head is separate from the main-head result; check exact run SHA before treating its matrix as validation of main.
 
 ## Security and quality controls
