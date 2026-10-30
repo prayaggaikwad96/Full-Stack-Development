@@ -17,6 +17,19 @@ This report records a remote-only audit of the six public repositories returned 
 
 All six repositories are public, unarchived, and report administrator permissions for the connected account.
 
+## Latest remote re-verification — 2026-10-31
+
+The newer, live results are recorded in [the 2026-10-31 remote remediation audit](github-remote-remediation-audit-2026-10-31.md). Values in the older 2026-10-30 snapshot below are historical only.
+
+- Full-Stack-Development `main` = `00ff3bcf137599c9cc0dd47e7f7447732b3e6cf0`.
+- Full-Stack-Development `Developer` = `33eb13cf83db41825e3184d4bb4314d0a4750630`.
+- Current compare `main...Developer`: diverged; 248 Developer-only commits and 32 main-only commits.
+- Computer-Classes `main` and `Developer` remain identical at `e53a39c85f7b3395f793c8cea61dd0955974fbcf`.
+- Full-Stack-Development PR #13 and REA PR #13 are closed unmerged because both were stale/unsafe synchronization proposals.
+- Full-Stack-Development PR #14 remains open/draft and requires a fresh base/head comparison and exact-head CI before it can be considered merge-ready.
+- On Full-Stack-Development main SHA `00ff3bcf137599c9cc0dd47e7f7447732b3e6cf0`, root gitignore validation and nested project-tree audit passed. CodeQL was still in progress at the latest check.
+- Full-Stack-Development `main`, `Developer`, Computer-Classes `main`, and `Developer` report `protected: false`. Branch protection, Dependabot/security toggles, and local Windows state are not verified or complete.
+
 ## Freshly verified results — 2026-10-30
 
 ### Full-Stack-Development
