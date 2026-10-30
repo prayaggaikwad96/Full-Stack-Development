@@ -36,6 +36,9 @@ The archived nested-tree audit report covers 524 shared file paths: 160 files we
 - Preserve recovery references and project-specific feature branches until local backups, unique work, and repository state are verified.
 - Do not delete or overwrite branches or project files until their unique work is preserved elsewhere.
 
+
+- [Account-wide GitHub audit — 2026-10-30](docs/GITHUB_ACCOUNT_AUDIT_2026-10-30.md) — six-repository remote inventory, active PR and CI findings, safety gates, and outstanding local/admin work.
+
 ## Adding examples
 
 - Keep each example focused on one topic.
