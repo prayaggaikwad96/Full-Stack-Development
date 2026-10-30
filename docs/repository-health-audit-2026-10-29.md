@@ -4,6 +4,8 @@
 Remote-only audit of the public repository using GitHub metadata, commit comparisons, Actions workflow runs, pull request metadata, and repository files. This does not verify the owner's local Windows worktree, local-only commits/backups, nested repository configuration, or account/repository security-alert settings.
 
 ## Verified repository state
+
+**Rechecked 2026-10-30 15:35 IST:** the authoritative branch comparison is `main...Developer` = 247 commits ahead on Developer and 14 commits ahead on main. Earlier 10-ahead figures in this report are superseded by this live result.
 - Default branch: `main`.
 - Main head at audit time: `67598cf08e207bf6db746ff157d7963fd7d0cefd`.
 - Developer head at audit time: `204748099731c3aeb04963e6d8957dcd569daf62`.
@@ -11,7 +13,7 @@ Remote-only audit of the public repository using GitHub metadata, commit compari
 - Compare `main...Developer`: Developer is 247 commits ahead and main is 14 commits ahead; status is `diverged`. The reverse comparison confirms main is 14 commits ahead and Developer 247 commits ahead.
 - Therefore, the branches are not synchronized. The previous "no common ancestor" assertion is incorrect for this live snapshot.
 - Both refs report `protected: false` in the branch metadata response. The repository rulesets endpoint returned an empty list.
-- The `archive/codepilot-feature-history-before-sync-2026-10-27` recovery branch remains at `6c68a09756d30a004f2519dab06c9da7494005c8`. Preserve it.
+- The `archive/codepilot-feature-history-before-sync-2026-10-27` recovery branch remains at `6c68a09756d30a004f2519dab06c9da7494005c8`. GitHub compare currently returns no common ancestor between this branch and `main`; preserve it.
 - Open PR #12 is a draft documentation checklist; it is not a synchronization candidate and should not be merged merely to reduce the open-PR count.
 - Previous audit documents and PR comments contain stale branch heads/counts. Revalidate before using them for any ref mutation.
 
