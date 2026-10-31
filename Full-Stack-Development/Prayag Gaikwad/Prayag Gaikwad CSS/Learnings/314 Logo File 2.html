@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .main {
+            width: 1020px;
+            height: 1070px;
+            margin: 15px auto;
+            position: relative;
+            border: 5px solid rgb(40, 70, 27);
+            background: linear-gradient(110deg, #aad0fa, #7cb7e3, #9e98ed);
+            overflow: hidden;
+        }
+
+        .logo-box,
+        .loco,
+        .social {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid green;
+        }
+
+        .logo-box {
+            width: 280px;
+            height: 280px;
+            background: white;
+            z-index: 2;
+        }
+
+        .logo-box img {
+            width: 175px;
+            height: 175px;
+            object-fit: contain;
+        }
+
+        .whatsapp {
+            top: 0;
+            left: 0;
+        }
+
+        .whatsapp img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .twitter {
+            top: 195px;
+            left: 180px;
+        }
+
+        .twitter img {
+            width: 190px;
+            height: 190px;
+        }
+
+        .loco {
+            width: 280px;
+            height: 280px;
+            top: 175px;
+            left: 565px;
+            background: #171238;
+            z-index: 1;
+        }
+
+        .loco img {
+            width: 190px;
+            height: 190px;
+            object-fit: contain;
+        }
+
+        .rooter {
+            top: 0;
+            right: 0;
+        }
+
+        .instagram {
+            bottom: 175px;
+            left: 180px;
+        }
+
+        .instagram img {
+            width: 190px;
+            height: 190px;
+        }
+
+        .youtube {
+            bottom: 195px;
+            right: 180px;
+        }
+
+        .youtube img {
+            width: 160px;
+            height: 160px;
+        }
+
+        .facebook {
+            bottom: 0;
+            left: 0;
+        }
+
+        .facebook img {
+            width: 175px;
+            height: 175px;
+        }
+
+        .pinterest {
+            bottom: 0;
+            right: 0;
+        }
+
+        .pinterest img {
+            width: 170px;
+            height: 170px;
+        }
+
+        .social {
+            width: 280px;
+            height: 280px;
+            top: 390px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #91cf28;
+            z-index: 10;
+            flex-direction: column;
+            color: red;
+            font: bold 48px/1.35 "Times New Roman", serif;
+        }
+
+        @media (max-width: 1040px) {
+            .main {
+                margin: 15px;
+                transform: scale(calc((100vw - 30px) / 1020));
+                transform-origin: top left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main">
+        <div class="logo-box whatsapp">
+            <img src="../CSS Images/WhatsApp.svg.webp" alt="WhatsApp">
+        </div>
+
+        <div class="logo-box twitter">
+            <img src="../CSS Images/Twitter-Logo-2010.png" alt="Twitter">
+        </div>
+
+        <div class="loco">
+            <img src="../CSS Images/0x0.png" alt="Loco">
+        </div>
+
+        <div class="logo-box rooter">
+            <img src="../CSS Images/Rooter images (1).png" alt="Rooter">
+        </div>
+
+        <div class="logo-box instagram">
+            <img src="../CSS Images/Instagram_logo_2022.svg.webp" alt="Instagram">
+        </div>
+
+        <div class="logo-box youtube">
+            <img src="../CSS Images/YouTube_full-color_icon_(2017).svg.webp" alt="YouTube">
+        </div>
+
+        <div class="logo-box facebook">
+            <img src="../CSS Images/Facebook_f_logo_(2021).svg.webp" alt="Facebook">
+        </div>
+
+        <div class="logo-box pinterest">
+            <img src="../CSS Images/Pinterest_logo.png" alt="Pinterest">
+        </div>
+
+        <div class="social">
+            <div>Social</div>
+            <div>Media</div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Multiple Classes</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+
+            /* Two-color background */
+            background: linear-gradient(to right, lightblue, lightyellow);
+        }
+
+        h1 {
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-weight: bold;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .city {
+            color: white;
+            padding: 20px;
+            margin: 20px auto;
+            width: 70%;
+
+            border: 3px solid black;
+            border-radius: 12px;
+
+            font-weight: bold;
+            text-align: center;
+
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+            transition: 0.3s;
+        }
+
+        /* London */
+        .london {
+            background-color: tomato;
+        }
+
+        /* Paris */
+        .paris {
+            background-color: royalblue;
+        }
+
+        /* Tokyo */
+        .tokyo {
+            background-color: orange;
+            color: black;
+        }
+
+        /* Main class */
+        .main {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Hover effect */
+        .city:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+        }
+
+        .london:hover {
+            background-color: darkred;
+        }
+
+        .paris:hover {
+            background-color: darkblue;
+        }
+
+        .tokyo:hover {
+            background-color: gold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Multiple Classes</h1>
+
+    <p>
+        All three city headings use the "city" class.
+        Each city also has its own class for a different color.
+        London additionally uses the "main" class.
+    </p>
+
+    <h2 class="city london main">London</h2>
+
+    <h2 class="city paris">Paris</h2>
+
+    <h2 class="city tokyo">Tokyo</h2>
+
+</body>
+
+</html>
+

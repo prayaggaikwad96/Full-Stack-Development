@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Emojis</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #fff7d6, #ffe4f0);
+            color: #2d2d2d;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 22px;
+            padding: 30px 40px;
+            text-align: center;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .emoji {
+            display: block;
+            font-size: clamp(4rem, 10vw, 8rem);
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: 2rem;
+        }
+
+        p {
+            margin: 8px 0;
+            font-size: 1.1rem;
+        }
+
+        .code {
+            display: inline-block;
+            background: #f5f5f5;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-family: Consolas, monospace;
+            font-size: 0.95rem;
+        }
+
+        .demo-row {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .mini-emoji {
+            font-size: 2rem;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 10px 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <span class="emoji">&#127896;</span>
+        <h1>HTML Emoji Demo</h1>
+
+        <p>Unicode value: <span class="code">&#127896;</span></p>
+        <p>Hex value: <span class="code">&#x1F398;</span></p>
+
+        <div class="demo-row">
+            <span class="mini-emoji">&#128512;</span>
+            <span class="mini-emoji">&#128154;</span>
+            <span class="mini-emoji">&#127881;</span>
+            <span class="mini-emoji">&#127942;</span>
+        </div>
+    </div>
+</body>
+</html>
