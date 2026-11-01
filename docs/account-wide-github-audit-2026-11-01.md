@@ -90,3 +90,39 @@ After checking exact upstream refs and verifying that both forks contained zero 
 - `altair` remains exactly equal to upstream at `2deae0675ebf170e0bc8eac743de609a1c7dd07d`.
 - `rea` remains divergent from upstream: fork is 6 commits ahead and 43 commits behind, so no ref update was attempted.
 - `Full-Stack-Development` remains divergent: Developer is 248 commits ahead and main is 46 commits behind; neither primary ref was changed.
+
+
+## Live remote verification — 2026-11-01 22:11 IST
+
+This section supersedes stale counts and status statements above where the live observations differ.
+
+### Current refs and repository hygiene
+- `virtual:main`: `0a368c76950610227af7a5d3695e53877f9ad914`, equal to observed upstream `TanStack/virtual:main`.
+- `git:master`: `50fe5cc63f9cd6e89b87a2c9ccf96a444f4cfdb7`, equal to observed upstream `git/git:master`.
+- `altair:master`: `2deae0675ebf170e0bc8eac743de609a1c7dd07d`, the same observed tip as its upstream baseline in the previous audit; verify equality again before future sync.
+- `Computer-Classes:main` and `Developer` both point to `e53a39c85f7b3395f793c8cea61dd0955974fbcf`.
+- `REA:main`: `42a912e196523f5ff401ebc6ee95cc90580c841b`; live upstream `morluto/rea:main`: `1d343a88e53af51101a408d437641c60b7bb34e4` (Nov 1 commit). The fork is behind newer upstream work and must be reconciled from the new exact tip; do not treat the Oct 31 merge as current synchronization.
+- `Full-Stack-Development:main`: `8e7f74b62115da1850d1be6952463c764b9dd293`; `Developer`: `33eb13cf83db41825e3184d4bb4314d0a4750630`. GitHub compare reports Developer 248 ahead and main 47 ahead, merge base `db1f8569d21a8bb41baec229fae4326f2c65aa43`. Both refs must be preserved pending a reviewed reconciliation.
+
+### Live PR and branch-protection audit
+- The live owner-repository inventory returned zero open PRs in all six repositories.
+- All six default branch records report `protected: false`; all six repository rulesets endpoints return an empty list.
+- Numerous closed topic, staging, and safety refs are preserved. No branches were deleted.
+- Both Windows local clones/worktrees remain unverified; do not delete their branches or recovery refs until the local PowerShell audit is reviewed.
+
+### CI / check qualification
+- Live combined-status and PR-triggered workflow queries returned no status contexts and no workflow runs on the six current default-branch commit SHAs inspected. This means current-head CI is **unverified** through these queries, not passed.
+- Historical CI results recorded earlier in this document apply only to their explicitly named historical SHAs and do not qualify later commits.
+
+### Workflow scope finding
+- The existing `.github/workflows/repository-consistency.yml` on Full-Stack-Development runs on main push only when selected paths change, on PRs targeting main, manual dispatch, and weekly schedule. It is intentionally read-only for branch comparison and does not reconcile refs.
+- Keep this workflow read-only; it correctly warns on divergence rather than rewriting refs automatically.
+
+### Current conclusion
+- Remote fast-forward synchronization verified for `virtual` and `git` at the exact SHAs above.
+- `Computer-Classes` primary branches are identical.
+- `altair` has no fork-local open PRs; upstream equality should be verified directly before future updates.
+- `REA` needs a new upstream reconciliation based on upstream SHA `1d343a88e53af51101a408d437641c60b7bb34e4`, with CI.
+- `Full-Stack-Development` needs a reviewed history reconciliation; current divergence is 248/47, not 248/46.
+- Security rulesets/branch protections, current CI qualification, secrets/security alert settings, and Windows local checkout verification remain outstanding.
+- No destructive operation or unreviewed branch deletion was performed.
