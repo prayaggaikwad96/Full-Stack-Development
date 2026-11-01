@@ -35,3 +35,14 @@ Closed/merged/unmerged PRs #1–#14 are historical GitHub records and are not de
 2. Confirm the standalone engineering-recommendations document exists in an authoritative main-branch destination before considering deletion of its source branch.
 3. Archive each cleanup candidate's exact commit SHA and inspect its unique tree/content.
 4. Only then delete a branch that is both content-preserved and confirmed unused locally.
+
+
+## Live verification update — 2026-11-02 01:xx IST
+- Current main: `d198efcb764ee8429b785e9800f18f83f6d11ef2`.
+- Current Developer: `33eb13cf83db41825e3184d4bb4314d0a4750630`.
+- Live comparison from main to Developer: Developer is 248 commits ahead and main is 49 commits ahead; shared merge base remains `db1f8569d21a8bb41baec229fae4326f2c65aa43`.
+- The only file listed in the main-to-Developer compare response is `.github/workflows/repository-consistency.yml` (10 additions, 9 deletions); the reverse comparison reveals additional main-only learning content and audit documents. Preserve both histories.
+- Latest main Actions run set on `d198efc`: CodePilot tests, CodeQL, nested-tree audit, and root gitignore validation all completed successfully on 2026-11-01.
+- Current default-branch metadata for all six owner repositories reports unprotected. The available GitHub integration cannot read branch protection details (403) or write branch rulesets; rulesets queries available to this connection return empty lists.
+- No open PRs are listed in the six owner repositories. External upstream PRs remain separate: TanStack Virtual #1321 and Altair GraphQL #3341 are open upstream contributions.
+- Do not delete historical/safety/topic refs before a local Windows worktree/backup audit.
