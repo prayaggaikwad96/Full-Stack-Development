@@ -5,7 +5,7 @@ This review covers the current remote branch inventory and PR history. It does n
 
 ## Primary branches
 - `main`: current publishing branch.
-- `Developer`: primary development branch. It remains divergent from `main`; latest checked comparison is 248 Developer-only commits and 40 main-only commits from shared merge base `db1f8569d21a8bb41baec229fae4326f2c65aa43`.
+- `Developer`: primary development branch. Live comparison at 2026-11-02 01:xx IST reports 248 Developer-only commits and 49 main-only commits from shared merge base `db1f8569d21a8bb41baec229fae4326f2c65aa43`. `main` is `d198efcb764ee8429b785e9800f18f83f6d11ef2`; `Developer` is `33eb13cf83db41825e3184d4bb4314d0a4750630`. Do not reconcile until local Windows checkout/backups are reviewed.
 - No primary branch was modified by this cleanup review.
 
 ## Preserve
