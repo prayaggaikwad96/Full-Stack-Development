@@ -31,10 +31,13 @@ The archived nested-tree audit report covers 524 shared file paths: 160 files we
 ## Branch workflow
 
 - `main` is the default branch and source of truth for the published repository.
-- `Developer` is intended to mirror `main`, but the current remote refs are divergent and GitHub's compare endpoint reports no common ancestor. Do not force-push or overwrite either ref. Run `docs/windows-repository-audit.ps1` from the local Windows checkout, confirm backups and the unique commits on both branches, then reconcile intentionally using a new reviewable branch or documented migration. Re-check both refs before future releases or local pushes. Use pull requests for meaningful changes when practical.
-- `archive/codepilot-feature-history-before-sync-2026-10-27` is a historical recovery branch containing 36 commits not reachable from `main`. Its divergent tip is intentional for recovery, not synchronization failure; do not fast-forward or delete it until its unique work has been reviewed and independently backed up.
+- `Developer` is not currently synchronized with `main`. The latest GitHub comparison confirms a shared merge base but divergent branch tips; ahead/behind counts are live values and can change with every push. Compare the exact refs before any integration. Do not force-push, reset, or overwrite either ref. Run `docs/windows-repository-audit.ps1` from the local Windows checkout, verify backups and unique commits on both sides, then reconcile intentionally through a reviewable candidate and tests.
+- `archive/codepilot-feature-history-before-sync-2026-10-27` is a historical recovery branch containing CodePilot files and history not reachable from the current `main` comparison. PR #8 integrated a CodePilot implementation into `main`, but that does not make this separate historical branch disposable. Preserve it until its unique commits are reviewed and independently backed up.
 - Preserve recovery references and project-specific feature branches until local backups, unique work, and repository state are verified.
 - Do not delete or overwrite branches or project files until their unique work is preserved elsewhere.
+
+
+- [Account-wide GitHub audit — 2026-10-30](docs/GITHUB_ACCOUNT_AUDIT_2026-10-30.md) — six-repository remote inventory, active PR and CI findings, safety gates, and outstanding local/admin work.
 
 ## Adding examples
 
@@ -46,7 +49,7 @@ The archived nested-tree audit report covers 524 shared file paths: 160 files we
 
 ## Validation
 
-GitHub Actions checks the CodePilot Python backend and browser JavaScript, runs integration tests on Python 3.12, 3.13, 3.14, and 3.15, validates representative `.gitignore` rules, and compares the canonical and legacy learning trees. The CodePilot test matrix runs on every pull request so its result remains available when repository branch rules are configured; push-triggered runs for that project remain path-filtered.
+GitHub Actions checks the CodePilot Python backend and browser JavaScript, runs integration tests on Python 3.12, 3.13, 3.14, and 3.15, validates representative `.gitignore` rules, and compares the canonical and legacy learning trees. The CodePilot test matrix runs on every pull request to `main` and every push to `main`, so test results are available for both code and repository-maintenance commits.
 
 This is a learning archive; examples may be educational rather than production-ready. Verify behavior using each project's documented toolchain and instructions.
 
@@ -54,7 +57,7 @@ This is a learning archive; examples may be educational rather than production-r
 
 - [Contributing guide](CONTRIBUTING.md) — branch workflow, local validation commands, and review expectations.
 - [Security policy](SECURITY.md) — how to disclose a vulnerability privately.
-- [Latest repository health and synchronization audit](docs/repository-health-audit-2026-10-29.md) — includes the live `main`/`Developer` comparison, exact tested CI runs, and outstanding local/security checks.
+- [Repository health and synchronization audit](docs/repository-health-audit-2026-10-29.md) — timestamped remote snapshot; use the live GitHub comparison for current branch counts and check status. Includes tested CI evidence and outstanding local/security checks.
 - [CodeQL analysis workflow](.github/workflows/codeql.yml) scans GitHub Actions workflows, JavaScript/TypeScript, and Python on pushes, pull requests, and a weekly schedule.
 - [Dependabot configuration](.github/dependabot.yml) requests weekly GitHub Actions dependency updates. Review its pull requests before merging.
 - Use `.github/pull_request_template.md` to record tests, security hygiene, documentation, and compatibility considerations.

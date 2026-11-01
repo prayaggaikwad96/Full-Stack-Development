@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tours & Travels - Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* BODY */
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+            padding: 30px;
+        }
+
+        /* MAIN CONTAINER */
+
+        .container {
+            width: 100%;
+            max-width: 1250px;
+            min-height: 700px;
+            display: flex;
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px #0002;
+        }
+
+        /* LEFT SECTION BACKGROUND IMAGE */
+
+        .left-section {
+            width: 50%;
+
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15)),
+                url("https://indochinatodaytravel.com/wp-content/uploads/2025/09/vietnam-nature-tour-package-3.jpg");
+
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 55px 30px;
+        }
+
+        /* LOGO IMAGE */
+
+        .logo-img {
+            width: 85%;
+            max-width: 420px;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 25px;
+        }
+
+        /* WEBSITE NAME */
+
+        .logo {
+            font: italic bold 48px Georgia, serif;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        /* TAGLINE */
+
+        .tagline {
+            font-size: 17px;
+            line-height: 1.8;
+            max-width: 400px;
+            color: white;
+            text-shadow: 1px 2px 4px #000;
+        }
+
+        /* RIGHT SECTION */
+
+        .right-section {
+            width: 50%;
+            padding: 75px 11%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: white;
+        }
+
+        /* HEADING */
+
+        h1 {
+            text-align: center;
+            font-size: 55px;
+            color: #079bd0;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 35px;
+        }
+
+        /* INPUT FIELDS */
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            color: #009ed0;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            height: 50px;
+            padding: 12px 15px;
+            border: 1.5px solid #08a3d0;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        input:focus {
+            border-color: #007da9;
+            box-shadow: 0 0 5px #00a0d04d;
+        }
+
+        /* FORGOT PASSWORD */
+
+        .forgot {
+            display: block;
+            text-align: right;
+            margin: -10px 0 25px;
+            font-size: 12px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .forgot:hover {
+            color: #079fd5;
+        }
+
+        /* LOGIN BUTTON */
+
+        .login-btn {
+            width: 120px;
+            height: 45px;
+            background: #079fd5;
+            color: white;
+            border: 0;
+            border-radius: 6px;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .login-btn:hover {
+            background: #007fae;
+            transform: translateY(-2px);
+        }
+
+        /* DIVIDER */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 28px 0;
+            color: #333;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #ccc;
+        }
+
+        /* SOCIAL LOGIN */
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-login a {
+            width: 90px;
+            height: 50px;
+            border-radius: 9px;
+            background: #e9f5f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .3s;
+            text-decoration: none;
+        }
+
+        .social-login img {
+            width: 23px;
+            height: 23px;
+            object-fit: contain;
+        }
+
+        .social-login a:hover {
+            background: #d4ebf0;
+            transform: translateY(-3px);
+        }
+
+        /* REGISTER */
+
+        .register {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 13px;
+        }
+
+        .register a {
+            color: #009bc9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .register a:hover {
+            text-decoration: underline;
+        }
+
+        /* TABLET RESPONSIVE */
+
+        @media(max-width: 850px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                flex-direction: column;
+                max-width: 500px;
+                min-height: auto;
+            }
+
+            .left-section {
+                width: 100%;
+                min-height: 300px;
+                padding: 35px 20px;
+            }
+
+            .logo-img {
+                max-width: 250px;
+                margin-bottom: 15px;
+            }
+
+            .logo {
+                font-size: 38px;
+            }
+
+            .right-section {
+                width: 100%;
+                padding: 45px 30px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+        }
+
+        /* MOBILE RESPONSIVE */
+
+        @media(max-width: 400px) {
+
+            .right-section {
+                padding: 35px 20px;
+            }
+
+            .social-login a {
+                width: 75px;
+            }
+
+            .logo {
+                font-size: 32px;
+            }
+
+            h1 {
+                font-size: 40px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LEFT SECTION -->
+
+        <div class="left-section">
+
+            <!-- TOURS AND TRAVELS LOGO -->
+
+            <img src=""
+                alt="" class="logo-img">
+
+            <!-- WEBSITE NAME -->
+
+            <div class="logo">
+                Tours & Travels
+            </div>
+
+            <!-- TAGLINE -->
+
+            <p class="tagline">
+                Travel is the only purchase that enriches you
+                in ways beyond material wealth.
+            </p>
+
+        </div>
+
+        <!-- RIGHT SECTION -->
+
+        <div class="right-section">
+
+            <h1>Welcome</h1>
+
+            <p class="subtitle">
+                Login to Your Travel Account
+            </p>
+
+            <!-- LOGIN FORM -->
+
+            <form action="#" method="post">
+
+                <div class="input-group">
+
+                    <label for="email">Email Id</label>
+
+                    <input type="email" id="email" name="email" placeholder="Enter your email" autocomplete="email"
+                        required>
+
+                </div>
+
+                <div class="input-group">
+
+                    <label for="password">Password</label>
+
+                    <input type="password" id="password" name="password" placeholder="Enter your password" minlength="6"
+                        autocomplete="current-password" required>
+
+                </div>
+
+                <!-- FORGOT PASSWORD -->
+
+                <a href="forgot-password.html" class="forgot">
+                    Forgot your password?
+                </a>
+
+                <!-- LOGIN BUTTON -->
+
+                <button type="submit" class="login-btn">
+                    LOGIN
+                </button>
+
+            </form>
+
+            <!-- DIVIDER -->
+
+            <div class="divider">
+                OR
+            </div>
+
+            <!-- SOCIAL LOGIN -->
+
+            <div class="social-login">
+
+                <!-- GOOGLE -->
+
+                <a href="https://accounts.google.com/" aria-label="Login with Google" title="Google">
+
+                    <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/3840px-Google_%22G%22_logo.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" alt="Google">
+
+                </a>
+
+                <!-- FACEBOOK -->
+
+                <a href="https://www.facebook.com/login/" aria-label="Login with Facebook" title="Facebook">
+
+                    <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/2023_Facebook_icon.svg/3840px-2023_Facebook_icon.svg.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail" alt="Facebook">
+
+                </a>
+
+                <!-- APPLE -->
+
+                <a href="https://account.apple.com/" aria-label="Login with Apple" title="Apple">
+
+                    <img src="https://cdn.simpleicons.org/apple/000000" alt="Apple">
+
+                </a>
+
+            </div>
+
+            <!-- REGISTER LINK -->
+
+            <p class="register">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Register Now
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
