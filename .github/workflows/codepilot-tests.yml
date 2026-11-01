@@ -5,9 +5,6 @@ on:
     branches: [main]
   push:
     branches: [main]
-    paths:
-      - "projects/codepilot-free/**"
-      - ".github/workflows/codepilot-tests.yml"
   workflow_dispatch:
 
 permissions:
