@@ -49,7 +49,7 @@ The archived nested-tree audit report covers 524 shared file paths: 160 files we
 
 ## Validation
 
-GitHub Actions checks the CodePilot Python backend and browser JavaScript, runs integration tests on Python 3.12, 3.13, 3.14, and 3.15, validates representative `.gitignore` rules, and compares the canonical and legacy learning trees. The CodePilot test matrix runs on every pull request so its result remains available when repository branch rules are configured; push-triggered runs for that project remain path-filtered.
+GitHub Actions checks the CodePilot Python backend and browser JavaScript, runs integration tests on Python 3.12, 3.13, 3.14, and 3.15, validates representative `.gitignore` rules, and compares the canonical and legacy learning trees. The CodePilot test matrix runs on every pull request to `main` and every push to `main`, so test results are available for both code and repository-maintenance commits.
 
 This is a learning archive; examples may be educational rather than production-ready. Verify behavior using each project's documented toolchain and instructions.
 
