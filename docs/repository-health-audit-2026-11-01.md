@@ -68,15 +68,14 @@ The CodePilot workflow trigger and README documentation were corrected and verif
 - Discussions are disabled, the wiki is enabled, and issues are enabled.
 
 ### Applied governance and security controls
-- Branch protection is enabled on `Full-Stack-Development/main` and `Computer-Classes/main`: pull requests are required, force-pushes and deletion are blocked, and admins can bypass. Full-Stack now requires 11 proven PR checks (CodeQL, the Python/Node matrix, nested-tree audit, and `.gitignore` validation); Computer-Classes has no required checks until reliable checks are available. No rulesets were added.
+- Branch protection is enabled on `Full-Stack-Development/main` and `Computer-Classes/main`: pull requests are required, force-pushes and deletion are blocked, and admins can bypass. Full-Stack now requires 10 checks that run on every PR (CodeQL analysis, repository invariants, and the eight Python/Node matrix jobs). The nested-tree and `.gitignore` workflows remain path-scoped and are not global required checks. Computer-Classes has no required checks until reliable checks are available. No rulesets were added.
 - Dependabot vulnerability alerts were enabled on all six repositories. Automated security updates were enabled on the two first-party repositories; fork settings were left unchanged.
 
 ### Outstanding work and scope limits
 - Root licenses remain intentionally deferred pending provenance and licensing review.
-- Computer-Classes' Dependabot workflow is failing on its current `main` SHA because `.github/dependabot.yml` has `updates: []`, but Dependabot is attempting to fetch `/.github/workflows/<anything>.yml` where no workflows directory exists. This workflow/configuration mismatch still needs correction and validation in that repository.
+- Computer-Classes' Dependabot dynamic run failed on `main` SHA `59c573635430b9973b5e03de5212edbb2bd539c9`: it requested the `github_actions` ecosystem and `/.github/workflows/<anything>.yml`, but the repository has no workflows directory and its current Dependabot file has `updates: []`. The empty dependency graph and missing manifest mean no update entry or dummy workflow was added; the origin of the dynamic job needs a GitHub-side follow-up.
 - Recent Altair workflow failures were confirmed, but the run logs were unavailable through the CLI; their causes remain unverified. Do not mask or disable those failures without a root-cause review.
 - REA's fork is 6 commits ahead and 76 behind upstream. Do not merge or rewrite either history without reviewing the full difference.
 - Altair's fork is 7 commits ahead and current with upstream; preserve the fork-only commits.
 - Virtual is identical with upstream. The Git fork was safely fast-forwarded from 34 commits behind to the exact upstream `master` SHA `ebdc087dc99d68bb340c282b2ba5f722def28d19`; its safety backup branch remains untouched.
 - The inspected upstream contributions are historical: TanStack Virtual #1335 is merged; Virtual #1321, Altair #3341, REA #6025–#6027, REA fork #13, and Full-Stack-Development #13–#14 are closed and unmerged. Do not reopen or resubmit them without review and maintainer context.
-- Run the checked-in Windows audit on the actual local clones and verify backups, worktrees, nested Git state, and local-only changes. This worktree cannot prove the state of either Windows PC's other checkout.

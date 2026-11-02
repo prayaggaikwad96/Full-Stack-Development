@@ -140,7 +140,7 @@ This section supersedes earlier live-state claims in this historical report wher
 - `rea`: `main` is 6 commits ahead and 76 behind `morluto/rea:main`. Preserve both histories and do not merge until the full divergence is reviewed.
 
 ### Branch protection and security
-- PRs are required on `Full-Stack-Development:main` and `Computer-Classes:main`; force-push and deletion are blocked, and administrators can bypass. Full-Stack requires 11 successful PR checks (CodeQL analysis, the eight Python/Node matrix jobs, nested-tree audit, and `.gitignore` validation), with the branch required to be up to date. Computer-Classes has no required checks until reliable checks are available. These settings were verified after applying them.
+- PRs are required on `Full-Stack-Development:main` and `Computer-Classes:main`; force-push and deletion are blocked, and administrators can bypass. Full-Stack requires 10 checks that run on every PR (CodeQL analysis, repository invariants, and the eight Python/Node matrix jobs), with the branch required to be up to date. Path-scoped nested-tree and `.gitignore` checks are not global requirements. Computer-Classes has no required checks until reliable checks are available. These settings were verified after applying them.
 - No repository rulesets were present on the six repositories.
 - Dependabot vulnerability alerts are enabled on all six repositories.
 - Automated Dependabot security updates are enabled on the two first-party repositories, `Full-Stack-Development` and `Computer-Classes`; the four forks were left unchanged.
@@ -148,13 +148,13 @@ This section supersedes earlier live-state claims in this historical report wher
 
 ### CI, community health, and PR inventory
 - Full-Stack-Development CodeQL and repository consistency passed on SHA `50778e6e9aaf7a4bdca27ffc8a69653a027e6144`; CodePilot tests, `.gitignore` validation, and nested-tree audit passed on that SHA on November 1.
-- Computer-Classes has a failing Dependabot workflow on SHA `59c573635430b9973b5e03de5212edbb2bd539c9`: its config declares `updates: []`, while the run attempts to fetch `/.github/workflows/<anything>.yml` from a repository with no workflows directory. This is distinct from the vulnerability-alert and automatic-security-update settings. It remains to be corrected.
+- Computer-Classes' Dependabot dynamic run failed on SHA `59c573635430b9973b5e03de5212edbb2bd539c9`: it requested the `github_actions` ecosystem and `/.github/workflows/<anything>.yml`, but the repository has no workflows directory and its current Dependabot file has `updates: []`. Its dependency graph has no external package entries. No dummy manifest or ecosystem was added; the dynamic job's source still needs GitHub-side investigation.
 - Altair CodeQL passed on its current `master` SHA `c96f9dd2dfe680dc553262ef65cc6b513d701c3c`. Its Dependabot, Scorecard, and main workflow runs failed; their logs were unavailable through the CLI, so causes are not asserted.
 - Current `main`/`master` CI evidence for Virtual, REA, and Git was absent in the inspected check-runs. Do not treat lack of a run as a pass.
 - No open PRs were returned for any of the six owner repositories. TanStack Virtual #1335 is merged; Virtual #1321, Altair #3341, REA #6025–#6027, REA fork #13, and Full-Stack #13–#14 are closed unmerged. Do not reopen or resubmit without reviewing their diffs and maintainer context.
-- Both first-party repositories currently report 57% community health. This Full-Stack worktree adds Contributor Covenant 2.1 and issue forms; the Computer-Classes changes are being prepared in a separate branch. The score will only reflect merged default-branch files. Root licenses remain deferred pending provenance review.
+- Both first-party repositories currently report 57% community health. Full-Stack community files are in [PR #16](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/16), with required checks running. Computer-Classes community files are in [PR #1](https://github.com/prayaggaikwad96/Computer-Classes/pull/1), with local YAML validation and no required CI configured. Scores only reflect merged default-branch files. Root licenses remain deferred pending provenance review.
 - No `prayaggaikwad96/prayaggaikwad96` profile README repository was found. No profile repository or metadata was created or changed.
 
 ### Remaining verification
 - The Windows repository audit was not run: it inspects local clones outside this worktree and writes a CSV under `%TEMP%`. Verify each actual clone and backup on the user's Windows machines before claiming local synchronization.
-- Computer-Classes' Dependabot workflow failure, Altair failures, stale/missing CI evidence on Virtual/REA/Git, upstream PR decisions, and first-party community files awaiting review/merge remain open work. No recovery branch was deleted or rewritten.
+- Computer-Classes' Dependabot dynamic-run failure, Altair failures, stale/missing CI evidence on Virtual/REA/Git, upstream PR decisions, and first-party community PRs awaiting merge remain open work. No recovery branch was deleted or rewritten.
