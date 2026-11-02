@@ -19,7 +19,7 @@ on:
       - "docs/repository-health-audit-*.md"
       - "README.md"
   pull_request:
-    branches: [main]
+    branches: [main, Developer]
   workflow_dispatch:
   schedule:
     - cron: "30 3 * * 1"
