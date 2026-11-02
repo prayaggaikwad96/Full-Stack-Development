@@ -90,8 +90,19 @@ function closeSettings(){$("#settingsModal").hidden=true}
 function preview(){
  saveFiles();
  const html=String(state.files["index.html"]||"<h1>No index.html</h1>"),css=String(state.files["style.css"]||""),js=String(state.files["app.js"]||"");
- const clean=html.replace(/<link\b(?=[^>]*\bhref\s*=\s*(['"])(?:\.\/)?style\.css(?:\?[^'"]*)?\1)[^>]*>\s*/gi,"").replace(/<script\b(?=[^>]*\bsrc\s*=\s*(['"])(?:\.\/)?app\.js(?:\?[^'"]*)?\1)[^>]*>\s*<\/script>\s*/gi,"");
- const styled=clean.includes("</head>")?clean.replace(/<\/head>/i,"<style>"+css+"</style></head>"):"<style>"+css+"</style>"+clean;
+ const previewDocument=new DOMParser().parseFromString(html,"text/html");
+ for(const link of previewDocument.querySelectorAll("link[href]")){
+  const href=(link.getAttribute("href")||"").trim().split("?")[0];
+  if(href==="style.css"||href==="./style.css")link.remove();
+ }
+ for(const script of previewDocument.querySelectorAll("script[src]")){
+  const src=(script.getAttribute("src")||"").trim().split("?")[0];
+  if(src==="app.js"||src==="./app.js")script.remove();
+ }
+ const styleElement=previewDocument.createElement("style");
+ styleElement.textContent=css;
+ previewDocument.head.append(styleElement);
+ const styled=previewDocument.documentElement.outerHTML;
  const scriptSource=JSON.stringify(js).replace(/</g,"\\u003c");
  const previewScript='<script type="application/json">'+scriptSource+'</script><script>(()=>{(0,eval)(JSON.parse(document.currentScript.previousElementSibling.textContent))})();</script>';
  const doc=styled+previewScript;
