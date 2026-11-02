@@ -31,13 +31,13 @@ The archived nested-tree audit report covers 524 shared file paths: 160 files we
 ## Branch workflow
 
 - `main` is the default branch and source of truth for the published repository.
-- `Developer` is not currently synchronized with `main`. The latest GitHub comparison confirms a shared merge base but divergent branch tips; ahead/behind counts are live values and can change with every push. Compare the exact refs before any integration. Do not force-push, reset, or overwrite either ref. Run `docs/windows-repository-audit.ps1` from the local Windows checkout, verify backups and unique commits on both sides, then reconcile intentionally through a reviewable candidate and tests.
+- As of 2026-11-02, GitHub reports `main` and `Developer` at the same commit (`50778e6e9aaf7a4bdca27ffc8a69653a027e6144`), with zero commits ahead or behind. This is a point-in-time check; compare the exact refs before relying on synchronization. PR #15 performed the reviewed synchronization. Do not force-push, reset, or overwrite either ref.
 - `archive/codepilot-feature-history-before-sync-2026-10-27` is a historical recovery branch containing CodePilot files and history not reachable from the current `main` comparison. PR #8 integrated a CodePilot implementation into `main`, but that does not make this separate historical branch disposable. Preserve it until its unique commits are reviewed and independently backed up.
 - Preserve recovery references and project-specific feature branches until local backups, unique work, and repository state are verified.
 - Do not delete or overwrite branches or project files until their unique work is preserved elsewhere.
 
 
-- [Account-wide GitHub audit — 2026-10-30](docs/GITHUB_ACCOUNT_AUDIT_2026-10-30.md) — six-repository remote inventory, active PR and CI findings, safety gates, and outstanding local/admin work.
+- [Account-wide GitHub audit](docs/account-wide-github-audit-2026-11-01.md) — six-repository snapshot with a live November 2 refresh, CI/security findings, and outstanding local/admin work.
 
 ## Adding examples
 
@@ -56,8 +56,10 @@ This is a learning archive; examples may be educational rather than production-r
 ## Quality, security, and contributions
 
 - [Contributing guide](CONTRIBUTING.md) — branch workflow, local validation commands, and review expectations.
+- [Code of Conduct](CODE_OF_CONDUCT.md) — community standards and reporting options.
 - [Security policy](SECURITY.md) — how to disclose a vulnerability privately.
-- [Repository health and synchronization audit](docs/repository-health-audit-2026-10-29.md) — timestamped remote snapshot; use the live GitHub comparison for current branch counts and check status. Includes tested CI evidence and outstanding local/security checks.
+- Use the [issue forms](.github/ISSUE_TEMPLATE) for bug reports and feature requests; do not include secrets or private data.
+- [Repository health and synchronization audit](docs/repository-health-audit-2026-11-01.md) — dated remote snapshots, with the November 2 live refresh at the end; verify live refs and check status before acting.
 - [CodeQL analysis workflow](.github/workflows/codeql.yml) scans GitHub Actions workflows, JavaScript/TypeScript, and Python on pushes, pull requests, and a weekly schedule.
 - [Dependabot configuration](.github/dependabot.yml) requests weekly GitHub Actions dependency updates. Review its pull requests before merging.
 - Use `.github/pull_request_template.md` to record tests, security hygiene, documentation, and compatibility considerations.
