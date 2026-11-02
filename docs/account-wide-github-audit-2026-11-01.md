@@ -126,3 +126,35 @@ This section supersedes stale counts and status statements above where the live 
 - `Full-Stack-Development` needs a reviewed history reconciliation; current divergence is 248/47, not 248/46.
 - Security rulesets/branch protections, current CI qualification, secrets/security alert settings, and Windows local checkout verification remain outstanding.
 - No destructive operation or unreviewed branch deletion was performed.
+
+## Live account refresh — November 2, 2026
+
+This section supersedes earlier live-state claims in this historical report where they differ. It covers the six owner repositories visible to the authenticated account.
+
+### Branches and synchronization
+- `Full-Stack-Development`: `main` and `Developer` are identical at `50778e6e9aaf7a4bdca27ffc8a69653a027e6144` (0 ahead/behind); PR #15 merged November 1.
+- `Computer-Classes`: `main` and `Developer` are identical at `59c573635430b9973b5e03de5212edbb2bd539c9`.
+- `virtual`: `main` is identical to `TanStack/virtual:main` at `0a368c76950610227af7a5d3695e53877f9ad914`.
+- `git`: `master` was fast-forwarded without force from `50fe5cc63f9cd6e89b87a2c9ccf96a444f4cfdb7` to upstream `git/git:master` at `ebdc087dc99d68bb340c282b2ba5f722def28d19`; post-update comparison is identical. The recovery backup branch was left intact.
+- `altair`: `master` is 7 commits ahead of `altair-graphql/altair:master`, 0 behind. Preserve the fork-only history.
+- `rea`: `main` is 6 commits ahead and 76 behind `morluto/rea:main`. Preserve both histories and do not merge until the full divergence is reviewed.
+
+### Branch protection and security
+- PRs are required on `Full-Stack-Development:main` and `Computer-Classes:main`; force-push and deletion are blocked, and administrators can bypass. Full-Stack requires 11 successful PR checks (CodeQL analysis, the eight Python/Node matrix jobs, nested-tree audit, and `.gitignore` validation), with the branch required to be up to date. Computer-Classes has no required checks until reliable checks are available. These settings were verified after applying them.
+- No repository rulesets were present on the six repositories.
+- Dependabot vulnerability alerts are enabled on all six repositories.
+- Automated Dependabot security updates are enabled on the two first-party repositories, `Full-Stack-Development` and `Computer-Classes`; the four forks were left unchanged.
+- Secret scanning and push protection are enabled on all six repositories. Non-provider-pattern secret scanning is disabled.
+
+### CI, community health, and PR inventory
+- Full-Stack-Development CodeQL and repository consistency passed on SHA `50778e6e9aaf7a4bdca27ffc8a69653a027e6144`; CodePilot tests, `.gitignore` validation, and nested-tree audit passed on that SHA on November 1.
+- Computer-Classes has a failing Dependabot workflow on SHA `59c573635430b9973b5e03de5212edbb2bd539c9`: its config declares `updates: []`, while the run attempts to fetch `/.github/workflows/<anything>.yml` from a repository with no workflows directory. This is distinct from the vulnerability-alert and automatic-security-update settings. It remains to be corrected.
+- Altair CodeQL passed on its current `master` SHA `c96f9dd2dfe680dc553262ef65cc6b513d701c3c`. Its Dependabot, Scorecard, and main workflow runs failed; their logs were unavailable through the CLI, so causes are not asserted.
+- Current `main`/`master` CI evidence for Virtual, REA, and Git was absent in the inspected check-runs. Do not treat lack of a run as a pass.
+- No open PRs were returned for any of the six owner repositories. TanStack Virtual #1335 is merged; Virtual #1321, Altair #3341, REA #6025–#6027, REA fork #13, and Full-Stack #13–#14 are closed unmerged. Do not reopen or resubmit without reviewing their diffs and maintainer context.
+- Both first-party repositories currently report 57% community health. This Full-Stack worktree adds Contributor Covenant 2.1 and issue forms; the Computer-Classes changes are being prepared in a separate branch. The score will only reflect merged default-branch files. Root licenses remain deferred pending provenance review.
+- No `prayaggaikwad96/prayaggaikwad96` profile README repository was found. No profile repository or metadata was created or changed.
+
+### Remaining verification
+- The Windows repository audit was not run: it inspects local clones outside this worktree and writes a CSV under `%TEMP%`. Verify each actual clone and backup on the user's Windows machines before claiming local synchronization.
+- Computer-Classes' Dependabot workflow failure, Altair failures, stale/missing CI evidence on Virtual/REA/Git, upstream PR decisions, and first-party community files awaiting review/merge remain open work. No recovery branch was deleted or rewritten.
