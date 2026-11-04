@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Portfolio Gallery using HTML and CSS</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: powderblue;
+            text-align: center;
+            padding: 15px;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .title {
+            background-color: green;
+            padding: 15px;
+        }
+
+        h1 {
+            color: white;
+            margin: 10px;
+        }
+
+        h2 {
+            margin-top: 25px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #5673C8;
+        }
+
+        a:hover {
+            color: lightblue;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 10px 0;
+        }
+
+        .column {
+            flex: 1 1 calc(20% - 15px);
+            min-width: 180px;
+            max-width: 220px;
+            transition: transform 0.3s ease;
+        }
+
+        .column:hover {
+            transform: translateY(-10px);
+        }
+
+        .content {
+            background-color: white;
+            padding: 12px;
+            border: 1px solid gray;
+            height: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .column:hover .content {
+            box-shadow: 0 14px 15px rgba(0, 128, 0, 0.4);
+        }
+
+        .content img {
+            width: 100%;
+            height: 130px;
+            object-fit: contain;
+        }
+
+        .content h3 {
+            font-size: 18px;
+        }
+
+        p {
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+        }
+
+        /* SQL logo */
+        .sql-logo {
+            width: 100%;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2875B8;
+            font-size: 38px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* Tablet */
+        @media screen and (max-width: 850px) {
+            .column {
+                flex: 1 1 calc(50% - 15px);
+                max-width: 350px;
+            }
+        }
+
+        /* Mobile */
+        @media screen and (max-width: 500px) {
+            body {
+                padding: 10px;
+            }
+
+            .column {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="title">
+        <h1>GeeksforGeeks</h1>
+    </div>
+
+    <div class="container">
+
+        <h3>A Computer Science Portal for Geeks</h3>
+
+        <hr>
+
+        <h2>Portfolio</h2>
+
+        <div class="row">
+
+            <!-- HTML -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://www.geeksforgeeks.org/wp-content/uploads/html.png" alt="HTML Logo">
+
+                    <h3>
+                        <a href="https://www.w3schools.com/html/">
+                            HTML Tutorials
+                        </a>
+                    </h3>
+
+                    <p>
+                        HTML stands for Hyper Text Markup Language.
+                        It is used to design web pages using markup
+                        language. Hypertext defines the link between
+                        web pages.
+                    </p>
+                </div>
+            </div>
+
+            <!-- CSS -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://www.geeksforgeeks.org/wp-content/uploads/CSS.png" alt="CSS Logo">
+
+                    <h3>
+                        <a href="https://www.w3schools.com/css/">
+                            CSS Tutorials
+                        </a>
+                    </h3>
+
+                    <p>
+                        Cascading Style Sheets, fondly referred to
+                        as CSS, is used to style web pages and make
+                        them presentable.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PHP -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://www.geeksforgeeks.org/wp-content/uploads/php-1.png" alt="PHP Logo">
+
+                    <h3>
+                        <a href="https://www.w3schools.com/php/">
+                            PHP Tutorials
+                        </a>
+                    </h3>
+
+                    <p>
+                        PHP stands for PHP: Hypertext Preprocessor.
+                        It is a server-side scripting language
+                        designed specifically for web development.
+                    </p>
+                </div>
+            </div>
+
+            <!-- JavaScript -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://www.geeksforgeeks.org/wp-content/uploads/javascript.png" alt="JavaScript Logo">
+
+                    <h3>
+                        <a href="https://www.w3schools.com/js/">
+                            JavaScript Tutorials
+                        </a>
+                    </h3>
+
+                    <p>
+                        JavaScript is a programming language used
+                        to make web pages interactive and dynamic.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SQL -->
+            <div class="column">
+                <div class="content">
+
+                    <div class="sql-logo">
+                        SQL
+                    </div>
+
+                    <h3>
+                        <a href="https://www.w3schools.com/sql/">
+                            SQL Tutorials
+                        </a>
+                    </h3>
+
+                    <p>
+                        SQL is a standard language for storing,
+                        manipulating and retrieving data in
+                        databases. It works with MySQL, SQL Server,
+                        MS Access, Oracle and PostgreSQL.
+                    </p>
+
+                </div>
+            </div>
+
+            <!-- Python -->
+    <div class="column">
+        <div class="content">
+    
+            <div class="python-logo">
+                Python
+            </div>
+    
+            <h3>
+                <a href="https://www.w3schools.com/python/default.asp">
+                    Python Tutorials
+                </a>
+            </h3>
+    
+            <p>
+        Python is a popular programming language.
+        
+        Python can be used on a server to create web applications.
+        
+        Python is easy to learn - You will enjoy it!
+            </p>
+    
+        </div>
+    </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
