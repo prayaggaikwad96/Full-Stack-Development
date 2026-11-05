@@ -1,4 +1,6 @@
-# Repository health and synchronization audit — November 1, 2026 (refreshed)
+# Repository health and synchronization audit — November 1, 2026 (with November 2 refresh)
+
+> The dated findings below record the November 1 snapshot. The live remote refresh at the end supersedes earlier statements about current refs, CI, security settings, and community health.
 
 ## Scope
 Remote-only audit of prayaggaikwad96/Full-Stack-Development. The GitHub connector can inspect and update repository files and refs, but cannot inspect either Windows PC, administer branch protection/rulesets, inspect all private security-alert settings, or prove local backup/worktree state.
@@ -48,4 +50,34 @@ No passing conclusion is claimed until GitHub reports success on this exact SHA.
 Run `docs/windows-repository-audit.ps1` on both Windows PCs and compare actual local HEADs, remotes, upstream tracking refs, dirty/untracked paths, local-only commits, worktrees, nested repo/submodule state, and offline backups. Review the complete 248/43 divergent graph and file tree (learning archive, images, CodePilot, docs and workflow versions) before proposing a normal merge. Do not fast-forward Developer until a reviewable integration result passes CI and all unique work is accounted for.
 
 ## Conclusion
-The CodePilot workflow trigger and README documentation were corrected and verified on main. CI has been triggered for the latest main commit, but results are not complete yet. Main and Developer remain divergent; local Windows state, branch protection and security toggles remain unverified. This is improved but not a claim of full synchronization or full hardening.
+The CodePilot workflow trigger and README documentation were corrected and verified on main at the time of this snapshot. The November 2 refresh below supersedes its statements about branch synchronization, CI, and security settings. Local Windows state and owner-side controls still require separate verification.
+
+## Live remote refresh — November 2, 2026
+
+### Branches and CI
+- PR [#15](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/15) synchronized `main` and `Developer` on November 1. After community PR [#16](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/16) merged, `Developer` was safely fast-forwarded to `main`; the live comparison is identical.
+- PR-based branch protection is now enabled for both first-party default branches, with force-push and deletion blocked and admin bypass preserved. The repository rulesets endpoint remains empty.
+- All ten required checks and CodeQL passed on PR #16 head `a620ec341a1aee35d5a25db12c593a05d90f462a`; this includes the repository-invariants job and eight Python/Node matrix jobs. CodePilot tests, root `.gitignore` validation, and nested-tree audit also completed successfully on November 1. Post-merge runs were not separately verified.
+
+### Community health and repository settings
+- GitHub Community Profile reports 85% after PR #16 merged. It recognizes the README, contributing guide, Code of Conduct file, issue template, and pull-request template; no root license is detected.
+- PR #16 added Contributor Covenant 2.1, bug-report and feature-request YAML forms, a default issue-template fallback, and consistency-workflow checks for the community files.
+- The repository's contribution guide intentionally defers a root license pending provenance and owner review. The Code of Conduct includes a GitHub reporting route.
+- Secret scanning and push protection are enabled; non-provider-pattern secret scanning is disabled. Dependabot alerts are now enabled across all six audited repositories. Automated Dependabot security updates are enabled for Full-Stack-Development and Computer-Classes only; forks are unchanged.
+- Actions are enabled with all actions allowed; workflow token permissions default to read-only and workflows cannot approve pull requests.
+- Discussions are disabled, the wiki is enabled, and issues are enabled.
+
+### Applied governance and security controls
+- Branch protection is enabled on `Full-Stack-Development/main` and `Computer-Classes/main`: pull requests are required, force-pushes and deletion are blocked, and admins can bypass. Full-Stack now requires 10 checks that run on every PR (CodeQL analysis, repository invariants, and the eight Python/Node matrix jobs). The nested-tree and `.gitignore` workflows remain path-scoped and are not global required checks. Computer-Classes has no required checks until reliable checks are available. No rulesets were added.
+- Dependabot vulnerability alerts were enabled on all six repositories. Automated security updates were enabled on the two first-party repositories; fork settings were left unchanged.
+
+### Outstanding work and scope limits
+- Root licenses remain intentionally deferred pending provenance and licensing review.
+- The Full-Stack and Computer-Classes community-health changes are merged. Computer-Classes reports 85% community health and recognizes the Contributor Covenant, issue template, and pull-request template.
+- The read-only Windows audit ran on November 2. Both expected repository paths resolve to the same Git root, whose worktree is clean at local `main` commit `a2273be3a14ff2adccd8e1bf767f48be4ba4d0f5`. Its `origin/main` tracking ref is stale at `50778e6e9aaf7a4bdca27ffc8a69653a027e6144`; the local branch is one commit ahead of that stale ref, and GitHub does not recognize the local commit. The commit modifies one CSS animation HTML file. The normalized tree comparison found 526 identical files, 11 canonical-only files, and 7 nested-only files. No local refs, files, or histories were changed; review before synchronization.
+- Computer-Classes' Dependabot dynamic run failed on `main` SHA `59c573635430b9973b5e03de5212edbb2bd539c9`: it requested the `github_actions` ecosystem and `/.github/workflows/<anything>.yml`, but the repository has no workflows directory and its current Dependabot file has `updates: []`. The empty dependency graph and missing manifest mean no update entry or dummy workflow was added; the origin of the dynamic job needs a GitHub-side follow-up.
+- Recent Altair workflow failures were confirmed, but the run logs were unavailable through the CLI; their causes remain unverified. Do not mask or disable those failures without a root-cause review.
+- REA's fork is 6 commits ahead and 76 behind upstream. Do not merge or rewrite either history without reviewing the full difference.
+- Altair's fork is 7 commits ahead and current with upstream; preserve the fork-only commits.
+- Virtual is identical with upstream. The Git fork was safely fast-forwarded from 34 commits behind to the exact upstream `master` SHA `ebdc087dc99d68bb340c282b2ba5f722def28d19`; its safety backup branch remains untouched.
+- The inspected upstream contributions are historical: TanStack Virtual #1335 is merged; Virtual #1321, Altair #3341, REA #6025–#6027, REA fork #13, and Full-Stack-Development #13–#14 are closed and unmerged. Do not reopen or resubmit them without review and maintainer context.

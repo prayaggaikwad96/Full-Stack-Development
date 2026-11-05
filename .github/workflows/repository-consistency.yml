@@ -5,10 +5,21 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/repository-consistency.yml"
-      - "docs/repository-health-audit-2026-10-29.md"
+      - ".github/ISSUE_TEMPLATE/**"
+      - ".github/dependabot.yml"
+      - ".github/pull_request_template.md"
+      - ".github/workflows/cleanup-redundant-branches.yml"
+      - ".github/workflows/codepilot-tests.yml"
+      - ".github/workflows/codeql.yml"
+      - ".gitignore"
+      - "CODE_OF_CONDUCT.md"
+      - "CONTRIBUTING.md"
+      - "SECURITY.md"
+      - "docs/account-wide-github-audit-*.md"
+      - "docs/repository-health-audit-*.md"
       - "README.md"
   pull_request:
-    branches: [main]
+    branches: [main, Developer]
   workflow_dispatch:
   schedule:
     - cron: "30 3 * * 1"
@@ -52,7 +63,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in .gitignore SECURITY.md CONTRIBUTING.md .github/pull_request_template.md .github/dependabot.yml .github/workflows/codeql.yml .github/workflows/codepilot-tests.yml .github/workflows/cleanup-redundant-branches.yml; do
+          for path in .gitignore SECURITY.md CONTRIBUTING.md CODE_OF_CONDUCT.md .github/pull_request_template.md .github/ISSUE_TEMPLATE/config.yml .github/ISSUE_TEMPLATE/bug_report.yml .github/ISSUE_TEMPLATE/feature_request.yml .github/dependabot.yml .github/workflows/codeql.yml .github/workflows/codepilot-tests.yml .github/workflows/cleanup-redundant-branches.yml; do
             if [[ ! -f "$path" ]]; then
               echo "::error::Missing required repository file: $path"
               exit 1
