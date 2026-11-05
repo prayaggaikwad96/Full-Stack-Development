@@ -7,6 +7,7 @@ import socket
 import threading
 import unittest
 import zipfile
+from unittest.mock import patch
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
@@ -182,6 +183,29 @@ class CodePilotApiTests(unittest.TestCase):
         status, _, body = self.request("/api/project/import-zip", "POST", raw=b"not-a-zip", content_type="application/zip")
         self.assertEqual(status, 400)
         self.assertIn("valid ZIP", json.loads(body)["error"])
+
+    def test_github_import_downloads_and_filters_public_source_archive(self):
+        archive = io.BytesIO()
+        with zipfile.ZipFile(archive, "w") as bundle:
+            bundle.writestr("demo-main/README.md", "# Demo")
+            bundle.writestr("demo-main/src/main.py", "print('hello')")
+            bundle.writestr("demo-main/image.png", b"not text")
+            bundle.writestr("demo-main/../escape.py", "unsafe")
+        metadata = io.BytesIO(json.dumps({"default_branch": "main"}).encode())
+        downloaded = io.BytesIO(archive.getvalue())
+        with patch("app.urllib.request.urlopen", side_effect=[metadata, downloaded]) as mocked:
+            status, _, body = self.request(
+                "/api/github/import", "POST",
+                {"url": "https://github.com/example/demo"},
+            )
+        self.assertEqual(status, 200)
+        result = json.loads(body)
+        self.assertEqual(result["repository"], "example/demo")
+        self.assertEqual(result["branch"], "main")
+        self.assertEqual(result["files"], {"README.md": "# Demo", "src/main.py": "print('hello')"})
+        self.assertEqual(mocked.call_count, 2)
+        self.assertIn("api.github.com/repos/example/demo", mocked.call_args_list[0].args[0].full_url)
+        self.assertIn("codeload.github.com/example/demo", mocked.call_args_list[1].args[0].full_url)
 
     def test_github_import_only_accepts_public_repo_urls(self):
         for url in ["http://github.com/owner/repo", "https://example.com/owner/repo", "https://github.com/owner/repo/tree/main/src", "https://user:pass@github.com/owner/repo"]:
