@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Portfolio Gallery using HTML and CSS</title>
+    <title>Comprehensive Tech Portfolio & W3Schools Tutorials Directory</title>
 
     <style>
         * {
@@ -13,7 +12,7 @@
         }
 
         body {
-            background-color: powderblue;
+            background-color: rgb(171, 203, 248);
             text-align: center;
             padding: 15px;
             margin: 0;
@@ -21,13 +20,14 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: auto;
         }
 
         .title {
-            background-color: green;
-            padding: 15px;
+            background-color: #04AA6D;
+            padding: 20px;
+            border-radius: 6px;
         }
 
         h1 {
@@ -36,7 +36,8 @@
         }
 
         h2 {
-            margin-top: 25px;
+            margin-top: 35px;
+            color: #222;
         }
 
         a {
@@ -45,7 +46,7 @@
         }
 
         a:hover {
-            color: lightblue;
+            color: #04AA6D;
         }
 
         .row {
@@ -71,44 +72,35 @@
             background-color: white;
             padding: 12px;
             border: 1px solid gray;
+            border-radius: 6px;
             height: 100%;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.3s ease;
         }
 
         .column:hover .content {
-            box-shadow: 0 14px 15px rgba(0, 128, 0, 0.4);
+            box-shadow: 0 14px 15px rgba(4, 170, 109, 0.4);
         }
 
         .content img {
             width: 100%;
-            height: 130px;
+            height: 120px;
             object-fit: contain;
         }
 
         .content h3 {
-            font-size: 18px;
+            font-size: 16px;
+            margin: 10px 0 5px 0;
         }
 
         p {
-            line-height: 1.5;
+            font-size: 13px;
+            line-height: 1.4;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 4;
             overflow: hidden;
-        }
-
-        /* SQL logo */
-        .sql-logo {
-            width: 100%;
-            height: 130px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #2875B8;
-            font-size: 38px;
-            font-weight: bold;
-            letter-spacing: 2px;
+            color: #555;
         }
 
         /* Tablet */
@@ -136,145 +128,362 @@
 <body>
 
     <div class="title">
-        <h1>GeeksforGeeks</h1>
+        <h1>Tech Stack Portfolio & W3Schools Tutorials Directory</h1>
     </div>
 
     <div class="container">
 
-        <h3>A Computer Science Portal for Geeks</h3>
+        <h3>Explore Programming Languages, Frameworks, and Developer Tools</h3>
 
         <hr>
 
-        <h2>Portfolio</h2>
-
+        <!-- Core & Frontend Technologies -->
+        <h2>Core & Frontend Technologies</h2>
         <div class="row">
-
             <!-- HTML -->
             <div class="column">
                 <div class="content">
-                    <img src="https://www.geeksforgeeks.org/wp-content/uploads/html.png" alt="HTML Logo">
-
-                    <h3>
-                        <a href="https://www.w3schools.com/html/">
-                            HTML Tutorials
-                        </a>
-                    </h3>
-
-                    <p>
-                        HTML stands for Hyper Text Markup Language.
-                        It is used to design web pages using markup
-                        language. Hypertext defines the link between
-                        web pages.
-                    </p>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
+                        alt="HTML Logo">
+                    <h3><a href="https://www.w3schools.com/html/" target="_blank">HTML</a></h3>
+                    <p>Standard markup language for building web pages and structuring web content.</p>
                 </div>
             </div>
-
             <!-- CSS -->
             <div class="column">
                 <div class="content">
-                    <img src="https://www.geeksforgeeks.org/wp-content/uploads/CSS.png" alt="CSS Logo">
-
-                    <h3>
-                        <a href="https://www.w3schools.com/css/">
-                            CSS Tutorials
-                        </a>
-                    </h3>
-
-                    <p>
-                        Cascading Style Sheets, fondly referred to
-                        as CSS, is used to style web pages and make
-                        them presentable.
-                    </p>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS Logo">
+                    <h3><a href="https://www.w3schools.com/css/" target="_blank">CSS</a></h3>
+                    <p>Stylesheet language used for describing the presentation of web pages.</p>
                 </div>
             </div>
-
-            <!-- PHP -->
-            <div class="column">
-                <div class="content">
-                    <img src="https://www.geeksforgeeks.org/wp-content/uploads/php-1.png" alt="PHP Logo">
-
-                    <h3>
-                        <a href="https://www.w3schools.com/php/">
-                            PHP Tutorials
-                        </a>
-                    </h3>
-
-                    <p>
-                        PHP stands for PHP: Hypertext Preprocessor.
-                        It is a server-side scripting language
-                        designed specifically for web development.
-                    </p>
-                </div>
-            </div>
-
             <!-- JavaScript -->
             <div class="column">
                 <div class="content">
-                    <img src="https://www.geeksforgeeks.org/wp-content/uploads/javascript.png" alt="JavaScript Logo">
-
-                    <h3>
-                        <a href="https://www.w3schools.com/js/">
-                            JavaScript Tutorials
-                        </a>
-                    </h3>
-
-                    <p>
-                        JavaScript is a programming language used
-                        to make web pages interactive and dynamic.
-                    </p>
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
+                        alt="JS Logo">
+                    <h3><a href="https://www.w3schools.com/js/" target="_blank">JavaScript</a></h3>
+                    <p>Dynamic programming language powering interactive elements on web applications.</p>
                 </div>
             </div>
+            <!-- TypeScript -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+                        alt="TS Logo">
+                    <h3><a href="https://www.w3schools.com/typescript/" target="_blank">TypeScript</a></h3>
+                    <p>Statically typed superset of JavaScript that adds types at compile time.</p>
+                </div>
+            </div>
+            <!-- React -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+                        alt="React Logo">
+                    <h3><a href="https://www.w3schools.com/react/" target="_blank">React</a></h3>
+                    <p>Popular JavaScript library for building component-based user interfaces.</p>
+                </div>
+            </div>
+            <!-- Vue -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
+                        alt="Vue Logo">
+                    <h3><a href="https://www.w3schools.com/vue/" target="_blank">Vue.js</a></h3>
+                    <p>Progressive JavaScript framework for building modern user interfaces.</p>
+                </div>
+            </div>
+            <!-- Angular -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg"
+                        alt="Angular Logo">
+                    <h3><a href="https://angular.dev/" target="_blank">Angular</a></h3>
+                    <p>Platform and framework for building scalable single-page client applications.</p>
+                </div>
+            </div>
+            <!-- Bootstrap -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg"
+                        alt="Bootstrap Logo">
+                    <h3><a href="https://www.w3schools.com/bootstrap/bootstrap_ver.asp" target="_blank">Bootstrap</a>
+                    </h3>
+                    <p>Powerful CSS framework for fast responsive, mobile-first web development.</p>
+                </div>
+            </div>
+            <!-- W3.CSS -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+                        alt="W3.CSS Logo">
+                    <h3><a href="https://www.w3schools.com/w3css/def.asp" target="_blank">W3.CSS</a></h3>
+                    <p>Modern CSS framework with built-in responsiveness and lightweight speed.</p>
+                </div>
+            </div>
+            <!-- Sass -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg"
+                        alt="Sass Logo">
+                    <h3><a href="https://www.w3schools.com/sass/" target="_blank">Sass</a></h3>
+                    <p>Extension of CSS that adds power and elegance with variables and nested rules.</p>
+                </div>
+            </div>
+        </div>
 
+        <!-- Programming Languages & Backend -->
+        <h2>Programming Languages & Backend</h2>
+        <div class="row">
+            <!-- Python -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
+                        alt="Python Logo">
+                    <h3><a href="https://www.w3schools.com/python/" target="_blank">Python</a></h3>
+                    <p>Versatile high-level language used in web development, AI, and automation.</p>
+                </div>
+            </div>
+            <!-- C -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" alt="C Logo">
+                    <h3><a href="https://www.w3schools.com/c/" target="_blank">C Language</a></h3>
+                    <p>Robust general-purpose programming language for system and embedded software.</p>
+                </div>
+            </div>
+            <!-- C++ -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg"
+                        alt="C++ Logo">
+                    <h3><a href="https://www.w3schools.com/cpp/" target="_blank">C++</a></h3>
+                    <p>Extension of C featuring object-oriented tools for high-performance apps.</p>
+                </div>
+            </div>
+            <!-- C# -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg"
+                        alt="C# Logo">
+                    <h3><a href="https://www.w3schools.com/cs/" target="_blank">C#</a></h3>
+                    <p>Modern, object-oriented language developed by Microsoft for the .NET ecosystem.</p>
+                </div>
+            </div>
+            <!-- Java -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
+                        alt="Java Logo">
+                    <h3><a href="https://www.w3schools.com/java/" target="_blank">Java</a></h3>
+                    <p>Object-oriented, platform-independent language built for enterprise systems.</p>
+                </div>
+            </div>
+            <!-- PHP -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP Logo">
+                    <h3><a href="https://www.w3schools.com/php/" target="_blank">PHP</a></h3>
+                    <p>Widely-used server-side scripting language tailored for web engineering.</p>
+                </div>
+            </div>
+            <!-- Node.js -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                        alt="Node.js Logo">
+                    <h3><a href="https://www.w3schools.com/nodejs/" target="_blank">Node.js</a></h3>
+                    <p>JavaScript runtime built on Chrome's V8 engine for scalable server-side apps.</p>
+                </div>
+            </div>
+            <!-- Go -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" alt="Go Logo">
+                    <h3><a href="https://www.w3schools.com/go/" target="_blank">Go (Golang)</a></h3>
+                    <p>Open-source programming language designed for fast, reliable concurrent software.</p>
+                </div>
+            </div>
+            <!-- Rust -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-original.svg"
+                        alt="Rust Logo">
+                    <h3><a href="https://www.w3schools.com/rust/" target="_blank">Rust</a></h3>
+                    <p>Systems programming language focused on safety, speed, and memory management.</p>
+                </div>
+            </div>
+            <!-- Kotlin -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg"
+                        alt="Kotlin Logo">
+                    <h3><a href="https://www.w3schools.com/kotlin/" target="_blank">Kotlin</a></h3>
+                    <p>Modern cross-platform language fully interoperable with Java for Android apps.</p>
+                </div>
+            </div>
+            <!-- Swift -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/swift/swift-original.svg"
+                        alt="Swift Logo">
+                    <h3><a href="https://www.w3schools.com/swift/" target="_blank">Swift</a></h3>
+                    <p>Intuitive programming language created by Apple for building iOS and macOS apps.</p>
+                </div>
+            </div>
+            <!-- R -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/r/r-original.svg" alt="R Logo">
+                    <h3><a href="https://www.w3schools.com/r/" target="_blank">R Language</a></h3>
+                    <p>Specialized programming language heavily used for statistical computing and graphics.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Databases & Data Science -->
+        <h2>Databases & Data Science</h2>
+        <div class="row">
             <!-- SQL -->
             <div class="column">
                 <div class="content">
-
-                    <div class="sql-logo">
-                        SQL
-                    </div>
-
-                    <h3>
-                        <a href="https://www.w3schools.com/sql/">
-                            SQL Tutorials
-                        </a>
-                    </h3>
-
-                    <p>
-                        SQL is a standard language for storing,
-                        manipulating and retrieving data in
-                        databases. It works with MySQL, SQL Server,
-                        MS Access, Oracle and PostgreSQL.
-                    </p>
-
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                        alt="SQL Logo">
+                    <h3><a href="https://www.w3schools.com/sql/" target="_blank">SQL</a></h3>
+                    <p>Standard language for managing and querying data in relational database systems.</p>
                 </div>
             </div>
-
-            <!-- Python -->
-    <div class="column">
-        <div class="content">
-    
-            <div class="python-logo">
-                Python
+            <!-- MySQL -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+                        alt="MySQL Logo">
+                    <h3><a href="https://www.w3schools.com/mysql/" target="_blank">MySQL</a></h3>
+                    <p>Open-source relational database management system using structured query language.</p>
+                </div>
             </div>
-    
-            <h3>
-                <a href="https://www.w3schools.com/python/default.asp">
-                    Python Tutorials
-                </a>
-            </h3>
-    
-            <p>
-        Python is a popular programming language.
-        
-        Python can be used on a server to create web applications.
-        
-        Python is easy to learn - You will enjoy it!
-            </p>
-    
+            <!-- PostgreSQL -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+                        alt="PostgreSQL Logo">
+                    <h3><a href="https://www.w3schools.com/postgresql/" target="_blank">PostgreSQL</a></h3>
+                    <p>Advanced enterprise-class open-source relational database supporting SQL and JSON.</p>
+                </div>
+            </div>
+            <!-- MongoDB -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                        alt="MongoDB Logo">
+                    <h3><a href="https://www.w3schools.com/mongodb/" target="_blank">MongoDB</a></h3>
+                    <p>Flexible NoSQL document database designed for modern web-scale applications.</p>
+                </div>
+            </div>
+            <!-- Pandas -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg"
+                        alt="Pandas Logo">
+                    <h3><a href="https://www.w3schools.com/python/pandas/default.asp" target="_blank">Pandas</a></h3>
+                    <p>Python data analysis and data manipulation library built on data structures.</p>
+                </div>
+            </div>
+            <!-- NumPy -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg"
+                        alt="NumPy Logo">
+                    <h3><a href="https://www.w3schools.com/python/numpy/default.asp" target="_blank">NumPy</a></h3>
+                    <p>Fundamental package for scientific computing and multi-dimensional array math in Python.</p>
+                </div>
+            </div>
+            <!-- Excel -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azuredatastudio/azuredatastudio-original.svg"
+                        alt="Excel Logo">
+                    <h3><a href="https://www.w3schools.com/excel/" target="_blank">Excel</a></h3>
+                    <p>Master data analysis, spreadsheet formulas, charts, and financial modeling.</p>
+                </div>
+            </div>
         </div>
-    </div>
 
+        <!-- DevOps, Cloud, Tools & Security -->
+        <h2>DevOps, Cloud, Tools & Security</h2>
+        <div class="row">
+            <!-- AWS -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original.svg"
+                        alt="AWS Logo">
+                    <h3><a href="https://www.w3schools.com/aws/" target="_blank">AWS Cloud</a></h3>
+                    <p>Comprehensive cloud computing platform offering compute, storage, and serverless tools.</p>
+                </div>
+            </div>
+            <!-- Git -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git Logo">
+                    <h3><a href="https://www.w3schools.com/git/" target="_blank">Git</a></h3>
+                    <p>Distributed version control system for tracking changes in source code.</p>
+                </div>
+            </div>
+            <!-- GitHub -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                        alt="GitHub Logo">
+                    <h3><a href="https://github.com/" target="_blank">GitHub</a></h3>
+                    <p>Web-based hosting platform for version control and collaborative software building.</p>
+                </div>
+            </div>
+            <!-- Bash -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
+                        alt="Bash Logo">
+                    <h3><a href="https://www.gnu.org/software/bash/" target="_blank">Bash / Shell</a></h3>
+                    <p>Unix shell and command language used for shell scripting and process automation.</p>
+                </div>
+            </div>
+            <!-- XML -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xml/xml-original.svg" alt="XML Logo">
+                    <h3><a href="https://www.w3schools.com/xml/" target="_blank">XML</a></h3>
+                    <p>Learn XML markup language for structuring, storing, and transporting data.</p>
+                </div>
+            </div>
+            <!-- JSON -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/json/json-original.svg"
+                        alt="JSON Logo">
+                    <h3><a href="https://www.w3schools.com/js/js_json_intro.asp" target="_blank">JSON</a></h3>
+                    <p>Lightweight data-interchange format widely used in modern Web APIs.</p>
+                </div>
+            </div>
+            <!-- AJAX -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg"
+                        alt="AJAX Logo">
+                    <h3><a href="https://www.w3schools.com/xml/ajax_intro.asp" target="_blank">AJAX</a></h3>
+                    <p>Exchange data with a web server asynchronously behind the scenes.</p>
+                </div>
+            </div>
+            <!-- Cyber Security -->
+            <div class="column">
+                <div class="content">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg"
+                        alt="Security Logo">
+                    <h3><a href="https://www.w3schools.com/cybersecurity/" target="_blank">Cyber Security</a></h3>
+                    <p>Protect computers, programs, networks, and data from unauthorized digital access.</p>
+                </div>
+            </div>
         </div>
+
     </div>
 
 </body>
