@@ -6,6 +6,9 @@ on:
     paths:
       - "Prayag Gaikwad/**"
       - "Full-Stack-Development/Prayag Gaikwad/**"
+    paths:
+      - "Prayag Gaikwad/**"
+      - "Full-Stack-Development/Prayag Gaikwad/**"
   pull_request:
     branches: [main]
     paths:
