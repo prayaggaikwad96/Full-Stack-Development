@@ -163,6 +163,21 @@ class CodePilotApiTests(unittest.TestCase):
             [{"role": "user", "content": "Say hello"}],
         )
 
+    def test_chat_skips_messages_with_non_string_roles(self):
+        status, _, _ = self.request(
+            "/api/chat", "POST",
+            {"model": "test-coder:latest", "messages": [
+                {"role": "user", "content": "Say hello"},
+                {"role": [], "content": "Malformed list role"},
+                {"role": {"name": "user"}, "content": "Malformed object role"},
+            ]},
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(
+            FakeOllamaHandler.last_chat_request["messages"][1:],
+            [{"role": "user", "content": "Say hello"}],
+        )
+
     def test_project_export_and_zip_import_round_trip(self):
         project = {"index.html": "<h1>Hello</h1>", "src/main.js": "console.log('hi')"}
         status, content_type, body = self.request("/api/project/export", "POST", {"files": project})
