@@ -86,18 +86,47 @@
         const imageUpload = document.getElementById("imageUpload");
         const greenBox = document.getElementById("greenBox");
         const preview = document.getElementById("preview");
+        let previewURL = null;
 
-        imageUpload.addEventListener("change", function () {
+        imageUpload.addEventListener("change", async function () {
             const file = this.files[0];
+            preview.hidden = true;
+            greenBox.style.backgroundImage = "";
+            if (previewURL) {
+                URL.revokeObjectURL(previewURL);
+                previewURL = null;
+            }
 
-            if (file && file.type.startsWith("image/")) {
-                const imageURL = URL.createObjectURL(file);
+            if (!file || !file.type.startsWith("image/")) {
+                return;
+            }
 
-                greenBox.style.backgroundImage =
-                    `url("${imageURL}")`;
+            let bitmap;
+            try {
+                bitmap = await createImageBitmap(file);
+                const canvas = document.createElement("canvas");
+                canvas.width = bitmap.width;
+                canvas.height = bitmap.height;
+                const context = canvas.getContext("2d");
+                if (!context) {
+                    throw new Error("Could not create an image preview.");
+                }
+                context.drawImage(bitmap, 0, 0);
 
-                preview.src = imageURL;
+                const safeImage = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+                if (!safeImage) {
+                    throw new Error("Could not encode the image preview.");
+                }
+                previewURL = URL.createObjectURL(safeImage);
+                greenBox.style.backgroundImage = `url("${previewURL}")`;
+                preview.src = previewURL;
                 preview.hidden = false;
+            } catch (error) {
+                console.error("Could not create an image preview.", error);
+            } finally {
+                if (bitmap) {
+                    bitmap.close();
+                }
             }
         });
     </script>

@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible problem in the repository or one of its projects.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Before filing, search existing issues and avoid including secrets or private data. For security vulnerabilities, use the private reporting instructions in SECURITY.md instead of a public issue.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the problem and identify the affected project or repository path.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: List the smallest set of steps that reproduces the problem.
+      placeholder: |
+        1. Open ...
+        2. Run ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and relevant details
+      description: Include relevant operating system, tool versions, error messages, or screenshots. Remove secrets and personal data.
+    validations:
+      required: false
