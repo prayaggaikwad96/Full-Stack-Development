@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body{
+            background-color: rgb(201, 223, 251);
+            text-align: center;
+        }
+        * {
+            box-sizing: border-box;
+        }
+
+        .responsive-form {
+            max-width: 600px;
+            width: 100%;
+            border-radius: 4px;
+            border: 2px solid #7ff57f;
+            ;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        label {
+            min-width: 48%;
+            margin-bottom: 10px;
+        }
+
+        input[type=text],
+        select {
+            min-width: 45%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        textarea {
+            min-width: 45%;
+            height: 150px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #91daff;
+            color: white;
+            padding: 14px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 600px) {
+
+            label,
+            input[type=text],
+            input[type=submit],
+            select,
+            textarea {
+                flex: 100%;
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Responsive Form</h2>
+    <p>Resize the screen to see the form layout change!</p>
+
+    <div class="responsive-form">
+
+        <form action="/action_page.php">
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname" placeholder="Your first name">
+
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname" placeholder="Your last name">
+
+            <label for="country">Country:</label>
+            <select id="country" name="country">
+                <option value="australia">Australia</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+            </select>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Write something.."></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+
+    </div>
+
+</body>
+
+</html>

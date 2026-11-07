@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-index Example</title>
+
+    <style>
+        .container {
+            position: relative;
+            min-height: 200px;
+        }
+
+        .black-box {
+            position: relative;
+            z-index: 1;
+            border: 2px solid black;
+            height: 100px;
+            margin: 30px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .gray-box {
+            position: absolute;
+            z-index: 3;
+            background-color: lightgray;
+            height: 60px;
+            width: 70%;
+            left: 50px;
+            top: 50px;
+            padding: 5px;
+        }
+
+        .green-box {
+            position: absolute;
+            z-index: 2;
+            background-color: green;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 35%;
+            height: 100px;
+            left: 270px;
+            top: -15px;
+        }
+
+        .image-option {
+            margin: 20px 0;
+        }
+
+        #preview {
+            display: block;
+            max-width: 250px;
+            max-height: 150px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Z-index Example</h1>
+
+    <p>
+        An element with greater stack order is always above
+        an element with a lower stack order.
+    </p>
+
+    <div class="image-option">
+        <label for="imageUpload">Choose an image:</label>
+        <input type="file" id="imageUpload" accept="image/*">
+        <img id="preview" alt="Selected image preview" hidden>
+    </div>
+
+    <div class="container">
+        <div class="black-box">Black box (z-index: 1)</div>
+        <div class="gray-box">Gray box (z-index: 3)</div>
+        <div class="green-box" id="greenBox">
+            Green box (z-index: 2)
+        </div>
+    </div>
+
+    <script>
+        const imageUpload = document.getElementById("imageUpload");
+        const greenBox = document.getElementById("greenBox");
+        const preview = document.getElementById("preview");
+        let previewURL = null;
+
+        imageUpload.addEventListener("change", async function () {
+            const file = this.files[0];
+            preview.hidden = true;
+            greenBox.style.backgroundImage = "";
+            if (previewURL) {
+                URL.revokeObjectURL(previewURL);
+                previewURL = null;
+            }
+
+            if (!file || !file.type.startsWith("image/")) {
+                return;
+            }
+
+            let bitmap;
+            try {
+                bitmap = await createImageBitmap(file);
+                const canvas = document.createElement("canvas");
+                canvas.width = bitmap.width;
+                canvas.height = bitmap.height;
+                const context = canvas.getContext("2d");
+                if (!context) {
+                    throw new Error("Could not create an image preview.");
+                }
+                context.drawImage(bitmap, 0, 0);
+
+                const safeImage = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+                if (!safeImage) {
+                    throw new Error("Could not encode the image preview.");
+                }
+                previewURL = URL.createObjectURL(safeImage);
+                greenBox.style.backgroundImage = `url("${previewURL}")`;
+                preview.src = previewURL;
+                preview.hidden = false;
+            } catch (error) {
+                console.error("Could not create an image preview.", error);
+            } finally {
+                if (bitmap) {
+                    bitmap.close();
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

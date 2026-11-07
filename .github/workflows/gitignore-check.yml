@@ -2,9 +2,9 @@ name: Validate root gitignore
 
 on:
   push:
-    branches: [main]
+    branches: [main, Developer]
   pull_request:
-    branches: [main]
+    branches: [main, Developer]
     paths:
       - ".gitignore"
       - ".github/workflows/gitignore-check.yml"

@@ -2,9 +2,9 @@ name: CodePilot tests
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, Developer]
   push:
-    branches: [main]
+    branches: [main, Developer]
   workflow_dispatch:
 
 permissions:

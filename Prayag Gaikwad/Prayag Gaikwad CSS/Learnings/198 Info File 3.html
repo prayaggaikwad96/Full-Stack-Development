@@ -1,0 +1,88 @@
+Yes! You can add files to GitHub in both ways:
+
+1. Directly through the GitHub website.
+2. Through VS Code using Git commands.
+
+Both methods work. The main difference is how you upload and manage your files.
+
+## 1. Method 1: Add files directly through GitHub
+
+How to exit from editor in linux terminal - The freeCodeCamp Forum
+
+Steps
+
+1. Open your repository on GitHub.
+2. Click Add file.
+3. Choose Create new file or Upload files.
+4. Add your content or select files.
+5. Click Commit changes.
+
+What happens?
+
+- The files are added directly to your remote GitHub repository.
+- GitHub creates a commit for the changes.
+- You don't need to run `git add`, `git commit`, or `git push` for that upload.
+
+## 2. Method 2: Add files through VS Code using Git commands
+
+Suppose your project contains these files:
+
+text
+```
+MyProject/
+├── index.html
+├── style.css
+└── script.js
+```
+
+Open the project folder in VS Code, then open the terminal.
+
+Run these commands:
+
+bash
+```
+git init
+git add .
+git commit -m "Initial commit"
+```
+
+These commands create a local repository, stage your files, and save a local commit.
+
+Next, connect your project to GitHub:
+
+bash
+```
+git remote add origin https://github.com/USERNAME/REPOSITORY.git
+git branch -M main
+git push -u origin main
+```
+
+Replace `USERNAME` and `REPOSITORY` with your actual GitHub username and repository name.
+
+What happens?
+
+Your committed files are uploaded from your computer to GitHub.
+
+## 3. Main differences
+
+| Feature | GitHub website | VS Code + Git |
+| --- | --- | --- |
+| Add files | Yes | Yes |
+| Commit changes | Directly on GitHub | Locally |
+| Upload to GitHub | Immediate when committed | Requires `git push` |
+| Work offline | No | Yes, for local Git operations |
+| Best for | Small, occasional changes | Regular development and projects |
+
+## 4. Which method should you use?
+
+My recommendation is to learn VS Code + Git commands if you're learning web development or Java Full-Stack Development.
+It helps you understand version control and is useful for collaborative projects.
+
+Remember this simple rule:
+
+- `git add` → prepare changes.
+- `git commit` → save changes locally.
+- `git push` → upload commits to GitHub.
+
+You can also combine both methods, but if you edit files directly on GitHub, remember to synchronize those changes with
+your local repository before pushing further changes.

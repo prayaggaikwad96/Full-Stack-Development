@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Full Stack Development</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0f172a;
+            color: #ffffff;
+            padding: 50px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #1e293b;
+            color: #38bdf8;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        h1 span {
+            color: #38bdf8;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 45px;
+        }
+
+        .category {
+            text-align: left;
+            margin-bottom: 35px;
+        }
+
+        .category h2 {
+            font-size: 21px;
+            margin-bottom: 18px;
+            padding-left: 12px;
+            border-left: 4px solid #38bdf8;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .tech-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 23px 12px;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+            background: #263449;
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.10);
+        }
+
+        .tech-icon {
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .tech-card h3 {
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .tech-card p {
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 22px;
+            background: #1e293b;
+            border-radius: 12px;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .footer strong {
+            color: #38bdf8;
+        }
+
+        @media (max-width: 800px) {
+            .tech-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 35px 14px;
+            }
+
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="tag">FULL-STACK DEVELOPMENT</div>
+
+        <h1>Tech Stack <span>You'll Learn</span></h1>
+
+        <p class="subtitle">
+            Master the tools and technologies you'll need to build
+            modern, scalable, full-stack web applications.
+        </p>
+
+        <!-- Backend Development -->
+        <section class="category">
+            <h2>Backend Development</h2>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">☕</div>
+                    <h3>Java</h3>
+                    <p>Core programming and OOP</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🌱</div>
+                    <h3>Spring Framework</h3>
+                    <p>Enterprise application development</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🚀</div>
+                    <h3>Spring Boot</h3>
+                    <p>Build production-ready applications</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">⚙️</div>
+                    <h3>Multithreading</h3>
+                    <p>Concurrent task execution</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Frontend Development -->
+        <section class="category">
+            <h2>Frontend Development</h2>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🌐</div>
+                    <h3>HTML5 &amp; CSS3</h3>
+                    <p>Structure and styling of websites</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🟨</div>
+                    <h3>JavaScript</h3>
+                    <p>Interactive web applications</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">⚛️</div>
+                    <h3>React.js</h3>
+                    <p>Component-based user interfaces</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🧭</div>
+                    <h3>React Router</h3>
+                    <p>Navigation between pages</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🎨</div>
+                    <h3>Bootstrap</h3>
+                    <p>Responsive layouts and components</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🔄</div>
+                    <h3>Redux Toolkit</h3>
+                    <p>Application state management</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Databases -->
+        <section class="category">
+            <h2>Databases &amp; Caching</h2>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🗄️</div>
+                    <h3>MySQL</h3>
+                    <p>Relational database management</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🍃</div>
+                    <h3>MongoDB Atlas</h3>
+                    <p>Cloud-hosted NoSQL database</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">⚡</div>
+                    <h3>Redis</h3>
+                    <p>Fast data access and caching</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- APIs and Node -->
+        <section class="category">
+            <h2>APIs &amp; Server Technologies</h2>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🔗</div>
+                    <h3>REST APIs</h3>
+                    <p>Communication between applications</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🟢</div>
+                    <h3>Node.js</h3>
+                    <p>JavaScript runtime for servers</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🚂</div>
+                    <h3>Express.js</h3>
+                    <p>Web server and API framework</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🔐</div>
+                    <h3>Authentication</h3>
+                    <p>Secure login and access control</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Technologies -->
+        <section class="category">
+            <h2>Advanced Technologies &amp; Tools</h2>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">📨</div>
+                    <h3>Apache Kafka</h3>
+                    <p>Event streaming and messaging</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">📚</div>
+                    <h3>Git &amp; GitHub</h3>
+                    <p>Version control and collaboration</p>
+                </div>
+
+                <div class="tech-card">
+                    <div class="tech-icon">🤖</div>
+                    <h3>Claude</h3>
+                    <p>AI-assisted software development</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <strong>Career Goal:</strong>
+            Become a Java Full-Stack Developer by learning frontend,
+            backend, databases, APIs, and modern development tools.
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ID Attribute in JavaScript</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+
+            /* Two-color background */
+            background: linear-gradient(to right, powderblue, lightyellow);
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 35px;
+
+            background-color: white;
+
+            border: 3px solid #333;
+            border-radius: 20px;
+
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: darkblue;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        #myHeader {
+            background-color: tomato;
+            color: white;
+
+            padding: 25px;
+            margin: 25px 0;
+
+            border-radius: 15px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        #myHeader:hover {
+            background-color: orange;
+            color: black;
+
+            transform: scale(1.05);
+
+            cursor: pointer;
+        }
+
+        button {
+            background-color: darkblue;
+            color: white;
+
+            padding: 12px 25px;
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: limegreen;
+            color: black;
+
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2>Using The id Attribute in JavaScript</h2>
+
+        <p>
+            JavaScript can access an element with a specified
+            <b>id</b> by using the
+            <b>getElementById()</b> method:
+        </p>
+
+        <h1 id="myHeader">Hello World!</h1>
+
+        <button onclick="displayResult()">
+            Change Text
+        </button>
+
+    </div>
+
+    <script>
+        function displayResult() {
+            document.getElementById("myHeader").innerHTML =
+                "Have a nice day!";
+        }
+    </script>
+
+</body>
+
+</html>
+```

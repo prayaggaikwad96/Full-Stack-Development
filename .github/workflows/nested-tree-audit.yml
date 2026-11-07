@@ -2,12 +2,12 @@ name: Audit nested project tree
 
 on:
   push:
-    branches: [main]
+    branches: [main, Developer]
     paths:
       - "Prayag Gaikwad/**"
       - "Full-Stack-Development/Prayag Gaikwad/**"
   pull_request:
-    branches: [main]
+    branches: [main, Developer]
     paths:
       - "Prayag Gaikwad/**"
       - "Full-Stack-Development/Prayag Gaikwad/**"

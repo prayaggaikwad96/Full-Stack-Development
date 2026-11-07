@@ -2,7 +2,7 @@ name: Repository consistency audit
 
 on:
   push:
-    branches: [main]
+    branches: [main, Developer]
     paths:
       - ".github/workflows/repository-consistency.yml"
       - ".github/ISSUE_TEMPLATE/**"
@@ -11,6 +11,8 @@ on:
       - ".github/workflows/cleanup-redundant-branches.yml"
       - ".github/workflows/codepilot-tests.yml"
       - ".github/workflows/codeql.yml"
+      - ".github/workflows/gitignore-check.yml"
+      - ".github/workflows/nested-tree-audit.yml"
       - ".gitignore"
       - "CODE_OF_CONDUCT.md"
       - "CONTRIBUTING.md"
