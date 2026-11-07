@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body{
+            background-color: rgb(153, 208, 238);
+        }
+        div p {
+            background-color: rgb(98, 150, 193);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Descendant Combinator (space)</h2>
+
+    <p>The descendant combinator (space) matches all elements that are descendants (children, grandchildren, etc.) of a
+        specified element.</p>
+    <p>The following example selects all p elements inside div elements:</p>
+
+    <div>
+        <p>Paragraph 1 in the div.</p>
+        <p>Paragraph 2 in the div.</p>
+        <section>
+            <p>Paragraph 3 in the div.</p>
+        </section>
+    </div>
+
+    <p>Paragraph 4. Not in a div.</p>
+    <p>Paragraph 5. Not in a div.</p>
+
+</body>
+
+</html>

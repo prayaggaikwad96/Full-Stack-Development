@@ -1,0 +1,313 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HTML Bookmarks - Chapters</title>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            font-family: Arial, sans-serif;
+
+            /* Two-color background */
+            background: linear-gradient(
+                135deg,
+                powderblue,
+                lightyellow
+            );
+
+            text-align: center;
+        }
+
+        h1 {
+            background-color: darkslateblue;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .navigation {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navigation a {
+            display: inline-block;
+            background-color: tomato;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 22px;
+            margin: 8px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .navigation a:hover {
+            background-color: orange;
+            color: black;
+            transform: scale(1.1);
+        }
+
+        .chapter {
+            max-width: 750px;
+            margin: 20px auto;
+            padding: 20px;
+
+            background-color: white;
+
+            border: 3px solid darkslateblue;
+            border-radius: 15px;
+
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+
+            transition: 0.3s;
+        }
+
+        .chapter:hover {
+            background-color: lightcyan;
+            transform: scale(1.03);
+
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+        }
+
+        .chapter h2 {
+            margin-top: 0;
+            color: darkslateblue;
+        }
+
+        .chapter p {
+            font-weight: bold;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Special bookmark chapters */
+
+        #C4 {
+            background-color: lightgreen;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        #C10 {
+            background-color: lightsalmon;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        #C4:hover {
+            background-color: limegreen;
+            color: white;
+        }
+
+        #C10:hover {
+            background-color: tomato;
+            color: white;
+        }
+
+        .top-button {
+            display: inline-block;
+            text-decoration: none;
+
+            background-color: darkslateblue;
+            color: white;
+
+            padding: 12px 25px;
+            margin: 30px 0;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .top-button:hover {
+            background-color: orange;
+            color: black;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body id="top">
+
+    <h1>HTML Bookmark Chapters</h1>
+
+    <div class="navigation">
+
+        <h2>Jump to a Chapter</h2>
+
+        <a href="#C4">Jump to Chapter 4</a>
+
+        <a href="#C10">Jump to Chapter 10</a>
+
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 1</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 2</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 3</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+
+        <h2 id="C4">Chapter 4</h2>
+
+        <p>This chapter explains ba bla bla</p>
+
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 5</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 6</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 7</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 8</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 9</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+
+        <h2 id="C10">Chapter 10</h2>
+
+        <p>This chapter explains ba bla bla</p>
+
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 11</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 12</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 13</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 14</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 15</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 16</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 17</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 18</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 19</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 20</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 21</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 22</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <div class="chapter">
+        <h2>Chapter 23</h2>
+        <p>This chapter explains ba bla bla</p>
+    </div>
+
+
+    <a class="top-button" href="#top">
+        ↑ Back to Top
+    </a>
+
+</body>
+
+</html>
+```
