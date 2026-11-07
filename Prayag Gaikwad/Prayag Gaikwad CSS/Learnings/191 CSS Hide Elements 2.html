@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #panel,
+        .flip {
+            padding: 10px;
+            text-align: center;
+            background-color: #04AA6D;
+            color: white;
+            border: solid 1px #a6d8a8;
+            margin: auto;
+            cursor: pointer;
+        }
+
+        #panel {
+            display: none;
+            cursor: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p class="flip" onclick="myFunction()">Click to show/hide panel</p>
+
+    <div id="panel">
+        <p>The panel toggles between hiding and showing a div element.</p>
+        <p>We use JavaScript to open and close it.</p>
+        <p>You will learn more about JavaScript in our JavaScript Tutorial.</p>
+    </div>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("panel");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

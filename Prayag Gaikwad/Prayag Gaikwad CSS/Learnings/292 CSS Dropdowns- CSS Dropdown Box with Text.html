@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body{
+            background-color: rgb(180, 194, 244);
+            
+        }
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #7ab1e8;
+            min-width: 130px;
+            box-shadow: 0px 8px 16px 0px rgba(199, 136, 136, 0);
+            padding: 12px 16px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Dropdown Box with Text</h2>
+    <p>Mouse over the text below to display the dropdown content.</p>
+
+    <div class="dropdown">Mouse over me!
+        <div class="dropdown-content">Hello World!</div>
+    </div>
+
+</body>
+
+</html>
