@@ -90,3 +90,7 @@ The fork `prayaggaikwad96/rea` is diverged from parent `morluto/rea`:
 A draft-only upstream-to-fork review PR was opened: [prayaggaikwad96/rea#16](https://github.com/prayaggaikwad96/rea/pull/16). GitHub reports 214 commits, 2,173 changed files, 174,721 additions and 17,459 deletions, and initially returned `mergeable: false` at creation; a later live PR fetch reports `mergeable: true`. This is only GitHub's current mergeability calculation, not a safety approval. Keep the PR draft. The size still requires full content review, current head CI, and verification that all seven fork-only commits and the audit document remain preserved. This PR did not move either branch ref.
 
 The other checked fork relationships do not show missing upstream commits at the inspected tip: `virtual` local main is one commit ahead of upstream; `altair` local master is seven commits ahead; `git` local master is one commit ahead. These are point-in-time comparisons and should not be force-synchronized.
+
+
+### REA PR #16 review snapshot
+The PR currently remains open and draft. A later live fetch reports `mergeable: true`, but no workflow runs or check-runs were returned for the upstream head SHA at inspection time. Its 2,173 changed files are concentrated in `src` (1,278), `tests` (549), `docs` (215), `website` (47), and `scripts` (38), with the remainder in metadata, templates, and bridge code. Given the size and lack of PR-head CI evidence, do not merge until a full diff review and fresh target-branch CI are completed.
