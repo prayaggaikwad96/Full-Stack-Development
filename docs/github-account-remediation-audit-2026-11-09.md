@@ -44,7 +44,7 @@ Inspected run logs show a `minimatch` security update cannot be resolved by the 
 For Computer-Classes, virtual, rea, git and profile repo, the queried commit-check runs endpoint returned no check runs for the current default-branch commit; this is not equivalent to a comprehensive workflow/security audit.
 
 ## Access limitations and unverified controls
-The connected integration returned HTTP 403 for branch-protection read access on Full-Stack-Development (`Resource not accessible by integration`). Repository ruleset, secret-scanning, push-protection, vulnerability alerts, Actions secrets, and automatic branch-deletion settings were not fully verified across all repositories. The connector does not expose administrative write actions for branch protection/rulesets or repository security settings.
+The connected integration returned HTTP 403 for branch-protection detail reads on Full-Stack-Development. However, a subsequent live GET of the default-branch objects reports `protected: true` for all seven repositories. Thus all seven default branches are marked protected; the exact protection policy (required checks/reviews, admin enforcement, force-push/deletion rules, and ruleset/classic details) remains unverified. Secret-scanning, push-protection, vulnerability alerts, Actions secrets, and automatic branch-deletion settings were not fully verified across all repositories. The connector does not expose administrative write actions for branch protection/rulesets or repository security settings.
 Local Windows worktrees on two PCs cannot be inspected through this GitHub connection. No claim is made that local files, untracked work, or local-only commits are synchronized or backed up.
 
 ## Actions taken in this audit
@@ -62,3 +62,19 @@ Local Windows worktrees on two PCs cannot be inspected through this GitHub conne
 4. Validate Computer-Classes #6 and altair #3 with fresh PR checks before merge.
 5. Use an administrator-authorized GitHub session to configure and verify branch rulesets, required CI, secret scanning, push protection, Dependabot alerts, and default branch auto-delete policy.
 6. Complete full paginated branch, PR, workflow, security-alert, and releases/tags inventory before making cleanup decisions.
+
+
+## Verification correction — default-branch protection flags
+A fresh live GET of each repository's exact default-branch endpoint reports `protected: true` for all seven default branches:
+- Full-Stack-Development `main`
+- Computer-Classes `main`
+- virtual `main`
+- rea `main`
+- altair `master`
+- git `master`
+- prayaggaikwad96 `main`
+
+This confirms that GitHub currently marks every default branch as protected. The branch-protection detail endpoint still returns HTTP 403 to this integration, so exact rule contents remain unverified: required check names, required review count, stale-review dismissal, admin enforcement, force-push/deletion restrictions, and ruleset-vs-classic configuration. Do not describe protection as absent; describe detailed policy as inaccessible to this connection.
+
+## Audit PR validation
+This report is submitted as draft PR #38: https://github.com/prayaggaikwad96/Full-Stack-Development/pull/38. Its initial run passed seven checks on audit commit `7d60970679628b14da47aab11a222faaf8b1667e` (repository invariants and six Python/Node matrix jobs). The audit is documentation-only and must not be treated as approval to merge any other PR.
