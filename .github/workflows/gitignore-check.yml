@@ -24,7 +24,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7 # Replace with a verified full commit SHA before production enforcement.
         with:
           persist-credentials: false
       - name: Ensure environment templates remain trackable
