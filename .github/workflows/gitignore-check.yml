@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, Developer]
     paths:
       - ".gitignore"
       - ".github/workflows/gitignore-check.yml"
@@ -13,35 +13,43 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: gitignore-check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   gitignore:
     name: Validate ignore rules
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v7
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - name: Ensure environment templates remain trackable
         shell: bash
         run: |
+          set -euo pipefail
           assert_not_ignored() {
             local path="$1"
-            local status
             if git check-ignore --no-index -q "$path"; then
               echo "$path must not be ignored"
               return 1
             else
-              status=$?
-            fi
-            if [ "$status" -ne 1 ]; then
-              echo "git check-ignore failed for $path with exit code $status"
-              return "$status"
+              local status=$?
+              if [ "$status" -ne 1 ]; then
+                echo "git check-ignore failed for $path with exit code $status"
+                return "$status"
+              fi
             fi
           }
-
           assert_not_ignored .env.example
           assert_not_ignored .env.sample
       - name: Verify representative generated files are ignored
         shell: bash
         run: |
+          set -euo pipefail
           git check-ignore -q node_modules/example/index.js
           git check-ignore -q __pycache__/example.pyc
           git check-ignore -q .env.local

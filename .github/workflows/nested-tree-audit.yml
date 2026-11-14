@@ -6,6 +6,7 @@ on:
     paths:
       - "Prayag Gaikwad/**"
       - "Full-Stack-Development/Prayag Gaikwad/**"
+      - ".github/workflows/nested-tree-audit.yml"
   pull_request:
     branches: [main]
     paths:
@@ -21,26 +22,29 @@ jobs:
   compare:
     name: Compare canonical and nested learning trees
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Compare every file after line-ending normalization
         shell: bash
         run: |
+          set -euo pipefail
           python - <<'PY'
           import csv
           import hashlib
           import json
           import os
-          import sys
           from pathlib import Path
 
           repo = Path.cwd()
           canonical = repo / "Prayag Gaikwad"
           nested = repo / "Full-Stack-Development" / "Prayag Gaikwad"
           out = repo / "audit-artifacts"
-          out.mkdir(exist_ok=True)
+          out.mkdir(parents=True, exist_ok=True)
 
           def file_map(root):
               if not root.is_dir():
@@ -48,7 +52,7 @@ jobs:
               return {
                   path.relative_to(root).as_posix(): path
                   for path in root.rglob("*")
-                  if path.is_file()
+                  if path.is_file() and not path.is_symlink()
               }
 
           def read_file(path):
@@ -142,7 +146,7 @@ jobs:
                   if substantive:
                       handle.write("\n## Differences requiring review (first 100)\n\n| Status | Relative path |\n|---|---|\n")
                       for row in substantive[:100]:
-                          handle.write(f"| {row['status']} | `{row['relative_path'].replace('|', '%7C')}` |\n")
+                          handle.write(f"| {row['status']} | \`{row['relative_path'].replace('|', '%7C')}\` |\n")
 
           print(json.dumps({
               "canonical_directory_present": canonical.is_dir(),
