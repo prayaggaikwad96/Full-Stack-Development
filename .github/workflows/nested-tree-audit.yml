@@ -2,13 +2,13 @@ name: Audit nested project tree
 
 on:
   push:
-    branches: [main]
+    branches: [main, Developer]
     paths:
       - "Prayag Gaikwad/**"
       - "Full-Stack-Development/Prayag Gaikwad/**"
       - ".github/workflows/nested-tree-audit.yml"
   pull_request:
-    branches: [main]
+    branches: [main, Developer]
     paths:
       - "Prayag Gaikwad/**"
       - "Full-Stack-Development/Prayag Gaikwad/**"
@@ -168,3 +168,11 @@ jobs:
           path: audit-artifacts/
           if-no-files-found: error
           retention-days: 30
+
+      - name: Require both comparison roots
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d "Prayag Gaikwad" || { echo "::error::Canonical learning tree is missing."; exit 1; }
+          test -d "Full-Stack-Development/Prayag Gaikwad" || { echo "::error::Nested learning tree is missing."; exit 1; }
