@@ -1,7 +1,7 @@
 version: 2
 
 updates:
-  # Keep GitHub Actions references current (including pinned actions).
+  # Keep GitHub Actions references current, including immutable SHA pins.
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -17,11 +17,13 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci(deps)"
+      include: "scope"
 
-  # CodePilot is implemented with Python's standard library and has no
-  # third-party Python requirements or lockfile at present. Keep pip omitted
-  # until a dependency manifest is introduced.
-  #
-  # The repository currently has no package.json/lockfile, Dockerfile,
-  # or supported manifests for other package ecosystems. Add an ecosystem
-  # entry only when its manifest exists in the target directory.
+  # Add ecosystem entries only when a corresponding manifest/lockfile exists.
+  # CodePilot currently uses Python's standard library and browser JavaScript;
+  # no pip/npm/Docker/etc. dependency manifest exists in this repository.
