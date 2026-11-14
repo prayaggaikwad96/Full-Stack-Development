@@ -148,6 +148,21 @@ class CodePilotApiTests(unittest.TestCase):
         status, _, _ = self.request("/api/chat", "POST", raw=b"{bad json")
         self.assertEqual(status, 400)
 
+    def test_chat_skips_messages_with_non_string_roles(self):
+        status, _, _ = self.request(
+            "/api/chat", "POST",
+            {"model": "test-coder:latest", "messages": [
+                {"role": "user", "content": "Say hello"},
+                {"role": [], "content": "Malformed list role"},
+                {"role": {"name": "user"}, "content": "Malformed object role"},
+            ]},
+        )
+        self.assertEqual(status, 200)
+        self.assertEqual(
+            FakeOllamaHandler.last_chat_request["messages"][1:],
+            [{"role": "user", "content": "Say hello"}],
+        )
+
     def test_project_export_and_zip_import_round_trip(self):
         project = {"index.html": "<h1>Hello</h1>", "src/main.js": "console.log('hi')"}
         status, content_type, body = self.request("/api/project/export", "POST", {"files": project})
@@ -195,6 +210,29 @@ class CodePilotApiTests(unittest.TestCase):
         status, _, body = self.request("/api/not-a-route")
         self.assertEqual(status, 404)
         self.assertIn("not found", json.loads(body)["error"].lower())
+
+
+    def test_safe_project_path_rejects_traversal_and_absolute_paths(self):
+        self.assertEqual(codepilot.safe_project_path("src/main.py"), "src/main.py")
+        for unsafe in ["../escape.py", "/absolute.py", "folder/../escape.py", "folder\\\\escape.py", ""]:
+            with self.subTest(path=unsafe):
+                self.assertIsNone(codepilot.safe_project_path(unsafe))
+
+    def test_zip_import_skips_unsafe_and_unsupported_entries(self):
+        memory = io.BytesIO()
+        with zipfile.ZipFile(memory, "w") as archive:
+            archive.writestr("project/src/main.py", "print('safe')")
+            archive.writestr("../escape.py", "print('unsafe')")
+            archive.writestr("project/image.exe", "not source")
+        imported = codepilot.read_zip_files(memory.getvalue())
+        self.assertEqual(imported, {"project/src/main.py": "print('safe')"})
+
+    def test_zip_import_rejects_archives_without_supported_text_files(self):
+        memory = io.BytesIO()
+        with zipfile.ZipFile(memory, "w") as archive:
+            archive.writestr("project/image.exe", "not source")
+        with self.assertRaisesRegex(ValueError, "No supported UTF-8 source files"):
+            codepilot.read_zip_files(memory.getvalue())
 
 
 if __name__ == "__main__":

@@ -1,5 +1,7 @@
 version: 2
+
 updates:
+  # Keep GitHub Actions references current (including pinned actions).
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -7,7 +9,7 @@ updates:
       day: "monday"
       time: "04:00"
       timezone: "Asia/Kolkata"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
     groups:
       github-actions-minor-and-patch:
         patterns:
@@ -15,3 +17,11 @@ updates:
         update-types:
           - "minor"
           - "patch"
+
+  # CodePilot is implemented with Python's standard library and has no
+  # third-party Python requirements or lockfile at present. Keep pip omitted
+  # until a dependency manifest is introduced.
+  #
+  # The repository currently has no package.json/lockfile, Dockerfile,
+  # or supported manifests for other package ecosystems. Add an ecosystem
+  # entry only when its manifest exists in the target directory.

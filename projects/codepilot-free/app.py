@@ -200,7 +200,7 @@ class Handler(SimpleHTTPRequestHandler):
             if not isinstance(item, dict):
                 continue
             role, content = item.get("role"), item.get("content")
-            if role not in {"user", "assistant"} or not isinstance(content, str):
+            if not isinstance(role, str) or role not in {"user", "assistant"} or not isinstance(content, str):
                 continue
             chars += len(content)
             if chars > 1_500_000:

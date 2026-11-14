@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parallax Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Shared Parallax Style */
+        .parallax {
+            height: 600px;
+            background-image: url("https://media.geeksforgeeks.org/wp-content/uploads/20210402175040/back22.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .parallax h2 {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            letter-spacing: 2px;
+        }
+
+        .content {
+            padding: 50px;
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+
+        .content p {
+            max-width: 1000px;
+            margin: auto;
+            font-size: 17px;
+        }
+
+        @media (max-width: 768px) {
+            .parallax {
+                background-attachment: scroll;
+                height: 400px;
+            }
+
+            .parallax h2 {
+                font-size: 22px;
+            }
+
+            .content {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <section class="parallax">
+        <h2>THOMAS</h2>
+    </section>
+
+    <!-- About -->
+    <section class="content">
+        <p>
+            Thank you for visiting my website. My programming journey began in 2019 before starting
+            Computer Science Engineering. I enjoy solving programming problems, building web applications,
+            and creating interactive projects.
+
+            <br><br>
+
+            <strong>Languages:</strong> C, C++, Java, Python, JavaScript, MySQL
+
+            <br>
+
+            <strong>Skills:</strong> Data Structures & Algorithms, Object-Oriented Programming,
+            HTML, CSS, Linux, Git, GitHub
+        </p>
+    </section>
+
+    <!-- Projects -->
+    <section class="parallax">
+        <h2>PROJECTS</h2>
+    </section>
+
+    <section class="content">
+        <p>
+            Calendar • Tic-Tac-Toe • Quiz Game • Survey Form • Chat Bot • Tribute Page • Portfolio Website •
+            Guess the Number • Rock Paper Scissors • To-Do List • Notes App • BMI Calculator • Loan Calculator •
+            Travel Management System • Password Generator
+        </p>
+    </section>
+
+    <!-- Achievements -->
+    <section class="parallax">
+        <h2>ACHIEVEMENTS</h2>
+    </section>
+
+    <section class="content">
+        <p>
+            Technical Content Engineer Intern at GeeksforGeeks • Microsoft Learn Student Ambassador •
+            GirlScript Summer of Code Participant • Hackathon Mentor
+        </p>
+    </section>
+
+</body>
+
+</html>

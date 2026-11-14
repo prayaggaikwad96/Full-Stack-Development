@@ -2,7 +2,7 @@ name: CodePilot tests
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, Developer]
   push:
     branches: [main]
   workflow_dispatch:
@@ -10,22 +10,31 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: codepilot-tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: Python ${{ matrix.python-version }} / Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
         python-version: ["3.12", "3.13", "3.14", "3.15"]
         node-version: ["22", "24"]
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
-          cache: ""
-      - uses: actions/setup-node@v7
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
       - name: Check Python syntax
