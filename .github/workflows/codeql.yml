@@ -18,6 +18,7 @@ jobs:
   analyze:
     name: CodeQL analysis
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     permissions:
       actions: read
       contents: read
@@ -25,14 +26,16 @@ jobs:
       security-events: write
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7 # Replace with a verified full commit SHA before production enforcement.
+        with:
+          persist-credentials: false
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v4
+        uses: github/codeql-action/init@v4 # Replace with a verified full commit SHA before production enforcement.
         with:
           languages: actions, javascript-typescript, python
 
       - name: Perform CodeQL analysis
-        uses: github/codeql-action/analyze@v4
+        uses: github/codeql-action/analyze@v4 # Replace with a verified full commit SHA before production enforcement.
         with:
           category: "/language:actions-javascript-python"
