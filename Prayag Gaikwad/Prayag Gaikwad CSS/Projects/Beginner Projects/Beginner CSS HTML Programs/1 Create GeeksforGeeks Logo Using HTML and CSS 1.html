@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connected Circles</title>
+
+    <style>
+        body {
+            background-color: aliceblue;
+        }
+
+        .Wrapper {
+            display: flex;
+        }
+
+        .Circle {
+            height: 100px;
+            width: 100px;
+            border: 20px solid darkgreen;
+            border-radius: 50%;
+            position: relative;
+            box-sizing: content-box;
+        }
+
+        .Circle::after {
+            content:"";
+            position: absolute;
+            border-top: 100px solid transparent;
+            top: -35px;
+        }
+
+        .Circle1::after {
+            border-left: 140px solid white;
+            left: -50px;
+            top: -35px;
+        }
+
+        .Circle2::after {
+            border-right: 140px solid white;
+            right: -50px;
+            top: -35px;
+        }
+
+        .Circle1::before {
+            content:"";
+            height: 20px;
+            width: 276px;
+            position: absolute;
+            background: darkgreen;
+            left: -18px;
+            top: 45px;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Wrapper">
+        <div class="Circle Circle1"></div>
+        <div class="Circle Circle2"></div>
+    </div>
+</body>
+
+</html>

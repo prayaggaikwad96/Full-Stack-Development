@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box {
+        height: 100px;
+        width: 100px;
+        border: 3px solid black;
+        animation-name: boxAnm;
+        animation-duration: 1s;
+        /* animation-delay: 3s; */
+        position: absolute;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes boxAnm {
+
+        from{
+            background-color: red;
+            top: 10px;
+            }
+        to{
+            top: 500px;
+            background-color: green;
+            }
+        /* 0% {
+            scale: 1;
+            top: 0px;
+            left: 10px;
+            background-color: red;
+        }
+
+        25%{
+            left: 600px;
+        }
+
+        50% {
+            scale: 1.5;
+            border-radius: 100%;
+            rotate: 360deg;
+            background-color: green;
+            top: 300px;
+            left: 100px;
+        }
+
+        75%{
+            left: 500px;
+        }
+        
+        100% {
+            top: 0px;
+            left: 10px;
+            scale: 1;
+            background-color: red;
+        } */
+    }
+</style>
+
+<body>
+    <div class="box"></div>
+</body>
+
+</html>
