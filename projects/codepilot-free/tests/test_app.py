@@ -212,5 +212,28 @@ class CodePilotApiTests(unittest.TestCase):
         self.assertIn("not found", json.loads(body)["error"].lower())
 
 
+    def test_safe_project_path_rejects_traversal_and_absolute_paths(self):
+        self.assertEqual(codepilot.safe_project_path("src/main.py"), "src/main.py")
+        for unsafe in ["../escape.py", "/absolute.py", "folder/../escape.py", "folder\\\\escape.py", ""]:
+            with self.subTest(path=unsafe):
+                self.assertIsNone(codepilot.safe_project_path(unsafe))
+
+    def test_zip_import_skips_unsafe_and_unsupported_entries(self):
+        memory = io.BytesIO()
+        with zipfile.ZipFile(memory, "w") as archive:
+            archive.writestr("project/src/main.py", "print('safe')")
+            archive.writestr("../escape.py", "print('unsafe')")
+            archive.writestr("project/image.exe", "not source")
+        imported = codepilot.read_zip_files(memory.getvalue())
+        self.assertEqual(imported, {"project/src/main.py": "print('safe')"})
+
+    def test_zip_import_rejects_archives_without_supported_text_files(self):
+        memory = io.BytesIO()
+        with zipfile.ZipFile(memory, "w") as archive:
+            archive.writestr("project/image.exe", "not source")
+        with self.assertRaisesRegex(ValueError, "No supported UTF-8 source files"):
+            codepilot.read_zip_files(memory.getvalue())
+
+
 if __name__ == "__main__":
     unittest.main()
