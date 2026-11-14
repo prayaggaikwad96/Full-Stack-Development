@@ -189,6 +189,23 @@ class CodePilotApiTests(unittest.TestCase):
             self.assertEqual(status, 400, url)
             self.assertIn("repository URL", json.loads(body)["error"])
 
+    def test_github_import_rejects_non_repository_paths_and_invalid_hosts(self):
+        invalid_urls = [
+            "https://github.com/owner/repo/issues",
+            "https://github.com/owner/repo/tree/main",
+            "https://github.com.evil.example/owner/repo",
+            "https://github.com/owner/repo?tab=readme",
+            "https://github.com/owner/repo#readme",
+            "https://github.com/../repo",
+        ]
+        for url in invalid_urls:
+            with self.subTest(url=url):
+                status, _, body = self.request(
+                    "/api/github/import", "POST", {"url": url}
+                )
+                self.assertEqual(status, 400)
+                self.assertIn("repository URL", json.loads(body)["error"])
+
     def test_oversized_body_and_unknown_api_are_rejected(self):
         # Send only headers: reject the declared size before reading a body.
         with socket.create_connection(("127.0.0.1", self.server.server_port), timeout=3) as sock:
