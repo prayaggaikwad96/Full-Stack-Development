@@ -18,10 +18,6 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: nested-tree-audit-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   compare:
     name: Compare canonical and nested learning trees
@@ -48,7 +44,7 @@ jobs:
           canonical = repo / "Prayag Gaikwad"
           nested = repo / "Full-Stack-Development" / "Prayag Gaikwad"
           out = repo / "audit-artifacts"
-          out.mkdir(exist_ok=True)
+          out.mkdir(parents=True, exist_ok=True)
 
           def file_map(root):
               if not root.is_dir():
@@ -56,19 +52,19 @@ jobs:
               return {
                   path.relative_to(root).as_posix(): path
                   for path in root.rglob("*")
-                  if path.is_file()
+                  if path.is_file() and not path.is_symlink()
               }
 
           def read_file(path):
               data = path.read_bytes()
               exact_sha = hashlib.sha256(data).hexdigest()
-              is_text = b"\\0" not in data
+              is_text = b"\0" not in data
               if is_text:
                   try:
                       data.decode("utf-8-sig", errors="strict")
                   except UnicodeDecodeError:
                       is_text = False
-              normalized = data.replace(b"\\r\\n", b"\\n").replace(b"\\r", b"\\n") if is_text else data
+              normalized = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n") if is_text else data
               return data, exact_sha, normalized, is_text
 
           c_map, n_map = file_map(canonical), file_map(nested)
@@ -128,7 +124,7 @@ jobs:
           }
           json_path = out / "nested-tree-normalized-comparison.json"
           csv_path = out / "nested-tree-normalized-comparison.csv"
-          json_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+          json_path.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
           with csv_path.open("w", newline="", encoding="utf-8-sig") as handle:
               writer = csv.DictWriter(handle, fieldnames=[
                   "relative_path", "status", "canonical_size", "nested_size",
@@ -140,17 +136,17 @@ jobs:
           summary = os.environ.get("GITHUB_STEP_SUMMARY")
           if summary:
               with open(summary, "a", encoding="utf-8") as handle:
-                  handle.write("# Nested project tree comparison\\n\\n")
-                  handle.write(f"- Canonical directory present: {canonical.is_dir()}\\n- Nested directory present: {nested.is_dir()}\\n")
-                  handle.write(f"- Canonical files: {len(c_map)}\\n- Nested files: {len(n_map)}\\n- Union compared: {len(results)}\\n\\n")
-                  handle.write("| Status | Files |\\n|---|---:|\\n")
+                  handle.write("# Nested project tree comparison\n\n")
+                  handle.write(f"- Canonical directory present: {canonical.is_dir()}\n- Nested directory present: {nested.is_dir()}\n")
+                  handle.write(f"- Canonical files: {len(c_map)}\n- Nested files: {len(n_map)}\n- Union compared: {len(results)}\n\n")
+                  handle.write("| Status | Files |\n|---|---:|\n")
                   for key, value in counts.items():
-                      handle.write(f"| {key} | {value} |\\n")
+                      handle.write(f"| {key} | {value} |\n")
                   substantive = [x for x in results if x["status"] in ("content_different", "binary_different", "canonical_only", "nested_only")]
                   if substantive:
-                      handle.write("\\n## Differences requiring review (first 100)\\n\\n| Status | Relative path |\\n|---|---|\\n")
+                      handle.write("\n## Differences requiring review (first 100)\n\n| Status | Relative path |\n|---|---|\n")
                       for row in substantive[:100]:
-                          handle.write(f"| {row['status']} | `{row['relative_path'].replace('|', '%7C')}` |\\n")
+                          handle.write(f"| {row['status']} | \`{row['relative_path'].replace('|', '%7C')}\` |\n")
 
           print(json.dumps({
               "canonical_directory_present": canonical.is_dir(),
