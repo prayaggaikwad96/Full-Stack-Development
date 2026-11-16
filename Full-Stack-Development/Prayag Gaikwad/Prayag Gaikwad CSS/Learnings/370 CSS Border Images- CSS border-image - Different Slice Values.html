@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body{
+            background-color: rgb(156, 221, 253);
+        }
+        #borderimg1 {
+            border: 10px solid transparent;
+            padding: 15px;
+            border-image: url(border.png) 50 round;
+            margin-bottom: 15px;
+        }
+
+        #borderimg2 {
+            border: 10px solid transparent;
+            padding: 15px;
+            border-image: url(border.png) 20% round;
+            margin-bottom: 15px;
+        }
+
+        #borderimg3 {
+            border: 10px solid transparent;
+            padding: 15px;
+            border-image: url(border.png) 30% round;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>The border-image Property</h1>
+
+    <p>Different slice values completely changes the look of the border image:</p>
+
+    <div id="borderimg1">border-image: url(border.png) 50 round;</div>
+    <div id="borderimg2">border-image: url(border.png) 20% round;</div>
+    <div id="borderimg3">border-image: url(border.png) 30% round;</div>
+
+</body>
+
+</html>
