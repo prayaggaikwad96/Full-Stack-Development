@@ -318,7 +318,15 @@ class Handler(SimpleHTTPRequestHandler):
             return
         parsed = urlparse(raw_url.strip())
         parts = [part for part in parsed.path.strip("/").split("/") if part]
-        if parsed.scheme != "https" or parsed.hostname != "github.com" or parsed.username or len(parts) != 2:
+        if (
+            parsed.scheme != "https"
+            or parsed.netloc != "github.com"
+            or parsed.query
+            or parsed.fragment
+            or parsed.username
+            or parsed.password
+            or len(parts) != 2
+        ):
             self.send_json(400, {"error": "Use a public repository URL like https://github.com/owner/repository"})
             return
         owner, repo = parts
