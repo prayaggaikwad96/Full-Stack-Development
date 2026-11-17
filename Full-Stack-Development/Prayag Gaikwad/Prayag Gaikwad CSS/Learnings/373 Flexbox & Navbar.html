@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: rgb(214, 234, 252);
+            text-align: center;
+        }
+
+        /* Flexbox Container & Items */
+        .parent {
+            background-color: dodgerblue;
+            display: flex;
+            flex-direction: ;
+            justify-content: space-between;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .parent div {
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 10px;
+            padding: 20px;
+            font-size: 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+        }
+
+        /* Hover effect for Flexbox items */
+        .parent div:hover {
+            background-color: #ffffff;
+            color: #0284c7;
+            transform: translateY(-6px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            background: #1e293b;
+            padding: 15px 25px;
+            justify-content: center;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover effect for the Navbar container */
+        .navbar:hover {
+            background: #0f172a;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .navbar .links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar .links a {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            font-family: sans-serif;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        /* Animated underline setup */
+        .navbar .links a::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 4px;
+            width: 0;
+            height: 2px;
+            background-color: #38bdf8;
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+
+        /* Hover effect for individual Navigation links */
+        .navbar .links a:hover {
+            color: #38bdf8;
+            background-color: rgba(56, 189, 248, 0.12);
+            transform: translateY(-2px);
+        }
+
+        /* Expand underline on hover */
+        .navbar .links a:hover::after {
+            width: 70%;
+            left: 15%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Create a Flexbox Container & Navbar</h1>
+
+    <div class="parent">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+        <div>Item 4</div>
+        <div>Item 5</div>
+    </div>
+
+    <p>Flexbox must have a parent element with the display property set to flex or inline-flex.</p>
+    <p>Direct child elements of the flex container automatically becomes flex items.</p>
+
+    <nav class="navbar">
+        <div class="links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+            <a href="https://facebook.com">Facebook</a>
+            <a href="https://www.instagram.com/">Instagram</a>
+            <a href="https://www.x.com/">X</a>                
+
+        </div>
+    </nav>
+</body>
+
+</html>
