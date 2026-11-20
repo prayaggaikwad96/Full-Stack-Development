@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Escaped ID Selectors</title>
+    <style>
+        body{
+            background-color: aliceblue;
+        }
+        #blue {
+            background-color: lightblue;
+        }
+
+        /* "?" has special meaning in CSS selectors, so escape it with a backslash */
+        #item1 {
+            background-color: lightblue;
+        }
+
+        /* CSS ID/class identifiers cannot start with an unescaped digit; escape the first digit using hex */
+        #item2 {
+            background-color: red;
+        }
+
+        /* CSS ID SELECTOR 3 */
+        #item3 {
+            background-color: rgb(251, 223, 170);
+        }
+
+        /* CSS ID SELECTOR 4 */
+        #item4 {
+            background-color: turquoise;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="item1">This paragraph has a lightblue background.</p>
+    <p id="item2">This is just a red paragraph.</p>
+    <!-- The next two paragraphs have id attributes
+       that contain characters which must be escaped in CSS -->
+
+    <p id="item3">This paragraph has a orange background.</p>
+    <p id="item4">This paragraph has a turquoise background.</p>
+</body>
+
+</html>
