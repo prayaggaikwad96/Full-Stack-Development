@@ -12,7 +12,7 @@ A hands-on full-stack learning archive with web-development exercises and CodePi
 This repository contains learning materials, practical examples, and software projects. Individual examples may be educational, incomplete, or dependent on their documented toolchains.
 
 > [!IMPORTANT]
-> This README reflects a remote repository review on 22 November 2026. `main` is currently unprotected, and inspected protected branches have no required status-check enforcement. Local worktrees, external backups, restore tests, and complete security-alert inventories cannot be verified through this integration. Re-check GitHub settings and local machines before treating governance or synchronization as complete.
+> This README reflects a remote repository review on 22 November 2026. Branch metadata reports `main` as unprotected and marks some other refs as protected. However, the connected integration cannot read branch-protection or ruleset details (HTTP 403), so required reviews, required status checks, bypass rules, and enforcement are not verified. Local worktrees, external backups, restore tests, and complete security-alert inventories also cannot be verified through this integration. Re-check GitHub settings and local machines before treating governance or synchronization as complete.
 
 ## Learning path
 
