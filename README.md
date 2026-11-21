@@ -6,13 +6,13 @@ A hands-on full-stack learning archive with web-development exercises and CodePi
 
 - **Default branch:** `main`
 - **Visibility:** Public
-- **Last live-state review:** 19 November 2026
+- **Last remote review:** 22 November 2026
 - **Account:** [@prayaggaikwad96](https://github.com/prayaggaikwad96)
 
-This repository contains learning materials, practical examples, and software projects. It is actively maintained; individual examples may be educational, incomplete, or dependent on their documented toolchains.
+This repository contains learning materials, practical examples, and software projects. Individual examples may be educational, incomplete, or dependent on their documented toolchains.
 
 > [!IMPORTANT]
-> This README describes the remote repository state observed on 19 November 2026. It is not a claim that every security, governance, local-workstation, or synchronization task is complete. Re-check GitHub settings and the relevant pull requests before making release or branch-management decisions.
+> This README reflects a remote repository review on 22 November 2026. `main` is currently unprotected, and inspected protected branches have no required status-check enforcement. Local worktrees, external backups, restore tests, and complete security-alert inventories cannot be verified through this integration. Re-check GitHub settings and local machines before treating governance or synchronization as complete.
 
 ## Learning path
 
@@ -46,46 +46,36 @@ The archived nested-tree audit report records a point-in-time comparison. Its co
 ## Branch workflow and synchronization
 
 - `main` is the default branch and the published source of truth.
-- `Developer` is a separate protected development branch. Integrate changes through reviewed pull requests; compare exact commit refs before relying on synchronization.
+- `Developer` is the development branch. Compare exact commit references before relying on synchronization; do not assume it is current.
 - Preserve recovery and archive branches until their unique commits and content have been reviewed and independently backed up.
 - Never force-push, reset, delete, or overwrite a primary or recovery ref as a shortcut to synchronization.
 - Review learning-content changes as content, not as routine maintenance. A mergeable pull request is not automatically approved for merge.
 
-### Live branch-protection snapshot — 19 November 2026
+### Live branch and synchronization snapshot — 22 November 2026
 
 The remote branch API reported:
 
 | Branch | Protection | Required status checks |
 | --- | --- | --- |
 | `main` | Disabled | None |
-| `Developer` | Enabled | 10 |
+| `Developer` | Enabled | No current enforcement verified |
 
-The ten required checks on `Developer` are:
+The current comparison `Developer...main` reports `main` 72 commits ahead and `Developer` zero commits ahead. This is a fast-forward-shaped history, not approval to synchronize. [PR #35](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/35) contains a substantial 112-path educational-content and configuration change; review every path and verify local recovery state before merging.
 
-1. `Verify repository invariants`
-2. `CodeQL analysis`
-3. `Python 3.12 / Node.js 22`
-4. `Python 3.12 / Node.js 24`
-5. `Python 3.13 / Node.js 22`
-6. `Python 3.13 / Node.js 24`
-7. `Python 3.14 / Node.js 22`
-8. `Python 3.14 / Node.js 24`
-9. `Python 3.15 / Node.js 22`
-10. `Python 3.15 / Node.js 24`
+**Required owner action:** Configure suitable protection for `main` in GitHub repository Settings. Require pull requests, block force pushes and branch deletion, and require only stable CI checks verified on relevant pull-request events. The connected integration does not expose protection-write operations, so this repository has not changed those settings.
 
-**Required owner action:** Configure suitable protection for `main` in GitHub repository Settings. Require pull requests, block force pushes and branch deletion, and require stable CI checks only after confirming the checks run on every relevant pull request. Preserve an intentional administrator emergency-access policy. Re-fetch branch protection after saving; do not treat this README as proof that settings were changed.
+### Open pull requests observed during this review
 
-### Open pull requests at the time of review
+- [PR #35 — synchronize `main` into `Developer`](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/35): substantial 112-path synchronization; content review and local recovery verification required.
+- [PR #51 — refresh audit documentation](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/51): documentation-only proposal; review its complete diff and current facts before merging.
 
-- [PR #35 — synchronize `main` into `Developer`](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/35): open. It contains a substantial history/content synchronization; review the complete diff, exact-head checks, and local state before merging.
-- [PR #49 — correct invalid CSS `spacing` declarations](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/49): open at the time of review. Confirm exact-head CI and inspect the three educational examples before merging.
-
-Pull-request states can change after this snapshot. Always inspect the live PR and checks before acting.
+Pull-request states and checks can change. Inspect live PRs and exact head SHAs before acting.
 
 ## CI, quality, and security
 
 - [CodeQL workflow](.github/workflows/codeql.yml) scans configured GitHub Actions, JavaScript/TypeScript, and Python code.
 - [CodePilot test workflow](.github/workflows/codepilot-tests.yml) validates the backend, browser JavaScript, integration behavior, and supported Python/Node combinations.
+- On the observed `main` commit `1c703e24b07584fd8a0e1935a3654bacfcff825c`, CodeQL, all reported Python/Node matrix jobs, repository invariants, and ignore-rule checks completed successfully. These workflows do not validate every learning example or unrelated path.
 - [Dependabot configuration](.github/dependabot.yml) requests configured dependency updates. Review generated pull requests and test them before merging.
 - Use the [pull-request template](.github/pull_request_template.md) to document scope, tests, security hygiene, and compatibility.
 - Use the [issue forms](.github/ISSUE_TEMPLATE) for bug reports and feature requests. Do not include secrets or private data.
@@ -103,7 +93,7 @@ The following cannot be proven by a remote README update:
 - Exact-head CI success after each new commit.
 - All repository and account security settings, including alert inventories and push-protection configuration.
 
-Use the [repository health audit](docs/repository-health-audit-2026-11-01.md) as historical context only; its dated observations must not be mistaken for today's live state. Refresh it after a new audit.
+Use dated audit documents as historical context only; do not treat them as proof of today's state.
 
 ## Adding examples
 
