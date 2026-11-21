@@ -85,6 +85,8 @@ def read_zip_files(blob: bytes) -> dict[str, str]:
                 if not safe or not is_text_file(safe) or info.file_size > 2 * 1024 * 1024:
                     continue
                 unpacked += info.file_size
+                if safe in result:
+                    raise ValueError("ZIP contains duplicate or colliding project paths")
                 if unpacked > MAX_UNPACKED_BYTES or len(result) >= MAX_FILES:
                     raise ValueError("ZIP exceeds the text-project limits")
                 try:
@@ -281,6 +283,7 @@ class Handler(SimpleHTTPRequestHandler):
             return
         memory = io.BytesIO()
         total = 0
+        seen_paths: set[str] = set()
         with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_DEFLATED) as archive:
             archive.writestr("__codepilot_manifest__.json", encoded({"format": "codepilot-project-v1"}))
             for name, content in files.items():
@@ -291,6 +294,10 @@ class Handler(SimpleHTTPRequestHandler):
                 if safe == "__codepilot_manifest__.json":
                     self.send_json(400, {"error": "The project manifest filename is reserved"})
                     return
+                if safe in seen_paths:
+                    self.send_json(400, {"error": "Project contains duplicate or colliding file paths"})
+                    return
+                seen_paths.add(safe)
                 data = content.encode("utf-8")
                 if len(data) > 2 * 1024 * 1024:
                     self.send_json(413, {"error": "Each project file must be 2 MiB or smaller"})
