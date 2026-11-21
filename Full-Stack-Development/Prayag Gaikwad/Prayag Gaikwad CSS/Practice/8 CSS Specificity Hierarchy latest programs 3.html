@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>!important in @layer & Native CSS Nesting</title>
+    <style>
+        body {
+            background-color: lightblue;
+            text-align: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .page {
+            max-width: 480px;
+            width: 100%;
+        }
+
+        @layer tokens, components;
+
+        @layer tokens {
+
+            /* In !important declarations, EARLIER layers beat LATER layers */
+            .alert-banner {
+                background: #fef3c7 !important;
+                color: #92400e !important;
+            }
+        }
+
+        @layer components {
+
+            /* Even with a higher selector specificity, !important in `tokens` wins */
+            .page .alert-banner {
+                background: #fbe2e2 !important;
+                color: #991b1b !important;
+            }
+
+            /* Native CSS nesting builds compound specificity: .pricing-card .price */
+            .pricing-card {
+                padding: 1.25rem;
+                border: 1px solid #e2e8f0;
+                border-radius: 10px;
+                max-width: 480px;
+                width: 100%;
+                box-sizing: border-box;
+                background-color: #91c5f8;
+
+                & .price {
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    color: #0f172a;
+                }
+
+                /* & inside a nested rule repeats the parent selector chain */
+                & .price.discounted {
+                    color: #16a34a;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="alert-banner" style="padding: 0.85rem 1rem; border-radius: 8px;">
+            <strong>Notice:</strong> <code>@layer tokens</code> wins over <code>@layer components</code> for
+            <code>!important</code>.
+        </div>
+    </div>
+
+    <section class="pricing-card">
+        <h3>Google AI Pro Plan (₹1,950/month)</h3>
+        <p class="price discounted">₹501/month</p>
+        <p> Special Diwali Offer </p>
+    </section>
+</body>
+
+</html>

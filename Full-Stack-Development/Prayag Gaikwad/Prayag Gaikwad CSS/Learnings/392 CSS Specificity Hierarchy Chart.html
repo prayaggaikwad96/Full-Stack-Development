@@ -1,0 +1,356 @@
+CSS SPECIFICITY – COMPLETE LEARNING NOTES
+1. What is CSS Specificity?
+
+CSS Specificity determines which CSS selector wins when multiple CSS rules target the same HTML element.
+
+Example:
+
+css
+p {
+color: blue;
+}
+
+.text {
+color: green;
+}
+
+#demo {
+color: red;
+}
+
+
+The final output will be RED because the ID selector has higher specificity.
+
+2. CSS Specificity Formula
+
+CSS specificity is calculated using four levels:
+
+A - B - C - D
+
+Level Selector Type Example
+A Inline Styles style="color:red"
+B ID Selectors #header
+C Classes, Attributes, Pseudo-classes .box, [type], :hover
+D Elements, Pseudo-elements div, ::before
+Understanding Each Level
+
+A - Inline Styles
+
+HTML
+<p style="color: red;">Hello</p>
+
+
+Specificity: 1-0-0-0
+
+B - ID Selectors
+
+css
+#header {
+color: red;
+}
+
+
+Specificity: 0-1-0-0
+
+C - Class Selectors
+
+css
+.box {
+color: red;
+}
+
+
+Specificity: 0-0-1-0
+
+D - Element Selectors
+
+css
+p {
+color: red;
+}
+
+
+Specificity: 0-0-0-1
+
+3. CSS Specificity Hierarchy
+
+Priority from HIGHEST to LOWEST:
+
+Priority Selector Type Specificity
+1 Inline Styles 1-0-0-0
+2 ID Selector 0-1-0-0
+3 Class Selector 0-0-1-0
+4 Attribute Selector 0-0-1-0
+5 Pseudo-class 0-0-1-0
+6 Element Selector 0-0-0-1
+7 Pseudo-element 0-0-0-1
+8 Universal Selector 0-0-0-0
+
+Remember:
+
+Inline > ID > Class > Element > Universal
+
+4. Complete Specificity Calculation Chart
+CSS Selector Specificity
+* 0-0-0-0
+div 0-0-0-1
+p 0-0-0-1
+div p 0-0-0-2
+.box 0-0-1-0
+.box .text 0-0-2-0
+.box:hover 0-0-2-0
+[type="text"] 0-0-1-0
+#header 0-1-0-0
+#header .box 0-1-1-0
+#header .box p 0-1-1-1
+#header .box:hover 0-1-2-0
+style="color:red" 1-0-0-0
+5. How to Calculate Combined Selectors
+Example 1
+css
+.container .box p {
+color: red;
+}
+
+
+Calculation:
+
+.container = 0-0-1-0
+.box = 0-0-1-0
+p = 0-0-0-1
+
+Total = 0-0-2-1
+
+Example 2
+css
+#main .container .box p {
+color: red;
+}
+
+
+Calculation:
+
+#main = 0-1-0-0
+.container = 0-0-1-0
+.box = 0-0-1-0
+p = 0-0-0-1
+
+Total = 0-1-2-1
+
+Example 3
+css
+#header #main .box {
+color: red;
+}
+
+
+Calculation:
+
+#header = 0-1-0-0
+#main = 0-1-0-0
+.box = 0-0-1-0
+
+Total = 0-2-1-0
+
+6. Practical Example – Which CSS Rule Wins?
+HTML
+HTML
+<p id="demo" class="text">
+    Hello World
+</p>
+
+CSS
+css
+p {
+color: blue;
+}
+
+.text {
+color: green;
+}
+
+#demo {
+color: red;
+}
+
+Specificity Comparison
+Selector Specificity Color
+p 0-0-0-1 Blue
+.text 0-0-1-0 Green
+#demo 0-1-0-0 Red
+
+Final Output: RED
+
+Reason: The ID selector has higher specificity than the class and element selectors.
+
+7. Important Special Selectors
+Selector Specificity
+:hover 0-0-1-0
+:focus 0-0-1-0
+:active 0-0-1-0
+::before 0-0-0-1
+::after 0-0-0-1
+:not() Takes specificity of its argument
+:is() Takes specificity of its most specific argument
+:where() Always 0-0-0-0
+Example of :not()
+css
+p:not(.active) {
+color: red;
+}
+
+
+Specificity:
+
+p = 0-0-0-1
+.active = 0-0-1-0
+
+Total = 0-0-1-1
+
+Example of :where()
+css
+:where(#header .box) {
+color: red;
+}
+
+
+Specificity = 0-0-0-0
+
+Even though it contains an ID and a class, :where() contributes zero specificity.
+
+8. What is !important?
+
+!important is NOT a specificity value.
+
+It changes the cascade priority of a CSS declaration.
+
+Example:
+
+css
+p {
+color: blue !important;
+}
+
+#demo {
+color: red;
+}
+
+
+The blue declaration wins because it is marked !important, assuming both declarations have the same cascade origin and
+layer.
+
+Important: Avoid using !important unnecessarily.
+
+9. What Happens When Specificity Is Equal?
+
+When two applicable selectors have equal specificity, the later declaration wins if they have the same cascade origin,
+importance and layer.
+
+Example:
+
+css
+.text {
+color: blue;
+}
+
+.text {
+color: red;
+}
+
+
+Both selectors have specificity:
+
+0-0-1-0
+
+Final Output: RED
+
+Reason: The second declaration comes later.
+
+10. Important CSS Specificity Rules
+Specificity is compared from left to right.
+Never add all specificity digits into one number.
+An ID selector beats any number of class selectors.
+A class selector beats any number of element selectors.
+If specificity is equal, source order can determine the winner.
+!important changes cascade priority, not specificity.
+Universal selector * has zero specificity.
+:where() always has zero specificity.
+:not() and :is() use the specificity of their arguments.
+Inline styles have specificity 1-0-0-0.
+11. CSS Specificity Interview Questions
+
+Q1. Which selector has higher specificity?
+
+css
+.box
+#box
+div
+
+
+Answer: #box
+
+Q2. What is the specificity of this selector?
+
+css
+.container .box p
+
+
+Answer: 0-0-2-1
+
+Q3. Can 10 classes beat one ID?
+
+Answer: NO.
+
+An ID has a higher priority column than classes.
+
+Q4. What is the specificity of the universal selector?
+
+Answer: 0-0-0-0
+
+Q5. What is the specificity of :where()?
+
+Answer: 0-0-0-0
+
+Q6. What happens if two selectors have equal specificity?
+
+Answer: The later applicable declaration wins when the other cascade conditions are equal.
+
+Q7. Is !important part of specificity?
+
+Answer: NO. It changes cascade priority.
+
+12. Final Revision – Remember This!
+Specificity Formula
+
+A - B - C - D
+
+A = Inline Styles
+B = ID Selectors
+C = Classes, Attributes, Pseudo-classes
+D = Elements, Pseudo-elements
+Priority Order
+text
+1. Inline Styles
+2. ID Selectors
+3. Class Selectors
+4. Attribute Selectors
+5. Pseudo-classes
+6. Element Selectors
+7. Pseudo-elements
+8. Universal Selector
+
+Golden Rule
+
+Compare from LEFT to RIGHT.
+
+Never add the values together.
+
+Recommended Learning Order
+Understand the four-column specificity formula.
+Learn individual selector specificity.
+Practice combined selector calculations.
+Understand pseudo-classes and pseudo-elements.
+Learn !important and source order.
+Understand CSS cascade, inheritance and cascade layers.
+
+END OF CSS SPECIFICITY NOTES

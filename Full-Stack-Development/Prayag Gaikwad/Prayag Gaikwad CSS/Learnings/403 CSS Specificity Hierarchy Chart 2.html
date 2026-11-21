@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Specificity - Complete Learning Notes</title>
+
+    <style>
+        /* GENERAL STYLING */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #263238;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #172554, #2563eb);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header p {
+            font-size: 17px;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: white;
+            margin-bottom: 25px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        h2 {
+            color: #1d4ed8;
+            border-bottom: 2px solid #dbeafe;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #0f766e;
+            margin-top: 25px;
+        }
+
+        p {
+            margin: 12px 0;
+        }
+
+        code {
+            background: #e8eefc;
+            color: #be123c;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background: #172033;
+            color: #e2e8f0;
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #dbe2ea;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .note {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 15px;
+            margin: 18px 0;
+            border-radius: 5px;
+        }
+
+        .warning {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 15px;
+            margin: 18px 0;
+            border-radius: 5px;
+        }
+
+        .success {
+            background: #ecfdf5;
+            border-left: 5px solid #059669;
+            padding: 15px;
+            margin: 18px 0;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .demo {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .demo p {
+            margin: 5px 0;
+        }
+
+        /* INTERVIEW QUESTIONS */
+
+        .question {
+            background: #f8fafc;
+            border: 1px solid #dbeafe;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .answer {
+            color: #047857;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>CSS SPECIFICITY</h1>
+        <p>Complete Learning Notes | Beginner to Advanced</p>
+    </header>
+
+    <div class="container">
+
+        <!-- 1. INTRODUCTION -->
+
+        <section>
+            <h2>1. What is CSS Specificity?</h2>
+
+            <p>
+                CSS Specificity determines which CSS selector wins when
+                multiple CSS rules target the same HTML element.
+            </p>
+
+            <h3>Example</h3>
+
+            <pre>
+p {
+    color: blue;
+}
+
+.text {
+    color: green;
+}
+
+#demo {
+    color: red;
+}
+</pre>
+
+            <div class="note">
+                <strong>Explanation:</strong>
+                The ID selector has higher specificity than the class
+                and element selectors.
+            </div>
+
+            <div class="demo">
+                <p id="demo" class="text">Hello World - Final Output is RED</p>
+            </div>
+        </section>
+
+
+        <!-- 2. FORMULA -->
+
+        <section>
+            <h2>2. CSS Specificity Formula</h2>
+
+            <p>CSS specificity is represented using four columns:</p>
+
+            <h3>A - B - C - D</h3>
+
+            <table>
+                <tr>
+                    <th>Level</th>
+                    <th>Selector Type</th>
+                    <th>Example</th>
+                    <th>Specificity</th>
+                </tr>
+
+                <tr>
+                    <td>A</td>
+                    <td>Inline Styles</td>
+                    <td>style="color:red"</td>
+                    <td>1-0-0-0</td>
+                </tr>
+
+                <tr>
+                    <td>B</td>
+                    <td>ID Selectors</td>
+                    <td>#header</td>
+                    <td>0-1-0-0</td>
+                </tr>
+
+                <tr>
+                    <td>C</td>
+                    <td>Classes, Attributes, Pseudo-classes</td>
+                    <td>.box, [type], :hover</td>
+                    <td>0-0-1-0</td>
+                </tr>
+
+                <tr>
+                    <td>D</td>
+                    <td>Elements, Pseudo-elements</td>
+                    <td>div, ::before</td>
+                    <td>0-0-0-1</td>
+                </tr>
+            </table>
+
+            <h3>Understanding Each Level</h3>
+
+            <h3>A - Inline Styles</h3>
+            <pre>
+&lt;p style="color: red;"&gt;Hello&lt;/p&gt;
+</pre>
+            <p>Specificity: <code>1-0-0-0</code></p>
+
+            <h3>B - ID Selectors</h3>
+            <pre>
+#header {
+    color: red;
+}
+</pre>
+            <p>Specificity: <code>0-1-0-0</code></p>
+
+            <h3>C - Class Selectors</h3>
+            <pre>
+.box {
+    color: red;
+}
+</pre>
+            <p>Specificity: <code>0-0-1-0</code></p>
+
+            <h3>D - Element Selectors</h3>
+            <pre>
+p {
+    color: red;
+}
+</pre>
+            <p>Specificity: <code>0-0-0-1</code></p>
+        </section>
+
+
+        <!-- 3. HIERARCHY -->
+
+        <section>
+            <h2>3. CSS Specificity Hierarchy</h2>
+
+            <p>General specificity priority from highest to lowest:</p>
+
+            <table>
+                <tr>
+                    <th>Priority</th>
+                    <th>Selector Type</th>
+                    <th>Specificity</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>Inline Styles</td>
+                    <td>1-0-0-0</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>ID Selector</td>
+                    <td>0-1-0-0</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Class Selector</td>
+                    <td>0-0-1-0</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Attribute Selector</td>
+                    <td>0-0-1-0</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Pseudo-class</td>
+                    <td>0-0-1-0</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Element Selector</td>
+                    <td>0-0-0-1</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Pseudo-element</td>
+                    <td>0-0-0-1</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Universal Selector</td>
+                    <td>0-0-0-0</td>
+                </tr>
+            </table>
+
+            <div class="success">
+                <strong>Remember:</strong><br>
+                Inline &gt; ID &gt; Class &gt; Element &gt; Universal
+            </div>
+        </section>
+
+
+        <!-- 4. CHART -->
+
+        <section>
+            <h2>4. Complete Specificity Calculation Chart</h2>
+
+            <table>
+                <tr>
+                    <th>CSS Selector</th>
+                    <th>Specificity</th>
+                </tr>
+
+                <tr>
+                    <td>*</td>
+                    <td>0-0-0-0</td>
+                </tr>
+                <tr>
+                    <td>div</td>
+                    <td>0-0-0-1</td>
+                </tr>
+                <tr>
+                    <td>p</td>
+                    <td>0-0-0-1</td>
+                </tr>
+                <tr>
+                    <td>div p</td>
+                    <td>0-0-0-2</td>
+                </tr>
+                <tr>
+                    <td>.box</td>
+                    <td>0-0-1-0</td>
+                </tr>
+                <tr>
+                    <td>.box .text</td>
+                    <td>0-0-2-0</td>
+                </tr>
+                <tr>
+                    <td>.box:hover</td>
+                    <td>0-0-2-0</td>
+                </tr>
+                <tr>
+                    <td>[type="text"]</td>
+                    <td>0-0-1-0</td>
+                </tr>
+                <tr>
+                    <td>#header</td>
+                    <td>0-1-0-0</td>
+                </tr>
+                <tr>
+                    <td>#header .box</td>
+                    <td>0-1-1-0</td>
+                </tr>
+                <tr>
+                    <td>#header .box p</td>
+                    <td>0-1-1-1</td>
+                </tr>
+                <tr>
+                    <td>#header .box:hover</td>
+                    <td>0-1-2-0</td>
+                </tr>
+                <tr>
+                    <td>Inline Style</td>
+                    <td>1-0-0-0</td>
+                </tr>
+            </table>
+        </section>
+
+
+        <!-- 5. COMBINED SELECTORS -->
+
+        <section>
+            <h2>5. How to Calculate Combined Selectors</h2>
+
+            <h3>Example 1</h3>
+            <pre>
+.container .box p {
+    color: red;
+}
+</pre>
+
+            <p>Calculation:</p>
+            <ul>
+                <li>.container = 0-0-1-0</li>
+                <li>.box = 0-0-1-0</li>
+                <li>p = 0-0-0-1</li>
+            </ul>
+
+            <div class="success">
+                Total = <strong>0-0-2-1</strong>
+            </div>
+
+            <h3>Example 2</h3>
+            <pre>
+#main .container .box p {
+    color: red;
+}
+</pre>
+
+            <p>Calculation:</p>
+            <ul>
+                <li>#main = 0-1-0-0</li>
+                <li>.container = 0-0-1-0</li>
+                <li>.box = 0-0-1-0</li>
+                <li>p = 0-0-0-1</li>
+            </ul>
+
+            <div class="success">
+                Total = <strong>0-1-2-1</strong>
+            </div>
+
+            <h3>Example 3</h3>
+            <pre>
+#header #main .box {
+    color: red;
+}
+</pre>
+
+            <p>Calculation:</p>
+            <ul>
+                <li>#header = 0-1-0-0</li>
+                <li>#main = 0-1-0-0</li>
+                <li>.box = 0-0-1-0</li>
+            </ul>
+
+            <div class="success">
+                Total = <strong>0-2-1-0</strong>
+            </div>
+        </section>
+
+
+        <!-- 6. PRACTICAL EXAMPLE -->
+
+        <section>
+            <h2>6. Practical Example - Which CSS Rule Wins?</h2>
+
+            <h3>HTML</h3>
+            <pre>
+&lt;p id="demo" class="text"&gt;
+    Hello World
+&lt;/p&gt;
+</pre>
+
+            <h3>CSS</h3>
+            <pre>
+p {
+    color: blue;
+}
+
+.text {
+    color: green;
+}
+
+#demo {
+    color: red;
+}
+</pre>
+
+            <h3>Specificity Comparison</h3>
+
+            <table>
+                <tr>
+                    <th>Selector</th>
+                    <th>Specificity</th>
+                    <th>Color</th>
+                </tr>
+
+                <tr>
+                    <td>p</td>
+                    <td>0-0-0-1</td>
+                    <td>Blue</td>
+                </tr>
+                <tr>
+                    <td>.text</td>
+                    <td>0-0-1-0</td>
+                    <td>Green</td>
+                </tr>
+                <tr>
+                    <td>#demo</td>
+                    <td>0-1-0-0</td>
+                    <td>Red</td>
+                </tr>
+            </table>
+
+            <div class="demo">
+                <p id="demo" class="text">Hello World</p>
+            </div>
+
+            <div class="success">
+                <strong>Final Output: RED</strong><br>
+                Reason: The ID selector has higher specificity.
+            </div>
+        </section>
+
+
+        <!-- 7. SPECIAL SELECTORS -->
+
+        <section>
+            <h2>7. Important Special Selectors</h2>
+
+            <table>
+                <tr>
+                    <th>Selector</th>
+                    <th>Specificity</th>
+                </tr>
+
+                <tr>
+                    <td>:hover</td>
+                    <td>0-0-1-0</td>
+                </tr>
+                <tr>
+                    <td>:focus</td>
+                    <td>0-0-1-0</td>
+                </tr>
+                <tr>
+                    <td>:active</td>
+                    <td>0-0-1-0</td>
+                </tr>
+                <tr>
+                    <td>::before</td>
+                    <td>0-0-0-1</td>
+                </tr>
+                <tr>
+                    <td>::after</td>
+                    <td>0-0-0-1</td>
+                </tr>
+                <tr>
+                    <td>:not()</td>
+                    <td>Specificity of its argument</td>
+                </tr>
+                <tr>
+                    <td>:is()</td>
+                    <td>Most specific argument</td>
+                </tr>
+                <tr>
+                    <td>:where()</td>
+                    <td>Always 0-0-0-0</td>
+                </tr>
+            </table>
+
+            <h3>Example of :not()</h3>
+
+            <pre>
+p:not(.active) {
+    color: red;
+}
+</pre>
+
+            <p>Calculation:</p>
+            <ul>
+                <li>p = 0-0-0-1</li>
+                <li>.active = 0-0-1-0</li>
+            </ul>
+
+            <strong>Total = 0-0-1-1</strong>
+
+            <h3>Example of :where()</h3>
+
+            <pre>
+:where(#header .box) {
+    color: red;
+}
+</pre>
+
+            <div class="note">
+                Specificity = <strong>0-0-0-0</strong><br>
+                Even though it contains an ID and a class,
+                :where() contributes zero specificity.
+            </div>
+        </section>
+
+
+        <!-- 8. IMPORTANT -->
+
+        <section>
+            <h2>8. What is !important?</h2>
+
+            <p>
+                !important is NOT a specificity value.
+                It changes the cascade priority of a CSS declaration.
+            </p>
+
+            <h3>Example</h3>
+
+            <pre>
+p {
+    color: blue !important;
+}
+
+#demo {
+    color: red;
+}
+</pre>
+
+            <div class="warning">
+                <strong>Result: BLUE</strong><br>
+                Assuming both declarations have the same cascade origin
+                and layer, the important declaration wins.
+            </div>
+
+            <p>
+                Important: Avoid using !important unnecessarily.
+            </p>
+        </section>
+
+
+        <!-- 9. EQUAL SPECIFICITY -->
+
+        <section>
+            <h2>9. What Happens When Specificity Is Equal?</h2>
+
+            <p>
+                When two applicable selectors have equal specificity,
+                the later declaration wins if their cascade origin,
+                importance and layer are the same.
+            </p>
+
+            <h3>Example</h3>
+
+            <pre>
+.text {
+    color: blue;
+}
+
+.text {
+    color: red;
+}
+</pre>
+
+            <p>Both selectors have specificity:</p>
+
+            <strong>0-0-1-0</strong>
+
+            <div class="demo">
+                <p class="text">Final Output: RED</p>
+            </div>
+
+            <div class="success">
+                Reason: The second declaration comes later.
+            </div>
+        </section>
+
+
+        <!-- 10. IMPORTANT RULES -->
+
+        <section>
+            <h2>10. Important CSS Specificity Rules</h2>
+
+            <ul>
+                <li>Specificity is compared from left to right.</li>
+                <li>Never add all specificity digits into one number.</li>
+                <li>An ID selector beats any number of class selectors.</li>
+                <li>A class selector beats any number of element selectors.</li>
+                <li>If specificity is equal, source order can determine the winner.</li>
+                <li>!important changes cascade priority, not specificity.</li>
+                <li>Universal selector * has zero specificity.</li>
+                <li>:where() always has zero specificity.</li>
+                <li>:not() and :is() use the specificity of their arguments.</li>
+                <li>Inline styles have specificity 1-0-0-0.</li>
+            </ul>
+        </section>
+
+
+        <!-- 11. INTERVIEW QUESTIONS -->
+
+        <section>
+            <h2>11. CSS Specificity Interview Questions</h2>
+
+            <div class="question">
+                <strong>Q1. Which selector has higher specificity?</strong>
+                <pre>
+.box
+#box
+div
+</pre>
+                <p class="answer">Answer: #box</p>
+            </div>
+
+            <div class="question">
+                <strong>Q2. What is the specificity of this selector?</strong>
+                <pre>
+.container .box p
+</pre>
+                <p class="answer">Answer: 0-0-2-1</p>
+            </div>
+
+            <div class="question">
+                <strong>Q3. Can 10 classes beat one ID?</strong>
+                <p class="answer">Answer: NO.</p>
+                An ID has a higher priority column than classes.
+            </div>
+
+            <div class="question">
+                <strong>Q4. What is the specificity of the universal selector?</strong>
+                <p class="answer">Answer: 0-0-0-0</p>
+            </div>
+
+            <div class="question">
+                <strong>Q5. What is the specificity of :where()?</strong>
+                <p class="answer">Answer: 0-0-0-0</p>
+            </div>
+
+            <div class="question">
+                <strong>Q6. What happens if two selectors have equal specificity?</strong>
+                <p class="answer">
+                    Answer: The later applicable declaration wins when
+                    the other cascade conditions are equal.
+                </p>
+            </div>
+
+            <div class="question">
+                <strong>Q7. Is !important part of specificity?</strong>
+                <p class="answer">Answer: NO.</p>
+                It changes cascade priority.
+            </div>
+        </section>
+
+
+        <!-- 12. FINAL REVISION -->
+
+        <section>
+            <h2>12. Final Revision - Remember This!</h2>
+
+            <h3>Specificity Formula</h3>
+
+            <table>
+                <tr>
+                    <th>Column</th>
+                    <th>Meaning</th>
+                </tr>
+                <tr>
+                    <td>A</td>
+                    <td>Inline Styles</td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td>ID Selectors</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>Classes, Attributes, Pseudo-classes</td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td>Elements, Pseudo-elements</td>
+                </tr>
+            </table>
+
+            <h3>Priority Order</h3>
+
+            <ol>
+                <li>Inline Styles</li>
+                <li>ID Selectors</li>
+                <li>Class Selectors</li>
+                <li>Attribute Selectors</li>
+                <li>Pseudo-classes</li>
+                <li>Element Selectors</li>
+                <li>Pseudo-elements</li>
+                <li>Universal Selector</li>
+            </ol>
+
+            <div class="success">
+                <h3>Golden Rule</h3>
+                Compare specificity from LEFT to RIGHT.<br>
+                Never add the values together.
+            </div>
+
+            <h3>Recommended Learning Order</h3>
+
+            <ol>
+                <li>Understand the four-column specificity formula.</li>
+                <li>Learn individual selector specificity.</li>
+                <li>Practice combined selector calculations.</li>
+                <li>Understand pseudo-classes and pseudo-elements.</li>
+                <li>Learn !important and source order.</li>
+                <li>Understand CSS cascade, inheritance and cascade layers.</li>
+            </ol>
+
+        </section>
+
+    </div>
+
+    <footer>
+        <h2 style="color:white; border:none;">END OF CSS SPECIFICITY NOTES</h2>
+        <p>Learn | Practice | Understand | Master CSS</p>
+    </footer>
+
+</body>
+
+</html>

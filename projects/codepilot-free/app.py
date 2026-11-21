@@ -200,7 +200,7 @@ class Handler(SimpleHTTPRequestHandler):
             if not isinstance(item, dict):
                 continue
             role, content = item.get("role"), item.get("content")
-            if role not in {"user", "assistant"} or not isinstance(content, str):
+            if not isinstance(role, str) or role not in {"user", "assistant"} or not isinstance(content, str):
                 continue
             chars += len(content)
             if chars > 1_500_000:
@@ -318,7 +318,15 @@ class Handler(SimpleHTTPRequestHandler):
             return
         parsed = urlparse(raw_url.strip())
         parts = [part for part in parsed.path.strip("/").split("/") if part]
-        if parsed.scheme != "https" or parsed.hostname != "github.com" or parsed.username or len(parts) != 2:
+        if (
+            parsed.scheme != "https"
+            or parsed.netloc != "github.com"
+            or parsed.query
+            or parsed.fragment
+            or parsed.username
+            or parsed.password
+            or len(parts) != 2
+        ):
             self.send_json(400, {"error": "Use a public repository URL like https://github.com/owner/repository"})
             return
         owner, repo = parts

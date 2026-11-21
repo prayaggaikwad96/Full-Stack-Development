@@ -1,0 +1,112 @@
+ <!-- Program 1: @layer + :where() vs :is() + :has() (Complete HTML/CSS)/ -->
+<!-- Save this as specificity-layers.html and open it in any modern browser to see how layer order beats high selector -->
+<!-- specificity, how :where() keeps specificity at 0, and how :is() / :has() behave. -->
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern CSS Specificity & @layer Demo</title>
+    <style>
+        body{
+            background-color: #76abeb
+        }
+        /* 1. Declare explicit layer order from lowest to highest priority */
+        @layer reset, base, components, utilities;
+
+        @layer reset {
+
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+
+            /* :where() has (0, 0, 0) specificity even with an ID inside */
+            :where(#app .card .badge) {
+                background: #e2e8f0;
+                color: #0f172a;
+            }
+        }
+
+        @layer base {
+            body {
+                font-family: system-ui, -apple-system, sans-serif;
+                margin: 2rem;
+                background: #f8fafc;
+                color: #1e293b;
+            }
+
+            /* High specificity (1, 2, 1) inside an EARLIER layer */
+            #app .card .badge.status {
+                background: #dc2626;
+                color: #ffffff;
+            }
+        }
+
+        @layer components {
+            .card {
+                max-width: 480px;
+                padding: 1.25rem;
+                border-radius: 12px;
+                background: #ffffff;
+                border: 1px solid #cbd5e1;
+            }
+
+            /* :is() takes the highest specificity among its arguments -> (0, 1, 0) */
+            .card :is(.badge, .missing-high-specificity-class) {
+                display: inline-block;
+                padding: 0.25rem 0.6rem;
+                border-radius: 999px;
+                font-size: 0.85rem;
+                font-weight: 600;
+            }
+
+            /* :has() takes the specificity of its most specific argument */
+            .card:has(.featured-flag) {
+                border-color: #2563eb;
+                box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+            }
+        }
+
+        @layer utilities {
+
+            /* Lower specificity (0, 1, 0) than #app .card .badge.status (1, 2, 1),
+         but wins because `utilities` comes AFTER `base` in @layer order */
+            .bg-emerald {
+                background: #059669;
+                color: #ffffff;
+            }
+        }
+
+        /* Unlayered normal CSS beats all layered normal CSS */
+        .unlayered-note {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            border-left: 4px solid #7c3aed;
+            background: #f5f3ff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <article class="card">
+            <span class="featured-flag" hidden>Featured</span>
+            <h2>Order #1042</h2>
+            <p>
+                Badge below has <code>.bg-emerald</code> from <code>@layer utilities</code>,
+                overriding <code>#app .card .badge.status</code> from <code>@layer base</code>.
+            </p>
+            <span class="badge status bg-emerald">Delivered via UPI</span>
+        </article>
+
+        <div class="unlayered-note">
+            Unlayered rules sit above named layers in the normal cascade.
+        </div>
+    </div>
+</body>
+
+</html>

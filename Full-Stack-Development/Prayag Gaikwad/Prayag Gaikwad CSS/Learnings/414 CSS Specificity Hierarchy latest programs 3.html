@@ -1,0 +1,73 @@
+<!-- Program 3: @scope Proximity vs. Specificity (Complete HTML/CSS) -->
+<!--Save this as scope-proximity.html and open it in a browser. Both .theme-light and .theme-dark apply .label with -->
+<!-- identical (0, 1, 0) specificity, so DOM proximity decides which one applies. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS @scope Proximity Demo</title>
+    <style>
+        @layer base, themes;
+
+        @layer base {
+            body {
+                font-family: system-ui, -apple-system, sans-serif;
+                margin: 2rem;
+                background: #b5d8fc;
+                color: #0f172a;
+            }
+
+            .box {
+                padding: 1rem 1.25rem;
+                border-radius: 10px;
+                margin-top: 1rem;
+                max-width: 520px;
+                border: 1px solid #cbd5e1;
+            }
+        }
+
+        @layer themes {
+
+            /* Scoped to .theme-dark: only affects descendants up to .theme-light (donut scope) */
+            @scope (.theme-dark) to (.theme-light) {
+                .label {
+                    color: #f8fafc;
+                    background: #1e293b;
+                    padding: 0.35rem 0.65rem;
+                    border-radius: 6px;
+                    display: inline-block;
+                }
+            }
+
+            /* Scoped to .theme-light: closer ancestor for inner elements */
+            @scope (.theme-light) {
+                .label {
+                    color: #0f172a;
+                    background: #fef08a;
+                    padding: 0.35rem 0.65rem;
+                    border-radius: 6px;
+                    display: inline-block;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>@scope Proximity in Action</h2>
+
+    <!-- Outer scope is .theme-dark (distance 1 to .label) -->
+    <div class="box theme-dark">
+        <p>Outer dark container: <span class="label">Dark Scoped Label</span></p>
+
+        <!-- Inner scope is .theme-light (distance 1 to inner .label, beats outer .theme-dark) -->
+        <div class="box theme-light">
+            <p>Inner light container: <span class="label">Light Scoped Label (Closer Scope Wins)</span></p>
+        </div>
+    </div>
+</body>
+
+</html>

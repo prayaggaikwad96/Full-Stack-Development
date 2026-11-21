@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Cascade & Specificity Demo</title>
+    <link rel="stylesheet" href="external.css">
+    <style>
+        body {
+            background-color: aliceblue;
+            color: #1e293b;
+            font-family: system-ui, -apple-system, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            background-color: rgb(240, 167, 149);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+        }
+
+        /* Class selector (0, 1, 0) beats element selector h2 (0, 0, 1) */
+        .highlight-rgb {
+            background-color: rgb(69, 184, 246);
+            color: black;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        /* Attribute selector has the same specificity as a class (0, 1, 0) */
+        [data-badge="demo"] {
+            border: 2px dashed #0f172a;
+        }
+
+        /* ID selector (1, 0, 0) beats class (0, 1, 0) and element (0, 0, 1) */
+        #priority-box {
+            background-color: #fef3c7;
+            color: #78350f;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border: 2px solid #f59e0b;
+        }
+
+        /* !important overrides normal inline and author styles */
+        .override-important {
+            background-color: #dcfce7 !important;
+            color: #14532d !important;
+        }
+
+        button {
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
+            background-color: #0f172a;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #334155;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Internal CSS overrides external CSS</h1>
+        <h2 class="highlight-rgb" data-badge="demo">Class selector overrides internal tag rule</h2>
+
+        <!-- Inline style (1, 0, 0, 0) beats ID, class, and tag rules -->
+        <p id="priority-box" class="highlight-rgb" style="background-color: #e0e7ff; color: #1e1b4b;">
+            Inline style beats both the <code>#priority-box</code> ID and <code>.highlight-rgb</code> class.
+        </p>
+
+        <p id="important-target"
+            style="background-color: #fee2e2; color: #7f1d1d; padding: 0.75rem; border-radius: 6px;">
+            Toggle <code>!important</code> to see a class beat an inline style.
+        </p>
+
+        <button type="button" id="toggle-btn">Toggle !important Class</button>
+    </main>
+
+    <script>
+        const target = document.getElementById("important-target");
+        const button = document.getElementById("toggle-btn");
+
+        button.addEventListener("click", () => {
+            target.classList.toggle("override-important");
+        });
+    </script>
+</body>
+
+</html>

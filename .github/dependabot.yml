@@ -1,5 +1,7 @@
 version: 2
+
 updates:
+  # Keep GitHub Actions references current, including immutable SHA pins.
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -7,7 +9,7 @@ updates:
       day: "monday"
       time: "04:00"
       timezone: "Asia/Kolkata"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
     groups:
       github-actions-minor-and-patch:
         patterns:
@@ -15,3 +17,13 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci(deps)"
+      include: "scope"
+
+  # Add ecosystem entries only when a corresponding manifest/lockfile exists.
+  # CodePilot currently uses Python's standard library and browser JavaScript;
+  # no pip/npm/Docker/etc. dependency manifest exists in this repository.
