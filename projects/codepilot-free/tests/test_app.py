@@ -215,6 +215,24 @@ class CodePilotApiTests(unittest.TestCase):
         self.assertEqual(status, 400)
         self.assertIn("manifest filename is reserved", json.loads(body)["error"])
 
+
+    def test_project_export_rejects_normalized_path_collisions(self):
+        status, _, body = self.request(
+            "/api/project/export", "POST",
+            {"files": {"src/main.py": "first", "src//main.py": "second"}},
+        )
+        self.assertEqual(status, 400)
+        self.assertIn("duplicate or colliding", json.loads(body)["error"])
+
+    def test_zip_import_rejects_normalized_path_collisions(self):
+        memory = io.BytesIO()
+        with zipfile.ZipFile(memory, "w") as archive:
+            archive.writestr("__codepilot_manifest__.json", json.dumps({"format": "codepilot-project-v1"}))
+            archive.writestr("src/main.py", "first")
+            archive.writestr("src//main.py", "second")
+        with self.assertRaisesRegex(ValueError, "duplicate or colliding project paths"):
+            codepilot.read_zip_files(memory.getvalue())
+
     def test_export_rejects_unsafe_paths_and_bad_zip(self):
         status, _, body = self.request("/api/project/export", "POST", {"files": {"../escape.js": "bad"}})
         self.assertEqual(status, 400)
