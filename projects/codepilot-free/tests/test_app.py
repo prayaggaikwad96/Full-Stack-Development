@@ -16,6 +16,7 @@ import app as codepilot
 
 class FakeOllamaHandler(BaseHTTPRequestHandler):
     last_chat_request = None
+    omit_done = False
 
     def do_GET(self):
         if self.path != "/api/tags":
@@ -36,7 +37,7 @@ class FakeOllamaHandler(BaseHTTPRequestHandler):
         type(self).last_chat_request = json.loads(self.rfile.read(length).decode())
         chunks = [
             {"model": "test-coder:latest", "message": {"role": "assistant", "content": "hello "}, "done": False},
-            {"model": "test-coder:latest", "message": {"role": "assistant", "content": "from the test model"}, "done": True, "total_duration": 1_500_000_000},
+            {"model": "test-coder:latest", "message": {"role": "assistant", "content": "from the test model"}, "done": not type(self).omit_done, "total_duration": 1_500_000_000},
         ]
         body = b"".join(json.dumps(chunk).encode() + b"\n" for chunk in chunks)
         self.send_response(200)
@@ -124,6 +125,28 @@ class CodePilotApiTests(unittest.TestCase):
         self.assertEqual(sent["messages"][0]["role"], "system")
         self.assertTrue(all(item["role"] in {"system", "user", "assistant"} for item in sent["messages"]))
         self.assertNotIn("This role is not accepted from clients", str(sent["messages"]))
+
+
+    def test_chat_reports_incomplete_when_ollama_omits_done_chunk(self):
+        original = FakeOllamaHandler.omit_done
+        try:
+            FakeOllamaHandler.omit_done = True
+            status, content_type, body = self.request(
+                "/api/chat", "POST",
+                {"model": "test-coder:latest", "messages": [{"role": "user", "content": "Hi"}]},
+            )
+        finally:
+            FakeOllamaHandler.omit_done = original
+
+        self.assertEqual(status, 200)
+        self.assertEqual(content_type, "text/event-stream")
+        packets = [
+            json.loads(line[6:])
+            for line in body.decode().splitlines()
+            if line.startswith("data: ")
+        ]
+        self.assertFalse(packets[-1]["done"])
+        self.assertIn("ended before", packets[-1]["error"])
 
     def test_chat_returns_json_error_when_ollama_is_offline(self):
         original = codepilot.OLLAMA_BASE_URL
