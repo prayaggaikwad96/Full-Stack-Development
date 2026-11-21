@@ -288,7 +288,13 @@ class Handler(SimpleHTTPRequestHandler):
                 if not safe or not isinstance(content, str):
                     self.send_json(400, {"error": f"Invalid project file path or contents: {str(name)[:100]}"})
                     return
+                if safe == "__codepilot_manifest__.json":
+                    self.send_json(400, {"error": "The project manifest filename is reserved"})
+                    return
                 data = content.encode("utf-8")
+                if len(data) > 2 * 1024 * 1024:
+                    self.send_json(413, {"error": "Each project file must be 2 MiB or smaller"})
+                    return
                 total += len(data)
                 if total > MAX_UNPACKED_BYTES:
                     self.send_json(413, {"error": "Project text exceeds the 12 MiB export limit"})
