@@ -210,7 +210,7 @@ class CodePilotApiTests(unittest.TestCase):
     def test_project_export_rejects_reserved_manifest_filename(self):
         status, _, body = self.request(
             "/api/project/export", "POST",
-            {"files": {"__codepilot_manifest__.json": "{\\"user_data\\": true}"}},
+            {"files": {"__codepilot_manifest__.json": "user supplied data"}},
         )
         self.assertEqual(status, 400)
         self.assertIn("manifest filename is reserved", json.loads(body)["error"])
