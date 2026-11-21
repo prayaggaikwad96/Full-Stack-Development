@@ -234,7 +234,7 @@ class Handler(SimpleHTTPRequestHandler):
                 self.close_connection = True
                 self.end_headers()
                 headers_sent = True
-                done: dict[str, Any] = {"done": True, "model": model.strip(), "duration_ms": 0}
+                done: dict[str, Any] = {"done": False, "model": model.strip(), "duration_ms": 0}
                 for line in response:
                     if not line.strip():
                         continue
@@ -249,7 +249,7 @@ class Handler(SimpleHTTPRequestHandler):
                         self.wfile.flush()
                     if chunk.get("done"):
                         done = {"done": True, "model": chunk.get("model", model.strip()), "duration_ms": round(chunk.get("total_duration", 0) / 1_000_000)}
-                self.wfile.write(b"data: " + encoded(done) + b"\n\n")
+                if done.get("done"):\n                    terminal = done\n                else:\n                    terminal = {"done": False, "model": model.strip(), "duration_ms": 0, "error": "Local AI stream ended before the model confirmed completion"}\n                self.wfile.write(b"data: " + encoded(terminal) + b"\n\n")
                 self.wfile.flush()
         except (urllib.error.URLError, TimeoutError, OSError, ValueError) as exc:
             message = {"error": f"Local AI stream interrupted: {str(exc)[:300]}"}
