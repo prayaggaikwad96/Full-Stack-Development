@@ -198,6 +198,23 @@ class CodePilotApiTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertEqual(json.loads(response_body)["files"], project)
 
+
+    def test_project_export_rejects_files_over_import_limit(self):
+        oversized = "x" * (2 * 1024 * 1024 + 1)
+        status, _, body = self.request(
+            "/api/project/export", "POST", {"files": {"large.py": oversized}}
+        )
+        self.assertEqual(status, 413)
+        self.assertIn("2 MiB or smaller", json.loads(body)["error"])
+
+    def test_project_export_rejects_reserved_manifest_filename(self):
+        status, _, body = self.request(
+            "/api/project/export", "POST",
+            {"files": {"__codepilot_manifest__.json": "{\\"user_data\\": true}"}},
+        )
+        self.assertEqual(status, 400)
+        self.assertIn("manifest filename is reserved", json.loads(body)["error"])
+
     def test_export_rejects_unsafe_paths_and_bad_zip(self):
         status, _, body = self.request("/api/project/export", "POST", {"files": {"../escape.js": "bad"}})
         self.assertEqual(status, 400)
