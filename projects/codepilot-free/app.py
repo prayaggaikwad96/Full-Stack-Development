@@ -85,6 +85,8 @@ def read_zip_files(blob: bytes) -> dict[str, str]:
                 if not safe or not is_text_file(safe) or info.file_size > 2 * 1024 * 1024:
                     continue
                 unpacked += info.file_size
+                if safe in result:
+                    raise ValueError("ZIP contains duplicate or colliding project paths")
                 if unpacked > MAX_UNPACKED_BYTES or len(result) >= MAX_FILES:
                     raise ValueError("ZIP exceeds the text-project limits")
                 try:
@@ -234,7 +236,7 @@ class Handler(SimpleHTTPRequestHandler):
                 self.close_connection = True
                 self.end_headers()
                 headers_sent = True
-                done: dict[str, Any] = {"done": True, "model": model.strip(), "duration_ms": 0}
+                done: dict[str, Any] = {"done": False, "model": model.strip(), "duration_ms": 0}
                 for line in response:
                     if not line.strip():
                         continue
@@ -249,7 +251,16 @@ class Handler(SimpleHTTPRequestHandler):
                         self.wfile.flush()
                     if chunk.get("done"):
                         done = {"done": True, "model": chunk.get("model", model.strip()), "duration_ms": round(chunk.get("total_duration", 0) / 1_000_000)}
-                self.wfile.write(b"data: " + encoded(done) + b"\n\n")
+                if done.get("done"):
+                    terminal = done
+                else:
+                    terminal = {
+                        "done": False,
+                        "model": model.strip(),
+                        "duration_ms": 0,
+                        "error": "Local AI stream ended before the model confirmed completion",
+                    }
+                self.wfile.write(b"data: " + encoded(terminal) + b"\n\n")
                 self.wfile.flush()
         except (urllib.error.URLError, TimeoutError, OSError, ValueError) as exc:
             message = {"error": f"Local AI stream interrupted: {str(exc)[:300]}"}
@@ -272,6 +283,7 @@ class Handler(SimpleHTTPRequestHandler):
             return
         memory = io.BytesIO()
         total = 0
+        seen_paths: set[str] = set()
         with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_DEFLATED) as archive:
             archive.writestr("__codepilot_manifest__.json", encoded({"format": "codepilot-project-v1"}))
             for name, content in files.items():
@@ -279,7 +291,17 @@ class Handler(SimpleHTTPRequestHandler):
                 if not safe or not isinstance(content, str):
                     self.send_json(400, {"error": f"Invalid project file path or contents: {str(name)[:100]}"})
                     return
+                if safe == "__codepilot_manifest__.json":
+                    self.send_json(400, {"error": "The project manifest filename is reserved"})
+                    return
+                if safe in seen_paths:
+                    self.send_json(400, {"error": "Project contains duplicate or colliding file paths"})
+                    return
+                seen_paths.add(safe)
                 data = content.encode("utf-8")
+                if len(data) > 2 * 1024 * 1024:
+                    self.send_json(413, {"error": "Each project file must be 2 MiB or smaller"})
+                    return
                 total += len(data)
                 if total > MAX_UNPACKED_BYTES:
                     self.send_json(413, {"error": "Project text exceeds the 12 MiB export limit"})
