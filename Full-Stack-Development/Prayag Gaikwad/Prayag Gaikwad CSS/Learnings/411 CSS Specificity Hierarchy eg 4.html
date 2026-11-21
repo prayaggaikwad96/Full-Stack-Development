@@ -1,0 +1,37 @@
+<!-- 3. Modern Pseudo-Classes (:is(), :not(), :where()) -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Pseudo-Classes</title>
+    <style>
+        body{
+            background-color: aliceblue;
+            text-align: center;
+        }
+        /* Score: 0-0-1 (because :where(#hero) adds 0 specificity) */
+        :where(#hero) p {
+            color: gray;
+        }
+
+        /* Score: 0-0-2 (2 elements) -> Easily overrides :where(#hero) p */
+        section p {
+            color: navy;
+        }
+
+        /* Score: 1-0-1 (:is() takes the highest weight inside it: #hero = 1-0-0) */
+        :is(.container, #hero) p {
+            color: crimson;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="hero" class="container">
+        <p>This text renders in CRIMSON.</p>
+    </section>
+</body>
+
+</html>

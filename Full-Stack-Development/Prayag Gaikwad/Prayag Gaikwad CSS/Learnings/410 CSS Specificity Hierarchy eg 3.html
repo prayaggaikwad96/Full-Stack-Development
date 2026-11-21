@@ -1,0 +1,36 @@
+<!-- Example Programs Demonstrating Specificity -->
+<!-- 1. Basic Hierarchy (Inline vs. ID vs. Class vs. Element) -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body{
+            background-color: aliceblue;
+            text-align: center;
+        }
+        /* Score: 0-0-1 (Element) */
+        p {
+            color: blue;
+        }
+
+        /* Score: 0-1-0 (Class) -> Overrides Element */
+        .text-highlight {
+            color: green;
+        }
+
+        /* Score: 1-0-0 (ID) -> Overrides Class */
+        #main-paragraph {
+            color: purple;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Score: 1-0-0-0 (Inline) -> Wins over ID, Class, and Element -->
+    <p id="main-paragraph" class="text-highlight" style="color: orangered;">
+        Megumi Fushiguro (Jujutsu Kaisen): "The only thing granted equally to all is unfair reality."
+    </p>
+</body>
+
+</html>
