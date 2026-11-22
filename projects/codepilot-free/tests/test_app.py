@@ -258,8 +258,8 @@ class CodePilotApiTests(unittest.TestCase):
         # retaining the original compressed payload. The importer must enforce
         # its limit on bytes actually decompressed, not trust metadata alone.
         blob = bytearray(memory.getvalue())
-        local_header = blob.find(b"PK\\x03\\x04")
-        central_directory = blob.find(b"PK\\x01\\x02")
+        local_header = blob.find(b"PK\x03\x04")
+        central_directory = blob.find(b"PK\x01\x02")
         self.assertGreaterEqual(local_header, 0)
         self.assertGreaterEqual(central_directory, 0)
         struct.pack_into("<I", blob, local_header + 22, 64)
