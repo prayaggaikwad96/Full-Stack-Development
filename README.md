@@ -6,13 +6,13 @@ A hands-on full-stack learning archive with web-development exercises and CodePi
 
 - **Default branch:** `main`
 - **Visibility:** Public
-- **Last live-state review:** 19 November 2026
+- **Last live-state review:** 22 November 2026
 - **Account:** [@prayaggaikwad96](https://github.com/prayaggaikwad96)
 
 This repository contains learning materials, practical examples, and software projects. It is actively maintained; individual examples may be educational, incomplete, or dependent on their documented toolchains.
 
 > [!IMPORTANT]
-> This README describes the remote repository state observed on 19 November 2026. It is not a claim that every security, governance, local-workstation, or synchronization task is complete. Re-check GitHub settings and the relevant pull requests before making release or branch-management decisions.
+> This README describes the remote repository state observed on 22 November 2026. It is not a claim that every security, governance, local-workstation, or synchronization task is complete. Re-check GitHub settings and the relevant pull requests before making release or branch-management decisions.
 
 ## Learning path
 
@@ -51,7 +51,7 @@ The archived nested-tree audit report records a point-in-time comparison. Its co
 - Never force-push, reset, delete, or overwrite a primary or recovery ref as a shortcut to synchronization.
 - Review learning-content changes as content, not as routine maintenance. A mergeable pull request is not automatically approved for merge.
 
-### Live branch-protection snapshot — 19 November 2026
+### Live branch-protection snapshot — 22 November 2026
 
 The remote branch API reported:
 
@@ -60,7 +60,7 @@ The remote branch API reported:
 | `main` | Disabled | None |
 | `Developer` | Enabled | 10 |
 
-The ten required checks on `Developer` are:
+The required-check configuration on `Developer` could not be re-read in this audit (HTTP 403); the historical ten-check list below must not be treated as current enforcement:
 
 1. `Verify repository invariants`
 2. `CodeQL analysis`
@@ -75,12 +75,12 @@ The ten required checks on `Developer` are:
 
 **Required owner action:** Configure suitable protection for `main` in GitHub repository Settings. Require pull requests, block force pushes and branch deletion, and require stable CI checks only after confirming the checks run on every relevant pull request. Preserve an intentional administrator emergency-access policy. Re-fetch branch protection after saving; do not treat this README as proof that settings were changed.
 
-### Open pull requests at the time of review
+### Open pull requests at the time of review — 22 November 2026
 
 - [PR #35 — synchronize `main` into `Developer`](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/35): open. It contains a substantial history/content synchronization; review the complete diff, exact-head checks, and local state before merging.
 - [PR #49 — correct invalid CSS `spacing` declarations](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/49): open at the time of review. Confirm exact-head CI and inspect the three educational examples before merging.
 
-Pull-request states can change after this snapshot. Always inspect the live PR and checks before acting.
+Pull-request states can change after this snapshot. Current open PRs also include #51 and #55; inspect live PRs and exact-head checks before acting.
 
 ## CI, quality, and security
 
