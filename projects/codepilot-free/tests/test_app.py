@@ -255,15 +255,15 @@ class CodePilotApiTests(unittest.TestCase):
             archive.writestr("src/main.py", "print('safe')")
 
         # Forge the advertised uncompressed sizes in both ZIP headers while
-        # retaining the original compressed payload. The importer must enforce
-        # its limit on bytes actually decompressed, not trust metadata alone.
+        # retaining the original compressed payload. The importer must reject malformed size metadata rather than accept
+        # a truncated entry or rely only on ZipInfo.file_size.
         blob = bytearray(memory.getvalue())
         local_header = blob.find(b"PK\x03\x04")
         central_directory = blob.find(b"PK\x01\x02")
         self.assertGreaterEqual(local_header, 0)
         self.assertGreaterEqual(central_directory, 0)
-        struct.pack_into("<I", blob, local_header + 22, 64)
-        struct.pack_into("<I", blob, central_directory + 24, 64)
+        struct.pack_into("<I", blob, local_header + 22, 0)
+        struct.pack_into("<I", blob, central_directory + 24, 0)
 
         with self.assertRaisesRegex(ValueError, "not a valid ZIP archive"):
             codepilot.read_zip_files(bytes(blob))
