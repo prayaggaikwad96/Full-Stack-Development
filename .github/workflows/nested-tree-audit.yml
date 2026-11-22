@@ -2,13 +2,13 @@ name: Audit nested project tree
 
 on:
   push:
-    branches: [main]
+    branches: [main, Developer]
     paths:
       - "Prayag Gaikwad/**"
       - "Full-Stack-Development/Prayag Gaikwad/**"
       - ".github/workflows/nested-tree-audit.yml"
   pull_request:
-    branches: [main]
+    branches: [main, Developer]
     paths:
       - "Prayag Gaikwad/**"
       - "Full-Stack-Development/Prayag Gaikwad/**"
@@ -28,6 +28,13 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
+
+      - name: Require both comparison roots
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -d "Prayag Gaikwad" || { echo "::error::Canonical learning tree is missing."; exit 1; }
+          test -d "Full-Stack-Development/Prayag Gaikwad" || { echo "::error::Nested learning tree is missing."; exit 1; }
 
       - name: Compare every file after line-ending normalization
         shell: bash
