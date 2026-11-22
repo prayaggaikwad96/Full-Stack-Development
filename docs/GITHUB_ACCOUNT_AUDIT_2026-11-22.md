@@ -187,3 +187,22 @@ The earlier Computer-Classes PR #17 has been closed after confirming that `direc
 - Git PR #7: still no Actions run/check context on its latest commit; exact-head validation is a hard merge blocker. PR #3 remains the superseded historical reference.
 - FSD PR #35 remains draft due the 112-path content synchronization and unverified two-PC recovery gate.
 - No PR has been merged in this remediation session. No default/protected branch, repository settings, secrets, releases, tags, or recovery refs have been modified.
+
+
+## Additional CI maintenance and PR disposition — 22 November 2026
+
+### Git fork — stale PR closed, replacement remains gated
+- Git PR #3 has been closed as superseded; its source branch remains preserved for history/recovery. No branch was deleted.
+- Git PR #7 is based on current `master`; a fresh comparison is `ahead 3 / behind 0`, with only `ci/install-dependencies.sh` and `.github/workflows/main.yml` changed. GitHub currently reports it mergeable, but its exact-head Actions runs/check contexts remain absent. The PR is not validated and must not merge until the full CI matrix runs on its latest SHA.
+
+### TanStack Virtual — GitHub Actions runtime update
+- The `virtual` PR workflow currently pins `nrwl/nx-set-shas@v4.4.0`, whose `action.yml` targets Node 20. The exact-head PR #25 log emitted a Node-20 deprecation warning because GitHub runners force this action to Node 24.
+- The upstream action released v5.1.0 with `runs.using: node24`; the `main-branch-name` input remains available. A separate one-line PR #26 updates the SHA pin to the v5.1.0 commit and is awaiting exact-head workflow validation. Do not merge without verifying the full PR test pipeline.
+
+### Final state of other proposed changes
+- Computer-Classes PR #17 was closed after its diagnosis was disproven; `directory: "/"` remains the documented correct Actions ecosystem setting. No current Dependabot path bug is claimed.
+- Computer-Classes PR #15 still adds CodeQL push and pull_request triggers for both primary/development branches; exact-head CodeQL succeeded.
+- FSD PR #35 remains draft; no merge. PR #63 remains open for independent review; latest audit document checks passed.
+- Virtual PR #25 is fully green on exact head; review pending. PR #26 is a separate runtime-migration change and is not yet validated.
+
+No default branch or protected branch, settings, repository secrets, tags, releases, or local refs/backups were changed.
