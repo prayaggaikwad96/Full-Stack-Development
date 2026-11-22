@@ -105,7 +105,7 @@ def read_zip_files(blob: bytes) -> dict[str, str]:
                 except UnicodeDecodeError:
                     continue
     except (zipfile.BadZipFile, EOFError, NotImplementedError, RuntimeError) as exc:
-        raise ValueError("That file is not a valid or supported ZIP archive") from exc
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression") from exc
     if not result:
         raise ValueError("No supported UTF-8 source files were found in the ZIP")
     return result
