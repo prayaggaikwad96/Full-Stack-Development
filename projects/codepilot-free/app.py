@@ -8,6 +8,7 @@ import re
 import urllib.error
 import urllib.request
 import zipfile
+import zlib
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import PurePosixPath, Path
 from typing import Any
@@ -55,6 +56,25 @@ def is_text_file(path: str) -> bool:
     return name in {"dockerfile", "makefile", ".gitignore", ".editorconfig", ".env.example"} or PurePosixPath(path).suffix.lower() in TEXT_SUFFIXES
 
 
+def _read_zip_entry_limited(
+    archive: zipfile.ZipFile,
+    info: zipfile.ZipInfo,
+    limit: int,
+    error_message: str,
+) -> bytes:
+    """Read at most limit + 1 decompressed bytes, independent of ZIP header sizes."""
+    content = bytearray()
+    with archive.open(info) as stream:
+        while len(content) <= limit:
+            chunk = stream.read(min(64 * 1024, limit + 1 - len(content)))
+            if not chunk:
+                break
+            content.extend(chunk)
+            if len(content) > limit:
+                raise ValueError(error_message)
+    return bytes(content)
+
+
 def read_zip_files(blob: bytes) -> dict[str, str]:
     if not blob or len(blob) > MAX_ZIP_BYTES:
         raise ValueError("ZIP must be smaller than 24 MiB")
@@ -73,10 +93,18 @@ def read_zip_files(blob: bytes) -> dict[str, str]:
                 manifest_info = manifest_entries[0]
                 if manifest_info.file_size > MAX_MANIFEST_BYTES:
                     raise ValueError("ZIP project manifest exceeds the 4 KiB safety limit")
-                unpacked += manifest_info.file_size
                 if not manifest_info.is_dir() and not manifest_info.flag_bits & 0x1:
+                    manifest_data = _read_zip_entry_limited(
+                        archive,
+                        manifest_info,
+                        MAX_MANIFEST_BYTES,
+                        "ZIP project manifest exceeds the 4 KiB safety limit",
+                    )
+                    unpacked += len(manifest_data)
+                    if unpacked > MAX_UNPACKED_BYTES:
+                        raise ValueError("ZIP exceeds the text-project limits")
                     try:
-                        marker = json.loads(archive.read(manifest_info).decode("utf-8"))
+                        marker = json.loads(manifest_data.decode("utf-8"))
                         own_archive = isinstance(marker, dict) and marker.get("format") == "codepilot-project-v1"
                     except (UnicodeDecodeError, json.JSONDecodeError):
                         pass
@@ -95,21 +123,29 @@ def read_zip_files(blob: bytes) -> dict[str, str]:
                 safe = safe_project_path(candidate)
                 if not safe or not is_text_file(safe) or info.file_size > 2 * 1024 * 1024:
                     continue
-                unpacked += info.file_size
                 if safe in result:
                     raise ValueError("ZIP contains duplicate or colliding project paths")
-                if unpacked > MAX_UNPACKED_BYTES or len(result) >= MAX_FILES:
+                if len(result) >= MAX_FILES:
                     raise ValueError("ZIP exceeds the text-project limits")
+                remaining = MAX_UNPACKED_BYTES - unpacked
+                if info.file_size > remaining:
+                    raise ValueError("ZIP exceeds the text-project limits")
+                file_data = _read_zip_entry_limited(
+                    archive,
+                    info,
+                    min(2 * 1024 * 1024, remaining),
+                    "ZIP exceeds the text-project limits",
+                )
+                unpacked += len(file_data)
                 try:
-                    result[safe] = archive.read(info).decode("utf-8-sig")
+                    result[safe] = file_data.decode("utf-8-sig")
                 except UnicodeDecodeError:
                     continue
-    except (zipfile.BadZipFile, EOFError, NotImplementedError, RuntimeError) as exc:
+    except (zipfile.BadZipFile, EOFError, NotImplementedError, RuntimeError, zlib.error) as exc:
         raise ValueError("That file is not a valid ZIP archive or uses unsupported compression") from exc
     if not result:
         raise ValueError("No supported UTF-8 source files were found in the ZIP")
     return result
-
 
 class Handler(SimpleHTTPRequestHandler):
     server_version = "CodePilotFree/1.2"
