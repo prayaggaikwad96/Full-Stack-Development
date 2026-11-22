@@ -4,6 +4,7 @@ from __future__ import annotations
 import io
 import json
 import socket
+import struct
 import threading
 import unittest
 import zipfile
@@ -246,6 +247,26 @@ class CodePilotApiTests(unittest.TestCase):
         self.assertLess(len(blob), codepilot.MAX_ZIP_BYTES)
         with self.assertRaisesRegex(ValueError, "manifest exceeds the 4 KiB safety limit"):
             codepilot.read_zip_files(blob)
+
+    def test_zip_import_bounds_actual_manifest_decompression_when_header_understates_size(self):
+        memory = io.BytesIO()
+        with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+            archive.writestr(codepilot.MANIFEST_NAME, "x" * (8 * 1024 * 1024))
+            archive.writestr("src/main.py", "print('safe')")
+
+        # Forge the advertised uncompressed sizes in both ZIP headers while
+        # retaining the original compressed payload. The importer must enforce
+        # its limit on bytes actually decompressed, not trust metadata alone.
+        blob = bytearray(memory.getvalue())
+        local_header = blob.find(b"PK\\x03\\x04")
+        central_directory = blob.find(b"PK\\x01\\x02")
+        self.assertGreaterEqual(local_header, 0)
+        self.assertGreaterEqual(central_directory, 0)
+        struct.pack_into("<I", blob, local_header + 22, 64)
+        struct.pack_into("<I", blob, central_directory + 24, 64)
+
+        with self.assertRaisesRegex(ValueError, "manifest exceeds the 4 KiB safety limit"):
+            codepilot.read_zip_files(bytes(blob))
 
     def test_export_rejects_unsafe_paths_and_bad_zip(self):
         status, _, body = self.request("/api/project/export", "POST", {"files": {"../escape.js": "bad"}})
