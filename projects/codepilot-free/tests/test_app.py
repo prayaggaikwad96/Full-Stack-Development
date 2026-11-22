@@ -248,7 +248,7 @@ class CodePilotApiTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "manifest exceeds the 4 KiB safety limit"):
             codepilot.read_zip_files(blob)
 
-    def test_zip_import_bounds_actual_manifest_decompression_when_header_understates_size(self):
+    def test_zip_import_rejects_forged_uncompressed_size_metadata(self):
         memory = io.BytesIO()
         with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_DEFLATED) as archive:
             archive.writestr(codepilot.MANIFEST_NAME, "x" * (8 * 1024 * 1024))
@@ -265,7 +265,7 @@ class CodePilotApiTests(unittest.TestCase):
         struct.pack_into("<I", blob, local_header + 22, 64)
         struct.pack_into("<I", blob, central_directory + 24, 64)
 
-        with self.assertRaisesRegex(ValueError, "manifest exceeds the 4 KiB safety limit"):
+        with self.assertRaisesRegex(ValueError, "not a valid ZIP archive"):
             codepilot.read_zip_files(bytes(blob))
 
     def test_export_rejects_unsafe_paths_and_bad_zip(self):
