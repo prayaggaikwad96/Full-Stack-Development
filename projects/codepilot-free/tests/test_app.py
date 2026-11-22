@@ -4,6 +4,7 @@ from __future__ import annotations
 import io
 import json
 import socket
+import struct
 import threading
 import unittest
 import zipfile
@@ -246,6 +247,74 @@ class CodePilotApiTests(unittest.TestCase):
         self.assertLess(len(blob), codepilot.MAX_ZIP_BYTES)
         with self.assertRaisesRegex(ValueError, "manifest exceeds the 4 KiB safety limit"):
             codepilot.read_zip_files(blob)
+
+    def test_zip_import_rejects_zip64_before_parsing_central_directory(self):
+        memory = io.BytesIO()
+        with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_STORED) as archive:
+            archive.writestr("src/main.py", "print('safe')")
+
+        # Mark the EOCD as ZIP64 without adding a ZIP64 locator. The preflight
+        # must reject ZIP64 before Python's ZipFile parses the central directory.
+        blob = bytearray(memory.getvalue())
+        eocd = blob.rfind(b"PK\x05\x06")
+        self.assertGreaterEqual(eocd, 0)
+        struct.pack_into("<H", blob, eocd + 8, 0xFFFF)
+        struct.pack_into("<H", blob, eocd + 10, 0xFFFF)
+
+        original_zipfile = codepilot.zipfile.ZipFile
+        codepilot.zipfile.ZipFile = lambda *_args, **_kwargs: self.fail(
+            "ZipFile must not parse ZIP64 archives"
+        )
+        try:
+            with self.assertRaisesRegex(ValueError, "ZIP64 archives are not supported"):
+                codepilot.read_zip_files(bytes(blob))
+        finally:
+            codepilot.zipfile.ZipFile = original_zipfile
+
+    def test_zip_import_rejects_forged_uncompressed_size_metadata(self):
+        memory = io.BytesIO()
+        with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+            archive.writestr(codepilot.MANIFEST_NAME, "x" * (8 * 1024 * 1024))
+            archive.writestr("src/main.py", "print('safe')")
+
+        # Forge the advertised uncompressed sizes in both ZIP headers while
+        # retaining the original compressed payload. The importer must reject malformed size metadata rather than accept
+        # a truncated entry or rely only on ZipInfo.file_size.
+        blob = bytearray(memory.getvalue())
+        local_header = blob.find(b"PK\x03\x04")
+        central_directory = blob.find(b"PK\x01\x02")
+        self.assertGreaterEqual(local_header, 0)
+        self.assertGreaterEqual(central_directory, 0)
+        struct.pack_into("<I", blob, local_header + 22, 0)
+        struct.pack_into("<I", blob, central_directory + 24, 0)
+
+        with self.assertRaisesRegex(ValueError, "not a valid ZIP archive"):
+            codepilot.read_zip_files(bytes(blob))
+
+    def test_zip_import_rejects_excessive_central_directory_entries_before_parsing(self):
+        memory = io.BytesIO()
+        entry_count = codepilot.MAX_FILES * 3 + 1
+        with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_STORED) as archive:
+            for index in range(entry_count):
+                archive.writestr(f"ignored/{index:05}.bin", b"")
+
+        # Under-report the count in the EOCD record. The importer must count
+        # actual central-directory records before zipfile allocates ZipInfo objects.
+        blob = bytearray(memory.getvalue())
+        eocd = blob.rfind(b"PK\x05\x06")
+        self.assertGreaterEqual(eocd, 0)
+        struct.pack_into("<H", blob, eocd + 8, 1)
+        struct.pack_into("<H", blob, eocd + 10, 1)
+
+        original_zipfile = codepilot.zipfile.ZipFile
+        codepilot.zipfile.ZipFile = lambda *_args, **_kwargs: self.fail(
+            "ZipFile must not parse an excessive central directory"
+        )
+        try:
+            with self.assertRaisesRegex(ValueError, "ZIP contains too many entries"):
+                codepilot.read_zip_files(bytes(blob))
+        finally:
+            codepilot.zipfile.ZipFile = original_zipfile
 
     def test_export_rejects_unsafe_paths_and_bad_zip(self):
         status, _, body = self.request("/api/project/export", "POST", {"files": {"../escape.js": "bad"}})
