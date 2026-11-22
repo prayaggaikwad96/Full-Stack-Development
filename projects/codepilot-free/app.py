@@ -72,7 +72,7 @@ def _preflight_zip_entry_count(blob: bytes) -> None:
             entries_on_disk,
             total_entries,
             directory_size,
-            _directory_offset,
+            directory_offset,
             _comment_size,
         ) = struct.unpack_from("<4s4H2LH", blob, eocd_offset)
     except struct.error as exc:
@@ -86,6 +86,7 @@ def _preflight_zip_entry_count(blob: bytes) -> None:
         entries_on_disk == 0xFFFF
         or total_entries == 0xFFFF
         or directory_size == 0xFFFFFFFF
+        or directory_offset == 0xFFFFFFFF
     ):
         locator_offset = eocd_offset - 20
         if locator_offset < 0 or blob[locator_offset:locator_offset + 4] != b"PK\\x06\\x07":
