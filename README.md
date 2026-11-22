@@ -9,10 +9,10 @@ A hands-on full-stack learning archive with web-development exercises and CodePi
 - **Last live-state review:** 22 November 2026
 - **Account:** [@prayaggaikwad96](https://github.com/prayaggaikwad96)
 
-This repository contains learning materials, practical examples, and software projects. It is actively maintained; individual examples may be educational, incomplete, or dependent on their documented toolchains.
+This repository contains learning materials, practical examples, and software projects. Individual examples may be educational, incomplete, or dependent on their documented toolchains.
 
 > [!IMPORTANT]
-> This README describes the remote repository state observed on 22 November 2026. It is not a claim that every security, governance, local-workstation, or synchronization task is complete. Re-check GitHub settings and the relevant pull requests before making release or branch-management decisions.
+> This README reflects a remote repository review on 22 November 2026. The branch API reports `main` as unprotected and `Developer` as protected, but the connected integration cannot read branch-protection or ruleset details (HTTP 403). Required reviews, required status checks, bypass rules, and effective enforcement are therefore not verified. Local worktrees, independent backups, restore tests, and complete security-alert inventories also cannot be verified through this integration. Re-check repository Settings and local machines before treating governance or synchronization as complete.
 
 ## Learning path
 
@@ -46,21 +46,21 @@ The archived nested-tree audit report records a point-in-time comparison. Its co
 ## Branch workflow and synchronization
 
 - `main` is the default branch and the published source of truth.
-- `Developer` is a separate protected development branch. Integrate changes through reviewed pull requests; compare exact commit refs before relying on synchronization.
+- `Developer` is the development branch. The branch API reports a protected flag, but detailed rules could not be inspected; compare exact commit refs before relying on synchronization.
 - Preserve recovery and archive branches until their unique commits and content have been reviewed and independently backed up.
 - Never force-push, reset, delete, or overwrite a primary or recovery ref as a shortcut to synchronization.
 - Review learning-content changes as content, not as routine maintenance. A mergeable pull request is not automatically approved for merge.
 
-### Live branch-protection snapshot — 22 November 2026
+### Live branch and protection snapshot — 22 November 2026
 
-The remote branch API reported:
+The live branch listing reported the following protection flags. The detailed branch-protection and ruleset endpoints returned HTTP 403 through the connected integration, so the effective requirements and bypass rules could not be verified.
 
-| Branch | Protection | Required status checks |
+| Branch | Branch API `protected` flag | Detailed enforcement |
 | --- | --- | --- |
-| `main` | Disabled | None |
-| `Developer` | Enabled | 10 |
+| `main` | `false` | Not readable; verify in repository Settings |
+| `Developer` | `true` | Not readable; verify in repository Settings |
 
-The required-check configuration on `Developer` could not be re-read in this audit (HTTP 403); the historical ten-check list below must not be treated as current enforcement:
+A historical audit recorded ten required checks on `Developer`; that list is not confirmed as current and must not be copied into settings without checking the exact checks emitted by current workflows:
 
 1. `Verify repository invariants`
 2. `CodeQL analysis`
@@ -73,14 +73,11 @@ The required-check configuration on `Developer` could not be re-read in this aud
 9. `Python 3.15 / Node.js 22`
 10. `Python 3.15 / Node.js 24`
 
-**Required owner action:** Configure suitable protection for `main` in GitHub repository Settings. Require pull requests, block force pushes and branch deletion, and require stable CI checks only after confirming the checks run on every relevant pull request. Preserve an intentional administrator emergency-access policy. Re-fetch branch protection after saving; do not treat this README as proof that settings were changed.
+**Required owner action:** In repository Settings, protect `main`: require changes through pull requests, require stable checks that run on every relevant PR, resolve review conversations, and block force pushes and branch deletion. Require an independent approval when a reviewer is available; do not configure an impossible self-approval rule for a solo-maintained project. Keep any administrator bypass intentional and documented. Verify the saved rule and applicable rulesets after changing them.
 
-### Open pull requests at the time of review — 22 November 2026
+### Pull requests and synchronization
 
-- [PR #35 — synchronize `main` into `Developer`](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/35): open. It contains a substantial history/content synchronization; review the complete diff, exact-head checks, and local state before merging.
-- [PR #49 — correct invalid CSS `spacing` declarations](https://github.com/prayaggaikwad96/Full-Stack-Development/pull/49): open at the time of review. Confirm exact-head CI and inspect the three educational examples before merging.
-
-Pull-request states can change after this snapshot. Current open PRs also include #51 and #55; inspect live PRs and exact-head checks before acting.
+Always use the [live pull-request list](https://github.com/prayaggaikwad96/Full-Stack-Development/pulls) rather than a hard-coded README list; PR states and checks change. The current `main` to `Developer` proposal is a substantial 112-path change, including learning-content moves and five removed paths. Keep it in draft until every affected educational file is reviewed, local worktrees and independent backups are verified, and the final proposed result passes CI. A green check or GitHub's mergeable flag is not approval to merge.
 
 ## CI, quality, and security
 
