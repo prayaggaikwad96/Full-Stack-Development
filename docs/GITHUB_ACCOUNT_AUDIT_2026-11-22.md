@@ -206,3 +206,10 @@ The earlier Computer-Classes PR #17 has been closed after confirming that `direc
 - Virtual PR #25 is fully green on exact head; review pending. PR #26 is a separate runtime-migration change and is not yet validated.
 
 No default branch or protected branch, settings, repository secrets, tags, releases, or local refs/backups were changed.
+
+
+### TanStack Virtual PR #26 — Node 24 runtime upgrade validated
+- PR #26 updates `nrwl/nx-set-shas` from v4.4.0 (Node 20 action runtime) to v5.1.0 (Node 24 runtime) by immutable commit SHA.
+- The action's v5.1.0 metadata retains `main-branch-name`, `NX_BASE` and `NX_HEAD` semantics needed by the current PR workflow.
+- Latest exact head `df263d232f1f8be304e35cc7016c92f13af7b707` passed Test, Preview, Version Preview, Provenance, CodeQL, and GitHub Actions security analysis.
+- PR #26 remains open for independent review; not merged.
