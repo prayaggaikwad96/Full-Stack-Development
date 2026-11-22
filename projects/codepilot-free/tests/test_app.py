@@ -268,6 +268,31 @@ class CodePilotApiTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "not a valid ZIP archive"):
             codepilot.read_zip_files(bytes(blob))
 
+    def test_zip_import_rejects_excessive_central_directory_entries_before_parsing(self):
+        memory = io.BytesIO()
+        entry_count = codepilot.MAX_FILES * 3 + 1
+        with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_STORED) as archive:
+            for index in range(entry_count):
+                archive.writestr(f"ignored/{index:05}.bin", b"")
+
+        # Under-report the count in the EOCD record. The importer must count
+        # actual central-directory records before zipfile allocates ZipInfo objects.
+        blob = bytearray(memory.getvalue())
+        eocd = blob.rfind(b"PK\x05\x06")
+        self.assertGreaterEqual(eocd, 0)
+        struct.pack_into("<H", blob, eocd + 8, 1)
+        struct.pack_into("<H", blob, eocd + 10, 1)
+
+        original_zipfile = codepilot.zipfile.ZipFile
+        codepilot.zipfile.ZipFile = lambda *_args, **_kwargs: self.fail(
+            "ZipFile must not parse an excessive central directory"
+        )
+        try:
+            with self.assertRaisesRegex(ValueError, "ZIP contains too many entries"):
+                codepilot.read_zip_files(bytes(blob))
+        finally:
+            codepilot.zipfile.ZipFile = original_zipfile
+
     def test_export_rejects_unsafe_paths_and_bad_zip(self):
         status, _, body = self.request("/api/project/export", "POST", {"files": {"../escape.js": "bad"}})
         self.assertEqual(status, 400)
