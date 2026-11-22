@@ -21,6 +21,8 @@ MAX_PROJECT_BYTES = 12 * 1024 * 1024
 MAX_ZIP_BYTES = 24 * 1024 * 1024
 MAX_FILES = 500
 MAX_UNPACKED_BYTES = 12 * 1024 * 1024
+MAX_MANIFEST_BYTES = 4 * 1024
+MANIFEST_NAME = "__codepilot_manifest__.json"
 TEXT_SUFFIXES = {
     ".html", ".htm", ".css", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx",
     ".py", ".md", ".txt", ".json", ".jsonc", ".yaml", ".yml", ".toml", ".xml",
@@ -64,12 +66,21 @@ def read_zip_files(blob: bytes) -> dict[str, str]:
             if len(entries) > MAX_FILES * 3:
                 raise ValueError("ZIP contains too many entries")
             own_archive = False
-            try:
-                marker = json.loads(archive.read("__codepilot_manifest__.json").decode("utf-8"))
-                own_archive = marker.get("format") == "codepilot-project-v1"
-            except (KeyError, UnicodeDecodeError, json.JSONDecodeError, AttributeError):
-                pass
-            regular = [i for i in entries if not i.is_dir() and i.filename != "__codepilot_manifest__.json"]
+            manifest_entries = [i for i in entries if i.filename == MANIFEST_NAME]
+            if len(manifest_entries) > 1:
+                raise ValueError("ZIP contains duplicate project manifest entries")
+            if manifest_entries:
+                manifest_info = manifest_entries[0]
+                if manifest_info.file_size > MAX_MANIFEST_BYTES:
+                    raise ValueError("ZIP project manifest exceeds the 4 KiB safety limit")
+                unpacked += manifest_info.file_size
+                if not manifest_info.is_dir() and not manifest_info.flag_bits & 0x1:
+                    try:
+                        marker = json.loads(archive.read(manifest_info).decode("utf-8"))
+                        own_archive = isinstance(marker, dict) and marker.get("format") == "codepilot-project-v1"
+                    except (UnicodeDecodeError, json.JSONDecodeError):
+                        pass
+            regular = [i for i in entries if not i.is_dir() and i.filename != MANIFEST_NAME]
             parts_list = [PurePosixPath(i.filename).parts for i in regular]
             wrapper_root = None
             if not own_archive and parts_list and all(len(parts) >= 2 for parts in parts_list):
@@ -77,7 +88,7 @@ def read_zip_files(blob: bytes) -> dict[str, str]:
                 if len(roots) == 1:
                     wrapper_root = next(iter(roots))
             for info in entries:
-                if info.is_dir() or info.flag_bits & 0x1 or info.filename == "__codepilot_manifest__.json":
+                if info.is_dir() or info.flag_bits & 0x1 or info.filename == MANIFEST_NAME:
                     continue
                 parts = PurePosixPath(info.filename).parts
                 candidate = PurePosixPath(*parts[1:]).as_posix() if wrapper_root and len(parts) > 1 and parts[0] == wrapper_root else PurePosixPath(info.filename).as_posix()
@@ -93,8 +104,8 @@ def read_zip_files(blob: bytes) -> dict[str, str]:
                     result[safe] = archive.read(info).decode("utf-8-sig")
                 except UnicodeDecodeError:
                     continue
-    except zipfile.BadZipFile as exc:
-        raise ValueError("That file is not a valid ZIP archive") from exc
+    except (zipfile.BadZipFile, EOFError, NotImplementedError, RuntimeError) as exc:
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression") from exc
     if not result:
         raise ValueError("No supported UTF-8 source files were found in the ZIP")
     return result
@@ -285,13 +296,13 @@ class Handler(SimpleHTTPRequestHandler):
         total = 0
         seen_paths: set[str] = set()
         with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-            archive.writestr("__codepilot_manifest__.json", encoded({"format": "codepilot-project-v1"}))
+            archive.writestr(MANIFEST_NAME, encoded({"format": "codepilot-project-v1"}))
             for name, content in files.items():
                 safe = safe_project_path(name)
                 if not safe or not isinstance(content, str):
                     self.send_json(400, {"error": f"Invalid project file path or contents: {str(name)[:100]}"})
                     return
-                if safe == "__codepilot_manifest__.json":
+                if safe == MANIFEST_NAME:
                     self.send_json(400, {"error": "The project manifest filename is reserved"})
                     return
                 if safe in seen_paths:
