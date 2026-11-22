@@ -233,6 +233,20 @@ class CodePilotApiTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "duplicate or colliding project paths"):
             codepilot.read_zip_files(memory.getvalue())
 
+    def test_zip_import_rejects_oversized_project_manifest_before_reading(self):
+        memory = io.BytesIO()
+        with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+            archive.writestr(
+                codepilot.MANIFEST_NAME,
+                "x" * (codepilot.MAX_MANIFEST_BYTES + 1),
+            )
+            archive.writestr("src/main.py", "print('safe')")
+
+        blob = memory.getvalue()
+        self.assertLess(len(blob), codepilot.MAX_ZIP_BYTES)
+        with self.assertRaisesRegex(ValueError, "manifest exceeds the 4 KiB safety limit"):
+            codepilot.read_zip_files(blob)
+
     def test_export_rejects_unsafe_paths_and_bad_zip(self):
         status, _, body = self.request("/api/project/export", "POST", {"files": {"../escape.js": "bad"}})
         self.assertEqual(status, 400)
