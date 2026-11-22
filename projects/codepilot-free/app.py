@@ -62,10 +62,7 @@ def _preflight_zip_entry_count(blob: bytes) -> None:
     search_start = max(0, len(blob) - (22 + 0xFFFF))
     eocd_offset = blob.rfind(b"PK\x05\x06", search_start)
     if eocd_offset < 0 or eocd_offset + 22 > len(blob):
-        # ZipFile provides the canonical malformed-archive error.
-        with zipfile.ZipFile(io.BytesIO(blob)) as archive:
-            archive.infolist()
-        return
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
 
     signature, disk_number, directory_disk, entries_on_disk, total_entries, directory_size, directory_offset, comment_size = struct.unpack_from(
         "<4s4H2LH", blob, eocd_offset
@@ -76,12 +73,9 @@ def _preflight_zip_entry_count(blob: bytes) -> None:
         raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
 
     if entries_on_disk == 0xFFFF or total_entries == 0xFFFF or directory_size == 0xFFFFFFFF or directory_offset == 0xFFFFFFFF:
-        # Let zipfile validate ZIP64 structures; still avoid large central directories
-        # by rejecting ZIP64 archives whose declared entry count exceeds our bound.
-        with zipfile.ZipFile(io.BytesIO(blob)) as archive:
-            if len(archive.infolist()) > MAX_FILES * 3:
-                raise ValueError("ZIP contains too many entries")
-        return
+        # CodePilot archives are capped at 500 files and well below ZIP64 limits.
+        # Reject ZIP64 before ZipFile parses/allocates its central-directory entries.
+        raise ValueError("ZIP64 archives are not supported")
 
     if entries_on_disk != total_entries:
         raise ValueError("Multi-disk ZIP archives are not supported")
