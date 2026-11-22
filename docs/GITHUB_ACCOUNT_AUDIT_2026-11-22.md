@@ -147,3 +147,14 @@ No settings, secrets, default branches, tags, releases, or recovery refs were ch
 - PR #7: GitHub CI not running on latest head; do not merge.
 - PR #35 remains draft; do not merge until content review, branch governance and two-PC backup/restore checks are complete.
 - No settings, secrets, primary branch refs, tags, releases, or recovery refs were changed by this follow-up.
+
+
+## Correction — Computer-Classes Dependabot diagnosis withdrawn (22 November 2026)
+
+An earlier follow-up incorrectly claimed that `Computer-Classes/.github/dependabot.yml` was misconfigured because it used `directory: "/"`. That diagnosis is withdrawn.
+
+GitHub's official Dependabot documentation requires the GitHub Actions ecosystem directory to be `/ ` (slash, no space); Dependabot then searches `.github/workflows` and a root `action.yml`. The failed updater run `43805270981` was executed against commit `0d83861c6e187f962e7189647e2b1c6a9db6e922`. The exact historical tree at that SHA had no `.github/workflows/` directory, so `dependency_file_not_found` was expected on that historical commit and does not establish a bad directory setting. The CodeQL workflow first appears in the tree by commit `a0ecfea2c63098e03a537551c9ed2063b79c9abe` and exists on current `main`.
+
+The speculative fix was reverted to `directory: "/"`, and [Computer-Classes PR #17](https://github.com/prayaggaikwad96/Computer-Classes/pull/17) was closed with an explanation. Do not describe PR #17 as a real fix or the original updater failure as a current configuration defect. Verify a later scheduled updater run before concluding current Dependabot operation is healthy.
+
+Official documentation: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file and https://docs.github.com/code-security/dependabot/dependabot-version-updates/optimizing-the-creation-of-pull-requests-for-dependabot-version-updates.
