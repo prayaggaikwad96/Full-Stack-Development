@@ -112,3 +112,38 @@ A focused config-only fix was opened as [Computer-Classes PR #17](https://github
 
 ### Safety and current disposition
 No settings, secrets, default branches, tags, releases, or recovery refs were changed. PR #35 and Git PR #3 remain draft and must not be merged based on existing evidence. Local worktree/backup/restore checks remain an owner-side task.
+
+
+## Further remediation activity — 22 November 2026, afternoon
+
+### Computer-Classes follow-ups
+- PR #15 now changes both CodeQL triggers: pushes to `main` and `Developer`, and pull requests targeting either branch. Latest head `d960e665b6c25262d5c7085eb26602940c2332e6` has successful CodeQL analysis.
+- PR #17 updates the GitHub Actions Dependabot ecosystem directory from `/` to `/.github/workflows`, the only real workflow directory in the repository. Latest head `09d9473f689c2946d3468f9f7666204b42794097` has successful CodeQL and configuration-validation checks. The next actual Dependabot update cycle is still required to prove that the updater now discovers and updates workflow actions.
+- PR #16 remains a governance-document change only. It does not enable protection on `Developer`.
+
+### TanStack Virtual / Marko anchor regression
+- PR #25: [retry clamped prepend anchors after DOM commit](https://github.com/prayaggaikwad96/virtual/pull/25), current base `main`, latest head `6e0d079758efeee14f33c8188193fa2ad8f0a8bc`.
+- The main branch's virtual-core retains a clamped anchor retry, but its Marko element and window wrappers did not schedule a retry after Marko commits the expanded sizer. The focused PR schedules one next-frame retry, cancels superseded frames and cancels on component destruction; it adds core tests for a clamped prepend, explicit-scroll cancellation and cancellation before update.
+- The first preview build exposed a TypeScript visibility error because the wrapper called a private core method. This was corrected with a narrow internal type assertion; the core method remains private and no public API was added.
+- On the corrected head, CodeQL, zizmor, provenance, package preview build and version preview succeeded. The main PR Test job was still in progress at this snapshot; do not merge until it finishes successfully.
+
+### Security advisory accuracy — virtual dependencies
+- Current `pnpm-lock.yaml` includes `glob@13.0.6`. GitHub-reviewed GHSA-3g3m-2fjr-6pw4 affects glob `>=9.0.0 <=14.0.1`; patched version is `14.0.2`. The advisory specifically documents continued filesystem traversal after an AbortSignal cancellation. <https://github.com/isaacs/node-glob/security/advisories/GHSA-3g3m-2fjr-6pw4>
+- The transitive consumers in this lockfile include Marko tooling and npm-cli ecosystem packages. A forced major override to glob 14 can violate their `^13` ranges, so do not apply a lockfile-only major override without upgrading compatible parents and running the full test/build matrix. An existing candidate branch proposes glob 14 but has not regenerated the lockfile and is not a validated fix.
+- Hono is currently locked at `4.13.19`, which is above the GHSA-5r4p-p66f-jhc7 fix `4.13.11`; that advisory is not a reason to roll back or further upgrade the current Hono entry. <https://github.com/honojs/hono/security/advisories/GHSA-5r4p-p66f-jhc7>
+- Corrected a prior overbroad minimatch assessment: the current GitHub maintainer advisory GHSA-g3hv-75wg-m249 lists `10.2.6` as affected and `11.0.1` as patched; the main lockfile's `10.2.5` is not listed as affected by that specific advisory. GHSA-hqmv-qgp3-jx75 affects only `11.0.3` through `11.0.7`, patched at `11.0.8`; do not label 10.2.5 as affected by that distinct issue. <https://github.com/isaacs/minimatch/security/advisories/GHSA-g3hv-75wg-m249> <https://github.com/isaacs/minimatch/security/advisories/GHSA-hqmv-qgp3-jx75>
+
+### Git fork CI
+- PR #7: [atomic Ubuntu dirname replacement and container bootstrap](https://github.com/prayaggaikwad96/git/pull/7), latest patch head `68eaa64e81d103d91f1e4a679a2eebcdf5a3d4e4`. It is based on current `master`, modifies only `ci/install-dependencies.sh` and `.github/workflows/main.yml`, and has been exercised with a local filesystem-state/failure matrix.
+- No GitHub Actions runs or check contexts were exposed for that head. A comment was added requesting repository Actions enablement/approval verification and exact-head CI. PR #3 remains as a recovery/history reference and is explicitly marked as superseded; do not merge either patch until PR #7 runs the full matrix successfully.
+
+### Delayed Dependabot update jobs
+- The REA root `minimatch` and advertised-schemas `pip` updater runs created on 18 November remain queued with no jobs listed. Several Altair daily npm update runs also show queued/no-job state. This indicates that the updater work is not verifiably completing; repository file inspection alone cannot establish a service-side cause. Track the Dependabot UI/logs and GitHub Actions status before asserting update automation is healthy.
+
+### Current merge posture
+- PR #63 audit document: the exact current head previously passed repository invariants, 8 Python/Node matrix combinations, and CodeQL; it remains open for independent review.
+- PRs #15 and #17: exact-head CodeQL and configuration checks passed; keep open for review and confirm actual Developer branch protections / Dependabot update cycle.
+- PR #25: security/build/preview checks passed on latest head; the main Test job was still running at this snapshot.
+- PR #7: GitHub CI not running on latest head; do not merge.
+- PR #35 remains draft; do not merge until content review, branch governance and two-PC backup/restore checks are complete.
+- No settings, secrets, primary branch refs, tags, releases, or recovery refs were changed by this follow-up.
