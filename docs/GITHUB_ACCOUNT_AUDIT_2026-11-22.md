@@ -84,3 +84,31 @@ This is a remote GitHub audit, not a local build or complete security assessment
 ## Next review
 
 Re-run the audit against fresh refs and exact workflow run SHAs. Update this report only when new evidence changes a finding or closes a remediation item.
+
+
+## Follow-up verification — 22 November 2026, 12:40 IST
+
+### PR #63 validation
+The exact PR head `d6cd01ecfeee72f4f1eb99e4790c46933a30da7a` passed Repository consistency, all eight CodePilot Python/Node matrix jobs, and CodeQL. No independent review is recorded; PR #63 remains open for review.
+
+### Primary-branch API snapshot
+The branch endpoint reports the following coarse `protected` flags:
+- `Full-Stack-Development/main`: false.
+- `Computer-Classes/main`, `virtual/main`, `rea/main`, `altair/master`, `git/master`, and `prayaggaikwad96/main`: true.
+
+The detailed protection endpoint returns HTTP 403 through this GitHub integration for the six protected branches. The rulesets endpoint returned an empty list for all seven repositories. Thus the effective review requirements, required checks, conversation resolution, bypass policy, and force-push/deletion restrictions remain unverified. Do not interpret a coarse protected flag as full governance compliance.
+
+### New confirmed Dependabot configuration defect — Computer-Classes
+The 16 November Dependabot run failed with `dependency_file_not_found`: `/action.yml or /.github/workflows/<anything>.yml not found`. The repository root inventory contains only `.github`, docs, and Markdown guidance; the only workflow is `.github/workflows/codeql.yml`. The GitHub Actions ecosystem was incorrectly scoped to `/`.
+
+A focused config-only fix was opened as [Computer-Classes PR #17](https://github.com/prayaggaikwad96/Computer-Classes/pull/17): change the Dependabot directory to `/.github/workflows`. The PR changes one file (5 additions, 1 deletion), no source code, and its current CodeQL PR check is running. The actual Dependabot updater cycle must still confirm the fix after merge/scheduled execution; do not claim it is repaired until then.
+
+### Workflow run evidence refresh
+- Full-Stack-Development/main: latest visible PR checks and push runs for the current main head succeeded.
+- Computer-Classes/main: CodeQL succeeded; prior Dependabot updater runs failed due to the wrong directory scope described above.
+- virtual/main: CodeQL and zizmor succeeded on current main; Release and autofix jobs were skipped by conditions. An earlier CodeQL run on the immediately preceding SHA was cancelled, while the latest current-head CodeQL succeeded.
+- REA and Altair: recent Dependabot jobs appear queued for long periods in the workflow-run API, so dependency update automation completion is not established.
+- Git and profile repository: the recent default-branch workflow-run query returned no entries. This is not passing CI evidence.
+
+### Safety and current disposition
+No settings, secrets, default branches, tags, releases, or recovery refs were changed. PR #35 and Git PR #3 remain draft and must not be merged based on existing evidence. Local worktree/backup/restore checks remain an owner-side task.
