@@ -248,6 +248,29 @@ class CodePilotApiTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "manifest exceeds the 4 KiB safety limit"):
             codepilot.read_zip_files(blob)
 
+    def test_zip_import_rejects_zip64_before_parsing_central_directory(self):
+        memory = io.BytesIO()
+        with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_STORED) as archive:
+            archive.writestr("src/main.py", "print('safe')")
+
+        # Mark the EOCD as ZIP64 without adding a ZIP64 locator. The preflight
+        # must reject ZIP64 before Python's ZipFile parses the central directory.
+        blob = bytearray(memory.getvalue())
+        eocd = blob.rfind(b"PK\x05\x06")
+        self.assertGreaterEqual(eocd, 0)
+        struct.pack_into("<H", blob, eocd + 8, 0xFFFF)
+        struct.pack_into("<H", blob, eocd + 10, 0xFFFF)
+
+        original_zipfile = codepilot.zipfile.ZipFile
+        codepilot.zipfile.ZipFile = lambda *_args, **_kwargs: self.fail(
+            "ZipFile must not parse ZIP64 archives"
+        )
+        try:
+            with self.assertRaisesRegex(ValueError, "ZIP64 archives are not supported"):
+                codepilot.read_zip_files(bytes(blob))
+        finally:
+            codepilot.zipfile.ZipFile = original_zipfile
+
     def test_zip_import_rejects_forged_uncompressed_size_metadata(self):
         memory = io.BytesIO()
         with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_DEFLATED) as archive:
