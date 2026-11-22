@@ -158,3 +158,32 @@ GitHub's official Dependabot documentation requires the GitHub Actions ecosystem
 The speculative fix was reverted to `directory: "/"`, and [Computer-Classes PR #17](https://github.com/prayaggaikwad96/Computer-Classes/pull/17) was closed with an explanation. Do not describe PR #17 as a real fix or the original updater failure as a current configuration defect. Verify a later scheduled updater run before concluding current Dependabot operation is healthy.
 
 Official documentation: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file and https://docs.github.com/code-security/dependabot/dependabot-version-updates/optimizing-the-creation-of-pull-requests-for-dependabot-version-updates.
+
+
+## Further exact-head verification — 22 November 2026, 13:05 IST
+
+### TanStack Virtual PR #25 — Marko #1267
+The corrected PR head `65d63632c5a38e9958f83b5d9254f46d093833e4` now has a green exact-head check suite:
+- CodeQL: success.
+- GitHub Actions security analysis / zizmor: success.
+- PR Test: success.
+- Provenance: success.
+- Package Preview and Version Preview: success.
+- The Test job reports 124/124 Nx tasks successful and 0 failed; the E2E segment reports 82 passed, 1 skipped. The skip in the combined log is from the separate core `scroll-trace.test.ts` suite; the Marko chat-pretext E2E suite is built and executed in the same run.
+- The previously skipped Marko #1267 test is now deterministic: it holds the delayed history prepend, clicks Latest, then releases the prepend and asserts that the end remains pinned. The core fix marks a clamped prepend anchor and the Marko element/window wrappers re-run `_willUpdate()` after the next DOM commit.
+- PR #25 remains open for independent review. Green CI validates the proposed head but does not substitute for maintainer review or prove performance/behavior beyond the test coverage.
+
+### Full-Stack-Development audit PR #63
+Latest audit-document head `f9c430d887a1ea160d98da1ba884e780bf936e78` passed Repository consistency, all eight CodePilot Python/Node matrix jobs, and CodeQL. It remains open for review and has not been merged.
+
+### Dependabot false-positive correction
+The earlier Computer-Classes PR #17 has been closed after confirming that `directory: "/"` is the documented setting for the GitHub Actions ecosystem and that the 16-November failed updater commit had no `.github/workflows/` directory. The attempted config change was reverted; no current-main config bug is established. See the correction section above and the closed PR for the historical evidence.
+
+### Current merge posture
+- PR #25: all available checks green; independent review still pending.
+- PR #63: all available checks green on its latest audit-document head; independent review pending.
+- Computer-Classes PR #15: CodeQL passed after adding both push and pull_request branch coverage for Developer; review remains pending.
+- Computer-Classes PR #16: documentation only; actual Developer branch protection must be applied separately in Settings.
+- Git PR #7: still no Actions run/check context on its latest commit; exact-head validation is a hard merge blocker. PR #3 remains the superseded historical reference.
+- FSD PR #35 remains draft due the 112-path content synchronization and unverified two-PC recovery gate.
+- No PR has been merged in this remediation session. No default/protected branch, repository settings, secrets, releases, tags, or recovery refs have been modified.
