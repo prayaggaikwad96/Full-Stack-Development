@@ -9,6 +9,7 @@ import urllib.error
 import urllib.request
 import zipfile
 import zlib
+import struct
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import PurePosixPath, Path
 from typing import Any
@@ -56,6 +57,93 @@ def is_text_file(path: str) -> bool:
     return name in {"dockerfile", "makefile", ".gitignore", ".editorconfig", ".env.example"} or PurePosixPath(path).suffix.lower() in TEXT_SUFFIXES
 
 
+def _preflight_zip_entry_count(blob: bytes) -> None:
+    """Reject oversized central directories before zipfile allocates every ZipInfo."""
+    search_start = max(0, len(blob) - (22 + 0xFFFF))
+    eocd_offset = blob.rfind(b"PK\\x05\\x06", search_start)
+    if eocd_offset < 0 or eocd_offset + 22 > len(blob):
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
+
+    try:
+        (
+            signature,
+            disk_number,
+            directory_disk,
+            entries_on_disk,
+            total_entries,
+            directory_size,
+            _directory_offset,
+            _comment_size,
+        ) = struct.unpack_from("<4s4H2LH", blob, eocd_offset)
+    except struct.error as exc:
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression") from exc
+
+    if signature != b"PK\\x05\\x06" or disk_number != 0 or directory_disk != 0:
+        raise ValueError("Multi-disk or invalid ZIP archives are not supported")
+
+    directory_end = eocd_offset
+    if (
+        entries_on_disk == 0xFFFF
+        or total_entries == 0xFFFF
+        or directory_size == 0xFFFFFFFF
+    ):
+        locator_offset = eocd_offset - 20
+        if locator_offset < 0 or blob[locator_offset:locator_offset + 4] != b"PK\\x06\\x07":
+            raise ValueError("ZIP64 central-directory metadata is invalid")
+        try:
+            _, locator_disk, _zip64_offset, disk_count = struct.unpack_from(
+                "<4sLQL", blob, locator_offset
+            )
+        except struct.error as exc:
+            raise ValueError("ZIP64 central-directory metadata is invalid") from exc
+        if locator_disk != 0 or disk_count != 1:
+            raise ValueError("Multi-disk ZIP archives are not supported")
+
+        zip64_offset = locator_offset - 56
+        if zip64_offset < 0 or blob[zip64_offset:zip64_offset + 4] != b"PK\\x06\\x06":
+            raise ValueError("ZIP64 central-directory metadata is invalid")
+        try:
+            zip64 = struct.unpack_from("<4sQ2H2L4Q", blob, zip64_offset)
+        except struct.error as exc:
+            raise ValueError("ZIP64 central-directory metadata is invalid") from exc
+        if zip64[4] != 0 or zip64[5] != 0 or zip64[6] != zip64[7]:
+            raise ValueError("Multi-disk ZIP archives are not supported")
+        total_entries = zip64[7]
+        directory_size = zip64[8]
+        directory_end = zip64_offset
+    elif entries_on_disk != total_entries:
+        raise ValueError("Multi-disk ZIP archives are not supported")
+
+    if total_entries > MAX_FILES * 3:
+        raise ValueError("ZIP contains too many entries")
+
+    directory_start = directory_end - directory_size
+    if directory_start < 0:
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
+
+    count = 0
+    offset = directory_start
+    while offset < directory_end:
+        if offset + 46 > directory_end or blob[offset:offset + 4] != b"PK\\x01\\x02":
+            raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
+        try:
+            name_length, extra_length, comment_length = struct.unpack_from(
+                "<HHH", blob, offset + 28
+            )
+        except struct.error as exc:
+            raise ValueError("That file is not a valid ZIP archive or uses unsupported compression") from exc
+        next_offset = offset + 46 + name_length + extra_length + comment_length
+        if next_offset > directory_end:
+            raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
+        count += 1
+        if count > MAX_FILES * 3:
+            raise ValueError("ZIP contains too many entries")
+        offset = next_offset
+
+    if count != total_entries:
+        raise ValueError("ZIP central-directory entry count does not match its metadata")
+
+
 def _read_zip_entry_limited(
     archive: zipfile.ZipFile,
     info: zipfile.ZipInfo,
@@ -85,6 +173,7 @@ def read_zip_files(blob: bytes) -> dict[str, str]:
     result: dict[str, str] = {}
     unpacked = 0
     try:
+        _preflight_zip_entry_count(blob)
         with zipfile.ZipFile(io.BytesIO(blob)) as archive:
             entries = archive.infolist()
             if len(entries) > MAX_FILES * 3:
