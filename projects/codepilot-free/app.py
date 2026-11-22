@@ -60,7 +60,7 @@ def is_text_file(path: str) -> bool:
 def _preflight_zip_entry_count(blob: bytes) -> None:
     """Reject oversized central directories before zipfile allocates every ZipInfo."""
     search_start = max(0, len(blob) - (22 + 0xFFFF))
-    eocd_offset = blob.rfind(b"PK\\x05\\x06", search_start)
+    eocd_offset = blob.rfind(b"PK\x05\x06", search_start)
     if eocd_offset < 0 or eocd_offset + 22 > len(blob):
         raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
 
@@ -78,7 +78,7 @@ def _preflight_zip_entry_count(blob: bytes) -> None:
     except struct.error as exc:
         raise ValueError("That file is not a valid ZIP archive or uses unsupported compression") from exc
 
-    if signature != b"PK\\x05\\x06" or disk_number != 0 or directory_disk != 0:
+    if signature != b"PK\x05\x06" or disk_number != 0 or directory_disk != 0:
         raise ValueError("Multi-disk or invalid ZIP archives are not supported")
 
     directory_end = eocd_offset
@@ -89,7 +89,7 @@ def _preflight_zip_entry_count(blob: bytes) -> None:
         or directory_offset == 0xFFFFFFFF
     ):
         locator_offset = eocd_offset - 20
-        if locator_offset < 0 or blob[locator_offset:locator_offset + 4] != b"PK\\x06\\x07":
+        if locator_offset < 0 or blob[locator_offset:locator_offset + 4] != b"PK\x06\x07":
             raise ValueError("ZIP64 central-directory metadata is invalid")
         try:
             _, locator_disk, _zip64_offset, disk_count = struct.unpack_from(
@@ -101,7 +101,7 @@ def _preflight_zip_entry_count(blob: bytes) -> None:
             raise ValueError("Multi-disk ZIP archives are not supported")
 
         zip64_offset = locator_offset - 56
-        if zip64_offset < 0 or blob[zip64_offset:zip64_offset + 4] != b"PK\\x06\\x06":
+        if zip64_offset < 0 or blob[zip64_offset:zip64_offset + 4] != b"PK\x06\x06":
             raise ValueError("ZIP64 central-directory metadata is invalid")
         try:
             zip64 = struct.unpack_from("<4sQ2H2L4Q", blob, zip64_offset)
@@ -125,7 +125,7 @@ def _preflight_zip_entry_count(blob: bytes) -> None:
     count = 0
     offset = directory_start
     while offset < directory_end:
-        if offset + 46 > directory_end or blob[offset:offset + 4] != b"PK\\x01\\x02":
+        if offset + 46 > directory_end or blob[offset:offset + 4] != b"PK\x01\x02":
             raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
         try:
             name_length, extra_length, comment_length = struct.unpack_from(
