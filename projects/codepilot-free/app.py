@@ -72,6 +72,10 @@ def _read_zip_entry_limited(
             content.extend(chunk)
             if len(content) > limit:
                 raise ValueError(error_message)
+    # ZipExtFile can stop immediately when a forged header advertises zero
+    # bytes. Verify CRC explicitly so even empty/truncated reads are rejected.
+    if zlib.crc32(content) & 0xFFFFFFFF != info.CRC:
+        raise zipfile.BadZipFile(f"Bad CRC-32 for file {info.filename!r}")
     return bytes(content)
 
 
