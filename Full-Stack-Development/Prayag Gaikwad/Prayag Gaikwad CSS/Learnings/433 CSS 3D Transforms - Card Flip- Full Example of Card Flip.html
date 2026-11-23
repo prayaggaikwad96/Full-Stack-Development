@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body{
+            background-color: rgb(164, 208, 246);
+            text-align: center;
+        }
+        .container {
+            width: 200px;
+            height: 250px;
+            border: 1px solid lightgray;
+            perspective: 600px;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 5s;
+            transform-style: preserve-3d;
+        }
+
+        .face {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            backface-visibility: hidden;
+            text-align: center;
+        }
+
+        .front {
+            background: rgb(0, 109, 128);
+        }
+
+        .back {
+            background: rgb(243, 168, 168);
+            transform: rotateY(180deg);
+        }
+
+        .container:hover .card {
+            transform: rotateY(180deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Card Flip</h1>
+
+    <div class="container">
+        <div class="card">
+            <div class="face front">
+                <h2>Front Blue</h2>
+            </div>
+            <div class="face back">
+                <h2>Back Pink</h2>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
