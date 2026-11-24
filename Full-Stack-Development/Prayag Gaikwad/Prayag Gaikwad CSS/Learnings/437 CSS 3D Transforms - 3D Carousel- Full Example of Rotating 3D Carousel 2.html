@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS 3D Carousel</title>
+    <style>
+        :root {
+            --card-width: 190px;
+            --card-height: 190px;
+            --total-items: 11;
+            --radius: 365px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body {
+            padding-top: 36px;
+            background-color: #1e293b;
+            background-image:
+                linear-gradient(rgba(15, 23, 42, 0.25), rgba(15, 23, 42, 0.35)),
+                url("https://tos-sos-sg.sfo3.cdn.digitaloceanspaces.com/web/trip/photos/pexels-apasaric-2506923.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        @media (min-width: 769px) {
+            body {
+                background-attachment: fixed;
+            }
+        }
+
+        h1 {
+            margin: 0 0 24px;
+            color: #fff;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+        }
+
+        .container {
+            width: var(--card-width);
+            height: var(--card-height);
+            margin: 110px auto 60px;
+            perspective: 1200px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transform-origin: center center;
+            will-change: transform;
+            animation: spin 10s infinite linear;
+        }
+
+        .card {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.75);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+            background-color: #0f172a;
+            backface-visibility: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform:
+                rotateY(calc(var(--index) * (360deg / var(--total-items)))) translateZ(var(--radius));
+        }
+
+        .card img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.35), transparent 50%);
+            pointer-events: none;
+        }
+
+        .card-label {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85);
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotateY(0deg);
+            }
+
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .carousel:hover {
+            animation-play-state: paused;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --card-width: 140px;
+                --card-height: 140px;
+                --radius: 250px;
+            }
+
+            .container {
+                margin: 90px auto 40px;
+                perspective: 950px;
+            }
+
+            .card-label {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS 3D Carousel</h1>
+
+    <div class="container">
+        <div class="carousel">
+            <div class="card" style="--index:0;"><img
+                    src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 1" /><span class="card-label">1</span></div>
+            <div class="card" style="--index:1;"><img
+                    src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 2" /><span class="card-label">2</span></div>
+            <div class="card" style="--index:2;"><img
+                    src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 3" /><span class="card-label">3</span></div>
+            <div class="card" style="--index:3;"><img
+                    src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 4" /><span class="card-label">4</span></div>
+            <div class="card" style="--index:4;"><img
+                    src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 5" /><span class="card-label">5</span></div>
+            <div class="card" style="--index:5;"><img
+                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 6" /><span class="card-label">6</span></div>
+            <div class="card" style="--index:6;"><img
+                    src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 7" /><span class="card-label">7</span></div>
+            <div class="card" style="--index:7;"><img
+                    src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 8" /><span class="card-label">8</span></div>
+            <div class="card" style="--index:8;"><img
+                    src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 9" /><span class="card-label">9</span></div>
+            <div class="card" style="--index:9;"><img
+                    src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 10" /><span class="card-label">10</span></div>
+            <div class="card" style="--index:10;"><img
+                    src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=85"
+                    alt="Card 11" /><span class="card-label">11</span></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

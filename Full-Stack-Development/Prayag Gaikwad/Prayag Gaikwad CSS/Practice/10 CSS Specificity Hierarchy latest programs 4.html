@@ -6,36 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>!important in @layer & Native CSS Nesting</title>
     <style>
-        body {
-            background-color: lightblue;
-            text-align: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 1.5rem;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 1.5rem;
-        }
+        @layer base, tokens, components;
 
-        .page {
-            max-width: 984px;
-            width: 100%;
-        }
+        @layer base {
 
-        .pricing-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: stretch;
-            gap: 1.5rem;
-            width: 100%;
-            max-width: 984px;
-        }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
 
-        @layer tokens, components;
+            body {
+                background-color: #bae6fd;
+                color: #0f172a;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                line-height: 1.5;
+                text-align: center;
+                min-height: 100vh;
+                margin: 0;
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .page {
+                max-width: 984px;
+                width: 100%;
+            }
+
+            .pricing-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: stretch;
+                gap: 1.5rem;
+                width: 100%;
+                max-width: 984px;
+            }
+        }
 
         @layer tokens {
 
@@ -43,12 +54,22 @@
             .alert-banner {
                 background: #fef3c7 !important;
                 color: #92400e !important;
+                border: 1px solid #f59e0b;
+                padding: 0.85rem 1.1rem;
+                border-radius: 10px;
+                box-shadow: 0 2px 6px rgba(146, 64, 14, 0.08);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 18px rgba(146, 64, 14, 0.14);
+                }
             }
         }
 
         @layer components {
 
-            /* Even with a higher selector specificity, !important in `tokens` wins */
+            /* Even with higher selector specificity, !important in `tokens` wins */
             .page .alert-banner {
                 background: #fbe2e2 !important;
                 color: #991b1b !important;
@@ -58,40 +79,80 @@
             .pricing-card {
                 flex: 1 1 320px;
                 max-width: 480px;
-                padding: 1.25rem;
-                border: 1px solid #e2e8f0;
-                border-radius: 10px;
-                box-sizing: border-box;
+                padding: 1.35rem 1.25rem;
+                border: 1px solid #cbd5e1;
+                border-radius: 12px;
                 background-color: #91c5f8;
+                box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+                transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease, background-color 0.22s ease;
+
+                & h3 {
+                    margin: 0.25rem 0 0.5rem;
+                    font-size: 1.15rem;
+                    color: #0f172a;
+                }
+
+                & p {
+                    margin: 0.35rem 0;
+                }
 
                 & .badge {
                     display: inline-block;
                     margin-bottom: 0.5rem;
-                    padding: 0.2rem 0.65rem;
+                    padding: 0.22rem 0.7rem;
                     border-radius: 999px;
                     font-size: 0.75rem;
                     font-weight: 700;
-                    letter-spacing: 0.04em;
+                    letter-spacing: 0.05em;
                     text-transform: uppercase;
                     background-color: #1e3a8a;
                     color: #ffffff;
+                    transition: transform 0.2s ease, background-color 0.2s ease;
                 }
 
                 & .price {
-                    font-size: 1.5rem;
+                    font-size: 1.6rem;
                     font-weight: 700;
                     color: #0f172a;
+                    margin: 0.4rem 0;
                 }
 
                 /* & inside a nested rule repeats the parent selector chain */
                 & .price.discounted {
-                    color: #16a34a;
+                    color: #15803d;
+                }
+
+                &:hover {
+                    transform: translateY(-5px);
+                    background-color: #a3d0fc;
+                    border-color: #3b82f6;
+                    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.16);
+
+                    & .badge {
+                        background-color: #172554;
+                        transform: scale(1.04);
+                    }
                 }
             }
 
             .pricing-card.featured {
                 border: 2px solid #1e3a8a;
                 box-shadow: 0 10px 25px rgba(30, 58, 138, 0.16);
+
+                &:hover {
+                    transform: translateY(-6px);
+                    border-color: #172554;
+                    box-shadow: 0 18px 34px rgba(30, 58, 138, 0.26);
+                }
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .alert-banner,
+            .pricing-card,
+            .pricing-card .badge {
+                transition: none;
             }
         }
     </style>
@@ -99,7 +160,7 @@
 
 <body>
     <div class="page">
-        <div class="alert-banner" style="padding: 0.85rem 1rem; border-radius: 8px;">
+        <div class="alert-banner">
             <strong>Notice:</strong> <code>@layer tokens</code> wins over <code>@layer components</code> for
             <code>!important</code>.
         </div>
@@ -116,7 +177,7 @@
             <span class="badge">Popular</span>
             <h3>Google AI Ultra Plan (₹24,500/month)</h3>
             <p class="price">₹19,999/month</p>
-            <p>Annual &amp; Priority Access</p>
+            <p>Annual & Priority Access</p>
         </section>
     </div>
 </body>

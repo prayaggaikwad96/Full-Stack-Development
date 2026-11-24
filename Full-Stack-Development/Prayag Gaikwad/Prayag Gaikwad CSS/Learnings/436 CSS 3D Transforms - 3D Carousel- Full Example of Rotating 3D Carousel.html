@@ -3,7 +3,9 @@
 <head>
 <style>
   body{
-    background-color: rgb(240, 240, 255);
+    background-color: rgb(136, 182, 247);
+    text-align: center;
+    background-image: url();
   }
 :root {
   --card-width: 200px;
@@ -16,7 +18,7 @@
   width: var(--card-width);
   height: var(--card-height);
   margin: 80px auto;
-  perspective: 1000px;
+  perspective: 700px;
 }
 
 .carousel {
@@ -24,7 +26,7 @@
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  animation: spin 10s infinite linear;
+  animation: spin 5s infinite linear;
 }
 
 .card {
@@ -33,7 +35,8 @@
   height: 100%;
   left: 0;
   top: 0;
-  background: linear-gradient(to bottom, rgb(248, 106, 40), rgb(219, 246, 101));
+  background: linear-gradient(to bottom, rgb(238, 150, 110), rgb(251, 215, 125));
+  /* background-image: url(); */
   color: white;
   font-size: 2rem;
   display: flex;
@@ -46,7 +49,7 @@
 }
 
 @keyframes spin {
-  from { transform: rotateY(0deg); }
+  from { transform: rotateY(50deg); }
   to { transform: rotateY(360deg); }
 }
 
@@ -67,6 +70,11 @@
     <div class="card" style="--index:3;">4</div>
     <div class="card" style="--index:4;">5</div>
     <div class="card" style="--index:5;">6</div>
+    <div class="card" style="--index:6;">7</div>
+    <div class="card" style="--index:7;">8</div>
+    <div class="card" style="--index:8;">9</div>
+    <div class="card" style="--index:9;">10</div>
+    <div class="card" style="--index:10;">11</div>
   </div>
 </div>
 
