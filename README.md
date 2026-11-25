@@ -6,13 +6,13 @@ A hands-on full-stack learning archive with web-development exercises and CodePi
 
 - **Default branch:** `main`
 - **Visibility:** Public
-- **Last live-state review:** 22 November 2026
+- **Last live-state review:** 25 November 2026
 - **Account:** [@prayaggaikwad96](https://github.com/prayaggaikwad96)
 
 This repository contains learning materials, practical examples, and software projects. Individual examples may be educational, incomplete, or dependent on their documented toolchains.
 
 > [!IMPORTANT]
-> This README reflects a remote repository review on 22 November 2026. The branch API reports `main` as unprotected and `Developer` as protected, but the connected integration cannot read branch-protection or ruleset details (HTTP 403). Required reviews, required status checks, bypass rules, and effective enforcement are therefore not verified. Local worktrees, independent backups, restore tests, and complete security-alert inventories also cannot be verified through this integration. Re-check repository Settings and local machines before treating governance or synchronization as complete.
+> This README reflects a remote repository review on 25 November 2026. The branch API reports `main` as unprotected and `Developer` as protected, but the connected integration cannot read branch-protection or ruleset details (HTTP 403). Required reviews, required status checks, bypass rules, and effective enforcement are therefore not verified. Local worktrees, independent backups, restore tests, and complete security-alert inventories also cannot be verified through this integration. Re-check repository Settings and local machines before treating governance or synchronization as complete.
 
 ## Learning path
 
@@ -51,7 +51,7 @@ The archived nested-tree audit report records a point-in-time comparison. Its co
 - Never force-push, reset, delete, or overwrite a primary or recovery ref as a shortcut to synchronization.
 - Review learning-content changes as content, not as routine maintenance. A mergeable pull request is not automatically approved for merge.
 
-### Live branch and protection snapshot — 22 November 2026
+### Live branch and protection snapshot — 25 November 2026
 
 The live branch listing reported the following protection flags. The detailed branch-protection and ruleset endpoints returned HTTP 403 through the connected integration, so the effective requirements and bypass rules could not be verified.
 
@@ -77,7 +77,7 @@ A historical audit recorded ten required checks on `Developer`; that list is not
 
 ### Pull requests and synchronization
 
-Always use the [live pull-request list](https://github.com/prayaggaikwad96/Full-Stack-Development/pulls) rather than a hard-coded README list; PR states and checks change. The current `main` to `Developer` proposal is a substantial 112-path change, including learning-content moves and five removed paths. Keep it in draft until every affected educational file is reviewed, local worktrees and independent backups are verified, and the final proposed result passes CI. A green check or GitHub's mergeable flag is not approval to merge.
+Always use the [live pull-request list](https://github.com/prayaggaikwad96/Full-Stack-Development/pulls) rather than a hard-coded README list; PR states and checks change. The current `main` to `Developer` proposal (#35) is a substantial 146-path change across 82 commits, including learning-content additions and moves, plus five removed paths that were previously verified as zero-byte placeholders. Its head `7cea0202` completed all 24 visible CI checks successfully on 25 November 2026; those are point-in-time results, not merge approval. Keep it in draft until every affected educational file is reviewed, local worktrees and independent backups are verified, and the final proposed result passes CI. A green check or GitHub's mergeable flag is not approval to merge.
 
 ## CI, quality, and security
 
@@ -107,7 +107,7 @@ Use the [repository health audit](docs/repository-health-audit-2026-11-01.md) as
 - Keep each example focused on one topic.
 - Use descriptive filenames and consistent folder organization.
 - Include setup, run, and expected-result instructions when dependencies are required.
-- Update documentation when project structure or behavior changes.
+- Update documentation when project structure and behavior change.
 - Add tests for behavior changes and regressions where practical.
 - Do not commit API keys, tokens, passwords, real environment files, private records, or other sensitive data.
 - Use `.env.example` for non-secret configuration templates.
