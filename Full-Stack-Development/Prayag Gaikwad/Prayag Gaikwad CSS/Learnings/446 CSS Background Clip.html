@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #div1 {
+            border: 5px dotted black;
+            padding: 35px;
+            background-image: url(paper.gif);
+            background-clip: border-box;
+        }
+
+        #div2 {
+            border: 5px dotted black;
+            padding: 35px;
+            background-image: url(paper.gif);
+            background-clip: padding-box;
+        }
+
+        #div3 {
+            border: 5px dotted black;
+            padding: 35px;
+            background-image: url(paper.gif);
+            background-clip: content-box;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>The background-clip Property</h1>
+
+    <p>background-clip: border-box (this is default):</p>
+    <div id="div1">
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            dolore magna aliquam erat volutpat.</p>
+    </div>
+
+    <p>background-clip: padding-box:</p>
+    <div id="div2">
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            dolore magna aliquam erat volutpat.</p>
+    </div>
+
+    <p>background-clip: content-box:</p>
+    <div id="div3">
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            dolore magna aliquam erat volutpat.</p>
+    </div>
+
+</body>
+
+</html>
