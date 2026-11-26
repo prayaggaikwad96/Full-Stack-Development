@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> AMU - Login Page </title>
+
+    <!-- GOOGLE FONT: MICHROMA -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* BODY */
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #777382;
+            padding: 30px;
+        }
+
+        /* MAIN CONTAINER */
+
+        .container {
+            width: 100%;
+            max-width: 15000px;
+            min-height: 845px;
+            display: flex;
+            background: #2c2535;
+            border-radius: 13px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px #0004;
+            padding: 13px;
+        }
+
+        /* LEFT SECTION */
+
+        .left-section {
+            width: 50%;
+            min-height: 530px;
+
+            background-color: #42317d;
+
+            background-image:
+                linear-gradient(rgba(20, 10, 40, 0.15),
+                    rgba(20, 10, 40, 0.35)),
+                url("https://i.redd.it/zlv5bhakiv291.jpg");
+
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            color: white;
+        }
+
+        /* HEADER */
+
+        .left-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* AMU LOGO - MICHROMA FONT */
+
+        .amu-logo {
+            font-family: 'Michroma', sans-serif;
+            font-size: 27px;
+            font-weight: 400;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        /* BACK LINK */
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            background: #ffffff25;
+            padding: 7px 13px;
+            border-radius: 20px;
+            transition: .3s;
+            white-space: nowrap;
+        }
+
+        .back-link:hover {
+            background: #ffffff45;
+        }
+
+        /* LEFT CONTENT */
+
+        .left-content {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .tagline {
+            font-size: 23px;
+            line-height: 1.25;
+            color: white;
+            font-weight: 400;
+        }
+
+        /* SLIDER DOTS */
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 9px;
+            margin-top: 28px;
+        }
+
+        .slider-dots span {
+            width: 24px;
+            height: 4px;
+            background: #ffffff55;
+            border-radius: 5px;
+        }
+
+        .slider-dots span.active {
+            background: white;
+            width: 33px;
+        }
+
+        /* RIGHT SECTION */
+
+        .right-section {
+            width: 50%;
+            padding: 45px 7%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #2c2535;
+            background-image: url("https://i.redd.it/rxer0gciy5l91.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center -75px;
+            color: white;
+        }
+
+        /* HEADING */
+
+        h1 {
+            font-size: 38px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        /* SUBTITLE */
+
+        .subtitle {
+            font-size: 12px;
+            color: #b7b2c0;
+            margin-bottom: 38px;
+        }
+
+        .subtitle a {
+            color: #c5b4ff;
+            text-decoration: underline;
+        }
+
+        /* FORM */
+
+        form {
+            width: 100%;
+        }
+
+        /* INPUT GROUP */
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 14px;
+        }
+
+        /* NAME FIELDS */
+
+        .name-group {
+            display: flex;
+            gap: 13px;
+        }
+
+        .name-group .input-group {
+            width: calc(50% - 6.5px);
+            min-width: 0;
+        }
+
+        /* INPUT FIELDS */
+
+        .input-group input {
+            width: 100%;
+            height: 38px;
+            padding: 10px 15px;
+
+            background: #3b3447;
+            border: 1px solid transparent;
+            border-radius: 5px;
+
+            outline: none;
+            color: white;
+            font-size: 12px;
+
+            transition: .3s;
+        }
+
+        .input-group input::placeholder {
+            color: #9992a5;
+        }
+
+        .input-group input:focus {
+            border-color: #b39bff;
+            box-shadow: 0 0 4px #9d7cff55;
+        }
+
+        /* PASSWORD WRAPPER */
+
+        .password-group {
+            position: relative;
+        }
+
+        .password-group input {
+            padding-right: 42px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            background: none;
+            border: none;
+            color: #aaa3b5;
+
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+        /* TERMS */
+
+        .terms {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 30px;
+            font-size: 10px;
+            color: #ddd9e5;
+        }
+
+        .terms input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            flex-shrink: 0;
+            accent-color: #8061c9;
+            cursor: pointer;
+        }
+
+        .terms label {
+            cursor: pointer;
+        }
+
+        .terms a {
+            color: #c5b4ff;
+        }
+
+        /* CREATE ACCOUNT BUTTON */
+
+        .create-btn {
+            width: 100%;
+            height: 38px;
+
+            background: #7654bd;
+            color: white;
+
+            border: none;
+            border-radius: 5px;
+
+            font-size: 12px;
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .create-btn:hover {
+            background: #8b6bd0;
+            transform: translateY(-2px);
+        }
+
+        /* DIVIDER */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+
+            margin: 20px 0 15px;
+
+            color: #a9a3b2;
+            font-size: 10px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #575060;
+        }
+
+        /* SOCIAL REGISTER */
+
+        .social-login {
+            display: flex;
+            gap: 13px;
+        }
+
+        .social-login a {
+            width: 50%;
+            height: 38px;
+
+            border: 1px solid #777080;
+            border-radius: 5px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            color: white;
+            font-size: 12px;
+            text-decoration: none;
+
+            transition: .3s;
+        }
+
+        .social-login a:hover {
+            background: #40384c;
+            border-color: #b39bff;
+        }
+
+        .social-login img {
+            width: 19px;
+            height: 19px;
+            object-fit: contain;
+        }
+
+        /* TABLET RESPONSIVE */
+
+        @media(max-width: 850px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                flex-direction: column;
+                max-width: 500px;
+                min-height: auto;
+                padding: 10px;
+            }
+
+            .left-section {
+                width: 100%;
+                min-height: 300px;
+            }
+
+            .right-section {
+                width: 100%;
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            .tagline {
+                font-size: 21px;
+            }
+        }
+
+        /* MOBILE RESPONSIVE */
+
+        @media(max-width: 450px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                border-radius: 10px;
+            }
+
+            .left-section {
+                min-height: 230px;
+                padding: 15px;
+            }
+
+            .amu-logo {
+                font-size: 23px;
+            }
+
+            .tagline {
+                font-size: 18px;
+            }
+
+            .right-section {
+                padding: 35px 18px;
+            }
+
+            h1 {
+                font-size: 29px;
+            }
+
+            .subtitle {
+                margin-bottom: 28px;
+            }
+
+            .name-group {
+                gap: 8px;
+            }
+
+            .name-group .input-group {
+                width: calc(50% - 4px);
+            }
+
+            .social-login {
+                gap: 8px;
+            }
+
+            .social-login a {
+                font-size: 11px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LEFT SECTION -->
+
+        <div class="left-section">
+
+            <!-- HEADER -->
+
+            <div class="left-header">
+
+                <!-- AMU LOGO -->
+
+                <div class="amu-logo">
+                    AMU
+                </div>
+
+                <a href="https://dribbble.com/shots/24552589-Login-Sign-up-Dark-Mode-UI-UX-Design" class="back-link"
+                    target="_blank" rel="noopener noreferrer">
+                    Back to website   →
+                </a>
+
+            </div>
+
+            <!-- LEFT CONTENT -->
+
+            <div class="left-content">
+
+                <p class="tagline">
+                    Capturing Moments,<br>
+                    Creating Memories
+                </p>
+
+                <!-- SLIDER DOTS -->
+
+                <div class="slider-dots">
+                    <span></span>
+                    <span></span>
+                    <span class="active"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SECTION -->
+
+        <div class="right-section">
+
+            <h1>Create an account</h1>
+
+            <p class="subtitle">
+                Already have an account?
+                <a href="login.html">Log in</a>
+            </p>
+
+            <!-- REGISTER FORM -->
+
+            <form action="#" method="post">
+
+                <!-- FIRST NAME AND LAST NAME -->
+
+                <div class="name-group">
+
+                    <div class="input-group">
+
+                        <input type="text" id="first-name" name="first_name" placeholder="First name"
+                            autocomplete="given-name" required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <input type="text" id="last-name" name="last_name" placeholder="Last name"
+                            autocomplete="family-name" required>
+
+                    </div>
+
+                </div>
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <input type="email" id="email" name="email" placeholder="Email" autocomplete="email" required>
+
+                </div>
+
+                <!-- PASSWORD -->
+
+                <div class="input-group password-group">
+
+                    <input type="password" id="password" name="password" placeholder="Enter your password" minlength="6"
+                        autocomplete="new-password" required>
+
+                    <button type="button" class="toggle-password" onclick="togglePassword()" aria-label="Show password">
+
+                        <span id="eye-icon">◉</span>
+
+                    </button>
+
+                </div>
+
+                <!-- TERMS AND CONDITIONS -->
+
+                <div class="terms">
+
+                    <input type="checkbox" id="terms" name="terms" required>
+
+                    <label for="terms">
+                        I agree to the
+                        <a href="terms.html">Terms & Conditions</a>
+                    </label>
+
+                </div>
+
+                <!-- CREATE ACCOUNT BUTTON -->
+
+                <button type="submit" class="create-btn">
+                    Create account
+                </button>
+
+            </form>
+
+            <!-- DIVIDER -->
+
+            <div class="divider">
+                Or register with
+            </div>
+
+            <!-- SOCIAL REGISTER -->
+
+            <div class="social-login">
+
+                <!-- GOOGLE -->
+
+                <a href="https://accounts.google.com/" aria-label="Register with Google" title="Google" target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img src="https://cdn.vectorstock.com/i/1000v/48/30/google-logo-symbol-vector-46334830.jpg"
+                        alt="Google logo">
+
+                    Google
+
+                </a>
+
+                <!-- APPLE -->
+
+                <a href="https://account.apple.com/" aria-label="Register with Apple" title="Apple" target="_blank"
+                    rel="noopener noreferrer">
+
+                    <img src="https://cdn.simpleicons.org/apple/FFFFFF" alt="Apple logo">
+
+                    Apple
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PASSWORD VISIBILITY SCRIPT -->
+
+    <script>
+
+        function togglePassword() {
+
+            const password = document.getElementById("password");
+            const eyeIcon = document.getElementById("eye-icon");
+            const button = document.querySelector(".toggle-password");
+
+            if (password.type === "password") {
+
+                password.type = "text";
+                eyeIcon.innerHTML = "◎";
+                button.setAttribute("aria-label", "Hide password");
+
+            } else {
+
+                password.type = "password";
+                eyeIcon.innerHTML = "◉";
+                button.setAttribute("aria-label", "Show password");
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
