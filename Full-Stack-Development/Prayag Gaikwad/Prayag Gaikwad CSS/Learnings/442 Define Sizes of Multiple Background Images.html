@@ -4,51 +4,530 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fixed Background Example</title>
+    <title>GitHub Copilot — Snap Scroll Parallax Showcase</title>
     <style>
+        :root {
+            --bg-base: #090d16;
+            --surface: rgba(15, 23, 42, 0.86);
+            --border: rgba(148, 163, 184, 0.22);
+            --accent: #818cf8;
+            --accent-2: #38bdf8;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --ease-fast: cubic-bezier(0.22, 1, 0.36, 1);
+            --bg-parallax-y: 0px;
+        }
+
         * {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+
         body {
             margin: 0;
-            padding: 20px;
-            font-family: sans-serif;
-            background-color: #f4f6f9;
-            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4NlsTnra6J_53ICwjQ4FuXCvD7taXODlpXG6oiy967A&s=10");
-            background-repeat: no-repeat;
-            background-size: 710px auto;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--text);
+            background-color: var(--bg-base);
+            line-height: 1.65;
+            overflow-x: hidden;
         }
 
-        #image1 {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 20px;
+        /* Top scroll progress bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            transform: scaleX(0);
+            transform-origin: left center;
+            background: linear-gradient(90deg, var(--accent-2), var(--accent));
+            z-index: 60;
+            pointer-events: none;
+        }
+
+        /* Fixed full-bleed background layer with parallax offset */
+        .bg-stage {
+            position: fixed;
+            inset: -24px 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+            background-color: var(--bg-base);
+        }
+
+        .bg-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: translate3d(0, var(--bg-parallax-y), 0) scale(1.08);
+            transition: opacity 240ms var(--ease-fast), transform 140ms linear;
+        }
+
+        .bg-slide.is-active {
+            opacity: 0.28;
+        }
+
+        .bg-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 22%, rgba(15, 23, 42, 0.42), rgba(9, 13, 22, 0.94) 76%);
+        }
+
+        /* Sticky stage filter bar */
+        .filter-bar {
+            position: fixed;
+            top: 14px;
+            left: 50%;
+            transform: translate3d(-50%, 0, 0);
+            width: min(760px, calc(100% - 32px));
+            z-index: 50;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.42);
+        }
+
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .filter-btn {
+            appearance: none;
+            border: 1px solid transparent;
+            background: transparent;
+            color: #cbd5e1;
+            font-family: inherit;
+            font-size: 0.84rem;
+            font-weight: 600;
+            padding: 7px 13px;
             border-radius: 8px;
-            background-color: rgba(240, 248, 255, 0.95);
-            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3horlQpgLLlkFeg_7om1ymdwf8vLH6-am_GFpXUkBWQ&s=10");
-            background-position: right bottom;
-            background-repeat: no-repeat;
-            background-size: 150px auto;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 140ms var(--ease-fast);
         }
 
-        #image1 h1 {
-            margin-top: 0;
+        .filter-btn:hover {
+            color: #f8fafc;
+            background: rgba(148, 163, 184, 0.14);
+            transform: translate3d(0, -1px, 0);
+        }
+
+        .filter-btn:focus-visible {
+            outline: 2px solid var(--accent-2);
+            outline-offset: 2px;
+        }
+
+        .filter-btn[aria-pressed="true"] {
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.24), rgba(129, 140, 248, 0.34));
+            border-color: rgba(129, 140, 248, 0.68);
+        }
+
+        .stage-status {
+            font-size: 0.78rem;
+            color: var(--muted);
+            padding: 0 6px;
+            white-space: nowrap;
+        }
+
+        /* Full-screen snap sections */
+        .snap-deck {
+            width: 100%;
+        }
+
+        .snap-section {
+            min-height: 100dvh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 84px 20px 36px;
+        }
+
+        .copilot-card {
+            width: 100%;
+            max-width: 760px;
+            background: var(--surface);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 26px;
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.42);
+            opacity: 0;
+            transform: translate3d(0, 20px, 0);
+            transition: opacity 220ms var(--ease-fast), transform 240ms var(--ease-fast), border-color 180ms ease, box-shadow 220ms ease;
+        }
+
+        .copilot-card.is-visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .copilot-card.is-focused {
+            border-color: rgba(129, 140, 248, 0.75);
+            box-shadow: 0 20px 46px rgba(79, 70, 229, 0.24);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #93c5fd;
+            background: rgba(59, 130, 246, 0.16);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            padding: 4px 10px;
+            border-radius: 999px;
+            margin-bottom: 10px;
+        }
+
+        h1,
+        h2 {
+            margin: 0 0 10px;
+            color: #f8fafc;
+            line-height: 1.25;
+        }
+
+        h1 {
+            font-size: 1.7rem;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+        }
+
+        p {
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 0.96rem;
+        }
+
+        .preview-frame {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.24);
+            background: #020617;
+        }
+
+        .preview-frame img {
+            --img-parallax-y: 0px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: translate3d(0, var(--img-parallax-y), 0) scale(1.1);
+            transition: transform 120ms linear;
+        }
+
+        @media (max-width: 640px) {
+            html {
+                scroll-snap-type: y proximity;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stage-status {
+                display: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-snap-type: none;
+                scroll-behavior: auto;
+            }
+
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <div id="image1">
-        <h1>Github Copilot</h1>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-            dolore magna aliquam erat volutpat.</p>
-        <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
-            commodo consequat.</p>
+    <div class="bg-stage" aria-hidden="true">
+        <div class="bg-slide is-active" data-bg="0"
+            style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&q=80');">
+        </div>
+        <div class="bg-slide" data-bg="1"
+            style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80');">
+        </div>
+        <div class="bg-slide" data-bg="2"
+            style="background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1600&q=80');">
+        </div>
+        <div class="bg-vignette"></div>
     </div>
 
+    <nav class="filter-bar" aria-label="GitHub Copilot stages">
+        <div class="filter-group">
+            <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All Stages</button>
+            <button type="button" class="filter-btn" data-filter="0" aria-pressed="false">01 · Inline</button>
+            <button type="button" class="filter-btn" data-filter="1" aria-pressed="false">02 · Chat</button>
+            <button type="button" class="filter-btn" data-filter="2" aria-pressed="false">03 · Repo</button>
+        </div>
+        <span class="stage-status" id="stageStatus" aria-live="polite">Active: Stage 01</span>
+    </nav>
+
+    <main class="snap-deck">
+        <section class="snap-section" id="stage-0" data-stage="0" data-label="Stage 01">
+            <article class="copilot-card is-visible is-focused">
+                <div class="card-grid">
+                    <div>
+                        <span class="badge">Stage 01 · Inline Completions</span>
+                        <h1>GitHub Copilot</h1>
+                        <p>Real-time code completions and next-edit suggestions inside your editor keep typing fast and
+                            uninterrupted.</p>
+                    </div>
+                    <div class="preview-frame">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+                            alt="Code editor showing programming syntax on a dark screen" loading="eager">
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="snap-section" id="stage-1" data-stage="1" data-label="Stage 02">
+            <article class="copilot-card">
+                <div class="card-grid">
+                    <div>
+                        <span class="badge">Stage 02 · Chat & Refactoring</span>
+                        <h2>Copilot Chat & Debugging</h2>
+                        <p>Explain unfamiliar code, trace bugs, and generate tests in context without leaving your
+                            workflow.</p>
+                    </div>
+                    <div class="preview-frame">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
+                            alt="Close-up circuit board representing high-speed computing" loading="lazy">
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="snap-section" id="stage-2" data-stage="2" data-label="Stage 03">
+            <article class="copilot-card">
+                <div class="card-grid">
+                    <div>
+                        <span class="badge">Stage 03 · Multi-File & Agents</span>
+                        <h2>Copilot Across Your Repo</h2>
+                        <p>Coordinate edits across files, review pull requests, and steer multi-step tasks across your
+                            repository.</p>
+                    </div>
+                    <div class="preview-frame">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80"
+                            alt="Developer monitor displaying structured code columns" loading="lazy">
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const progressBar = document.getElementById("scrollProgress");
+            const stageStatus = document.getElementById("stageStatus");
+            const filterButtons = Array.from(document.querySelectorAll(".filter-btn"));
+            const sections = Array.from(document.querySelectorAll(".snap-section"));
+            const cards = sections.map((sec) => sec.querySelector(".copilot-card"));
+            const parallaxImgs = sections.map((sec) => sec.querySelector(".preview-frame img"));
+            const bgSlides = Array.from(document.querySelectorAll(".bg-slide"));
+
+            let activeStage = "0";
+            let isProgrammaticScroll = false;
+            let scrollUnlockTimer = null;
+            let rafId = null;
+
+            function syncButtons(selectedFilter) {
+                filterButtons.forEach((btn) => {
+                    btn.setAttribute("aria-pressed", String(btn.dataset.filter === selectedFilter));
+                });
+            }
+
+            function setStage(stageIndex, updateFilterPill = false) {
+                if (!stageIndex) return;
+                activeStage = stageIndex;
+
+                bgSlides.forEach((slide) => {
+                    slide.classList.toggle("is-active", slide.dataset.bg === stageIndex);
+                });
+
+                sections.forEach((sec, idx) => {
+                    const isMatch = sec.dataset.stage === stageIndex;
+                    cards[idx].classList.toggle("is-focused", isMatch);
+                    if (isMatch) {
+                        sec.setAttribute("aria-current", "true");
+                        if (stageStatus) {
+                            stageStatus.textContent = `Active: ${sec.dataset.label}`;
+                        }
+                    } else {
+                        sec.removeAttribute("aria-current");
+                    }
+                });
+
+                if (updateFilterPill) {
+                    syncButtons(stageIndex);
+                }
+            }
+
+            function jumpToFilter(targetFilter) {
+                if (targetFilter === "all") {
+                    syncButtons("all");
+                    setStage("0", false);
+                    cards[0].classList.add("is-visible");
+                    isProgrammaticScroll = true;
+                    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+                } else {
+                    const idx = sections.findIndex((sec) => sec.dataset.stage === targetFilter);
+                    if (idx === -1) return;
+
+                    syncButtons(targetFilter);
+                    cards[idx].classList.add("is-visible");
+                    setStage(targetFilter, false);
+                    isProgrammaticScroll = true;
+                    sections[idx].scrollIntoView({
+                        behavior: prefersReducedMotion ? "auto" : "smooth",
+                        block: "start"
+                    });
+                }
+
+                clearTimeout(scrollUnlockTimer);
+                scrollUnlockTimer = setTimeout(() => {
+                    isProgrammaticScroll = false;
+                    detectClosestSection();
+                }, 650);
+            }
+
+            filterButtons.forEach((btn) => {
+                btn.addEventListener("click", () => jumpToFilter(btn.dataset.filter));
+            });
+
+            document.addEventListener("keydown", (event) => {
+                const tag = event.target && event.target.tagName;
+                if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || event.metaKey || event.ctrlKey || event.altKey) {
+                    return;
+                }
+                const key = event.key.toLowerCase();
+                if (key === "1") jumpToFilter("0");
+                else if (key === "2") jumpToFilter("1");
+                else if (key === "3") jumpToFilter("2");
+                else if (key === "0" || key === "a") jumpToFilter("all");
+            });
+
+            const revealObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const card = entry.target.querySelector(".copilot-card");
+                            if (card) card.classList.add("is-visible");
+                            revealObserver.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.25 }
+            );
+
+            sections.forEach((sec) => revealObserver.observe(sec));
+
+            function updateParallax() {
+                if (prefersReducedMotion) return;
+                const vh = window.innerHeight || 1;
+                const scrollTop = window.scrollY || window.pageYOffset;
+
+                // Subtle background depth shift
+                const bgOffset = Math.max(-24, Math.min(24, -(scrollTop * 0.04) % 48));
+                document.documentElement.style.setProperty("--bg-parallax-y", `${bgOffset.toFixed(1)}px`);
+
+                // Subtle per-card image parallax based on viewport center offset
+                sections.forEach((sec, idx) => {
+                    const img = parallaxImgs[idx];
+                    if (!img) return;
+                    const rect = sec.getBoundingClientRect();
+                    if (rect.bottom < -100 || rect.top > vh + 100) return;
+                    const normalized = (rect.top + rect.height * 0.5 - vh * 0.5) / vh;
+                    const imgOffset = Math.max(-14, Math.min(14, -normalized * 16));
+                    img.style.setProperty("--img-parallax-y", `${imgOffset.toFixed(1)}px`);
+                });
+            }
+
+            function detectClosestSection() {
+                if (isProgrammaticScroll) return;
+                const viewportCenter = window.innerHeight * 0.5;
+                let bestSection = sections[0];
+                let minDistance = Infinity;
+
+                sections.forEach((sec) => {
+                    const rect = sec.getBoundingClientRect();
+                    const secCenter = rect.top + rect.height / 2;
+                    const dist = Math.abs(secCenter - viewportCenter);
+                    if (dist < minDistance) {
+                        minDistance = dist;
+                        bestSection = sec;
+                    }
+                });
+
+                if (bestSection && bestSection.dataset.stage !== activeStage) {
+                    const currentAllPressed = filterButtons[0] && filterButtons[0].getAttribute("aria-pressed") === "true";
+                    setStage(bestSection.dataset.stage, !currentAllPressed);
+                }
+            }
+
+            function onFrame() {
+                const scrollTop = window.scrollY || window.pageYOffset;
+                const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+                const ratio = Math.min(1, Math.max(0, scrollTop / maxScroll));
+                progressBar.style.transform = `scaleX(${ratio})`;
+
+                updateParallax();
+                detectClosestSection();
+                rafId = null;
+            }
+
+            window.addEventListener(
+                "scroll",
+                () => {
+                    if (!rafId) {
+                        rafId = window.requestAnimationFrame(onFrame);
+                    }
+                },
+                { passive: true }
+            );
+
+            onFrame();
+        })();
+    </script>
 </body>
 
 </html>

@@ -3,103 +3,353 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Junji Ito — Master of Horror Manga</title>
     <style>
+        :root {
+            color-scheme: dark;
+            --bg-dark: #090909;
+            --surface-bg: rgba(12, 12, 12, 0.78);
+            --border-subtle: rgba(255, 255, 255, 0.22);
+            --border-strong: rgba(255, 255, 255, 0.72);
+            --text-main: #ffffff;
+            --text-muted: #e6e6e6;
+            --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
         html {
             scroll-behavior: smooth;
         }
 
         body {
-            background-color: #ef9696;
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #e5e5e5;
+            background-color: var(--bg-dark);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: clip;
         }
 
-        .hero-image {
-            /* Spiral-inspired dark radial gradient fallback + manga artwork overlay */
-            background: url(https://m.media-amazon.com/images/I/81CfbcFFyHL._AC_UF1000,1000_QL80_.jpg);
-            /* background: */
-            /* linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.75)), */
-            /* repeating-radial-gradient(circle at center, #0a0a0a 0, #0a0a0a 12px, #1e1e1e 13px, #1e1e1e 24px); */
-            background-size: cover;
-            height: 800px;
-            position: relative;
-            border-bottom: 2px solid #333333;
+        /* Top Scroll Progress Line */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.45), #ffffff);
+            z-index: 20;
+            pointer-events: none;
+            transition: width 0.08s linear;
         }
 
-        .hero-text {
-            text-align: center;
+        /* Fixed Background Stack */
+        .bg-stage {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background-color: #0d0d0d;
+            overflow: hidden;
+        }
+
+        .bg-layer {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #ffffff;
-            width: 90%;
+            inset: -3%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 0.85s var(--ease-smooth), transform 1.35s var(--ease-smooth);
+            transform: scale(1.06);
+            will-change: opacity, transform;
+            filter: contrast(1.16) brightness(1.08);
+        }
+
+        .bg-layer.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Stage 1: Uzumaki Classic Cover */
+        .bg-layer-0 {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.34)),
+                url("https://m.media-amazon.com/images/I/81CfbcFFyHL._AC_UF1000,1000_QL80_.jpg"),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800'%3E%3Crect width='800' height='800' fill='%23101010'/%3E%3Cpath d='M400 400 m0 0 a14 14 0 0 1 28 0 a28 28 0 0 1 -56 0 a42 42 0 0 1 84 0 a56 56 0 0 1 -112 0 a70 70 0 0 1 140 0 a84 84 0 0 1 -168 0 a98 98 0 0 1 196 0 a112 112 0 0 1 -224 0 a126 126 0 0 1 252 0 a140 140 0 0 1 -280 0 a154 154 0 0 1 308 0 a168 168 0 0 1 -336 0 a182 182 0 0 1 364 0 a196 196 0 0 1 -392 0' fill='none' stroke='%23686868' stroke-width='5'/%3E%3C/svg%3E");
+        }
+
+        /* Stage 2: Uzumaki Deluxe Edition */
+        .bg-layer-1 {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.36)),
+                url("https://m.media-amazon.com/images/I/918+m0P1gIL._AC_UF1000,1000_QL80_.jpg"),
+                repeating-conic-gradient(from 0deg at 50% 50%, #262626 0deg 10deg, #0e0e0e 10deg 20deg);
+        }
+
+        /* Stage 3: Kurouzu-cho Spiral Artwork */
+        .bg-layer-2 {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.34)),
+                url("https://m.media-amazon.com/images/I/81V+9W-dR6L._AC_UF1000,1000_QL80_.jpg"),
+                repeating-radial-gradient(circle at 50% 50%, #3e3e3e 0px, #3e3e3e 8px, #0d0d0d 9px, #0d0d0d 20px);
+        }
+
+        /* Stage 4: Junji Ito Monochrome Portrait */
+        .bg-layer-3 {
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.36)),
+                url("https://images.squarespace-cdn.com/content/v1/642fe9d50ff3d476932fc101/2f69580c-6b53-4226-b233-1faec2c8306f/junji.jpg"),
+                repeating-linear-gradient(45deg, #242424 0px, #242424 12px, #0d0d0d 12px, #0d0d0d 24px);
+        }
+
+        /* Stage 5: Hypnotic Spiral Vortex */
+        .bg-layer-4 {
+            background-image:
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.42) 100%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900' viewBox='0 0 900 900'%3E%3Crect width='900' height='900' fill='%230b0b0b'/%3E%3Cg transform='translate(450,450)'%3E%3Cpath d='M0 0 m0 0 a10 10 0 0 1 20 0 a20 20 0 0 1 -40 0 a30 30 0 0 1 60 0 a40 40 0 0 1 -80 0 a50 50 0 0 1 100 0 a60 60 0 0 1 -120 0 a70 70 0 0 1 140 0 a80 80 0 0 1 -160 0 a90 90 0 0 1 180 0 a100 100 0 0 1 -200 0 a110 110 0 0 1 220 0 a120 120 0 0 1 -240 0 a130 130 0 0 1 260 0 a140 140 0 0 1 -280 0 a150 150 0 0 1 300 0 a160 160 0 0 1 -320 0 a170 170 0 0 1 340 0 a180 180 0 0 1 -360 0 a190 190 0 0 1 380 0 a200 200 0 0 1 -400 0 a210 210 0 0 1 420 0 a220 220 0 0 1 -440 0' fill='none' stroke='%23dcdcdc' stroke-width='6' opacity='0.58'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Top-Right Chapter HUD */
+        .scroll-hud {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            z-index: 15;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            background: rgba(10, 10, 10, 0.84);
+            border: 1px solid var(--border-subtle);
+            font-size: 12px;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            max-width: calc(100vw - 32px);
+        }
+
+        #bg-label {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .scroll-dots {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .scroll-dot {
+            width: 10px;
+            height: 10px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.28);
+            cursor: pointer;
+            transition: background-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .scroll-dot:hover {
+            background: rgba(255, 255, 255, 0.65);
+        }
+
+        .scroll-dot.active {
+            background: #ffffff;
+            transform: scale(1.25);
+        }
+
+        /* Section Spacing for Smooth Scroll Pacing */
+        .scroll-section {
+            min-height: 92svh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 64px 20px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .hero-card {
+            width: 100%;
+            max-width: 720px;
+            padding: 36px 28px;
+            border-radius: 12px;
+            background: rgba(10, 10, 10, 0.62);
+            border: 1px solid var(--border-subtle);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            animation: fadeUp 0.85s var(--ease-smooth) forwards;
+        }
+
+        .hero-card h1 {
+            font-size: clamp(2.1rem, 6vw, 3.8rem);
+            margin: 0 0 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 3px 16px rgba(0, 0, 0, 0.95);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.4vw, 1.25rem);
+            color: var(--text-muted);
+            margin: 0 0 26px;
         }
 
         .hero-btn {
             display: inline-block;
-            margin-top: 12px;
-            padding: 10px 22px;
+            padding: 13px 28px;
             background-color: #ffffff;
-            color: #0d0d0d;
+            color: #0a0a0a;
             text-decoration: none;
-            font-weight: bold;
-            border-radius: 4px;
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 5px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            transition: transform 0.25s var(--ease-smooth), background-color 0.25s ease, box-shadow 0.25s ease;
         }
 
         .hero-btn:hover {
-            background-color: #f7bebe;
+            background-color: #e4e4e4;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(255, 255, 255, 0.25);
         }
 
-        .content-box {
-            max-width: 500px;
-            margin: 30px auto;
-            padding: 24px;
-            background-color: #d17878;
-            background: url(https://images.squarespace-cdn.com/content/v1/642fe9d50ff3d476932fc101/2f69580c-6b53-4226-b233-1faec2c8306f/junji.jpg);
-            border: 1px solid #333333;
+        /* Artwork Showcase Cards */
+        .artwork-card {
+            width: 100%;
+            max-width: 560px;
+            padding: 22px;
+            background: var(--surface-bg);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.82);
+            transition: transform 0.35s var(--ease-smooth), border-color 0.35s ease;
+        }
+
+        .artwork-card:hover {
+            border-color: var(--border-strong);
+            transform: translateY(-3px);
+        }
+
+        .artwork-card img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
             border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+            display: block;
+            transition: transform 0.45s var(--ease-smooth);
         }
 
-        .content-box code {
-            background-color: #2b2b2b;
-            padding: 2px 6px;
-            border-radius: 3px;
-            color: #f5f5f5;
+        .artwork-card:hover img {
+            transform: scale(1.02);
+        }
+
+        .img-fallback {
+            padding: 52px 16px;
+            background: #161616;
+            border-radius: 8px;
+            color: #dddddd;
+            font-weight: 600;
+        }
+
+        .artwork-title {
+            margin: 14px 0 4px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .artwork-caption {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        /* Commission Form */
+        .content-box {
+            width: 100%;
+            max-width: 560px;
+            padding: 36px 30px;
+            background: var(--surface-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            box-shadow: 0 18px 46px rgba(0, 0, 0, 0.88);
+            transition: border-color 0.35s ease;
+        }
+
+        .content-box:hover {
+            border-color: var(--border-strong);
+        }
+
+        .content-box h2 {
+            margin: 0 0 10px;
+            font-size: 1.6rem;
+            color: #ffffff;
+        }
+
+        .content-box p {
+            margin: 0 0 22px;
+            color: var(--text-muted);
+            font-size: 15px;
         }
 
         .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            margin-top: 18px;
+            gap: 16px;
         }
 
         .contact-form label {
-            font-weight: bold;
-            font-size: 14px;
-            margin-bottom: 4px;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 6px;
             display: block;
-            color: #f0f0f0;
+            color: #e8e8e8;
         }
 
         .contact-form input,
         .contact-form select,
         .contact-form textarea {
             width: 100%;
-            padding: 10px 12px;
-            background-color: #111111;
+            padding: 11px 14px;
+            background-color: rgba(22, 22, 22, 0.95);
             color: #ffffff;
-            border: 1px solid #444444;
-            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 5px;
             font-family: inherit;
-            font-size: 14px;
-            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .contact-form input:hover,
+        .contact-form select:hover,
+        .contact-form textarea:hover {
+            border-color: rgba(255, 255, 255, 0.45);
         }
 
         .contact-form input:focus,
@@ -107,6 +357,7 @@
         .contact-form textarea:focus {
             outline: none;
             border-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
         }
 
         .contact-form textarea {
@@ -116,70 +367,311 @@
 
         .submit-btn {
             align-self: flex-start;
-            padding: 10px 24px;
+            margin-top: 4px;
+            padding: 12px 26px;
             background-color: #ffffff;
-            color: #111111;
+            color: #0a0a0a;
             border: none;
-            border-radius: 4px;
-            font-size: 15px;
-            font-weight: bold;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
             cursor: pointer;
+            transition: transform 0.25s var(--ease-smooth), background-color 0.25s ease;
         }
 
         .submit-btn:hover {
-            background-color: #d4d4d4;
+            background-color: #e2e2e2;
+            transform: translateY(-2px);
+        }
+
+        .form-status {
+            display: none;
+            margin-top: 14px;
+            padding: 12px 14px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .scroll-hud {
+                top: 12px;
+                right: 12px;
+                padding: 6px 12px;
+                gap: 8px;
+                font-size: 11px;
+            }
+
+            .scroll-section {
+                min-height: auto;
+                padding: 48px 16px;
+            }
+
+            .hero-section {
+                min-height: 85svh;
+            }
+
+            .hero-card,
+            .artwork-card,
+            .content-box {
+                padding: 22px 18px;
+            }
+
+            .submit-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .bg-layer,
+            .scroll-dot,
+            .hero-btn,
+            .artwork-card,
+            .artwork-card img,
+            .submit-btn,
+            .scroll-progress {
+                transition: none;
+            }
+
+            .hero-card {
+                animation: none;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="hero-image">
-        <div class="hero-text">
-            <h1 style="font-size: 50px; margin: 0;">I am Junji Ito</h1>
-            <h3>Creator of Uzumaki & Japanese Horror Mangaka</h3>
-            <a class="hero-btn" href="https://uzumaki-junjito.com/">Enter the Spiral</a>
+    <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Dynamic Background Stack (5 Stages) -->
+    <div class="bg-stage" aria-hidden="true">
+        <div class="bg-layer bg-layer-0 active"></div>
+        <div class="bg-layer bg-layer-1"></div>
+        <div class="bg-layer bg-layer-2"></div>
+        <div class="bg-layer bg-layer-3"></div>
+        <div class="bg-layer bg-layer-4"></div>
+    </div>
+
+    <!-- Top-Right Chapter HUD -->
+    <div class="scroll-hud" aria-live="polite">
+        <span id="bg-label">Chapter I — Uzumaki</span>
+        <div class="scroll-dots" role="group" aria-label="Jump to chapter">
+            <button type="button" class="scroll-dot active" data-target="0" aria-label="Chapter I"></button>
+            <button type="button" class="scroll-dot" data-target="1" aria-label="Chapter II"></button>
+            <button type="button" class="scroll-dot" data-target="2" aria-label="Chapter III"></button>
+            <button type="button" class="scroll-dot" data-target="3" aria-label="Chapter IV"></button>
+            <button type="button" class="scroll-dot" data-target="4" aria-label="Chapter V"></button>
         </div>
     </div>
 
-    <div id="contact" class="content-box">
-        <h2>About & Manga Commissions</h2>
-        <p>Available for psychological horror illustrations, spiral-cursed ink panels, and manga anthology
-            collaborations.</p>
-        <p>The hero banner uses <code>background-size: cover</code> so it stays responsive—resize the browser window to
-            see how it adapts.</p>
+    <!-- Section 1: Hero -->
+    <header class="scroll-section hero-section" data-bg="0" data-title="Chapter I — Uzumaki">
+        <div class="hero-card">
+            <h1>I am Junji Ito</h1>
+            <p class="hero-subtitle">Creator of Uzumaki & Japanese Horror Mangaka</p>
+            <a class="hero-btn" href="#contact">Request a Commission</a>
+        </div>
+    </header>
 
-        <form class="contact-form" action="#" method="post">
-            <div>
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" placeholder="Kirie Goshima" required>
-            </div>
+    <!-- Section 2: Uzumaki Deluxe Edition -->
+    <section class="scroll-section" data-bg="1" data-title="Chapter II — The Curse"
+        aria-label="Uzumaki Deluxe Edition Showcase">
+        <div class="artwork-card">
+            <img src="https://m.media-amazon.com/images/I/918+m0P1gIL._AC_UF1000,1000_QL80_.jpg"
+                alt="Uzumaki Deluxe hardcover spiral manga artwork by Junji Ito"
+                data-fallback="Uzumaki Deluxe Spiral Edition">
+            <h2 class="artwork-title">Uzumaki: Deluxe Edition</h2>
+            <p class="artwork-caption">The town of Kurouzu-cho consumed by obsessive spiral geometry.</p>
+        </div>
+    </section>
 
-            <div>
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="kurouzu.town@example.com" required>
-            </div>
+    <!-- Section 3: Kurouzu-cho Spiral Art -->
+    <section class="scroll-section" data-bg="2" data-title="Chapter III — Kurouzu-cho"
+        aria-label="Uzumaki Spiral Panel Showcase">
+        <div class="artwork-card">
+            <img src="https://m.media-amazon.com/images/I/81CfbcFFyHL._AC_UF1000,1000_QL80_.jpg"
+                alt="Uzumaki spiral ink illustration by Junji Ito" data-fallback="Kurouzu-cho Spiral Ink Panel">
+            <h2 class="artwork-title">The Spiral Obsession</h2>
+            <p class="artwork-caption">Intricate crosshatching and psychological dread in monochrome ink.</p>
+        </div>
+    </section>
 
-            <div>
-                <label for="commission-type">Commission Type</label>
-                <select id="commission-type" name="commission_type">
-                    <option value="spiral-ink">Black & White Ink Illustration</option>
-                    <option value="one-shot">Horror Manga One-Shot</option>
-                    <option value="cover-art">Book / Album Cover Art</option>
-                    <option value="exhibition">Gallery & Anthology Inquiry</option>
-                </select>
-            </div>
+    <!-- Section 4: The Mangaka -->
+    <section class="scroll-section" data-bg="3" data-title="Chapter IV — The Artist"
+        aria-label="Junji Ito Artist Showcase">
+        <div class="artwork-card">
+            <img src="https://images.squarespace-cdn.com/content/v1/642fe9d50ff3d476932fc101/2f69580c-6b53-4226-b233-1faec2c8306f/junji.jpg"
+                alt="Portrait of Japanese horror mangaka Junji Ito" data-fallback="Junji Ito — Master of Horror">
+            <h2 class="artwork-title">Behind the Ink</h2>
+            <p class="artwork-caption">Crafting body horror, cosmic dread, and unforgettable manga panels.</p>
+        </div>
+    </section>
 
-            <div>
-                <label for="details">Project Details</label>
-                <textarea id="details" name="details"
-                    placeholder="Describe page count, eerie themes, and preferred timeline..." required></textarea>
-            </div>
+    <!-- Section 5: Commission Form -->
+    <main id="contact" class="scroll-section" data-bg="4" data-title="Chapter V — The Vortex">
+        <div class="content-box">
+            <h2>About & Manga Commissions</h2>
+            <p>Available for psychological horror illustrations, spiral-cursed ink panels, and manga anthology
+                collaborations.</p>
 
-            <button type="submit" class="submit-btn">Send Inquiry</button>
-        </form>
-    </div>
+            <form class="contact-form" id="commission-form">
+                <div>
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Kirie Goshima" required>
+                </div>
+
+                <div>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="kurouzu.town@example.com" required>
+                </div>
+
+                <div>
+                    <label for="commission-type">Commission Type</label>
+                    <select id="commission-type" name="commission_type">
+                        <option value="spiral-ink">Black & White Ink Illustration</option>
+                        <option value="one-shot">Horror Manga One-Shot</option>
+                        <option value="cover-art">Book / Album Cover Art</option>
+                        <option value="exhibition">Gallery & Anthology Inquiry</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="details">Project Details</label>
+                    <textarea id="details" name="details"
+                        placeholder="Describe page count, eerie themes, and preferred timeline..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Inquiry</button>
+                <div class="form-status" id="form-status" role="status"></div>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            const layers = Array.from(document.querySelectorAll(".bg-layer"));
+            const dots = Array.from(document.querySelectorAll(".scroll-dot"));
+            const sections = Array.from(document.querySelectorAll("[data-bg]"));
+            const label = document.getElementById("bg-label");
+            const progressBar = document.getElementById("scroll-progress");
+            let activeIndex = -1;
+            let ticking = false;
+
+            // Clean DOM-based image error fallback
+            document.querySelectorAll("img[data-fallback]").forEach((img) => {
+                img.addEventListener("error", () => {
+                    if (img.dataset.fallbackApplied) return;
+                    img.dataset.fallbackApplied = "true";
+                    const box = document.createElement("div");
+                    box.className = "img-fallback";
+                    box.textContent = img.dataset.fallback;
+                    img.replaceWith(box);
+                }, { once: true });
+            });
+
+            // Clickable chapter dots for smooth navigation
+            dots.forEach((dot) => {
+                dot.addEventListener("click", () => {
+                    const targetBg = dot.dataset.target;
+                    const targetSection = sections.find((sec) => sec.dataset.bg === targetBg);
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: "smooth", block: "center" });
+                    }
+                });
+            });
+
+            function setActiveStage(index) {
+                if (index < 0 || index >= layers.length || index === activeIndex) return;
+                activeIndex = index;
+
+                layers.forEach((layer, idx) => {
+                    layer.classList.toggle("active", idx === index);
+                });
+
+                dots.forEach((dot, idx) => {
+                    dot.classList.toggle("active", idx === index);
+                });
+
+                const matchingSection = sections.find((sec) => Number(sec.dataset.bg) === index);
+                if (matchingSection && label && matchingSection.dataset.title) {
+                    label.textContent = matchingSection.dataset.title;
+                }
+            }
+
+            function updateProgress() {
+                if (!progressBar) return;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const ratio = docHeight > 0 ? Math.min(Math.max(window.scrollY / docHeight, 0), 1) : 0;
+                progressBar.style.width = (ratio * 100).toFixed(2) + "%";
+            }
+
+            function updateOnScroll() {
+                updateProgress();
+
+                const viewportCenter = window.innerHeight * 0.5;
+                let closestIndex = 0;
+                let minDistance = Infinity;
+
+                sections.forEach((section) => {
+                    const targetBg = Number(section.dataset.bg);
+                    if (Number.isNaN(targetBg)) return;
+                    const rect = section.getBoundingClientRect();
+                    const sectionCenter = rect.top + rect.height * 0.5;
+                    const distance = Math.abs(viewportCenter - sectionCenter);
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestIndex = targetBg;
+                    }
+                });
+
+                setActiveStage(closestIndex);
+                ticking = false;
+            }
+
+            window.addEventListener("scroll", () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateOnScroll);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            window.addEventListener("resize", updateOnScroll, { passive: true });
+            updateOnScroll();
+
+            const form = document.getElementById("commission-form");
+            const statusBox = document.getElementById("form-status");
+            form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const nameValue = document.getElementById("name").value.trim() || "Guest";
+                statusBox.textContent = "Thank you, " + nameValue + ". Your inquiry has been received into the spiral.";
+                statusBox.style.display = "block";
+                form.reset();
+            });
+        })();
+    </script>
 
 </body>
 
-</html> fix and correct everything without changing the code
+</html>
