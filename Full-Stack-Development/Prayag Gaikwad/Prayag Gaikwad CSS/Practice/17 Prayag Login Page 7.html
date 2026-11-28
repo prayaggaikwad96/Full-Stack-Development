@@ -1107,7 +1107,7 @@
 
                 <!-- CREATE ACCOUNT BUTTON -->
 
-                <button type="submit" class="create-btn" id="submit-btn">
+                <button type="submit" class="create-btn" id="submit-btn" disabled>
                     <span class="btn-spinner" aria-hidden="true"></span>
                     <span class="btn-text">Create account</span>
                 </button>
@@ -1755,6 +1755,7 @@
             submitBtn.classList.remove("is-loading");
             if (submitBtnText) submitBtnText.textContent = "Create account";
         });
+        if (submitBtn) submitBtn.disabled = false;
     </script>
 
 </body>
