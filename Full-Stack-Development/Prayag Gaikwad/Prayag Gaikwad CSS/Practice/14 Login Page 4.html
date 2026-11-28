@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prayag — Create Account</title>
+
+    <!-- GOOGLE FONT: MICHROMA & SPACE GROTESK -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Space+Grotesk:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-void: #070709;
+            --bg-panel: #0e0e12;
+            --bg-elevated: #15151b;
+            --bg-input: #1b1b22;
+            --border-subtle: rgba(255, 255, 255, 0.12);
+            --border-strong: rgba(255, 255, 255, 0.24);
+            --accent-amber: #d99b43;
+            --accent-amber-bright: #ebb05a;
+            --accent-crimson: #e05368;
+            --accent-emerald: #45c486;
+            --text-primary: #f4f4f6;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --parallax-y: 0px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:
+                radial-gradient(circle at 18% 15%, rgba(217, 155, 67, 0.08), transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(120, 120, 145, 0.08), transparent 50%),
+                var(--bg-void);
+            color: var(--text-primary);
+            padding: 28px;
+        }
+
+        /* SUBTLE FILM GRAIN OVERLAY */
+
+        .film-grain {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.045;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-size: 180px 180px;
+        }
+
+        /* MAIN CONTAINER */
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1380px;
+            min-height: 780px;
+            display: flex;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.75);
+            padding: 12px;
+            gap: 12px;
+        }
+
+        /* LEFT SECTION — CINEMATIC SCI-FI PANEL WITH PARALLAX */
+
+        .left-section {
+            position: relative;
+            width: 50%;
+            min-height: 540px;
+            background-color: #101014;
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px;
+            color: var(--text-primary);
+            overflow: hidden;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            inset: -36px;
+            background-image:
+                linear-gradient(180deg, rgba(7, 7, 9, 0.72) 0%, rgba(7, 7, 9, 0.35) 50%, rgba(7, 7, 9, 0.88) 100%),
+                url("https://i.redd.it/zlv5bhakiv291.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            transform: translate3d(0, var(--parallax-y), 0) scale(1.04);
+            will-change: transform;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Subtle tactical grid & vignette overlay */
+        .left-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 44px 44px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .left-header,
+        .left-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .left-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .brand-wrap {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+
+        .amu-logo {
+            font-family: 'Michroma', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--text-primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .sector-tag {
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent-amber);
+            border: 1px solid rgba(217, 155, 67, 0.35);
+            background: rgba(217, 155, 67, 0.08);
+            padding: 3px 7px;
+            border-radius: 2px;
+        }
+
+        .back-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: rgba(14, 14, 18, 0.72);
+            border: 1px solid var(--border-subtle);
+            padding: 8px 14px;
+            border-radius: 2px;
+            transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .back-link:hover {
+            background: rgba(217, 155, 67, 0.14);
+            border-color: var(--accent-amber);
+            color: var(--accent-amber-bright);
+        }
+
+        /* LEFT CONTENT */
+
+        .left-content {
+            text-align: left;
+            margin-bottom: 8px;
+            max-width: 460px;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-amber);
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            font-size: 30px;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .sub-caption {
+            margin-top: 10px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        /* SLIDER DOTS */
+
+        .slider-dots {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 22px;
+        }
+
+        .slider-dots span {
+            width: 24px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .slider-dots span.active {
+            background: var(--accent-amber);
+            width: 40px;
+        }
+
+        /* RIGHT SECTION — FORM PANEL */
+
+        .right-section {
+            width: 50%;
+            padding: 46px 7%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--bg-elevated);
+            background-image:
+                linear-gradient(180deg, rgba(21, 21, 27, 0.94) 0%, rgba(16, 16, 21, 0.97) 100%),
+                url("https://i.redd.it/rxer0gciy5l91.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            color: var(--text-primary);
+        }
+
+        .form-kicker {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-amber);
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .subtitle a {
+            color: var(--accent-amber-bright);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(217, 155, 67, 0.45);
+            padding-bottom: 1px;
+            transition: color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .subtitle a:hover {
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        form {
+            width: 100%;
+        }
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 14px;
+        }
+
+        .name-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .name-group .input-group {
+            width: calc(50% - 6px);
+            min-width: 0;
+        }
+
+        .input-group input {
+            width: 100%;
+            height: 42px;
+            padding: 10px 14px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-subtle);
+            border-radius: 3px;
+            outline: none;
+            color: var(--text-primary);
+            font-size: 13px;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+
+        .input-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .input-group input:focus {
+            background: #202029;
+            border-color: var(--accent-amber);
+            box-shadow: 0 0 0 2px rgba(217, 155, 67, 0.16);
+        }
+
+        .input-group input.invalid {
+            border-color: var(--accent-crimson);
+            box-shadow: 0 0 0 2px rgba(224, 83, 104, 0.16);
+        }
+
+        .input-group input.valid {
+            border-color: var(--accent-emerald);
+        }
+
+        .field-error {
+            display: none;
+            margin-top: 5px;
+            font-size: 11px;
+            line-height: 1.35;
+            color: #ff8ea1;
+        }
+
+        .field-error.visible {
+            display: block;
+        }
+
+        /* PASSWORD STRENGTH METER */
+
+        .strength-box {
+            margin-top: 8px;
+        }
+
+        .strength-bars {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            margin-bottom: 6px;
+        }
+
+        .strength-bar {
+            height: 3px;
+            border-radius: 1px;
+            background: rgba(255, 255, 255, 0.12);
+            transition: background-color 0.25s ease;
+        }
+
+        .strength-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .strength-label {
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        /* PASSWORD WRAPPER */
+
+        .password-group {
+            position: relative;
+        }
+
+        .password-group input {
+            padding-right: 44px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 21px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            padding: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .toggle-password:hover,
+        .toggle-password:focus-visible {
+            color: var(--accent-amber-bright);
+            outline: none;
+        }
+
+        /* TERMS */
+
+        .terms {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 6px 0 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .terms input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            accent-color: var(--accent-amber);
+            cursor: pointer;
+        }
+
+        .terms label {
+            cursor: pointer;
+        }
+
+        .terms a {
+            color: var(--accent-amber-bright);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(217, 155, 67, 0.4);
+        }
+
+        .terms a:hover {
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        .terms-error {
+            display: none;
+            margin-bottom: 12px;
+            font-size: 11px;
+            line-height: 1.35;
+            color: #ff8ea1;
+        }
+
+        .terms-error.visible {
+            display: block;
+        }
+
+        .form-status {
+            display: none;
+            margin-bottom: 12px;
+            padding: 9px 12px;
+            border-radius: 3px;
+            font-size: 12px;
+            border: 1px solid rgba(69, 196, 134, 0.35);
+            background: rgba(69, 196, 134, 0.1);
+            color: #7ee2b0;
+        }
+
+        .form-status.visible {
+            display: block;
+        }
+
+        .form-status.error {
+            border-color: rgba(224, 83, 104, 0.45);
+            background: rgba(224, 83, 104, 0.12);
+            color: #ff8ea1;
+        }
+
+        /* PRIMARY CTA BUTTON */
+
+        .create-btn {
+            width: 100%;
+            height: 42px;
+            background: var(--accent-amber);
+            color: #09090b;
+            border: 1px solid var(--accent-amber-bright);
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .create-btn:hover {
+            background: var(--accent-amber-bright);
+            transform: translateY(-1px);
+        }
+
+        /* DIVIDER */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 22px 0 16px;
+            color: var(--text-muted);
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border-subtle);
+        }
+
+        /* SOCIAL REGISTER */
+
+        .social-login {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-login a {
+            width: 50%;
+            height: 40px;
+            background: rgba(27, 27, 34, 0.85);
+            border: 1px solid var(--border-subtle);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            color: var(--text-primary);
+            font-size: 12px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .social-login a:hover {
+            background: #23232d;
+            border-color: var(--border-strong);
+        }
+
+        .social-login img {
+            width: 17px;
+            height: 17px;
+            object-fit: contain;
+        }
+
+        /* RESPONSIVE BREAKPOINTS */
+
+        @media (max-width: 1024px) {
+            .container {
+                min-height: 660px;
+            }
+
+            .right-section {
+                padding: 36px 28px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .tagline {
+                font-size: 25px;
+            }
+        }
+
+        @media (max-width: 850px) {
+            body {
+                padding: 14px;
+            }
+
+            .container {
+                flex-direction: column;
+                max-width: 540px;
+                min-height: auto;
+                padding: 10px;
+            }
+
+            .left-section {
+                width: 100%;
+                min-height: 290px;
+            }
+
+            .right-section {
+                width: 100%;
+                padding: 36px 26px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .input-group input {
+                font-size: 16px;
+                height: 44px;
+            }
+
+            .toggle-password {
+                top: 22px;
+            }
+
+            .create-btn {
+                height: 44px;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .left-section {
+                min-height: 240px;
+                padding: 16px;
+            }
+
+            .amu-logo {
+                font-size: 19px;
+            }
+
+            .sector-tag {
+                display: none;
+            }
+
+            .tagline {
+                font-size: 21px;
+            }
+
+            .right-section {
+                padding: 28px 18px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .name-group {
+                gap: 8px;
+            }
+
+            .name-group .input-group {
+                width: calc(50% - 4px);
+            }
+
+            .social-login {
+                flex-direction: column;
+            }
+
+            .social-login a {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            :root {
+                --parallax-y: 0px !important;
+            }
+
+            .film-grain {
+                display: none;
+            }
+
+            * {
+                transition: none !important;
+            }
+
+            .create-btn:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="film-grain" aria-hidden="true"></div>
+
+    <div class="container">
+
+        <!-- LEFT SECTION -->
+
+        <div class="left-section">
+
+            <div class="parallax-bg" id="parallax-bg" aria-hidden="true"></div>
+
+            <div class="left-header">
+
+                <div class="brand-wrap">
+                    <div class="amu-logo">Prayag</div>
+                    <span class="sector-tag">Archive // 01</span>
+                </div>
+
+                <a href="https://www.huxleysaga.com/" class="back-link" target="_blank" rel="noopener noreferrer">
+                    Explore Saga →
+                </a>
+
+            </div>
+
+            <div class="left-content">
+
+                <p class="eyebrow">Visual Chronicles &amp; Field Logs</p>
+
+                <p class="tagline">
+                    Capturing Moments,<br>
+                    Creating Memories
+                </p>
+
+                <p class="sub-caption">
+                    Enter the archive to save frames, build collections, and share high-contrast stories across worlds.
+                </p>
+
+                <div class="slider-dots" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span class="active"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SECTION -->
+
+        <div class="right-section">
+
+            <p class="eyebrow form-kicker">Access Registration</p>
+
+            <h1>Create an account</h1>
+
+            <p class="subtitle">
+                Already have an account?
+                <a href="login.html">Log in</a>
+            </p>
+
+            <form id="signup-form" action="#" method="post" novalidate>
+
+                <div class="name-group">
+
+                    <div class="input-group">
+                        <input type="text" id="first-name" name="first_name" placeholder="First name"
+                            autocomplete="given-name" aria-describedby="first-name-error" required>
+                        <span class="field-error" id="first-name-error" aria-live="polite"></span>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" id="last-name" name="last_name" placeholder="Last name"
+                            autocomplete="family-name" aria-describedby="last-name-error" required>
+                        <span class="field-error" id="last-name-error" aria-live="polite"></span>
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder="Email address" autocomplete="email"
+                        aria-describedby="email-error" required>
+                    <span class="field-error" id="email-error" aria-live="polite"></span>
+                </div>
+
+                <div class="input-group password-group">
+
+                    <input type="password" id="password" name="password" placeholder="Create a password" minlength="6"
+                        autocomplete="new-password" aria-describedby="strength-hint password-error" required>
+
+                    <button type="button" class="toggle-password" onclick="togglePassword()" aria-label="Show password">
+                        <span id="eye-icon">◉</span>
+                    </button>
+
+                    <div class="strength-box" aria-live="polite">
+                        <div class="strength-bars">
+                            <span class="strength-bar" id="bar-1"></span>
+                            <span class="strength-bar" id="bar-2"></span>
+                            <span class="strength-bar" id="bar-3"></span>
+                            <span class="strength-bar" id="bar-4"></span>
+                        </div>
+                        <div class="strength-meta">
+                            <span id="strength-hint">Use 6+ chars, upper/lowercase, number &amp; symbol</span>
+                            <span class="strength-label" id="strength-label"></span>
+                        </div>
+                    </div>
+
+                    <span class="field-error" id="password-error" aria-live="polite"></span>
+
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="terms" name="terms" aria-describedby="terms-error" required>
+                    <label for="terms">
+                        I agree to the
+                        <a href="terms.html">Terms &amp; Conditions</a>
+                    </label>
+                </div>
+                <span class="terms-error" id="terms-error" aria-live="polite"></span>
+
+                <div class="form-status" id="form-status" aria-live="polite"></div>
+
+                <button type="submit" class="create-btn">
+                    Create account
+                </button>
+
+            </form>
+
+            <div class="divider">
+                Or continue with
+            </div>
+
+            <div class="social-login">
+
+                <a href="https://accounts.google.com/" aria-label="Register with Google" title="Google" target="_blank"
+                    rel="noopener noreferrer">
+                    <img src="https://cdn.vectorstock.com/i/1000v/48/30/google-logo-symbol-vector-46334830.jpg"
+                        alt="Google logo">
+                    Google
+                </a>
+
+                <a href="https://account.apple.com/" aria-label="Register with Apple" title="Apple" target="_blank"
+                    rel="noopener noreferrer">
+                    <img src="https://cdn.simpleicons.org/apple/FFFFFF" alt="Apple logo">
+                    Apple
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        /* SCROLL-LINKED PARALLAX */
+        (function initParallax() {
+            const leftSection = document.querySelector(".left-section");
+            const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+            let ticking = false;
+
+            function updateParallax() {
+                ticking = false;
+                if (reducedMotionQuery.matches || !leftSection) {
+                    document.documentElement.style.setProperty("--parallax-y", "0px");
+                    return;
+                }
+
+                const rect = leftSection.getBoundingClientRect();
+                const viewportHeight = window.innerHeight || 1;
+                const progress = (viewportHeight * 0.5 - rect.top) / viewportHeight;
+                const clamped = Math.max(-1, Math.min(1, progress));
+                const offsetPx = (clamped * 24).toFixed(2);
+
+                document.documentElement.style.setProperty("--parallax-y", `${offsetPx}px`);
+            }
+
+            function requestTick() {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            }
+
+            window.addEventListener("scroll", requestTick, { passive: true });
+            window.addEventListener("resize", requestTick, { passive: true });
+            if (reducedMotionQuery.addEventListener) {
+                reducedMotionQuery.addEventListener("change", requestTick);
+            }
+            updateParallax();
+        })();
+
+        function togglePassword() {
+            const password = document.getElementById("password");
+            const eyeIcon = document.getElementById("eye-icon");
+            const button = document.querySelector(".toggle-password");
+
+            if (password.type === "password") {
+                password.type = "text";
+                eyeIcon.textContent = "◎";
+                button.setAttribute("aria-label", "Hide password");
+            } else {
+                password.type = "password";
+                eyeIcon.textContent = "◉";
+                button.setAttribute("aria-label", "Show password");
+            }
+        }
+
+        function setStatusMessage(message, isError) {
+            const formStatus = document.getElementById("form-status");
+            formStatus.textContent = message;
+            formStatus.classList.remove("visible", "error");
+
+            if (message) {
+                formStatus.classList.add("visible");
+                if (isError) {
+                    formStatus.classList.add("error");
+                }
+            }
+        }
+
+        function getPasswordStrength(value) {
+            if (!value) {
+                return { score: 0, label: "", color: "" };
+            }
+
+            let score = 0;
+            if (value.length >= 6) score += 1;
+            if (value.length >= 10) score += 1;
+            if (/[A-Z]/.test(value) && /[a-z]/.test(value)) score += 1;
+            if (/\d/.test(value) && /[^A-Za-z0-9]/.test(value)) score += 1;
+
+            if (value.length < 6) {
+                return { score: 1, label: "Too short", color: "#e05368" };
+            }
+
+            const levels = [
+                { score: 1, label: "Weak", color: "#e05368" },
+                { score: 2, label: "Fair", color: "#d99b43" },
+                { score: 3, label: "Good", color: "#7cc6fe" },
+                { score: 4, label: "Strong", color: "#45c486" }
+            ];
+
+            return levels[Math.max(0, Math.min(3, score - 1))];
+        }
+
+        function updatePasswordStrength() {
+            const passwordInput = document.getElementById("password");
+            const bars = [
+                document.getElementById("bar-1"),
+                document.getElementById("bar-2"),
+                document.getElementById("bar-3"),
+                document.getElementById("bar-4")
+            ];
+            const labelEl = document.getElementById("strength-label");
+            const { score, label, color } = getPasswordStrength(passwordInput.value);
+
+            bars.forEach((bar, index) => {
+                bar.style.backgroundColor = index < score ? color : "rgba(255, 255, 255, 0.12)";
+            });
+
+            labelEl.textContent = label;
+            labelEl.style.color = color || "#71717a";
+        }
+
+        function setFieldState(input, errorEl, message) {
+            errorEl.textContent = message;
+            errorEl.classList.toggle("visible", Boolean(message));
+            input.classList.remove("valid", "invalid");
+
+            if (message) {
+                input.classList.add("invalid");
+                input.setAttribute("aria-invalid", "true");
+                return false;
+            }
+
+            input.setAttribute("aria-invalid", "false");
+            if (input.value.trim() !== "") {
+                input.classList.add("valid");
+            }
+
+            return true;
+        }
+
+        function validateName(inputId, errorId, labelText) {
+            const input = document.getElementById(inputId);
+            const errorEl = document.getElementById(errorId);
+            const value = input.value.trim();
+
+            if (!value) {
+                return setFieldState(input, errorEl, `${labelText} is required.`);
+            }
+            if (value.length < 2) {
+                return setFieldState(input, errorEl, "Enter at least 2 characters.");
+            }
+            return setFieldState(input, errorEl, "");
+        }
+
+        function validateFirstName() {
+            return validateName("first-name", "first-name-error", "First name");
+        }
+
+        function validateLastName() {
+            return validateName("last-name", "last-name-error", "Last name");
+        }
+
+        function validateEmail() {
+            const input = document.getElementById("email");
+            const errorEl = document.getElementById("email-error");
+            const value = input.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+            if (!value) {
+                return setFieldState(input, errorEl, "Email address is required.");
+            }
+            if (!emailPattern.test(value)) {
+                return setFieldState(input, errorEl, "Enter a valid email address.");
+            }
+            return setFieldState(input, errorEl, "");
+        }
+
+        function validatePassword() {
+            const input = document.getElementById("password");
+            const errorEl = document.getElementById("password-error");
+            const value = input.value;
+
+            updatePasswordStrength();
+
+            if (!value) {
+                return setFieldState(input, errorEl, "Password is required.");
+            }
+            if (value.length < 6) {
+                return setFieldState(input, errorEl, "Password must be at least 6 characters.");
+            }
+            return setFieldState(input, errorEl, "");
+        }
+
+        function validateTerms() {
+            const checkbox = document.getElementById("terms");
+            const errorEl = document.getElementById("terms-error");
+
+            if (!checkbox.checked) {
+                errorEl.textContent = "Please agree to the Terms & Conditions.";
+                errorEl.classList.add("visible");
+                checkbox.setAttribute("aria-invalid", "true");
+                return false;
+            }
+
+            errorEl.textContent = "";
+            errorEl.classList.remove("visible");
+            checkbox.setAttribute("aria-invalid", "false");
+            return true;
+        }
+
+        const form = document.getElementById("signup-form");
+        const firstNameInput = document.getElementById("first-name");
+        const lastNameInput = document.getElementById("last-name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const termsInput = document.getElementById("terms");
+
+        firstNameInput.addEventListener("input", () => {
+            setStatusMessage("", false);
+            validateFirstName();
+        });
+        firstNameInput.addEventListener("blur", validateFirstName);
+
+        lastNameInput.addEventListener("input", () => {
+            setStatusMessage("", false);
+            validateLastName();
+        });
+        lastNameInput.addEventListener("blur", validateLastName);
+
+        emailInput.addEventListener("input", () => {
+            setStatusMessage("", false);
+            validateEmail();
+        });
+        emailInput.addEventListener("blur", validateEmail);
+
+        passwordInput.addEventListener("input", () => {
+            setStatusMessage("", false);
+            validatePassword();
+        });
+        passwordInput.addEventListener("blur", validatePassword);
+
+        termsInput.addEventListener("change", () => {
+            setStatusMessage("", false);
+            validateTerms();
+        });
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const checks = [
+                { valid: validateFirstName(), el: firstNameInput },
+                { valid: validateLastName(), el: lastNameInput },
+                { valid: validateEmail(), el: emailInput },
+                { valid: validatePassword(), el: passwordInput },
+                { valid: validateTerms(), el: termsInput }
+            ];
+
+            const firstInvalid = checks.find((item) => !item.valid);
+
+            if (firstInvalid) {
+                setStatusMessage("Please fix the highlighted fields above.", true);
+                firstInvalid.el.focus();
+                return;
+            }
+
+            const { label } = getPasswordStrength(passwordInput.value);
+            setStatusMessage(`Form validated (${label} password). Ready to submit.`, false);
+        });
+    </script>
+
+</body>
+
+</html>

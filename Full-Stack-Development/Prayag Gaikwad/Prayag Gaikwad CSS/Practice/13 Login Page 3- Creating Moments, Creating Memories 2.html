@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
 
-    <title> AMU - Login Page </title>
+    <title>Prayag - Create Account</title>
 
     <!-- GOOGLE FONT: MICHROMA -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,21 +28,36 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #777382;
+            background-color: #171221;
+            background-image:
+                radial-gradient(circle at top left, rgba(118, 84, 189, 0.24), transparent 55%),
+                linear-gradient(135deg, rgba(23, 18, 33, 0.48) 0%, rgba(38, 29, 54, 0.38) 55%, rgba(25, 20, 36, 0.52) 100%),
+                url("https://images.stockcake.com/public/f/9/c/f9c040d1-492c-47e4-81e9-e22177898522_large/purple-mountain-reflection-stockcake.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             padding: 30px;
+        }
+
+        body.bg-fallback {
+            background-image:
+                radial-gradient(circle at top left, rgba(118, 84, 189, 0.38), transparent 55%),
+                linear-gradient(135deg, #171221 0%, #261d36 55%, #191424 100%);
         }
 
         /* MAIN CONTAINER */
 
         .container {
             width: 100%;
-            max-width: 15000px;
-            min-height: 845px;
+            max-width: 950px;
+            min-height: 620px;
             display: flex;
-            background: #2c2535;
+            gap: 13px;
+            background: rgba(44, 37, 53, 0.9);
             border-radius: 13px;
             overflow: hidden;
-            box-shadow: 0 20px 45px #0004;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.42);
             padding: 13px;
         }
 
@@ -49,25 +65,28 @@
 
         .left-section {
             width: 50%;
-            min-height: 530px;
-
-            background-color: #42317d;
-
+            background-color: #362466;
             background-image:
-                linear-gradient(rgba(20, 10, 40, 0.15),
-                    rgba(20, 10, 40, 0.35)),
+                linear-gradient(180deg,
+                    rgba(20, 10, 40, 0.14) 0%,
+                    rgba(34, 18, 68, 0.34) 60%,
+                    rgba(18, 10, 36, 0.58) 100%),
                 url("https://i.redd.it/zlv5bhakiv291.jpg");
-
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
-
             border-radius: 10px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             padding: 20px;
             color: white;
+        }
+
+        .left-section.bg-fallback {
+            background-image:
+                radial-gradient(circle at 25% 20%, rgba(168, 129, 255, 0.32), transparent 55%),
+                linear-gradient(160deg, #4b2f8c 0%, #2d1c57 52%, #1b1136 100%);
         }
 
         /* HEADER */
@@ -79,7 +98,7 @@
             gap: 10px;
         }
 
-        /* AMU LOGO - MICHROMA FONT */
+        /* LOGO - MICHROMA FONT */
 
         .amu-logo {
             font-family: 'Michroma', sans-serif;
@@ -87,6 +106,7 @@
             font-weight: 400;
             color: white;
             letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
         }
 
         /* BACK LINK */
@@ -95,15 +115,16 @@
             color: white;
             text-decoration: none;
             font-size: 12px;
-            background: #ffffff25;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(4px);
             padding: 7px 13px;
             border-radius: 20px;
-            transition: .3s;
+            transition: background-color 0.3s ease;
             white-space: nowrap;
         }
 
         .back-link:hover {
-            background: #ffffff45;
+            background: rgba(255, 255, 255, 0.3);
         }
 
         /* LEFT CONTENT */
@@ -118,6 +139,7 @@
             line-height: 1.25;
             color: white;
             font-weight: 400;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
         }
 
         /* SLIDER DOTS */
@@ -132,7 +154,7 @@
         .slider-dots span {
             width: 24px;
             height: 4px;
-            background: #ffffff55;
+            background: rgba(255, 255, 255, 0.38);
             border-radius: 5px;
         }
 
@@ -149,33 +171,46 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            border-radius: 10px;
             background-color: #2c2535;
-            background-image: url("https://i.redd.it/rxer0gciy5l91.jpg");
+            background-image:
+                linear-gradient(180deg,
+                    rgba(26, 20, 36, 0.28) 0%,
+                    rgba(22, 17, 32, 0.42) 100%),
+                url("https://i.redd.it/rxer0gciy5l91.jpg");
             background-repeat: no-repeat;
             background-size: cover;
-            background-position: center -75px;
+            background-position: center;
             color: white;
+        }
+
+        .right-section.bg-fallback {
+            background-image:
+                radial-gradient(circle at 85% 15%, rgba(118, 84, 189, 0.24), transparent 50%),
+                linear-gradient(180deg, #31293d 0%, #262030 100%);
         }
 
         /* HEADING */
 
         h1 {
-            font-size: 38px;
+            font-size: 36px;
             font-weight: 400;
             color: #ffffff;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
         }
 
         /* SUBTITLE */
 
         .subtitle {
             font-size: 12px;
-            color: #b7b2c0;
-            margin-bottom: 38px;
+            color: #e6e0f0;
+            margin-bottom: 32px;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
         }
 
         .subtitle a {
-            color: #c5b4ff;
+            color: #d9caff;
             text-decoration: underline;
         }
 
@@ -210,25 +245,81 @@
             width: 100%;
             height: 38px;
             padding: 10px 15px;
-
-            background: #3b3447;
-            border: 1px solid transparent;
+            background: rgba(34, 28, 46, 0.78);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.16);
             border-radius: 5px;
-
             outline: none;
             color: white;
             font-size: 12px;
-
-            transition: .3s;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
         }
 
         .input-group input::placeholder {
-            color: #9992a5;
+            color: #bfb8ce;
         }
 
         .input-group input:focus {
+            background: rgba(34, 28, 46, 0.9);
             border-color: #b39bff;
-            box-shadow: 0 0 4px #9d7cff55;
+            box-shadow: 0 0 6px rgba(157, 124, 255, 0.45);
+        }
+
+        .input-group input.invalid {
+            border-color: #ff6b8b;
+            box-shadow: 0 0 4px rgba(255, 107, 139, 0.45);
+        }
+
+        .input-group input.valid {
+            border-color: #55d69e;
+        }
+
+        .field-error {
+            display: none;
+            margin-top: 4px;
+            font-size: 10px;
+            line-height: 1.3;
+            color: #ffa6b9;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
+        }
+
+        .field-error.visible {
+            display: block;
+        }
+
+        /* PASSWORD STRENGTH METER */
+
+        .strength-box {
+            margin-top: 7px;
+        }
+
+        .strength-bars {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.25);
+            transition: background-color 0.25s ease;
+        }
+
+        .strength-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            color: #ece6f7;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+        }
+
+        .strength-label {
+            font-weight: 600;
+            white-space: nowrap;
         }
 
         /* PASSWORD WRAPPER */
@@ -243,16 +334,23 @@
 
         .toggle-password {
             position: absolute;
-            right: 13px;
-            top: 50%;
+            right: 12px;
+            top: 19px;
             transform: translateY(-50%);
-
             background: none;
             border: none;
-            color: #aaa3b5;
-
+            color: #d2cbe0;
             cursor: pointer;
-            font-size: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+        }
+
+        .toggle-password:hover,
+        .toggle-password:focus-visible {
+            color: #ffffff;
+            outline: none;
         }
 
         /* TERMS */
@@ -261,9 +359,10 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            margin: 0 0 30px;
+            margin: 0 0 12px;
             font-size: 10px;
-            color: #ddd9e5;
+            color: #f2eef9;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
         }
 
         .terms input[type="checkbox"] {
@@ -279,7 +378,39 @@
         }
 
         .terms a {
-            color: #c5b4ff;
+            color: #d9caff;
+        }
+
+        .terms-error {
+            display: none;
+            margin-bottom: 12px;
+            font-size: 10px;
+            line-height: 1.3;
+            color: #ffa6b9;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
+        }
+
+        .terms-error.visible {
+            display: block;
+        }
+
+        .form-status {
+            display: none;
+            margin-bottom: 12px;
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            background: rgba(23, 18, 33, 0.82);
+            color: #7ef2be;
+        }
+
+        .form-status.visible {
+            display: block;
+        }
+
+        .form-status.error {
+            background: rgba(23, 18, 33, 0.86);
+            color: #ffa6b9;
         }
 
         /* CREATE ACCOUNT BUTTON */
@@ -287,17 +418,14 @@
         .create-btn {
             width: 100%;
             height: 38px;
-
             background: #7654bd;
             color: white;
-
             border: none;
             border-radius: 5px;
-
             font-size: 12px;
             cursor: pointer;
-
-            transition: .3s;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .create-btn:hover {
@@ -311,11 +439,10 @@
             display: flex;
             align-items: center;
             gap: 13px;
-
             margin: 20px 0 15px;
-
-            color: #a9a3b2;
+            color: #e8e2f3;
             font-size: 10px;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
         }
 
         .divider::before,
@@ -323,7 +450,7 @@
             content: "";
             flex: 1;
             height: 1px;
-            background: #575060;
+            background: rgba(255, 255, 255, 0.42);
         }
 
         /* SOCIAL REGISTER */
@@ -336,37 +463,75 @@
         .social-login a {
             width: 50%;
             height: 38px;
-
-            border: 1px solid #777080;
+            border: 1px solid rgba(255, 255, 255, 0.32);
             border-radius: 5px;
-
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 9px;
-
             color: white;
             font-size: 12px;
             text-decoration: none;
-
-            transition: .3s;
+            background: rgba(34, 28, 46, 0.72);
+            backdrop-filter: blur(6px);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .social-login a:hover {
-            background: #40384c;
+            background: rgba(54, 46, 70, 0.88);
             border-color: #b39bff;
         }
 
-        .social-login img {
-            width: 19px;
-            height: 19px;
-            object-fit: contain;
+        .social-login svg {
+            width: 17px;
+            height: 17px;
+            flex-shrink: 0;
+        }
+
+        /* LARGE MONITORS & 4K RESPONSIVE */
+
+        @media (min-width: 1441px) {
+            body {
+                padding: 40px;
+            }
+
+            .container {
+                max-width: 1200px;
+                min-height: 700px;
+            }
+        }
+
+        /* MEDIUM DESKTOP / SMALL LAPTOP RESPONSIVE */
+
+        @media (max-width: 1200px) {
+            body {
+                padding: 22px;
+            }
+
+            .right-section {
+                padding: 40px 5%;
+            }
+        }
+
+        /* TABLET LANDSCAPE RESPONSIVE */
+
+        @media (max-width: 1024px) {
+            body {
+                padding: 18px;
+            }
+
+            .right-section {
+                padding: 35px 28px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
         }
 
         /* TABLET RESPONSIVE */
 
-        @media(max-width: 850px) {
-
+        @media (max-width: 850px) {
             body {
                 padding: 15px;
             }
@@ -380,16 +545,16 @@
 
             .left-section {
                 width: 100%;
-                min-height: 300px;
+                min-height: 280px;
             }
 
             .right-section {
                 width: 100%;
-                padding: 40px 30px;
+                padding: 36px 28px;
             }
 
             h1 {
-                font-size: 34px;
+                font-size: 32px;
             }
 
             .tagline {
@@ -397,20 +562,57 @@
             }
         }
 
+        /* LARGE MOBILE RESPONSIVE */
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .left-section {
+                min-height: 240px;
+            }
+
+            .right-section {
+                padding: 30px 22px;
+            }
+
+            .input-group input {
+                font-size: 16px;
+                height: 42px;
+            }
+
+            .toggle-password {
+                top: 21px;
+            }
+
+            .create-btn {
+                height: 42px;
+            }
+
+            .social-login a {
+                height: 40px;
+            }
+        }
+
         /* MOBILE RESPONSIVE */
 
-        @media(max-width: 450px) {
-
+        @media (max-width: 450px) {
             body {
                 padding: 10px;
             }
 
             .container {
                 border-radius: 10px;
+                margin: auto;
             }
 
             .left-section {
-                min-height: 230px;
+                min-height: 220px;
                 padding: 15px;
             }
 
@@ -423,15 +625,15 @@
             }
 
             .right-section {
-                padding: 35px 18px;
+                padding: 30px 18px;
             }
 
             h1 {
-                font-size: 29px;
+                font-size: 28px;
             }
 
             .subtitle {
-                margin-bottom: 28px;
+                margin-bottom: 24px;
             }
 
             .name-group {
@@ -450,6 +652,73 @@
                 font-size: 11px;
             }
         }
+
+        /* SMALL MOBILE RESPONSIVE */
+
+        @media (max-width: 360px) {
+            .left-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .name-group {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .name-group .input-group {
+                width: 100%;
+            }
+
+            .social-login {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .social-login a {
+                width: 100%;
+            }
+        }
+
+        /* LANDSCAPE / SHORT VIEWPORT RESPONSIVE */
+
+        @media (max-height: 620px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding: 10px;
+            }
+
+            .container {
+                min-height: auto;
+            }
+
+            .right-section {
+                padding: 24px 28px;
+            }
+
+            .subtitle {
+                margin-bottom: 18px;
+            }
+
+            .terms {
+                margin-bottom: 10px;
+            }
+
+            .divider {
+                margin: 14px 0 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+            }
+
+            .create-btn:hover {
+                transform: none;
+            }
+        }
     </style>
 
 </head>
@@ -466,15 +735,15 @@
 
             <div class="left-header">
 
-                <!-- AMU LOGO -->
+                <!-- LOGO -->
 
                 <div class="amu-logo">
-                    AMU
+                    Prayag
                 </div>
 
                 <a href="https://dribbble.com/shots/24552589-Login-Sign-up-Dark-Mode-UI-UX-Design" class="back-link"
                     target="_blank" rel="noopener noreferrer">
-                    Back to website   →
+                    Back to website &nbsp;&rarr;
                 </a>
 
             </div>
@@ -513,7 +782,7 @@
 
             <!-- REGISTER FORM -->
 
-            <form action="#" method="post">
+            <form id="signup-form" action="#" method="post" novalidate>
 
                 <!-- FIRST NAME AND LAST NAME -->
 
@@ -522,14 +791,16 @@
                     <div class="input-group">
 
                         <input type="text" id="first-name" name="first_name" placeholder="First name"
-                            autocomplete="given-name" required>
+                            autocomplete="given-name" aria-describedby="first-name-error" required>
+                        <span class="field-error" id="first-name-error" aria-live="polite"></span>
 
                     </div>
 
                     <div class="input-group">
 
                         <input type="text" id="last-name" name="last_name" placeholder="Last name"
-                            autocomplete="family-name" required>
+                            autocomplete="family-name" aria-describedby="last-name-error" required>
+                        <span class="field-error" id="last-name-error" aria-live="polite"></span>
 
                     </div>
 
@@ -539,7 +810,9 @@
 
                 <div class="input-group">
 
-                    <input type="email" id="email" name="email" placeholder="Email" autocomplete="email" required>
+                    <input type="email" id="email" name="email" placeholder="Email" autocomplete="email"
+                        aria-describedby="email-error" required>
+                    <span class="field-error" id="email-error" aria-live="polite"></span>
 
                 </div>
 
@@ -548,13 +821,30 @@
                 <div class="input-group password-group">
 
                     <input type="password" id="password" name="password" placeholder="Enter your password" minlength="6"
-                        autocomplete="new-password" required>
+                        autocomplete="new-password" aria-describedby="strength-hint password-error" required>
 
                     <button type="button" class="toggle-password" onclick="togglePassword()" aria-label="Show password">
-
-                        <span id="eye-icon">◉</span>
-
+                        <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
                     </button>
+
+                    <div class="strength-box" aria-live="polite">
+                        <div class="strength-bars">
+                            <span class="strength-bar" id="bar-1"></span>
+                            <span class="strength-bar" id="bar-2"></span>
+                            <span class="strength-bar" id="bar-3"></span>
+                            <span class="strength-bar" id="bar-4"></span>
+                        </div>
+                        <div class="strength-meta">
+                            <span id="strength-hint">Use 6+ chars, upper/lowercase, number &amp; symbol</span>
+                            <span class="strength-label" id="strength-label"></span>
+                        </div>
+                    </div>
+
+                    <span class="field-error" id="password-error" aria-live="polite"></span>
 
                 </div>
 
@@ -562,14 +852,17 @@
 
                 <div class="terms">
 
-                    <input type="checkbox" id="terms" name="terms" required>
+                    <input type="checkbox" id="terms" name="terms" aria-describedby="terms-error" required>
 
                     <label for="terms">
                         I agree to the
-                        <a href="terms.html">Terms & Conditions</a>
+                        <a href="terms.html">Terms &amp; Conditions</a>
                     </label>
 
                 </div>
+                <span class="terms-error" id="terms-error" aria-live="polite"></span>
+
+                <div class="form-status" id="form-status" aria-live="polite"></div>
 
                 <!-- CREATE ACCOUNT BUTTON -->
 
@@ -593,23 +886,28 @@
 
                 <a href="https://accounts.google.com/" aria-label="Register with Google" title="Google" target="_blank"
                     rel="noopener noreferrer">
-
-                    <img src="https://cdn.vectorstock.com/i/1000v/48/30/google-logo-symbol-vector-46334830.jpg"
-                        alt="Google logo">
-
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#4285F4"
+                            d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z" />
+                        <path fill="#34A853"
+                            d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24Z" />
+                        <path fill="#FBBC05"
+                            d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14Z" />
+                        <path fill="#EA4335"
+                            d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96Z" />
+                    </svg>
                     Google
-
                 </a>
 
                 <!-- APPLE -->
 
                 <a href="https://account.apple.com/" aria-label="Register with Apple" title="Apple" target="_blank"
                     rel="noopener noreferrer">
-
-                    <img src="https://cdn.simpleicons.org/apple/FFFFFF" alt="Apple logo">
-
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+                    </svg>
                     Apple
-
                 </a>
 
             </div>
@@ -618,32 +916,299 @@
 
     </div>
 
-    <!-- PASSWORD VISIBILITY SCRIPT -->
+    <!-- BACKGROUND IMAGE FALLBACK & FORM SCRIPT -->
 
     <script>
+        function applyBackgroundFallback(url, targetSelector) {
+            const target = document.querySelector(targetSelector);
+            if (!target) return;
+
+            const loader = new Image();
+            loader.referrerPolicy = "no-referrer";
+            let settled = false;
+
+            const timer = setTimeout(() => {
+                if (!settled) {
+                    settled = true;
+                    target.classList.add("bg-fallback");
+                }
+            }, 6000);
+
+            loader.onload = () => {
+                if (!settled) {
+                    settled = true;
+                    clearTimeout(timer);
+                    target.classList.remove("bg-fallback");
+                }
+            };
+
+            loader.onerror = () => {
+                if (!settled) {
+                    settled = true;
+                    clearTimeout(timer);
+                    target.classList.add("bg-fallback");
+                }
+            };
+
+            loader.src = url;
+        }
+
+        applyBackgroundFallback(
+            "https://images.stockcake.com/public/f/9/c/f9c040d1-492c-47e4-81e9-e22177898522_large/purple-mountain-reflection-stockcake.jpg",
+            "body"
+        );
+        applyBackgroundFallback(
+            "https://i.redd.it/zlv5bhakiv291.jpg",
+            ".left-section"
+        );
+        applyBackgroundFallback(
+            "https://i.redd.it/rxer0gciy5l91.jpg",
+            ".right-section"
+        );
 
         function togglePassword() {
-
             const password = document.getElementById("password");
             const eyeIcon = document.getElementById("eye-icon");
             const button = document.querySelector(".toggle-password");
 
             if (password.type === "password") {
-
                 password.type = "text";
-                eyeIcon.innerHTML = "◎";
+                eyeIcon.innerHTML = `
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                `;
                 button.setAttribute("aria-label", "Hide password");
-
             } else {
-
                 password.type = "password";
-                eyeIcon.innerHTML = "◉";
+                eyeIcon.innerHTML = `
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                `;
                 button.setAttribute("aria-label", "Show password");
-
             }
-
         }
 
+        function setStatusMessage(message, isError) {
+            const formStatus = document.getElementById("form-status");
+            formStatus.textContent = message;
+            formStatus.classList.remove("visible", "error");
+
+            if (message) {
+                formStatus.classList.add("visible");
+                if (isError) {
+                    formStatus.classList.add("error");
+                }
+            }
+        }
+
+        function getPasswordStrength(value) {
+            if (!value) {
+                return { score: 0, label: "", color: "" };
+            }
+
+            let score = 0;
+            if (value.length >= 6) score += 1;
+            if (value.length >= 10) score += 1;
+            if (/[A-Z]/.test(value) && /[a-z]/.test(value)) score += 1;
+            if (/\d/.test(value) && /[^A-Za-z0-9]/.test(value)) score += 1;
+
+            if (value.length < 6) {
+                return { score: 1, label: "Too short", color: "#ff6b8b" };
+            }
+
+            const levels = [
+                { score: 1, label: "Weak", color: "#ff6b8b" },
+                { score: 2, label: "Fair", color: "#f6b955" },
+                { score: 3, label: "Good", color: "#7cc6fe" },
+                { score: 4, label: "Strong", color: "#55d69e" }
+            ];
+
+            return levels[Math.max(0, Math.min(3, score - 1))];
+        }
+
+        function updatePasswordStrength() {
+            const passwordInput = document.getElementById("password");
+            const bars = [
+                document.getElementById("bar-1"),
+                document.getElementById("bar-2"),
+                document.getElementById("bar-3"),
+                document.getElementById("bar-4")
+            ];
+            const labelEl = document.getElementById("strength-label");
+            const { score, label, color } = getPasswordStrength(passwordInput.value);
+
+            bars.forEach((bar, index) => {
+                bar.style.backgroundColor = index < score ? color : "rgba(255, 255, 255, 0.25)";
+            });
+
+            labelEl.textContent = label;
+            labelEl.style.color = color || "#ece6f7";
+        }
+
+        function setFieldState(input, errorEl, message) {
+            errorEl.textContent = message;
+            errorEl.classList.toggle("visible", Boolean(message));
+            input.classList.remove("valid", "invalid");
+
+            if (message) {
+                input.classList.add("invalid");
+                input.setAttribute("aria-invalid", "true");
+                return false;
+            }
+
+            input.setAttribute("aria-invalid", "false");
+            if (input.value.trim() !== "") {
+                input.classList.add("valid");
+            }
+
+            return true;
+        }
+
+        function validateName(inputId, errorId, labelText) {
+            const input = document.getElementById(inputId);
+            const errorEl = document.getElementById(errorId);
+            const value = input.value.trim();
+
+            if (!value) {
+                return setFieldState(input, errorEl, `${labelText} is required.`);
+            }
+            if (value.length < 2) {
+                return setFieldState(input, errorEl, "Enter at least 2 characters.");
+            }
+            return setFieldState(input, errorEl, "");
+        }
+
+        function validateFirstName() {
+            return validateName("first-name", "first-name-error", "First name");
+        }
+
+        function validateLastName() {
+            return validateName("last-name", "last-name-error", "Last name");
+        }
+
+        function validateEmail() {
+            const input = document.getElementById("email");
+            const errorEl = document.getElementById("email-error");
+            const value = input.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+            if (!value) {
+                return setFieldState(input, errorEl, "Email address is required.");
+            }
+            if (!emailPattern.test(value)) {
+                return setFieldState(input, errorEl, "Enter a valid email address.");
+            }
+            return setFieldState(input, errorEl, "");
+        }
+
+        function validatePassword() {
+            const input = document.getElementById("password");
+            const errorEl = document.getElementById("password-error");
+            const value = input.value;
+
+            updatePasswordStrength();
+
+            if (!value) {
+                return setFieldState(input, errorEl, "Password is required.");
+            }
+            if (value.length < 6) {
+                return setFieldState(input, errorEl, "Password must be at least 6 characters.");
+            }
+            return setFieldState(input, errorEl, "");
+        }
+
+        function validateTerms() {
+            const checkbox = document.getElementById("terms");
+            const errorEl = document.getElementById("terms-error");
+
+            if (!checkbox.checked) {
+                errorEl.textContent = "Please agree to the Terms & Conditions.";
+                errorEl.classList.add("visible");
+                checkbox.setAttribute("aria-invalid", "true");
+                return false;
+            }
+
+            errorEl.textContent = "";
+            errorEl.classList.remove("visible");
+            checkbox.setAttribute("aria-invalid", "false");
+            return true;
+        }
+
+        const form = document.getElementById("signup-form");
+        const firstNameInput = document.getElementById("first-name");
+        const lastNameInput = document.getElementById("last-name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const termsInput = document.getElementById("terms");
+
+        firstNameInput.addEventListener("input", () => {
+            setStatusMessage("", false);
+            if (firstNameInput.classList.contains("invalid") || firstNameInput.value.trim().length >= 2) {
+                validateFirstName();
+            }
+        });
+        firstNameInput.addEventListener("blur", validateFirstName);
+
+        lastNameInput.addEventListener("input", () => {
+            setStatusMessage("", false);
+            if (lastNameInput.classList.contains("invalid") || lastNameInput.value.trim().length >= 2) {
+                validateLastName();
+            }
+        });
+        lastNameInput.addEventListener("blur", validateLastName);
+
+        emailInput.addEventListener("input", () => {
+            setStatusMessage("", false);
+            if (emailInput.classList.contains("invalid") || emailInput.value.includes("@")) {
+                validateEmail();
+            }
+        });
+        emailInput.addEventListener("blur", validateEmail);
+
+        passwordInput.addEventListener("input", () => {
+            setStatusMessage("", false);
+            updatePasswordStrength();
+            if (passwordInput.classList.contains("invalid") || passwordInput.value.length >= 6) {
+                validatePassword();
+            }
+        });
+        passwordInput.addEventListener("blur", validatePassword);
+
+        termsInput.addEventListener("change", () => {
+            setStatusMessage("", false);
+            validateTerms();
+        });
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const isFirstNameValid = validateFirstName();
+            const isLastNameValid = validateLastName();
+            const isEmailValid = validateEmail();
+            const isPasswordValid = validatePassword();
+            const isTermsValid = validateTerms();
+
+            const allValid =
+                isFirstNameValid &&
+                isLastNameValid &&
+                isEmailValid &&
+                isPasswordValid &&
+                isTermsValid;
+
+            if (!allValid) {
+                setStatusMessage("Please fix the highlighted fields before continuing.", true);
+                const firstInvalid = form.querySelector('[aria-invalid="true"]');
+                if (firstInvalid) {
+                    firstInvalid.focus();
+                }
+                return;
+            }
+
+            setStatusMessage(
+                `Account ready for ${firstNameInput.value.trim()} (${emailInput.value.trim()}). Connect your backend endpoint to persist registration.`,
+                false
+            );
+        });
     </script>
 
 </body>
