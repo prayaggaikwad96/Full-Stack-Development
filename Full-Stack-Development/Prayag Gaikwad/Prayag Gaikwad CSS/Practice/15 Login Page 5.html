@@ -753,7 +753,7 @@
 
                     <div class="status-banner" id="form-status" aria-live="polite"></div>
 
-                    <button type="submit" class="submit-btn">Enter Archive</button>
+                    <button type="submit" class="submit-btn" disabled>Enter Archive</button>
                 </form>
 
                 <div class="alt-divider">Or continue with</div>
@@ -1071,6 +1071,7 @@
                 submitBtn.textContent = originalText;
             }, 1200);
         });
+        submitBtn.disabled = false;
     </script>
 
 </body>
