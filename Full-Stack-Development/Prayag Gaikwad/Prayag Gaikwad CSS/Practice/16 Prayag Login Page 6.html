@@ -955,7 +955,7 @@
 
                 <!-- CREATE ACCOUNT BUTTON -->
 
-                <button type="submit" class="create-btn" id="submit-btn">
+                <button type="submit" class="create-btn" id="submit-btn" disabled>
                     <span class="btn-spinner" aria-hidden="true"></span>
                     <span class="btn-text">Create account</span>
                 </button>
@@ -1447,6 +1447,7 @@
             updatePasswordStrength();
             setSubmittingState(false);
         });
+        submitBtn.disabled = false;
     </script>
 
 </body>
