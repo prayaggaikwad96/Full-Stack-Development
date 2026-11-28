@@ -911,7 +911,8 @@
                 transform: none;
             }
         }
-    </style>
+        .demo-notice { margin: 0 0 1rem; padding: .75rem 1rem; border: 1px solid rgba(180, 150, 90, .45); border-radius: 12px; background: rgba(180, 150, 90, .10); color: inherit; font-size: .875rem; line-height: 1.5; }
+</style>
 
 </head>
 
@@ -974,7 +975,8 @@
 
             <!-- REGISTER FORM -->
 
-            <form id="signup-form" action="/api/auth/signup" method="post" novalidate>
+            <form id="signup-form" action="#" method="post" novalidate>
+                    <p class="demo-notice" role="note">Demo only: this page validates inputs locally. No account is created and no credentials are sent. Do not enter a real password.</p>
 
                 <!-- FIRST NAME AND LAST NAME -->
 
@@ -1105,7 +1107,7 @@
 
                 <!-- CREATE ACCOUNT BUTTON -->
 
-                <button type="submit" class="create-btn" id="submit-btn">
+                <button type="submit" class="create-btn" id="submit-btn" disabled>
                     <span class="btn-spinner" aria-hidden="true"></span>
                     <span class="btn-text">Create account</span>
                 </button>
@@ -1714,7 +1716,7 @@
         confirmPasswordInput.addEventListener("blur", validateConfirmPassword);
         termsInput.addEventListener("change", validateTerms);
 
-        form.addEventListener("submit", async (event) => {
+        form.addEventListener("submit", (event) => {
             event.preventDefault();
             setFormStatus("", "");
 
@@ -1737,56 +1739,23 @@
             if (submitBtnText) submitBtnText.textContent = "Creating account...";
             setFormStatus("loading", "Submitting your registration...");
 
-            const payload = {
-                first_name: firstNameInput.value.trim(),
-                last_name: lastNameInput.value.trim(),
-                email: emailInput.value.trim(),
-                password: passwordInput.value,
-                terms: termsInput.checked
-            };
+            submitBtn.disabled = true;
+            submitBtn.classList.add("is-loading");
+            if (submitBtnText) submitBtnText.textContent = "Checking form...";
+            setFormStatus(
+                "success",
+                "Demo only: local validation passed. No account was created and no credentials were sent."
+            );
 
-            try {
-                if (window.location.protocol === "file:") {
-                    await new Promise((resolve) => setTimeout(resolve, 600));
-                    resetFormAfterSuccess("Preview mode: Account form validated and submitted locally.");
-                    return;
-                }
+            passwordInput.value = "";
+            confirmPasswordInput.value = "";
+            syncPasswordUI();
 
-                const response = await fetch(form.action, {
-                    method: form.method || "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok) {
-                    resetFormAfterSuccess("Account created successfully!");
-                    return;
-                }
-
-                if (response.status === 404 || response.status === 501) {
-                    resetFormAfterSuccess("Preview mode: /api/auth/signup is not connected yet, but validation succeeded.");
-                    return;
-                }
-
-                let serverMessage = `Could not create account (${response.status}).`;
-                try {
-                    const data = await response.json();
-                    if (data && data.message) serverMessage = data.message;
-                } catch (_) {
-                    // Ignore non-JSON error bodies
-                }
-                setFormStatus("error", serverMessage);
-            } catch (err) {
-                setFormStatus(
-                    "error",
-                    "Network error while submitting registration. Check your connection or backend server."
-                );
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.classList.remove("is-loading");
-                if (submitBtnText) submitBtnText.textContent = "Create account";
-            }
+            submitBtn.disabled = false;
+            submitBtn.classList.remove("is-loading");
+            if (submitBtnText) submitBtnText.textContent = "Create account";
         });
+        if (submitBtn) submitBtn.disabled = false;
     </script>
 
 </body>

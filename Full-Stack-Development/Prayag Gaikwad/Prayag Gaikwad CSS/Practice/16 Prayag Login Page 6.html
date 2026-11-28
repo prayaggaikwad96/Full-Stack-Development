@@ -784,7 +784,8 @@
                 transform: none;
             }
         }
-    </style>
+        .demo-notice { margin: 0 0 1rem; padding: .75rem 1rem; border: 1px solid rgba(180, 150, 90, .45); border-radius: 12px; background: rgba(180, 150, 90, .10); color: inherit; font-size: .875rem; line-height: 1.5; }
+</style>
 
 </head>
 
@@ -847,7 +848,8 @@
 
             <!-- REGISTER FORM -->
 
-            <form id="signup-form" action="/api/auth/signup" method="post" novalidate>
+            <form id="signup-form" action="#" method="post" novalidate>
+                    <p class="demo-notice" role="note">Demo only: this page validates inputs locally. No account is created and no credentials are sent. Do not enter a real password.</p>
 
                 <!-- FIRST NAME AND LAST NAME -->
 
@@ -953,7 +955,7 @@
 
                 <!-- CREATE ACCOUNT BUTTON -->
 
-                <button type="submit" class="create-btn" id="submit-btn">
+                <button type="submit" class="create-btn" id="submit-btn" disabled>
                     <span class="btn-spinner" aria-hidden="true"></span>
                     <span class="btn-text">Create account</span>
                 </button>
@@ -1408,7 +1410,7 @@
             validateTerms();
         });
 
-        form.addEventListener("submit", async (event) => {
+        form.addEventListener("submit", (event) => {
             event.preventDefault();
 
             const isFirstNameValid = validateFirstName();
@@ -1435,78 +1437,17 @@
                 return;
             }
 
-            const payload = {
-                firstName: firstNameInput.value.trim(),
-                lastName: lastNameInput.value.trim(),
-                email: emailInput.value.trim(),
-                password: passwordInput.value,
-                acceptedTerms: termsInput.checked
-            };
-
-            const endpoint = form.getAttribute("action") || "/api/auth/signup";
-
             setSubmittingState(true);
-            setStatusMessage("Creating your account...", "loading");
-
-            try {
-                const response = await fetch(endpoint, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                let data = null;
-                const contentType = response.headers.get("content-type") || "";
-                if (contentType.includes("application/json")) {
-                    data = await response.json();
-                } else {
-                    const text = await response.text();
-                    if (text) {
-                        try {
-                            data = JSON.parse(text);
-                        } catch {
-                            data = { message: text };
-                        }
-                    }
-                }
-
-                if (!response.ok) {
-                    if (data && data.errors) {
-                        applyFieldErrorsFromServer(data.errors);
-                    }
-                    const serverMessage =
-                        (data && (data.message || data.error)) ||
-                        `Registration failed (status ${response.status}). Please try again.`;
-                    setStatusMessage(serverMessage, "error");
-                    return;
-                }
-
-                setStatusMessage(
-                    (data && data.message) ||
-                        `Account created for ${payload.firstName} (${payload.email}).`,
-                    "success"
-                );
-                form.reset();
-                updatePasswordStrength();
-                [firstNameInput, lastNameInput, emailInput, passwordInput, confirmPasswordInput].forEach((input) => {
-                    input.classList.remove("valid", "invalid");
-                    input.removeAttribute("aria-invalid");
-                });
-            } catch (error) {
-                const networkMessage =
-                    error && error.name === "TypeError"
-                        ? "Unable to reach the server. Check your connection or backend endpoint."
-                        : error && error.message
-                            ? error.message
-                            : "An unexpected error occurred while creating your account.";
-                setStatusMessage(networkMessage, "error");
-            } finally {
-                setSubmittingState(false);
-            }
+            setStatusMessage(
+                "Demo only: local validation passed. No account was created and no credentials were sent.",
+                "success"
+            );
+            passwordInput.value = "";
+            confirmPasswordInput.value = "";
+            updatePasswordStrength();
+            setSubmittingState(false);
         });
+        submitBtn.disabled = false;
     </script>
 
 </body>

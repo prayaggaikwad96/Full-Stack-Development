@@ -653,7 +653,8 @@
                 animation: none !important;
             }
         }
-    </style>
+        .demo-notice { margin: 0 0 1rem; padding: .75rem 1rem; border: 1px solid rgba(180, 150, 90, .45); border-radius: 12px; background: rgba(180, 150, 90, .10); color: inherit; font-size: .875rem; line-height: 1.5; }
+</style>
 </head>
 
 <body>
@@ -704,6 +705,7 @@
                 </p>
 
                 <form id="login-form" action="#" method="post" novalidate>
+                    <p class="demo-notice" role="note">Demo only: this page checks the form locally. No sign-in occurs and no credentials are sent. Do not enter a real password.</p>
                     <div class="field">
                         <div class="field-header">
                             <label for="email">Email Address</label>
@@ -751,7 +753,7 @@
 
                     <div class="status-banner" id="form-status" aria-live="polite"></div>
 
-                    <button type="submit" class="submit-btn">Enter Archive</button>
+                    <button type="submit" class="submit-btn" disabled>Enter Archive</button>
                 </form>
 
                 <div class="alt-divider">Or continue with</div>
@@ -1060,13 +1062,16 @@
             const originalText = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = "Signing In...";
-            setStatusMessage(`Signed in (${sessionMode}). Opening archive...`, false);
+            setStatusMessage(`Demo only: local validation passed (${sessionMode} preview). No authentication occurred and no credentials were sent.`, false);
+            passwordInput.value = "";
+            updatePasswordStrength("");
 
             window.setTimeout(() => {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
             }, 1200);
         });
+        submitBtn.disabled = false;
     </script>
 
 </body>
