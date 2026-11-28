@@ -8,6 +8,8 @@ import re
 import urllib.error
 import urllib.request
 import zipfile
+import zlib
+import struct
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import PurePosixPath, Path
 from typing import Any
@@ -21,6 +23,8 @@ MAX_PROJECT_BYTES = 12 * 1024 * 1024
 MAX_ZIP_BYTES = 24 * 1024 * 1024
 MAX_FILES = 500
 MAX_UNPACKED_BYTES = 12 * 1024 * 1024
+MAX_MANIFEST_BYTES = 4 * 1024
+MANIFEST_NAME = "__codepilot_manifest__.json"
 TEXT_SUFFIXES = {
     ".html", ".htm", ".css", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx",
     ".py", ".md", ".txt", ".json", ".jsonc", ".yaml", ".yml", ".toml", ".xml",
@@ -53,23 +57,110 @@ def is_text_file(path: str) -> bool:
     return name in {"dockerfile", "makefile", ".gitignore", ".editorconfig", ".env.example"} or PurePosixPath(path).suffix.lower() in TEXT_SUFFIXES
 
 
+def _preflight_zip_entry_count(blob: bytes) -> None:
+    """Reject oversized ZIP entry counts before zipfile allocates every ZipInfo."""
+    search_start = max(0, len(blob) - (22 + 0xFFFF))
+    eocd_offset = blob.rfind(b"PK\x05\x06", search_start)
+    if eocd_offset < 0 or eocd_offset + 22 > len(blob):
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
+
+    signature, disk_number, directory_disk, entries_on_disk, total_entries, directory_size, directory_offset, comment_size = struct.unpack_from(
+        "<4s4H2LH", blob, eocd_offset
+    )
+    if signature != b"PK\x05\x06" or disk_number != 0 or directory_disk != 0:
+        raise ValueError("Multi-disk or invalid ZIP archives are not supported")
+    if eocd_offset + 22 + comment_size > len(blob):
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
+
+    if entries_on_disk == 0xFFFF or total_entries == 0xFFFF or directory_size == 0xFFFFFFFF or directory_offset == 0xFFFFFFFF:
+        # CodePilot archives are capped at 500 files and well below ZIP64 limits.
+        # Reject ZIP64 before ZipFile parses/allocates its central-directory entries.
+        raise ValueError("ZIP64 archives are not supported")
+
+    if entries_on_disk != total_entries:
+        raise ValueError("Multi-disk ZIP archives are not supported")
+    if total_entries > MAX_FILES * 3:
+        raise ValueError("ZIP contains too many entries")
+    if directory_size > len(blob) or directory_offset + directory_size > len(blob):
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
+    if directory_offset + directory_size != eocd_offset:
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
+
+    count = 0
+    offset = directory_offset
+    end = directory_offset + directory_size
+    while offset < end:
+        if offset + 46 > end or blob[offset:offset + 4] != b"PK\x01\x02":
+            raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
+        name_length, extra_length, comment_length = struct.unpack_from("<HHH", blob, offset + 28)
+        offset += 46 + name_length + extra_length + comment_length
+        if offset > end:
+            raise ValueError("That file is not a valid ZIP archive or uses unsupported compression")
+        count += 1
+        if count > MAX_FILES * 3:
+            raise ValueError("ZIP contains too many entries")
+    if count != total_entries:
+        raise ValueError("ZIP central-directory entry count does not match its metadata")
+
+
+def _read_zip_entry_limited(
+    archive: zipfile.ZipFile,
+    info: zipfile.ZipInfo,
+    limit: int,
+    error_message: str,
+) -> bytes:
+    """Read at most limit + 1 decompressed bytes, independent of ZIP header sizes."""
+    content = bytearray()
+    with archive.open(info) as stream:
+        while len(content) <= limit:
+            chunk = stream.read(min(64 * 1024, limit + 1 - len(content)))
+            if not chunk:
+                break
+            content.extend(chunk)
+            if len(content) > limit:
+                raise ValueError(error_message)
+    # ZipExtFile can stop immediately when a forged header advertises zero
+    # bytes. Verify CRC explicitly so even empty/truncated reads are rejected.
+    if zlib.crc32(content) & 0xFFFFFFFF != info.CRC:
+        raise zipfile.BadZipFile(f"Bad CRC-32 for file {info.filename!r}")
+    return bytes(content)
+
+
 def read_zip_files(blob: bytes) -> dict[str, str]:
     if not blob or len(blob) > MAX_ZIP_BYTES:
         raise ValueError("ZIP must be smaller than 24 MiB")
     result: dict[str, str] = {}
     unpacked = 0
     try:
+        _preflight_zip_entry_count(blob)
         with zipfile.ZipFile(io.BytesIO(blob)) as archive:
             entries = archive.infolist()
             if len(entries) > MAX_FILES * 3:
                 raise ValueError("ZIP contains too many entries")
             own_archive = False
-            try:
-                marker = json.loads(archive.read("__codepilot_manifest__.json").decode("utf-8"))
-                own_archive = marker.get("format") == "codepilot-project-v1"
-            except (KeyError, UnicodeDecodeError, json.JSONDecodeError, AttributeError):
-                pass
-            regular = [i for i in entries if not i.is_dir() and i.filename != "__codepilot_manifest__.json"]
+            manifest_entries = [i for i in entries if i.filename == MANIFEST_NAME]
+            if len(manifest_entries) > 1:
+                raise ValueError("ZIP contains duplicate project manifest entries")
+            if manifest_entries:
+                manifest_info = manifest_entries[0]
+                if manifest_info.file_size > MAX_MANIFEST_BYTES:
+                    raise ValueError("ZIP project manifest exceeds the 4 KiB safety limit")
+                if not manifest_info.is_dir() and not manifest_info.flag_bits & 0x1:
+                    manifest_data = _read_zip_entry_limited(
+                        archive,
+                        manifest_info,
+                        MAX_MANIFEST_BYTES,
+                        "ZIP project manifest exceeds the 4 KiB safety limit",
+                    )
+                    unpacked += len(manifest_data)
+                    if unpacked > MAX_UNPACKED_BYTES:
+                        raise ValueError("ZIP exceeds the text-project limits")
+                    try:
+                        marker = json.loads(manifest_data.decode("utf-8"))
+                        own_archive = isinstance(marker, dict) and marker.get("format") == "codepilot-project-v1"
+                    except (UnicodeDecodeError, json.JSONDecodeError):
+                        pass
+            regular = [i for i in entries if not i.is_dir() and i.filename != MANIFEST_NAME]
             parts_list = [PurePosixPath(i.filename).parts for i in regular]
             wrapper_root = None
             if not own_archive and parts_list and all(len(parts) >= 2 for parts in parts_list):
@@ -77,26 +168,36 @@ def read_zip_files(blob: bytes) -> dict[str, str]:
                 if len(roots) == 1:
                     wrapper_root = next(iter(roots))
             for info in entries:
-                if info.is_dir() or info.flag_bits & 0x1 or info.filename == "__codepilot_manifest__.json":
+                if info.is_dir() or info.flag_bits & 0x1 or info.filename == MANIFEST_NAME:
                     continue
                 parts = PurePosixPath(info.filename).parts
                 candidate = PurePosixPath(*parts[1:]).as_posix() if wrapper_root and len(parts) > 1 and parts[0] == wrapper_root else PurePosixPath(info.filename).as_posix()
                 safe = safe_project_path(candidate)
                 if not safe or not is_text_file(safe) or info.file_size > 2 * 1024 * 1024:
                     continue
-                unpacked += info.file_size
-                if unpacked > MAX_UNPACKED_BYTES or len(result) >= MAX_FILES:
+                if safe in result:
+                    raise ValueError("ZIP contains duplicate or colliding project paths")
+                if len(result) >= MAX_FILES:
                     raise ValueError("ZIP exceeds the text-project limits")
+                remaining = MAX_UNPACKED_BYTES - unpacked
+                if info.file_size > remaining:
+                    raise ValueError("ZIP exceeds the text-project limits")
+                file_data = _read_zip_entry_limited(
+                    archive,
+                    info,
+                    min(2 * 1024 * 1024, remaining),
+                    "ZIP exceeds the text-project limits",
+                )
+                unpacked += len(file_data)
                 try:
-                    result[safe] = archive.read(info).decode("utf-8-sig")
+                    result[safe] = file_data.decode("utf-8-sig")
                 except UnicodeDecodeError:
                     continue
-    except zipfile.BadZipFile as exc:
-        raise ValueError("That file is not a valid ZIP archive") from exc
+    except (zipfile.BadZipFile, EOFError, NotImplementedError, RuntimeError, zlib.error) as exc:
+        raise ValueError("That file is not a valid ZIP archive or uses unsupported compression") from exc
     if not result:
         raise ValueError("No supported UTF-8 source files were found in the ZIP")
     return result
-
 
 class Handler(SimpleHTTPRequestHandler):
     server_version = "CodePilotFree/1.2"
@@ -200,7 +301,7 @@ class Handler(SimpleHTTPRequestHandler):
             if not isinstance(item, dict):
                 continue
             role, content = item.get("role"), item.get("content")
-            if role not in {"user", "assistant"} or not isinstance(content, str):
+            if not isinstance(role, str) or role not in {"user", "assistant"} or not isinstance(content, str):
                 continue
             chars += len(content)
             if chars > 1_500_000:
@@ -234,7 +335,7 @@ class Handler(SimpleHTTPRequestHandler):
                 self.close_connection = True
                 self.end_headers()
                 headers_sent = True
-                done: dict[str, Any] = {"done": True, "model": model.strip(), "duration_ms": 0}
+                done: dict[str, Any] = {"done": False, "model": model.strip(), "duration_ms": 0}
                 for line in response:
                     if not line.strip():
                         continue
@@ -249,7 +350,16 @@ class Handler(SimpleHTTPRequestHandler):
                         self.wfile.flush()
                     if chunk.get("done"):
                         done = {"done": True, "model": chunk.get("model", model.strip()), "duration_ms": round(chunk.get("total_duration", 0) / 1_000_000)}
-                self.wfile.write(b"data: " + encoded(done) + b"\n\n")
+                if done.get("done"):
+                    terminal = done
+                else:
+                    terminal = {
+                        "done": False,
+                        "model": model.strip(),
+                        "duration_ms": 0,
+                        "error": "Local AI stream ended before the model confirmed completion",
+                    }
+                self.wfile.write(b"data: " + encoded(terminal) + b"\n\n")
                 self.wfile.flush()
         except (urllib.error.URLError, TimeoutError, OSError, ValueError) as exc:
             message = {"error": f"Local AI stream interrupted: {str(exc)[:300]}"}
@@ -272,14 +382,25 @@ class Handler(SimpleHTTPRequestHandler):
             return
         memory = io.BytesIO()
         total = 0
+        seen_paths: set[str] = set()
         with zipfile.ZipFile(memory, "w", compression=zipfile.ZIP_DEFLATED) as archive:
-            archive.writestr("__codepilot_manifest__.json", encoded({"format": "codepilot-project-v1"}))
+            archive.writestr(MANIFEST_NAME, encoded({"format": "codepilot-project-v1"}))
             for name, content in files.items():
                 safe = safe_project_path(name)
                 if not safe or not isinstance(content, str):
                     self.send_json(400, {"error": f"Invalid project file path or contents: {str(name)[:100]}"})
                     return
+                if safe == MANIFEST_NAME:
+                    self.send_json(400, {"error": "The project manifest filename is reserved"})
+                    return
+                if safe in seen_paths:
+                    self.send_json(400, {"error": "Project contains duplicate or colliding file paths"})
+                    return
+                seen_paths.add(safe)
                 data = content.encode("utf-8")
+                if len(data) > 2 * 1024 * 1024:
+                    self.send_json(413, {"error": "Each project file must be 2 MiB or smaller"})
+                    return
                 total += len(data)
                 if total > MAX_UNPACKED_BYTES:
                     self.send_json(413, {"error": "Project text exceeds the 12 MiB export limit"})
@@ -318,7 +439,15 @@ class Handler(SimpleHTTPRequestHandler):
             return
         parsed = urlparse(raw_url.strip())
         parts = [part for part in parsed.path.strip("/").split("/") if part]
-        if parsed.scheme != "https" or parsed.hostname != "github.com" or parsed.username or len(parts) != 2:
+        if (
+            parsed.scheme != "https"
+            or parsed.netloc != "github.com"
+            or parsed.query
+            or parsed.fragment
+            or parsed.username
+            or parsed.password
+            or len(parts) != 2
+        ):
             self.send_json(400, {"error": "Use a public repository URL like https://github.com/owner/repository"})
             return
         owner, repo = parts

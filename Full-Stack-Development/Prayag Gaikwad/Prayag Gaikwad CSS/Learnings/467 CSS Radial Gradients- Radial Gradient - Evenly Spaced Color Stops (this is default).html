@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radial Gradient</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: aliceblue;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+        }
+
+        #grad1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+            width: 200px;
+            border-radius: 8px;
+            background-color: red;
+            /* Fallback for older browsers */
+            background-image: radial-gradient(red, yellow, green);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Radial Gradient - Evenly Spaced Color Stops</h1>
+
+    <div id="grad1"></div>
+
+</body>
+
+</html>

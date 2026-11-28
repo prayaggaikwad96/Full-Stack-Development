@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .container {
+            display: flex;
+            background-color: dodgerblue;
+        }
+
+        .container div {
+            background-color: #f1f1f1;
+            color: #000;
+            width: 100px;
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>The flex Property</h1>
+
+    <p>Make the third flex item growable (1), not shrinkable (0), and with an initial length of 150 pixels:</p>
+
+    <div class="container">
+        <div>1</div>
+        <div>2</div>
+        <div style="flex: 1 0 150px">3</div>
+        <div>4</div>
+    </div>
+
+</body>
+
+</html>

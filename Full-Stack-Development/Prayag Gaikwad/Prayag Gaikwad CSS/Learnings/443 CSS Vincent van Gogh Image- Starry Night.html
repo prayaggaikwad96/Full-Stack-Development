@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vincent van Gogh — Legendary Painter</title>
+    <style>
+        :root {
+            --bg-sky: rgb(115, 165, 213);
+            --bg-sky-deep: rgb(78, 126, 173);
+            --card-tint: rgba(248, 240, 240, 0.42);
+            --card-tint-strong: rgba(248, 240, 240, 0.58);
+            --surface-pill: rgba(255, 255, 255, 0.9);
+            --ink: #171717;
+            --ink-muted: #231919;
+            --accent: #521f1f;
+            --accent-hover: #162b3d;
+            --border: #b8a8a8;
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-card: 0 8px 24px rgba(14, 24, 38, 0.16);
+            --shadow-card-hover: 0 14px 32px rgba(14, 24, 38, 0.24);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 20px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(180deg, var(--bg-sky) 0%, var(--bg-sky-deep) 100%);
+            background-attachment: fixed;
+            min-height: 100dvh;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: clip;
+        }
+
+        /* Hero Banner */
+        .hero-image {
+            position: relative;
+            min-height: clamp(380px, 66vh, 620px);
+            background-color: #26394d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(28px, 6vw, 64px) clamp(16px, 4vw, 32px);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        /* Background layer separated so text/buttons never inherit filter dimming */
+        .hero-bg {
+            position: absolute;
+            inset: -12px;
+            z-index: -2;
+            background-color: #26394d;
+            background-image: url("https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTivxx64mKGaeXQADn4yZhVnOm3MzDo6-CUbWFKHP0i7GjWHsMnhSknyU-y9UZLlNvClSrGev9Ge8IELd4");
+            background-repeat: no-repeat;
+            background-position: center 22%;
+            background-size: cover;
+            filter: brightness(1.06) contrast(1.06);
+            transform: scale(1.03);
+            animation: heroBgSettle 1.1s var(--ease-out) both;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(180deg,
+                    rgba(14, 24, 38, 0.14) 0%,
+                    rgba(14, 24, 38, 0.48) 100%);
+        }
+
+        .hero-text {
+            text-align: center;
+            color: #ffffff;
+            max-width: 740px;
+            animation: heroEnter 0.55s var(--ease-out) both;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.1rem, 5.6vw, 3.25rem);
+            line-height: 1.14;
+            margin: 0;
+            letter-spacing: -0.015em;
+            text-shadow: 0 3px 16px rgba(0, 0, 0, 0.78), 0 1px 4px rgba(0, 0, 0, 0.9);
+        }
+
+        .hero-text h3 {
+            font-size: clamp(1rem, 2.3vw, 1.32rem);
+            font-weight: 500;
+            margin: 12px 0 0;
+            color: #f5f8fb;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.82);
+            animation: heroEnter 0.65s 0.08s var(--ease-out) both;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 24px;
+            animation: heroEnter 0.7s 0.14s var(--ease-out) both;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 11px 22px;
+            background-color: #ffffff;
+            color: #111111;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.32);
+            transition: transform 0.2s var(--ease-out), background-color 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-out);
+        }
+
+        .hero-btn:hover {
+            background-color: #faeeee;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.38);
+        }
+
+        .hero-btn:active {
+            transform: translateY(0) scale(0.99);
+        }
+
+        .hero-btn--secondary {
+            background-color: rgba(15, 23, 34, 0.56);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(6px);
+        }
+
+        .hero-btn--secondary:hover {
+            background-color: rgba(15, 23, 34, 0.78);
+        }
+
+        /* Content Card */
+        .content-box {
+            position: relative;
+            max-width: 920px;
+            margin: clamp(18px, 3.5vw, 34px) auto;
+            padding: clamp(20px, 4vw, 34px);
+            background-color: #f5e9e9;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            box-shadow: var(--shadow-card);
+            transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+        }
+
+        .content-box--contact {
+            background-image:
+                linear-gradient(var(--card-tint), var(--card-tint-strong)),
+                url("https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQNd9QRAIJ912zNtlJUPwbc1MsEx4CZGd4rTiFR8TWG2a5yLa-wsRi5espxLHspXSgbl9H-TdgSJqAko5w");
+        }
+
+        .content-box--gallery {
+            background-image:
+                linear-gradient(var(--card-tint), var(--card-tint-strong)),
+                url("https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTmalR5u_wk_ox9rg4VIxs7_50iC1NoGbzKzuU_LIGq4kwC3o1LBog8Z3yHH7GDf32ahWpardFIOGwB_40");
+        }
+
+        @media (hover: hover) {
+            .content-box:hover {
+                box-shadow: var(--shadow-card-hover);
+            }
+        }
+
+        /* Scroll reveal utility */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .content-box h2 {
+            display: inline-block;
+            margin-top: 0;
+            margin-bottom: 10px;
+            padding: 2px 10px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.84);
+            font-size: clamp(1.42rem, 3vw, 1.85rem);
+            line-height: 1.25;
+            color: var(--accent);
+        }
+
+        .content-box>p {
+            margin: 0 0 10px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.84);
+            color: var(--ink-muted);
+        }
+
+        code {
+            background: rgba(255, 255, 255, 0.92);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            border: 1px solid rgba(184, 168, 168, 0.6);
+        }
+
+        /* Form Layout */
+        .contact-form {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 10px;
+            background-color: rgba(248, 240, 240, 0.78);
+            backdrop-filter: blur(4px);
+        }
+
+        .field-full {
+            grid-column: 1 / -1;
+        }
+
+        .contact-form label {
+            font-weight: bold;
+            font-size: 0.875rem;
+            margin-bottom: 6px;
+            display: block;
+            color: var(--ink);
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            min-height: 44px;
+            padding: 11px 13px;
+            background-color: rgba(255, 255, 255, 0.96);
+            color: var(--ink);
+            border: 1.5px solid var(--border);
+            border-radius: 7px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.18s var(--ease-smooth), box-shadow 0.18s var(--ease-smooth), background-color 0.18s var(--ease-smooth);
+        }
+
+        .contact-form input:hover,
+        .contact-form select:hover,
+        .contact-form textarea:hover {
+            border-color: var(--accent);
+            background-color: #ffffff;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-hover);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 3px rgba(22, 43, 61, 0.22);
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 118px;
+        }
+
+        .submit-btn {
+            justify-self: start;
+            min-height: 44px;
+            padding: 11px 28px;
+            background-color: var(--accent);
+            color: #ffffff;
+            border: none;
+            border-radius: 7px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(82, 31, 31, 0.28);
+            transition: transform 0.18s var(--ease-out), background-color 0.18s var(--ease-smooth), box-shadow 0.18s var(--ease-out);
+        }
+
+        .submit-btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 16px rgba(22, 43, 61, 0.34);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0) scale(0.99);
+        }
+
+        .form-status {
+            margin-top: 16px;
+            padding: 12px 15px;
+            border-radius: 7px;
+            background-color: rgba(255, 255, 255, 0.96);
+            border-left: 4px solid var(--accent-hover);
+            color: var(--ink);
+            font-size: 0.92rem;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+            display: none;
+        }
+
+        .form-status.is-visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .filter-btn {
+            min-height: 38px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            border: 1.5px solid var(--border);
+            background-color: var(--surface-pill);
+            color: var(--ink);
+            font-family: inherit;
+            font-size: 0.86rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.18s var(--ease-smooth), color 0.18s var(--ease-smooth), border-color 0.18s var(--ease-smooth), transform 0.16s var(--ease-out);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            background-color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .filter-btn[aria-pressed="true"] {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: #ffffff;
+        }
+
+        /* Responsive Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .gallery-item {
+            margin: 0;
+        }
+
+        .gallery-item.is-hidden {
+            display: none;
+        }
+
+        .gallery-card {
+            position: relative;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            aspect-ratio: 4 / 3;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #2b3a4a;
+            cursor: pointer;
+            display: block;
+            text-align: left;
+            font-family: inherit;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out);
+        }
+
+        .gallery-card:hover,
+        .gallery-card:focus-visible {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s var(--ease-out), filter 0.25s var(--ease-smooth);
+        }
+
+        .gallery-card:hover img,
+        .gallery-card:focus-visible img {
+            transform: scale(1.06);
+            filter: brightness(0.78);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 32px 14px 13px;
+            background: linear-gradient(180deg, rgba(14, 20, 28, 0) 0%, rgba(14, 20, 28, 0.9) 100%);
+            color: #ffffff;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.2s var(--ease-out), transform 0.2s var(--ease-out);
+            pointer-events: none;
+        }
+
+        .gallery-card:hover .gallery-caption,
+        .gallery-card:focus-visible .gallery-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-caption strong {
+            display: block;
+            font-size: 0.98rem;
+            line-height: 1.25;
+        }
+
+        .gallery-caption span {
+            display: block;
+            font-size: 0.8rem;
+            color: #e2eaf2;
+            margin-top: 2px;
+        }
+
+        @media (hover: none),
+        (pointer: coarse) {
+            .gallery-caption {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Lightbox Modal with smooth open/close transition */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(14px, 4vw, 32px);
+            background-color: rgba(10, 15, 22, 0.84);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.24s var(--ease-smooth), visibility 0.24s var(--ease-smooth);
+        }
+
+        .lightbox.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .lightbox-dialog {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90dvh;
+            overflow-y: auto;
+            background-color: #f8f0f0;
+            color: var(--ink);
+            border-radius: 12px;
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.48);
+            transform: translateY(14px) scale(0.97);
+            transition: transform 0.26s var(--ease-out);
+        }
+
+        .lightbox.is-open .lightbox-dialog {
+            transform: translateY(0) scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 2;
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            background-color: rgba(14, 20, 28, 0.82);
+            color: #ffffff;
+            font-size: 1.4rem;
+            line-height: 1;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            transition: background-color 0.16s var(--ease-smooth), transform 0.18s var(--ease-out);
+        }
+
+        .lightbox-close:hover {
+            background-color: var(--accent);
+            transform: scale(1.08);
+        }
+
+        .lightbox-media {
+            background-color: #16202b;
+            max-height: 62dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .lightbox-media img {
+            width: 100%;
+            max-height: 62dvh;
+            object-fit: contain;
+            display: block;
+        }
+
+        .lightbox-body {
+            padding: clamp(16px, 3vw, 24px);
+        }
+
+        .lightbox-title {
+            margin: 0;
+            font-size: clamp(1.25rem, 2.8vw, 1.65rem);
+            color: var(--accent);
+        }
+
+        .lightbox-meta {
+            margin: 4px 0 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--ink-muted);
+        }
+
+        .lightbox-desc {
+            margin: 0;
+            font-size: 0.96rem;
+            color: var(--ink);
+        }
+
+        .site-footer {
+            max-width: 920px;
+            margin: 0 auto clamp(24px, 4vw, 40px);
+            padding: 0 clamp(16px, 4vw, 32px);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.88rem;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #ffffff;
+            outline-offset: 2px;
+        }
+
+        .content-box a:focus-visible,
+        .content-box button:focus-visible {
+            outline-color: var(--accent-hover);
+        }
+
+        @keyframes heroEnter {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heroBgSettle {
+            from {
+                transform: scale(1.09);
+            }
+
+            to {
+                transform: scale(1.03);
+            }
+        }
+
+        /* Tablet & Mobile Screens */
+        @media (max-width: 768px) {
+            body {
+                background-attachment: scroll;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .content-box {
+                margin: 14px 12px;
+                border-radius: 10px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+                max-width: 300px;
+                margin-inline: auto;
+            }
+
+            .submit-btn {
+                width: 100%;
+                justify-self: stretch;
+            }
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .reveal-on-scroll {
+                opacity: 1;
+                transform: none;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero-image">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="hero-text">
+            <h1>I am Vincent van Gogh</h1>
+            <h3>And I'm a Dutch Post-Impressionist painter</h3>
+            <nav class="hero-actions" aria-label="Primary navigation">
+                <a class="hero-btn" href="#contact">Commission me</a>
+                <a class="hero-btn hero-btn--secondary" href="#gallery">View gallery</a>
+                <a class="hero-btn hero-btn--secondary" href="https://en.wikipedia.org/wiki/Vincent_van_Gogh"
+                    target="_blank" rel="noopener noreferrer">Biography</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="contact" class="content-box content-box--contact reveal-on-scroll"
+            aria-labelledby="contact-heading">
+            <h2 id="contact-heading">About & Commissions</h2>
+            <p>Available for portrait commissions, expressive landscapes, and gallery exhibitions.</p>
+            <p>Responsive layout uses fluid spacing, <code>background-size: cover</code>, and adaptive grids across
+                phones, tablets, and desktops.</p>
+
+            <form id="commission-form" class="contact-form" action="#" method="post">
+                <div>
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Vincent van Gogh" autocomplete="name"
+                        required>
+                </div>
+
+                <div>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="VVG@example.com" autocomplete="email"
+                        required>
+                </div>
+
+                <div class="field-full">
+                    <label for="commission-type">Commission Type</label>
+                    <select id="commission-type" name="commission_type">
+                        <option value="portrait">Oil Portrait</option>
+                        <option value="landscape">Landscape Painting</option>
+                        <option value="still-life">Still Life</option>
+                        <option value="exhibition">Gallery Exhibition Inquiry</option>
+                    </select>
+                </div>
+
+                <div class="field-full">
+                    <label for="details">Project Details</label>
+                    <textarea id="details" name="details"
+                        placeholder="Describe canvas size, subject, and preferred timeline..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Inquiry</button>
+            </form>
+
+            <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+        </section>
+
+        <section id="gallery" class="content-box content-box--gallery reveal-on-scroll"
+            aria-labelledby="gallery-heading">
+            <h2 id="gallery-heading">Selected Works Gallery</h2>
+            <p>Filter by period or theme, hover or tap to see captions, and select any work to inspect in detail.</p>
+
+            <div class="filter-bar" role="group" aria-label="Filter paintings">
+                <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">All Works</button>
+                <button type="button" class="filter-btn" data-filter="arles" aria-pressed="false">Arles (1888)</button>
+                <button type="button" class="filter-btn" data-filter="provence" aria-pressed="false">Saint-Rémy & Spring
+                    (1889–1890)</button>
+            </div>
+
+            <div class="gallery-grid">
+                <figure class="gallery-item" data-category="provence">
+                    <button type="button" class="gallery-card" aria-label="Inspect The Starry Night"
+                        data-title="The Starry Night" data-meta="1889 · Oil on canvas · Saint-Rémy-de-Provence"
+                        data-desc="Painted in Saint-Rémy-de-Provence, capturing swirling night clouds, bright stars, and a dark cypress in the foreground.">
+                        <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTmalR5u_wk_ox9rg4VIxs7_50iC1NoGbzKzuU_LIGq4kwC3o1LBog8Z3yHH7GDf32ahWpardFIOGwB_40"
+                            alt="The Starry Night by Vincent van Gogh showing swirling night sky and cypress tree"
+                            loading="lazy">
+                        <figcaption class="gallery-caption">
+                            <strong>The Starry Night</strong>
+                            <span>1889 · Oil on canvas</span>
+                        </figcaption>
+                    </button>
+                </figure>
+
+                <figure class="gallery-item" data-category="arles">
+                    <button type="button" class="gallery-card" aria-label="Inspect Sunflowers" data-title="Sunflowers"
+                        data-meta="1888 · Oil on canvas · Arles"
+                        data-desc="Part of the Arles still-life series exploring rich yellows and ochres with bold, textured brushstrokes.">
+                        <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcQNd9QRAIJ912zNtlJUPwbc1MsEx4CZGd4rTiFR8TWG2a5yLa-wsRi5espxLHspXSgbl9H-TdgSJqAko5w"
+                            alt="Sunflowers by Vincent van Gogh showing bright yellow sunflowers in a ceramic vase"
+                            loading="lazy">
+                        <figcaption class="gallery-caption">
+                            <strong>Sunflowers</strong>
+                            <span>1888 · Oil on canvas</span>
+                        </figcaption>
+                    </button>
+                </figure>
+
+                <figure class="gallery-item" data-category="arles">
+                    <button type="button" class="gallery-card" aria-label="Inspect Cafe Terrace at Night"
+                        data-title="Cafe Terrace at Night" data-meta="1888 · Oil on canvas · Arles"
+                        data-desc="An outdoor evening scene in Arles contrasting warm gas-lit cafe tones against a deep starry night sky.">
+                        <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcQsd5hoGbFeClbHRlOwWYSSMSQMWqcSmQh7oXFavSA0XIZZZ13HIMSKAjjHUrkRmXuvBjCY0GSt1xY1lFs"
+                            alt="Cafe Terrace at Night by Vincent van Gogh depicting a lit outdoor cafe under a starry sky"
+                            loading="lazy">
+                        <figcaption class="gallery-caption">
+                            <strong>Cafe Terrace at Night</strong>
+                            <span>1888 · Oil on canvas</span>
+                        </figcaption>
+                    </button>
+                </figure>
+
+                <figure class="gallery-item" data-category="provence">
+                    <button type="button" class="gallery-card" aria-label="Inspect Self-Portrait (1889)"
+                        data-title="Self-Portrait" data-meta="1889 · Oil on canvas · Saint-Rémy-de-Provence"
+                        data-desc="Painted in Saint-Rémy-de-Provence with rhythmic, swirling brushwork in cool blues and greens.">
+                        <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTivxx64mKGaeXQADn4yZhVnOm3MzDo6-CUbWFKHP0i7GjWHsMnhSknyU-y9UZLlNvClSrGev9Ge8IELd4"
+                            alt="Self-Portrait by Vincent van Gogh with swirling blue-green background" loading="lazy">
+                        <figcaption class="gallery-caption">
+                            <strong>Self-Portrait</strong>
+                            <span>1889 · Oil on canvas</span>
+                        </figcaption>
+                    </button>
+                </figure>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        Vincent van Gogh Tribute & Studio Showcase
+    </footer>
+
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title"
+        aria-hidden="true">
+        <div class="lightbox-dialog">
+            <button type="button" id="lightbox-close" class="lightbox-close"
+                aria-label="Close painting preview">×</button>
+            <div class="lightbox-media">
+                <img id="lightbox-img" src="" alt="">
+            </div>
+            <div class="lightbox-body">
+                <h3 id="lightbox-title" class="lightbox-title"></h3>
+                <p id="lightbox-meta" class="lightbox-meta"></p>
+                <p id="lightbox-desc" class="lightbox-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            /* Scroll-triggered reveal for cards */
+            const revealEls = document.querySelectorAll(".reveal-on-scroll");
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+            if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+                revealEls.forEach(function (el) {
+                    el.classList.add("is-visible");
+                });
+            } else {
+                const observer = new IntersectionObserver(
+                    function (entries, obs) {
+                        entries.forEach(function (entry) {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add("is-visible");
+                                obs.unobserve(entry.target);
+                            }
+                        });
+                    },
+                    { threshold: 0.12, rootMargin: "0px 0px -24px 0px" }
+                );
+                revealEls.forEach(function (el) {
+                    observer.observe(el);
+                });
+            }
+
+            /* Image load error handling with clean fallback graphic */
+            const fallbackSvg =
+                "data:image/svg+xml," +
+                encodeURIComponent(
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">' +
+                    '<rect width="600" height="400" fill="#26394d"/>' +
+                    '<text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#f5f8fb" font-family="Arial,sans-serif" font-size="18">Artwork preview unavailable</text>' +
+                    "</svg>"
+                );
+
+            function applyImageFallback(img) {
+                if (!img || img.dataset.fallbackApplied) return;
+                img.dataset.fallbackApplied = "true";
+                img.alt = (img.alt || "Artwork") + " (image unavailable)";
+                img.style.objectFit = "cover";
+                img.src = fallbackSvg;
+            }
+
+            document.querySelectorAll("img").forEach(function (img) {
+                img.addEventListener("error", function () {
+                    applyImageFallback(img);
+                });
+            });
+
+            /* Commission Form Handling */
+            const form = document.getElementById("commission-form");
+            const statusBox = document.getElementById("form-status");
+            const nameInput = document.getElementById("name");
+            const typeSelect = document.getElementById("commission-type");
+
+            if (form && statusBox) {
+                form.addEventListener("submit", function (event) {
+                    event.preventDefault();
+                    const senderName = (nameInput && nameInput.value.trim()) || "there";
+                    const selectedLabel = typeSelect && typeSelect.options[typeSelect.selectedIndex]
+                        ? typeSelect.options[typeSelect.selectedIndex].text
+                        : "Commission";
+
+                    statusBox.textContent =
+                        selectedLabel + " inquiry noted locally for " + senderName +
+                        ". Connect a form endpoint to send emails.";
+                    statusBox.classList.add("is-visible");
+                    form.reset();
+                });
+            }
+
+            /* Gallery Category Filter */
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            const items = Array.from(document.querySelectorAll(".gallery-item"));
+            const cards = Array.from(document.querySelectorAll(".gallery-card"));
+
+            filterButtons.forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    const filter = btn.getAttribute("data-filter") || "all";
+
+                    filterButtons.forEach(function (b) {
+                        b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+                    });
+
+                    items.forEach(function (item) {
+                        const category = item.getAttribute("data-category");
+                        const matches = filter === "all" || category === filter;
+                        item.classList.toggle("is-hidden", !matches);
+                    });
+                });
+            });
+
+            /* Lightbox Modal with Focus Trap */
+            const lightbox = document.getElementById("lightbox");
+            const dialog = lightbox ? lightbox.querySelector(".lightbox-dialog") : null;
+            const closeBtn = document.getElementById("lightbox-close");
+            const lbImg = document.getElementById("lightbox-img");
+            const lbTitle = document.getElementById("lightbox-title");
+            const lbMeta = document.getElementById("lightbox-meta");
+            const lbDesc = document.getElementById("lightbox-desc");
+            let lastFocusedElement = null;
+
+            if (lbImg) {
+                lbImg.addEventListener("error", function () {
+                    applyImageFallback(lbImg);
+                });
+            }
+
+            function getFocusableElements(container) {
+                if (!container) return [];
+                return Array.from(
+                    container.querySelectorAll(
+                        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                    )
+                ).filter(function (el) {
+                    return !el.hasAttribute("disabled") && el.offsetParent !== null;
+                });
+            }
+
+            function openLightbox(card) {
+                const img = card.querySelector("img");
+                if (!img || !lightbox || !lbImg) return;
+
+                lastFocusedElement = document.activeElement;
+                delete lbImg.dataset.fallbackApplied;
+                lbImg.style.objectFit = "contain";
+                lbImg.src = img.currentSrc || img.src;
+                lbImg.alt = img.alt || card.dataset.title || "Painting preview";
+
+                if (lbTitle) lbTitle.textContent = card.dataset.title || "";
+                if (lbMeta) lbMeta.textContent = card.dataset.meta || "";
+                if (lbDesc) lbDesc.textContent = card.dataset.desc || "";
+
+                lightbox.classList.add("is-open");
+                lightbox.setAttribute("aria-hidden", "false");
+                document.body.style.overflow = "hidden";
+
+                if (closeBtn) {
+                    closeBtn.focus();
+                }
+            }
+
+            function closeLightbox() {
+                if (!lightbox || !lightbox.classList.contains("is-open")) return;
+
+                lightbox.classList.remove("is-open");
+                lightbox.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+
+                if (lbImg) {
+                    lbImg.src = "";
+                    lbImg.alt = "";
+                }
+
+                if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+                    lastFocusedElement.focus();
+                    lastFocusedElement = null;
+                }
+            }
+
+            cards.forEach(function (card) {
+                card.addEventListener("click", function () {
+                    openLightbox(card);
+                });
+            });
+
+            if (closeBtn) {
+                closeBtn.addEventListener("click", closeLightbox);
+            }
+
+            if (lightbox) {
+                lightbox.addEventListener("click", function (event) {
+                    if (event.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
+
+            document.addEventListener("keydown", function (event) {
+                if (!lightbox || !lightbox.classList.contains("is-open")) return;
+
+                if (event.key === "Escape") {
+                    event.preventDefault();
+                    closeLightbox();
+                    return;
+                }
+
+                if (event.key === "Tab" && dialog) {
+                    const focusables = getFocusableElements(dialog);
+                    if (focusables.length === 0) return;
+
+                    const first = focusables[0];
+                    const last = focusables[focusables.length - 1];
+
+                    if (event.shiftKey && document.activeElement === first) {
+                        event.preventDefault();
+                        last.focus();
+                    } else if (!event.shiftKey && document.activeElement === last) {
+                        event.preventDefault();
+                        first.focus();
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

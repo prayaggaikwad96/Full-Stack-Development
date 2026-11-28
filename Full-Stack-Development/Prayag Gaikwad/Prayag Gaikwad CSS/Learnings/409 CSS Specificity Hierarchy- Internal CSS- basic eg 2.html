@@ -1,0 +1,51 @@
+<!-- Example 2: Using internal CSS to style a page with a green heading, a blue paragraph, and a centered red button that -->
+<!-- changes color on hover. The button also includes a link to the GeeksforGeeks website. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Internal CSS</title>
+    <style>
+        body{
+            background-color: lightskyblue;
+        }
+        h1 {
+            color: green;
+            text-align: center;
+            font-size: 50px;
+        }
+
+        p {
+            font-size: 25px;
+            color: blue;
+            text-align: center;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .btn {
+            background-color: red;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #bfd7f1;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>GeeksforGeeks</h1>
+    <p>A Computer Science Portal..!</p>
+    <div class="container">
+        <a href="https://www.geeksforgeeks.org/" class="btn">Click Me</a>
+    </div>
+</body>
+
+</html>

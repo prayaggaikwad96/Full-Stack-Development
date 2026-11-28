@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The background-origin Property</title>
+    <style>
+        :root {
+            --scroll-x: 0px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(183, 222, 254);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 24px;
+            color: #102a43;
+            line-height: 1.5;
+        }
+
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.55);
+            border-radius: 8px;
+        }
+
+        .toolbar label {
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .box {
+            --hover-shift: 0px;
+            border: 10px dashed rgba(0, 0, 0, 0.35);
+            padding: 35px 35px 35px 125px;
+            background-color: rgba(255, 255, 255, 0.45);
+            background-repeat: no-repeat;
+            background-size: 84px 84px;
+            background-position: calc(12px + var(--scroll-x) + var(--hover-shift)) 16px;
+            margin-bottom: 24px;
+            border-radius: 8px;
+            will-change: transform, background-position, box-shadow;
+            transition:
+                transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.35s ease,
+                background-color 0.35s ease;
+        }
+
+        .box:hover {
+            --hover-shift: 10px;
+            transform: translateY(-4px);
+            background-color: rgba(255, 255, 255, 0.74);
+            border-color: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 14px 28px rgba(16, 42, 67, 0.16);
+        }
+
+        /* Replace any url(...) below with your own image/GIF path or URL */
+        #div1 {
+            background-origin: padding-box;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='24' r='14' fill='%23ff6b6b'/%3E%3Ccircle cx='75' cy='42' r='14' fill='%23ff8e72'/%3E%3Ccircle cx='65' cy='70' r='14' fill='%23ffa94d'/%3E%3Ccircle cx='35' cy='70' r='14' fill='%23ffd43b'/%3E%3Ccircle cx='25' cy='42' r='14' fill='%23f06595'/%3E%3Ccircle cx='50' cy='50' r='13' fill='%23fff3bf'/%3E%3C/svg%3E");
+        }
+
+        #div2 {
+            background-origin: border-box;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,10 62,38 92,38 68,56 77,86 50,68 23,86 32,56 8,38 38,38' fill='%2320c997'/%3E%3Ccircle cx='50' cy='52' r='10' fill='%23e6fcf5'/%3E%3C/svg%3E");
+        }
+
+        #div3 {
+            background-origin: content-box;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect x='20' y='20' width='60' height='60' rx='16' fill='%235c7cfa'/%3E%3Ccircle cx='50' cy='50' r='18' fill='%23edf2ff'/%3E%3C/svg%3E");
+        }
+
+        @media (max-width: 600px) {
+            .box {
+                padding: 108px 24px 24px 24px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .box,
+            .box:hover {
+                --scroll-x: 0px;
+                --hover-shift: 0px;
+                transform: none;
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>The background-origin Property</h1>
+
+    <div class="toolbar">
+        <label for="customImageInput">Test your own image or GIF:</label>
+        <input id="customImageInput" type="file" accept="image/*">
+    </div>
+
+    <p>background-origin: padding-box (default):</p>
+    <div id="div1" class="box">
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            dolore magna aliquam erat volutpat.</p>
+        <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
+            commodo consequat.</p>
+    </div>
+
+    <p>background-origin: border-box:</p>
+    <div id="div2" class="box">
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            dolore magna aliquam erat volutpat.</p>
+        <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
+            commodo consequat.</p>
+    </div>
+
+    <p>background-origin: content-box:</p>
+    <div id="div3" class="box">
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            dolore magna aliquam erat volutpat.</p>
+        <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea
+            commodo consequat.</p>
+    </div>
+
+    <script>
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const fileInput = document.getElementById('customImageInput');
+        const boxes = document.querySelectorAll('.box');
+
+        let targetX = 0;
+        let currentX = 0;
+        let rafId = null;
+        let activeObjectUrl = null;
+
+        function computeTargetX() {
+            if (prefersReducedMotion.matches) return 0;
+            const raw = window.scrollY * 0.16;
+            return Math.max(-28, Math.min(28, raw));
+        }
+
+        function animateScroll() {
+            targetX = computeTargetX();
+            currentX += (targetX - currentX) * 0.12;
+
+            if (Math.abs(targetX - currentX) < 0.05) {
+                currentX = targetX;
+            }
+
+            document.documentElement.style.setProperty('--scroll-x', `${currentX.toFixed(2)}px`);
+
+            if (currentX !== targetX) {
+                rafId = window.requestAnimationFrame(animateScroll);
+            } else {
+                rafId = null;
+            }
+        }
+
+        function scheduleScrollAnimation() {
+            if (!rafId) {
+                rafId = window.requestAnimationFrame(animateScroll);
+            }
+        }
+
+        window.addEventListener('scroll', scheduleScrollAnimation, { passive: true });
+        prefersReducedMotion.addEventListener('change', scheduleScrollAnimation);
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+
+            if (activeObjectUrl) {
+                URL.revokeObjectURL(activeObjectUrl);
+            }
+            activeObjectUrl = URL.createObjectURL(file);
+
+            boxes.forEach((box) => {
+                box.style.backgroundImage = `url("${activeObjectUrl}")`;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

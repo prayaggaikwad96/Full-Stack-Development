@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>!important in @layer & Native CSS Nesting</title>
+    <style>
+        @layer base, tokens, components;
+
+        @layer base {
+
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+
+            body {
+                background: radial-gradient(circle at top, #e0f2fe 0%, #bae6fd 100%);
+                color: #0f172a;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                line-height: 1.5;
+                text-align: center;
+                min-height: 100vh;
+                margin: 0;
+                padding: 2rem 1.25rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            .page {
+                max-width: 960px;
+                width: 100%;
+            }
+
+            .pricing-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: stretch;
+                gap: 1.5rem;
+                width: 100%;
+                max-width: 960px;
+            }
+        }
+
+        @layer tokens {
+
+            /* For !important declarations, EARLIER layers beat LATER layers */
+            .alert-banner {
+                background: #fef3c7 !important;
+                color: #92400e !important;
+                border: 1px solid #f59e0b;
+                padding: 0.9rem 1.15rem;
+                border-radius: 12px;
+                box-shadow: 0 2px 8px rgba(146, 64, 14, 0.08);
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+                & code {
+                    background: rgba(255, 255, 255, 0.65);
+                    padding: 0.1rem 0.35rem;
+                    border-radius: 5px;
+                    font-size: 0.9em;
+                }
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 18px rgba(146, 64, 14, 0.14);
+                }
+            }
+        }
+
+        @layer components {
+
+            /* Higher specificity (.page .alert-banner) loses to !important in `tokens` */
+            .page .alert-banner {
+                background: #fee2e2 !important;
+                color: #991b1b !important;
+            }
+
+            /* Native CSS nesting builds compound rules like .pricing-card .price */
+            .pricing-card {
+                position: relative;
+                flex: 1 1 320px;
+                max-width: 460px;
+                padding: 1.5rem 1.35rem;
+                border: 1px solid #cbd5e1;
+                border-radius: 14px;
+                background-color: #f8fafc;
+                box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
+                transition:
+                    transform 0.22s ease,
+                    box-shadow 0.22s ease,
+                    border-color 0.22s ease,
+                    background-color 0.22s ease;
+
+                & h3 {
+                    margin: 0.2rem 0 0.25rem;
+                    font-size: 1.15rem;
+                    font-weight: 700;
+                    color: #0f172a;
+                }
+
+                & .meta {
+                    margin: 0;
+                    font-size: 0.92rem;
+                    color: #475569;
+                }
+
+                & .badge {
+                    display: inline-block;
+                    padding: 0.24rem 0.75rem;
+                    border-radius: 999px;
+                    font-size: 0.72rem;
+                    font-weight: 700;
+                    letter-spacing: 0.06em;
+                    text-transform: uppercase;
+                    background-color: #1e3a8a;
+                    color: #ffffff;
+                    transition: transform 0.2s ease, background-color 0.2s ease;
+                }
+
+                & .price {
+                    font-size: 1.65rem;
+                    font-weight: 800;
+                    color: #0f172a;
+                    margin: 0.35rem 0;
+
+                    & del {
+                        font-size: 0.95rem;
+                        font-weight: 500;
+                        color: #64748b;
+                        margin-right: 0.4rem;
+                    }
+                }
+
+                /* Compounding with & targets elements that have BOTH .price and .discounted */
+                & .price.discounted {
+                    color: #15803d;
+                }
+
+                &:hover,
+                &:focus-within {
+                    transform: translateY(-5px);
+                    background-color: #ffffff;
+                    border-color: #3b82f6;
+                    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.14);
+
+                    & .badge {
+                        background-color: #172554;
+                        transform: scale(1.04);
+                    }
+                }
+            }
+
+            .pricing-card.featured {
+                border: 2px solid #1e3a8a;
+                background-color: #ffffff;
+                box-shadow: 0 10px 24px rgba(30, 58, 138, 0.14);
+
+                &:hover,
+                &:focus-within {
+                    transform: translateY(-6px);
+                    border-color: #172554;
+                    box-shadow: 0 18px 34px rgba(30, 58, 138, 0.22);
+                }
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .alert-banner,
+            .pricing-card,
+            .pricing-card .badge {
+                transition: none;
+            }
+
+            .alert-banner:hover,
+            .pricing-card:hover,
+            .pricing-card:focus-within,
+            .pricing-card.featured:hover,
+            .pricing-card.featured:focus-within,
+            .pricing-card:hover .badge {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="alert-banner" role="status">
+            <strong>Cascade rule:</strong>
+            <span><code>@layer tokens</code> wins over <code>@layer components</code> for
+                <code>!important</code>.</span>
+        </div>
+    </div>
+
+    <div class="pricing-grid">
+        <section class="pricing-card">
+            <span class="badge">Offer</span>
+            <h3>Google AI Pro Plan</h3>
+            <p class="price discounted"><del>₹1,950</del> ₹501/month</p>
+            <p class="meta">Special Diwali Offer</p>
+        </section>
+
+        <section class="pricing-card featured">
+            <span class="badge">Popular</span>
+            <h3>Google AI Ultra Plan</h3>
+            <p class="price"><del>₹24,500</del> ₹19,999/month</p>
+            <p class="meta">Annual &amp; Priority Access</p>
+        </section>
+    </div>
+</body>
+
+</html>

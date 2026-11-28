@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The background-clip Property</title>
+    <style>
+        :root {
+            --bg-scroll-y: 0px;
+        }
+
+        html {
+            box-sizing: border-box;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+            margin: 2rem auto;
+            max-width: 800px;
+            padding: 0 1rem 3rem;
+            background-color: #eef6ff;
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            color: #111827;
+            overflow-x: hidden;
+        }
+
+        /* Main moving page background driven by scroll position */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: -15vh -4vw;
+            z-index: -2;
+            background-image: url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transform: translate3d(0, var(--bg-scroll-y), 0) scale(1.05);
+            pointer-events: none;
+        }
+
+        /* Soft overlay so main text and clip boxes stay crisp and legible */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: rgba(240, 248, 255, 0.78);
+            pointer-events: none;
+        }
+
+        .clip-box {
+            border: 10px dotted rgba(0, 0, 0, 0.78);
+            padding: 35px;
+            background-color: rgba(255, 215, 0, 0.42);
+            background-size: 125% auto;
+            background-position: 0% 50%;
+            background-repeat: no-repeat;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            animation: panBackground 16s ease-in-out infinite alternate;
+            transition:
+                transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                background-color 0.3s ease,
+                border-color 0.25s ease;
+        }
+
+        .clip-box h2,
+        .clip-box p {
+            margin-top: 0;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
+        }
+
+        .clip-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .clip-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.14);
+            border-color: #000;
+            background-color: rgba(255, 215, 0, 0.52);
+            animation-play-state: paused;
+        }
+
+        #div1 {
+            background-image:
+                linear-gradient(135deg, rgba(255, 215, 0, 0.45), rgba(255, 165, 0, 0.25)),
+                url("https://media.istockphoto.com/id/968630976/photo/colorful-landscape-with-high-himalayan-mountains-beautiful-curving-river-green-forest-blue-sky.jpg?s=612x612&w=0&k=20&c=cbrwE0pXqvS_GHEkWSQ7t6jaMbVVjvwqnagOLvNViZ8=");
+            background-clip: border-box;
+            background-origin: border-box;
+        }
+
+        #div2 {
+            background-image:
+                linear-gradient(135deg, rgba(255, 215, 0, 0.45), rgba(255, 165, 0, 0.25)),
+                url("https://static.vecteezy.com/system/resources/previews/069/586/233/large_2x/majestic-ocean-waves-crashing-turquoise-water-coastline-aerial-view-sea-foam-whitecaps-marine-environment-natural-beauty-powerful-serene-coastal-splendor-photo.jpg");
+            background-clip: padding-box;
+            background-origin: padding-box;
+            animation-delay: -5s;
+        }
+
+        #div3 {
+            background-image:
+                linear-gradient(135deg, rgba(255, 215, 0, 0.45), rgba(255, 165, 0, 0.25)),
+                url("https://media.istockphoto.com/id/1399856226/photo/magical-forest-landscape-with-sunbeam-lighting-up-the-golden-foliage.jpg?s=612x612&w=0&k=20&c=oDRyepvw4f-Jb0lfupNnJv4FgqIujeDc9t4p7t6MlvI=");
+            background-clip: content-box;
+            background-origin: content-box;
+            animation-delay: -10s;
+        }
+
+        @keyframes panBackground {
+            0% {
+                background-position: 10% 45%;
+            }
+
+            50% {
+                background-position: 90% 55%;
+            }
+
+            100% {
+                background-position: 25% 50%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            body::before {
+                transform: none;
+            }
+
+            .clip-box {
+                animation: none;
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>The background-clip Property</h1>
+
+    <p><code>background-clip: border-box</code> (default — moving image extends beneath the dotted border):</p>
+    <div id="div1" class="clip-box">
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            dolore magna aliquam erat volutpat.</p>
+    </div>
+
+    <p><code>background-clip: padding-box</code> (moving image stops inside the border, covering padding):</p>
+    <div id="div2" class="clip-box">
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            dolore magna aliquam erat volutpat.</p>
+    </div>
+
+    <p><code>background-clip: content-box</code> (moving image stays strictly inside the text content area):</p>
+    <div id="div3" class="clip-box">
+        <h2>Lorem Ipsum Dolor</h2>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
+            dolore magna aliquam erat volutpat.</p>
+    </div>
+
+    <script>
+        (function () {
+            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+            if (prefersReducedMotion.matches) return;
+
+            let ticking = false;
+            const parallaxFactor = -0.18; // Subtle opposite/depth drift on scroll
+
+            function updateScrollBackground() {
+                const scrollY = window.scrollY || window.pageYOffset || 0;
+                const offset = Math.round(scrollY * parallaxFactor);
+                document.documentElement.style.setProperty("--bg-scroll-y", `${offset}px`);
+                ticking = false;
+            }
+
+            window.addEventListener("scroll", function () {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateScrollBackground);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            updateScrollBackground();
+        })();
+    </script>
+
+</body>
+
+</html>

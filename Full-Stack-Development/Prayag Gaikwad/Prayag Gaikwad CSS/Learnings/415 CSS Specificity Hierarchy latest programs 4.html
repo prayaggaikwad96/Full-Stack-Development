@@ -1,0 +1,132 @@
+<!-- Program 4: Inspecting Live Specificity & Cascade with JavaScript (getAnimations / DevTools API) -->
+<!-- In real debugging, you often want to inspect which stylesheet rules and specificity tuples are active on a DOM element. -->
+<!-- This snippet (inspect-specificity.html) parses selector specificity (IDs, Classes/Attributes/Pseudo-classes, -->
+<!-- Types/Pseudo-elements) in JavaScript and highlights the winning rule on any element you click. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Specificity Inspector</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 2rem;
+            background: #badcff;
+            color: #0f172a;
+        }
+
+        #checkout-panel .summary .total-row.highlight {
+            font-weight: 700;
+            color: #1d4ed8;
+        }
+
+        .summary .total-row {
+            padding: 0.75rem 1rem;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            cursor: pointer;
+            max-width: 460px;
+        }
+
+        #output {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 8px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.9rem;
+            max-width: 460px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="checkout-panel">
+        <div class="summary">
+            <div id="clickable-row" class="total-row highlight" data-testid="total">
+                Click me to inspect selector specificity: Payable ₹1,499
+            </div>
+        </div>
+    </div>
+
+    <div id="output">Click the row above to calculate selector specificity tuples.</div>
+
+    <script>
+        /**
+         * Approximates standard CSS selector specificity as [id, classOrAttrOrPseudoClass, typeOrPseudoElement].
+         * Ignores :where() (0 contribution) and evaluates functional pseudo-classes at max argument specificity.
+         */
+        function calcSpecificity(selector) {
+            let ids = 0;
+            let classes = 0;
+            let types = 0;
+
+            // Remove :where(...) completely since its specificity is always (0, 0, 0)
+            const cleaned = selector.replace(/:where\([^)]*\)/g, "");
+
+            // Count ID selectors (#foo)
+            const idMatches = cleaned.match(/#[a-zA-Z_-][\w-]*/g);
+            if (idMatches) ids += idMatches.length;
+
+            // Count class selectors (.foo), attribute selectors ([...]), and non-:where pseudo-classes (:hover, :not(...), :has(...))
+            const classMatches = cleaned.match(/\.[a-zA-Z_-][\w-]*|\[[^\]]+\]|:(?!where\b)[a-zA-Z-]+(\([^)]*\))?/g);
+            if (classMatches) classes += classMatches.length;
+
+            // Strip IDs, classes, attributes, pseudo-classes, and combinators to count type/pseudo-element names
+            const withoutSpecials = cleaned
+                .replace(/#[a-zA-Z_-][\w-]*/g, " ")
+                .replace(/\.[a-zA-Z_-][\w-]*/g, " ")
+                .replace(/\[[^\]]+\]/g, " ")
+                .replace(/:[a-zA-Z-]+(\([^)]*\))?/g, " ")
+                .replace(/[>+~*]/g, " ");
+
+            const typeMatches = withoutSpecials.match(/\b[a-zA-Z][\w-]*\b/g);
+            if (typeMatches) types += typeMatches.length;
+
+            return [ids, classes, types];
+        }
+
+        const candidates = [
+            "*",
+            "div",
+            ".total-row",
+            ".summary .total-row",
+            ".summary .total-row.highlight",
+            "#checkout-panel .summary .total-row.highlight",
+            ":where(#checkout-panel .summary .total-row.highlight)"
+        ];
+
+        const row = document.getElementById("clickable-row");
+        const output = document.getElementById("output");
+
+        row.addEventListener("click", () => {
+            const results = candidates
+                .filter((sel) => {
+                    try {
+                        return row.matches(sel);
+                    } catch {
+                        return false;
+                    }
+                })
+                .map((sel) => ({ selector: sel, spec: calcSpecificity(sel) }))
+                .sort((a, b) => {
+                    for (let i = 0; i < 3; i++) {
+                        if (b.spec[i] !== a.spec[i]) return b.spec[i] - a.spec[i];
+                    }
+                    return 0;
+                });
+
+            output.textContent = results
+                .map((r, idx) => `${idx === 0 ? "WINNER " : "       "}(${r.spec.join(", ")})  ${r.selector}`)
+                .join("\n");
+        });
+    </script>
+</body>
+
+</html>

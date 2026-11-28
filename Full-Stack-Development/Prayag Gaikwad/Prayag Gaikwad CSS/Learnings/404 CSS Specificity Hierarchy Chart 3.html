@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Specificity - Complete Interactive Learning Notes</title>
+    <style>
+        /* CSS VARIABLES & RESET */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #172554;
+            --primary-light: #dbeafe;
+            --accent: #0f766e;
+            --bg-page: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --code-bg: #0f172a;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* HEADER & STICKY NAV */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            padding: 45px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        nav {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 10px 20px;
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        nav a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        /* LAYOUT & CARDS */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: var(--bg-card);
+            margin-bottom: 28px;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            color: var(--accent);
+            margin-top: 24px;
+            font-size: 1.15rem;
+        }
+
+        p {
+            margin: 12px 0;
+        }
+
+        /* CODE BLOCKS */
+        code {
+            background: #e8eefc;
+            color: #be123c;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: "Fira Code", Consolas, Monaco, monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: var(--code-bg);
+            color: #f8fafc;
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            line-height: 1.6;
+            font-family: "Fira Code", Consolas, Monaco, monospace;
+            font-size: 0.92rem;
+        }
+
+        /* TABLES */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background: #eff6ff;
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--primary-dark);
+            color: white;
+            font-family: monospace;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        /* CALLOUT BOXES */
+        .note,
+        .warning,
+        .success {
+            padding: 16px 20px;
+            margin: 18px 0;
+            border-radius: 8px;
+        }
+
+        .note {
+            background: #eff6ff;
+            border-left: 5px solid var(--primary);
+        }
+
+        .warning {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+        }
+
+        .success {
+            background: #ecfdf5;
+            border-left: 5px solid #059669;
+        }
+
+        /* LIVE DEMOS */
+        .demo {
+            background: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            padding: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .demo-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .demo p {
+            color: blue;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .demo .text {
+            color: green;
+        }
+
+        .demo #demo-1 {
+            color: red;
+        }
+
+        .demo .card-title {
+            color: #2563eb;
+        }
+
+        .demo .featured .card-title {
+            color: #059669;
+        }
+
+        .demo #special-card .card-title {
+            color: #dc2626;
+        }
+
+        .demo .equal-text {
+            color: #2563eb;
+        }
+
+        .demo .equal-text.later {
+            color: #dc2626;
+        }
+
+        /* INTERACTIVE CALCULATOR */
+        .calc-box {
+            background: #f8fafc;
+            border: 2px solid var(--primary-light);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .calc-input {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 1.05rem;
+            font-family: monospace;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .calc-input:focus {
+            border-color: var(--primary);
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            text-align: center;
+        }
+
+        .score-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 15px 10px;
+            border-radius: 8px;
+        }
+
+        .score-num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: block;
+        }
+
+        .score-title {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* INTERACTIVE INTERVIEW QUESTIONS */
+        .question {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 18px;
+            margin: 15px 0;
+        }
+
+        .reveal-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        .reveal-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .answer-box {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+            color: #047857;
+        }
+
+        .answer-box.show {
+            display: block;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 650px) {
+            .score-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>CSS SPECIFICITY</h1>
+        <p>Complete Interactive Learning Notes | Beginner to Advanced</p>
+    </header>
+
+    <nav>
+        <a href="#intro">1. Intro</a>
+        <a href="#formula">2. Formula</a>
+        <a href="#calculator">3. Calculator</a>
+        <a href="#chart">4. Chart</a>
+        <a href="#combined">5. Combined</a>
+        <a href="#practical">6. Example</a>
+        <a href="#special">7. Special</a>
+        <a href="#cascade">8. Cascade</a>
+        <a href="#rules">9. Rules</a>
+        <a href="#interview">10. Q&amp;A</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- 1. INTRODUCTION -->
+        <section id="intro">
+            <h2>1. What is CSS Specificity?</h2>
+            <p>
+                <strong>CSS Specificity</strong> is the algorithm browsers use to decide which CSS rule applies to an
+                HTML element when multiple rules target the exact same element with conflicting properties.
+            </p>
+
+            <h3>Example</h3>
+            <pre>p { color: blue; }         /* Element selector */
+.text { color: green; }    /* Class selector */
+#demo-1 { color: red; }    /* ID selector */</pre>
+
+            <div class="demo">
+                <span class="demo-label">Live Rendered Output</span>
+                <p id="demo-1" class="text">Hello World — Final Output is RED</p>
+            </div>
+
+            <div class="note">
+                <strong>Explanation:</strong> Even though <code>p</code> and <code>.text</code> match the element, the
+                ID selector (<code>#demo-1</code>) has the highest specificity weight and wins.
+            </div>
+        </section>
+
+        <!-- 2. FORMULA -->
+        <section id="formula">
+            <h2>2. CSS Specificity Formula (A - B - C - D)</h2>
+            <p>Specificity is calculated across four distinct columns. Always compare from <strong>left to
+                    right</strong>.</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Column</th>
+                            <th>Selector Category</th>
+                            <th>Example</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>A</strong></td>
+                            <td>Inline Styles</td>
+                            <td><code>style="color: red"</code></td>
+                            <td><span class="badge">1-0-0-0</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>B</strong></td>
+                            <td>ID Selectors</td>
+                            <td><code>#header</code></td>
+                            <td><span class="badge">0-1-0-0</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>C</strong></td>
+                            <td>Classes, Attributes, Pseudo-classes</td>
+                            <td><code>.box</code>, <code>[type="text"]</code>, <code>:hover</code></td>
+                            <td><span class="badge">0-0-1-0</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>D</strong></td>
+                            <td>Elements, Pseudo-elements</td>
+                            <td><code>div</code>, <code>p</code>, <code>::before</code></td>
+                            <td><span class="badge">0-0-0-1</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 3. INTERACTIVE CALCULATOR -->
+        <section id="calculator">
+            <h2>3. Quick Specificity Estimator</h2>
+            <p>Type a selector (such as <code>div.card .title:hover</code> or <code>#nav .item a</code>) to estimate its
+                B-C-D counts.</p>
+
+            <div class="calc-box">
+                <input type="text" id="selector-input" class="calc-input" value="div.card .title:hover"
+                    placeholder="Enter a CSS selector...">
+                <div class="score-grid">
+                    <div class="score-card">
+                        <span class="score-num" id="score-a">0</span>
+                        <span class="score-title">A: Inline</span>
+                    </div>
+                    <div class="score-card">
+                        <span class="score-num" id="score-b">0</span>
+                        <span class="score-title">B: IDs</span>
+                    </div>
+                    <div class="score-card">
+                        <span class="score-num" id="score-c">2</span>
+                        <span class="score-title">C: Classes / Attr / Pseudo</span>
+                    </div>
+                    <div class="score-card">
+                        <span class="score-num" id="score-d">1</span>
+                        <span class="score-title">D: Elements</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. CHART -->
+        <section id="chart">
+            <h2>4. Specificity Ranking Chart</h2>
+            <p>From lowest to highest specificity in standard cascade order:</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Selector Type</th>
+                            <th>A-B-C-D</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 (Lowest)</td>
+                            <td>Universal <code>*</code> &amp; combinators (<code>&gt;</code>, <code>+</code>,
+                                <code>~</code>)</td>
+                            <td><span class="badge">0-0-0-0</span></td>
+                            <td>Combinators themselves add zero specificity.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Type / element &amp; pseudo-element (<code>::after</code>)</td>
+                            <td><span class="badge">0-0-0-1</span></td>
+                            <td>Each matching tag or pseudo-element adds 1 in column D.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Class, attribute selector, or pseudo-class (<code>:focus</code>)</td>
+                            <td><span class="badge">0-0-1-0</span></td>
+                            <td>Each adds 1 in column C.</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>ID selector (<code>#main</code>)</td>
+                            <td><span class="badge">0-1-0-0</span></td>
+                            <td>Each adds 1 in column B.</td>
+                        </tr>
+                        <tr>
+                            <td>5 (Highest Normal)</td>
+                            <td>Inline style attribute</td>
+                            <td><span class="badge">1-0-0-0</span></td>
+                            <td>Applies directly to the element's <code>style</code> attribute.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 5. COMBINED SELECTORS -->
+        <section id="combined">
+            <h2>5. Combined Selectors</h2>
+            <p>When chaining selectors together, count every matching token in its corresponding column:</p>
+
+            <pre>ul#nav li.active a { }   /* 0-1-1-2: 1 ID, 1 class, 2 elements */
+article.post &gt; p:first-child { } /* 0-0-2-2: 2 classes/pseudo-classes, 2 elements */
+input[type="email"].field { }    /* 0-0-2-1: 1 attr + 1 class = 2 in C, 1 element */</pre>
+
+            <div class="note">
+                <strong>Tip:</strong> Combinators like <code>&gt;</code> (child), <code>+</code> (adjacent sibling), and
+                <code>~</code> (general sibling) organize relationships—they do not add weight on their own.
+            </div>
+        </section>
+
+        <!-- 6. PRACTICAL EXAMPLE -->
+        <section id="practical">
+            <h2>6. Practical Component Example</h2>
+            <p>Suppose a card heading has a base class, a featured variant, and an ID wrapper:</p>
+
+            <pre>.card-title { color: #2563eb; }             /* 0-0-1-0 */
+.featured .card-title { color: #059669; }   /* 0-0-2-0 */
+#special-card .card-title { color: #dc2626; } /* 0-1-1-0 */</pre>
+
+            <div class="demo" id="special-card">
+                <span class="demo-label">Live Rendered Output</span>
+                <div class="featured">
+                    <p class="card-title">Featured Card Title — Wins via #special-card (0-1-1-0)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. SPECIAL SELECTORS -->
+        <section id="special">
+            <h2>7. Special Functional Selectors: <code>:where()</code>, <code>:is()</code> &amp; <code>:not()</code>
+            </h2>
+            <ul>
+                <li><code>:where(...)</code> always contributes <strong>0 specificity</strong>—great for resets and base
+                    defaults you want easy to override.</li>
+                <li><code>:is(...)</code> takes the specificity of its <strong>most specific argument</strong>.</li>
+                <li><code>:not(...)</code> takes the specificity of its <strong>most specific argument</strong> (it does
+                    not add weight by itself).</li>
+            </ul>
+
+            <pre>:where(.card h2) { color: gray; }      /* 0-0-0-0 */
+:is(.card, #hero) h2 { color: navy; } /* 0-1-0-1 (because #hero is inside :is()) */</pre>
+        </section>
+
+        <!-- 8. CASCADE ORDER -->
+        <section id="cascade">
+            <h2>8. Cascade Order &amp; Source Order</h2>
+            <p>When two rules have the <strong>exact same specificity</strong>, the rule that appears
+                <strong>later</strong> in the cascade wins.</p>
+
+            <pre>.demo .equal-text { color: #2563eb; }       /* 0-0-2-0 — earlier */
+.demo .equal-text.later { color: #dc2626; } /* 0-0-3-0 — higher specificity &amp; later */</pre>
+
+            <div class="demo">
+                <span class="demo-label">Live Rendered Output</span>
+                <p class="equal-text later">Cascade Tie-Breaker — Later / Higher Rule Wins</p>
+            </div>
+        </section>
+
+        <!-- 9. RULES -->
+        <section id="rules">
+            <h2>9. Practical Rules to Remember</h2>
+            <div class="success">
+                <strong>Keep specificity low:</strong> Prefer clean class names over chained IDs or deep descendant
+                paths so styles are easy to override later.
+            </div>
+            <div class="warning">
+                <strong>Avoid overusing <code>!important</code>:</strong> It overrides normal specificity and makes
+                debugging cascading conflicts much harder.
+            </div>
+        </section>
+
+        <!-- 10. INTERVIEW Q&A -->
+        <section id="interview">
+            <h2>10. Interview Q&amp;A</h2>
+
+            <div class="question">
+                <strong>Q1: Do ten class selectors (<code>.a.b.c.d.e.f.g.h.i.j</code>) beat one ID selector
+                    (<code>#unique</code>)?</strong>
+                <br>
+                <button class="reveal-btn" type="button" onclick="toggleAnswer('ans-1')">Show Answer</button>
+                <div id="ans-1" class="answer-box">
+                    No. Specificity columns do not roll over into higher columns—<code>0-1-0-0</code> beats
+                    <code>0-0-10-0</code>.
+                </div>
+            </div>
+
+            <div class="question">
+                <strong>Q2: Why is <code>:where()</code> useful in component libraries?</strong>
+                <br>
+                <button class="reveal-btn" type="button" onclick="toggleAnswer('ans-2')">Show Answer</button>
+                <div id="ans-2" class="answer-box">
+                    Because <code>:where()</code> has zero specificity, consumers can override default styles with a
+                    simple class or element selector without fighting specificity wars.
+                </div>
+            </div>
+
+            <div class="question">
+                <strong>Q3: What happens when two rules have identical specificity?</strong>
+                <br>
+                <button class="reveal-btn" type="button" onclick="toggleAnswer('ans-3')">Show Answer</button>
+                <div id="ans-3" class="answer-box">
+                    The browser checks origin/importance and cascade layers first, and if still tied, the rule declared
+                    later in source order wins.
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>CSS Specificity Learning Notes — Complete 10-Section Reference</p>
+    </footer>
+
+    <script>
+        function updateCalculator() {
+            const raw = document.getElementById("selector-input").value.trim();
+            const withoutPseudoEl = raw.replace(/::[a-zA-Z-]+/g, "");
+            const ids = (withoutPseudoEl.match(/#[a-zA-Z0-9_-]+/g) || []).length;
+            const classes = (withoutPseudoEl.match(/\.[a-zA-Z0-9_-]+/g) || []).length;
+            const attrs = (withoutPseudoEl.match(/\[[^\]]+\]/g) || []).length;
+            const pseudoClasses = (withoutPseudoEl.match(/:[a-zA-Z-]+(\([^)]*\))?/g) || []).length;
+            const cleanedForElements = withoutPseudoEl
+                .replace(/#[a-zA-Z0-9_-]+/g, " ")
+                .replace(/\.[a-zA-Z0-9_-]+/g, " ")
+                .replace(/\[[^\]]+\]/g, " ")
+                .replace(/:[a-zA-Z-]+(\([^)]*\))?/g, " ")
+                .replace(/[>+~*,]/g, " ");
+            const elements = (cleanedForElements.match(/\b[a-zA-Z][a-zA-Z0-9-]*\b/g) || []).length;
+
+            document.getElementById("score-b").textContent = ids;
+            document.getElementById("score-c").textContent = classes + attrs + pseudoClasses;
+            document.getElementById("score-d").textContent = elements;
+        }
+
+        function toggleAnswer(id) {
+            document.getElementById(id).classList.toggle("show");
+        }
+
+        document.getElementById("selector-input").addEventListener("input", updateCalculator);
+        updateCalculator();
+    </script>
+
+</body>
+
+</html>

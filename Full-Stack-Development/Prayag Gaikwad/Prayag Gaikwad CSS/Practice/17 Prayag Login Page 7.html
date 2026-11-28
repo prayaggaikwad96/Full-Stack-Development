@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+
+    <title>Prayag - Create Account</title>
+
+    <!-- GOOGLE FONT: MICHROMA -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* BODY */
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #171221;
+            background-image:
+                radial-gradient(circle at top left, rgba(118, 84, 189, 0.14), transparent 55%),
+                linear-gradient(135deg, rgba(23, 18, 33, 0.24) 0%, rgba(38, 29, 54, 0.18) 55%, rgba(25, 20, 36, 0.28) 100%),
+                url("https://images.stockcake.com/public/f/9/c/f9c040d1-492c-47e4-81e9-e22177898522_large/purple-mountain-reflection-stockcake.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 30px;
+        }
+
+        body.bg-fallback {
+            background-image:
+                radial-gradient(circle at top left, rgba(118, 84, 189, 0.38), transparent 55%),
+                linear-gradient(135deg, #171221 0%, #261d36 55%, #191424 100%);
+        }
+
+        /* MAIN CONTAINER */
+
+        .container {
+            width: 100%;
+            max-width: 980px;
+            min-height: 640px;
+            display: flex;
+            gap: 13px;
+            background: rgba(44, 37, 53, 0.68);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 13px;
+            overflow: hidden;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+            padding: 13px;
+        }
+
+        /* LEFT SECTION */
+
+        .left-section {
+            position: relative;
+            width: 50%;
+            background-color: #2d1e54;
+            background-image:
+                linear-gradient(180deg,
+                    rgba(18, 10, 36, 0.08) 0%,
+                    rgba(28, 15, 58, 0.18) 55%,
+                    rgba(16, 9, 32, 0.44) 100%),
+                url("https://i.redd.it/zlv5bhakiv291.jpg");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            color: white;
+            transition: background-image 0.35s ease;
+        }
+
+        .left-section.bg-fallback {
+            background-image:
+                radial-gradient(circle at 25% 20%, rgba(168, 129, 255, 0.32), transparent 55%),
+                linear-gradient(160deg, #4b2f8c 0%, #2d1c57 52%, #1b1136 100%);
+        }
+
+        /* HEADER */
+
+        .left-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            z-index: 1;
+        }
+
+        /* LOGO - MICHROMA FONT */
+
+        .amu-logo {
+            font-family: 'Michroma', sans-serif;
+            font-size: 27px;
+            font-weight: 400;
+            color: white;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        /* BACK LINK */
+
+        .back-link {
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            background: rgba(23, 18, 33, 0.45);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            padding: 7px 13px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .back-link:hover {
+            background: rgba(118, 84, 189, 0.55);
+            border-color: rgba(255, 255, 255, 0.45);
+        }
+
+        /* LEFT CONTENT */
+
+        .left-content {
+            text-align: center;
+            margin-bottom: 15px;
+            z-index: 1;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: rgba(18, 12, 30, 0.34);
+            backdrop-filter: blur(4px);
+        }
+
+        .tagline {
+            font-size: 23px;
+            line-height: 1.25;
+            color: white;
+            font-weight: 400;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+            transition: opacity 0.25s ease;
+        }
+
+        .tagline.is-fading {
+            opacity: 0.35;
+        }
+
+        /* SLIDER DOTS */
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .slider-dot {
+            width: 24px;
+            height: 6px;
+            padding: 0;
+            border: none;
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: width 0.25s ease, background-color 0.25s ease;
+        }
+
+        .slider-dot:hover {
+            background: rgba(255, 255, 255, 0.78);
+        }
+
+        .slider-dot:focus-visible {
+            outline: 2px solid #ffffff;
+            outline-offset: 3px;
+        }
+
+        .slider-dot.active {
+            background: white;
+            width: 33px;
+        }
+
+        /* RIGHT SECTION */
+
+        .right-section {
+            width: 50%;
+            padding: 32px 6.5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 10px;
+            background-color: #2c2535;
+            background-image:
+                linear-gradient(180deg,
+                    rgba(22, 17, 32, 0.24) 0%,
+                    rgba(18, 14, 28, 0.36) 100%),
+                url("https://i.redd.it/rxer0gciy5l91.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .right-section.bg-fallback {
+            background-image:
+                radial-gradient(circle at 85% 15%, rgba(118, 84, 189, 0.24), transparent 50%),
+                linear-gradient(180deg, #31293d 0%, #262030 100%);
+        }
+
+        /* HEADING */
+
+        h1 {
+            font-size: 36px;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+        }
+
+        /* SUBTITLE */
+
+        .subtitle {
+            font-size: 12px;
+            color: #f0ebf8;
+            margin-bottom: 20px;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+        }
+
+        .subtitle a {
+            color: #e4d8ff;
+            text-decoration: underline;
+        }
+
+        /* FORM */
+
+        form {
+            width: 100%;
+        }
+
+        /* INPUT GROUP */
+
+        .input-group {
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        /* NAME FIELDS */
+
+        .name-group {
+            display: flex;
+            gap: 13px;
+        }
+
+        .name-group .input-group {
+            width: calc(50% - 6.5px);
+            min-width: 0;
+        }
+
+        /* INPUT FIELDS */
+
+        .input-group input {
+            width: 100%;
+            height: 38px;
+            padding: 10px 15px;
+            background: rgba(24, 19, 34, 0.72);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 5px;
+            outline: none;
+            color: white;
+            font-size: 12px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, opacity 0.2s ease;
+        }
+
+        .input-group input:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .input-group input::placeholder {
+            color: #cfc8de;
+        }
+
+        .input-group input:focus {
+            background: rgba(24, 19, 34, 0.86);
+            border-color: #b39bff;
+            box-shadow: 0 0 6px rgba(157, 124, 255, 0.45);
+        }
+
+        .input-group input.invalid {
+            border-color: #ff6b8b;
+            box-shadow: 0 0 4px rgba(255, 107, 139, 0.45);
+        }
+
+        .input-group input.valid {
+            border-color: #55d69e;
+        }
+
+        .field-error {
+            display: none;
+            margin-top: 4px;
+            font-size: 10px;
+            line-height: 1.3;
+            color: #ffb3c4;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        .field-error.visible {
+            display: block;
+        }
+
+        /* PASSWORD STRENGTH METER */
+
+        .strength-box {
+            margin-top: 7px;
+        }
+
+        .strength-bars {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .strength-bar {
+            height: 4px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            transition: background-color 0.25s ease;
+        }
+
+        .strength-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            font-size: 10px;
+            color: #f3effa;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        .strength-label {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        /* PASSWORD WRAPPER & ACTION BUTTONS */
+
+        .password-group {
+            position: relative;
+        }
+
+        .password-group input {
+            padding-right: 102px;
+        }
+
+        .password-actions {
+            position: absolute;
+            right: 8px;
+            top: 19px;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .password-group .toggle-password {
+            position: static;
+            transform: none;
+            width: 24px;
+            height: 24px;
+            background: none;
+            border: none;
+            color: #e2dcf0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .password-group .toggle-password:hover,
+        .password-group .toggle-password:focus-visible {
+            color: #ffffff;
+            outline: none;
+        }
+
+        .pw-action-btn {
+            height: 24px;
+            padding: 0 7px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(118, 84, 189, 0.42);
+            color: #f3eeff;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .pw-action-btn:hover,
+        .pw-action-btn:focus-visible {
+            background: rgba(139, 107, 208, 0.65);
+            border-color: #c6b4ff;
+            color: #ffffff;
+            outline: none;
+        }
+
+        .pw-action-btn.copied {
+            background: rgba(85, 214, 158, 0.28);
+            border-color: #55d69e;
+            color: #7ef2be;
+        }
+
+        /* CAPS LOCK, CHECKLIST & MATCH STATUS */
+
+        .caps-warning {
+            display: none;
+            margin-top: 5px;
+            font-size: 10px;
+            line-height: 1.3;
+            color: #ffd17d;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        .caps-warning.visible {
+            display: block;
+        }
+
+        .password-checklist {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 4px 10px;
+            margin-top: 8px;
+            padding: 8px 10px;
+            border-radius: 6px;
+            background: rgba(20, 15, 29, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            font-size: 10px;
+            color: #dcd6ea;
+        }
+
+        .password-checklist li {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            line-height: 1.3;
+            transition: color 0.2s ease;
+        }
+
+        .password-checklist li::before {
+            content: "•";
+            font-size: 12px;
+            line-height: 1;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .password-checklist li.met {
+            color: #7ef2be;
+        }
+
+        .password-checklist li.met::before {
+            content: "✓";
+            font-size: 10px;
+            font-weight: 700;
+            color: #55d69e;
+        }
+
+        .match-status {
+            display: none;
+            margin-top: 5px;
+            font-size: 10px;
+            line-height: 1.3;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        .match-status.visible {
+            display: block;
+        }
+
+        .match-status.is-match {
+            color: #7ef2be;
+        }
+
+        .match-status.is-mismatch {
+            color: #ffb3c4;
+        }
+
+        /* TERMS */
+
+        .terms {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 10px;
+            font-size: 10px;
+            color: #f6f3fc;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        .terms input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            flex-shrink: 0;
+            accent-color: #8061c9;
+            cursor: pointer;
+        }
+
+        .terms label {
+            cursor: pointer;
+        }
+
+        .terms a {
+            color: #e4d8ff;
+        }
+
+        .terms-error {
+            display: none;
+            margin-bottom: 10px;
+            font-size: 10px;
+            line-height: 1.3;
+            color: #ffb3c4;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        .terms-error.visible {
+            display: block;
+        }
+
+        .form-status {
+            display: none;
+            margin-bottom: 10px;
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            line-height: 1.4;
+            background: rgba(20, 15, 29, 0.84);
+            color: #7ef2be;
+        }
+
+        .form-status.visible {
+            display: block;
+        }
+
+        .form-status.loading {
+            background: rgba(20, 15, 29, 0.84);
+            color: #e4d8ff;
+        }
+
+        .form-status.error {
+            background: rgba(20, 15, 29, 0.88);
+            color: #ffb3c4;
+        }
+
+        /* CREATE ACCOUNT BUTTON */
+
+        .create-btn {
+            width: 100%;
+            height: 38px;
+            background: #7654bd;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .create-btn:hover:not(:disabled) {
+            background: #8b6bd0;
+            transform: translateY(-2px);
+        }
+
+        .create-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-spinner {
+            display: none;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        .create-btn.is-loading .btn-spinner {
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* DIVIDER */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin: 16px 0 12px;
+            color: #f0ebf8;
+            font-size: 10px;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.45);
+        }
+
+        /* SOCIAL REGISTER */
+
+        .social-login {
+            display: flex;
+            gap: 13px;
+        }
+
+        .social-login a {
+            width: 50%;
+            height: 38px;
+            border: 1px solid rgba(255, 255, 255, 0.32);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            color: white;
+            font-size: 12px;
+            text-decoration: none;
+            background: rgba(24, 19, 34, 0.72);
+            backdrop-filter: blur(8px);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .social-login a:hover {
+            background: rgba(46, 36, 66, 0.88);
+            border-color: #b39bff;
+        }
+
+        .social-login svg {
+            width: 17px;
+            height: 17px;
+            flex-shrink: 0;
+        }
+
+        /* LARGE MONITORS & 4K RESPONSIVE */
+
+        @media (min-width: 1441px) {
+            body {
+                padding: 40px;
+            }
+
+            .container {
+                max-width: 1200px;
+                min-height: 700px;
+            }
+        }
+
+        /* MEDIUM DESKTOP / SMALL LAPTOP RESPONSIVE */
+
+        @media (max-width: 1200px) {
+            body {
+                padding: 22px;
+            }
+
+            .right-section {
+                padding: 36px 5%;
+            }
+        }
+
+        /* TABLET LANDSCAPE RESPONSIVE */
+
+        @media (max-width: 1024px) {
+            body {
+                padding: 18px;
+            }
+
+            .right-section {
+                padding: 32px 26px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+        }
+
+        /* TABLET RESPONSIVE */
+
+        @media (max-width: 850px) {
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                flex-direction: column;
+                max-width: 500px;
+                min-height: auto;
+                padding: 10px;
+            }
+
+            .left-section {
+                width: 100%;
+                min-height: 280px;
+            }
+
+            .right-section {
+                width: 100%;
+                padding: 32px 24px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .tagline {
+                font-size: 21px;
+            }
+        }
+
+        /* LARGE MOBILE RESPONSIVE */
+
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .left-section {
+                min-height: 240px;
+            }
+
+            .right-section {
+                padding: 28px 20px;
+            }
+
+            .input-group input {
+                font-size: 16px;
+                height: 42px;
+            }
+
+            .password-group .password-actions {
+                top: 21px;
+            }
+
+            .create-btn {
+                height: 42px;
+            }
+
+            .social-login a {
+                height: 40px;
+            }
+        }
+
+        /* MOBILE RESPONSIVE */
+
+        @media (max-width: 450px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                border-radius: 10px;
+                margin: auto;
+            }
+
+            .left-section {
+                min-height: 220px;
+                padding: 15px;
+            }
+
+            .amu-logo {
+                font-size: 23px;
+            }
+
+            .tagline {
+                font-size: 18px;
+            }
+
+            .right-section {
+                padding: 28px 18px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .subtitle {
+                margin-bottom: 20px;
+            }
+
+            .name-group {
+                gap: 8px;
+            }
+
+            .name-group .input-group {
+                width: calc(50% - 4px);
+            }
+
+            .password-checklist {
+                grid-template-columns: 1fr;
+            }
+
+            .social-login {
+                gap: 8px;
+            }
+
+            .social-login a {
+                font-size: 11px;
+            }
+        }
+
+        /* SMALL MOBILE RESPONSIVE */
+
+        @media (max-width: 360px) {
+            .left-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .name-group {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .name-group .input-group {
+                width: 100%;
+            }
+
+            .social-login {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .social-login a {
+                width: 100%;
+            }
+        }
+
+        /* LANDSCAPE / SHORT VIEWPORT RESPONSIVE */
+
+        @media (max-height: 620px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding: 10px;
+            }
+
+            .container {
+                min-height: auto;
+            }
+
+            .right-section {
+                padding: 24px 28px;
+            }
+
+            .subtitle {
+                margin-bottom: 16px;
+            }
+
+            .terms {
+                margin-bottom: 10px;
+            }
+
+            .divider {
+                margin: 14px 0 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
+
+            .create-btn:hover:not(:disabled) {
+                transform: none;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LEFT SECTION -->
+
+        <div class="left-section">
+
+            <!-- HEADER -->
+
+            <div class="left-header">
+
+                <!-- LOGO -->
+
+                <div class="amu-logo">
+                    Prayag
+                </div>
+
+                <a href="https://dribbble.com/shots/24552589-Login-Sign-up-Dark-Mode-UI-UX-Design" class="back-link"
+                    target="_blank" rel="noopener noreferrer">
+                    Back to website &nbsp;&rarr;
+                </a>
+
+            </div>
+
+            <!-- LEFT CONTENT -->
+
+            <div class="left-content">
+
+                <p class="tagline" id="left-tagline">
+                    Capturing Moments,<br>
+                    Creating Memories
+                </p>
+
+                <!-- SLIDER DOTS -->
+
+                <div class="slider-dots" role="tablist" aria-label="Showcase slides">
+                    <button type="button" class="slider-dot" data-slide="0" aria-label="Show slide 1" aria-selected="false" tabindex="-1"></button>
+                    <button type="button" class="slider-dot" data-slide="1" aria-label="Show slide 2" aria-selected="false" tabindex="-1"></button>
+                    <button type="button" class="slider-dot active" data-slide="2" aria-label="Show slide 3" aria-selected="true" tabindex="0"></button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SECTION -->
+
+        <div class="right-section">
+
+            <h1>Create an account</h1>
+
+            <p class="subtitle">
+                Already have an account?
+                <a href="login.html">Log in</a>
+            </p>
+
+            <!-- REGISTER FORM -->
+
+            <form id="signup-form" action="/api/auth/signup" method="post" novalidate>
+
+                <!-- FIRST NAME AND LAST NAME -->
+
+                <div class="name-group">
+
+                    <div class="input-group">
+
+                        <input type="text" id="first-name" name="first_name" placeholder="First name"
+                            autocomplete="given-name" aria-describedby="first-name-error" required>
+                        <span class="field-error" id="first-name-error" aria-live="polite"></span>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <input type="text" id="last-name" name="last_name" placeholder="Last name"
+                            autocomplete="family-name" aria-describedby="last-name-error" required>
+                        <span class="field-error" id="last-name-error" aria-live="polite"></span>
+
+                    </div>
+
+                </div>
+
+                <!-- EMAIL -->
+
+                <div class="input-group">
+
+                    <input type="email" id="email" name="email" placeholder="Email" autocomplete="email"
+                        aria-describedby="email-error" required>
+                    <span class="field-error" id="email-error" aria-live="polite"></span>
+
+                </div>
+
+                <!-- PASSWORD -->
+
+                <div class="input-group password-group">
+
+                    <input type="password" id="password" name="password" placeholder="Enter your password" minlength="6"
+                        autocomplete="new-password"
+                        aria-describedby="strength-hint caps-warning password-checklist password-error" required>
+
+                    <div class="password-actions">
+                        <button type="button" class="pw-action-btn" id="generate-password-btn"
+                            aria-label="Generate strong password" title="Generate strong password">
+                            Generate
+                        </button>
+
+                        <button type="button" class="pw-action-btn" id="copy-password-btn"
+                            aria-label="Copy password to clipboard" title="Copy password">
+                            Copy
+                        </button>
+
+                        <button type="button" class="toggle-password" onclick="togglePassword('password', this)"
+                            aria-label="Show password">
+                            <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="caps-warning" id="caps-warning" aria-live="polite">Caps Lock is on</div>
+
+                    <div class="strength-box" aria-live="polite">
+                        <div class="strength-bars">
+                            <span class="strength-bar" id="bar-1"></span>
+                            <span class="strength-bar" id="bar-2"></span>
+                            <span class="strength-bar" id="bar-3"></span>
+                            <span class="strength-bar" id="bar-4"></span>
+                        </div>
+                        <div class="strength-meta">
+                            <span id="strength-hint">Use 6+ chars, upper/lowercase, number &amp; symbol</span>
+                            <span class="strength-label" id="strength-label"></span>
+                        </div>
+                    </div>
+
+                    <ul class="password-checklist" id="password-checklist" aria-label="Password requirements">
+                        <li data-rule="length">At least 6 characters</li>
+                        <li data-rule="case">Upper &amp; lowercase letters</li>
+                        <li data-rule="number">At least 1 number</li>
+                        <li data-rule="symbol">At least 1 symbol</li>
+                    </ul>
+
+                    <span class="field-error" id="password-error" aria-live="polite"></span>
+
+                </div>
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="input-group password-group">
+
+                    <input type="password" id="confirm-password" name="confirm_password"
+                        placeholder="Confirm your password" minlength="6" autocomplete="new-password"
+                        aria-describedby="confirm-match-status confirm-password-error" required>
+
+                    <div class="password-actions">
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirm-password', this)"
+                            aria-label="Show confirm password">
+                            <svg class="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="match-status" id="confirm-match-status" aria-live="polite"></div>
+                    <span class="field-error" id="confirm-password-error" aria-live="polite"></span>
+
+                </div>
+
+                <!-- TERMS AND CONDITIONS -->
+
+                <div class="terms">
+
+                    <input type="checkbox" id="terms" name="terms" aria-describedby="terms-error" required>
+
+                    <label for="terms">
+                        I agree to the
+                        <a href="terms.html">Terms &amp; Conditions</a>
+                    </label>
+
+                </div>
+                <span class="terms-error" id="terms-error" aria-live="polite"></span>
+
+                <div class="form-status" id="form-status" aria-live="polite"></div>
+
+                <!-- CREATE ACCOUNT BUTTON -->
+
+                <button type="submit" class="create-btn" id="submit-btn">
+                    <span class="btn-spinner" aria-hidden="true"></span>
+                    <span class="btn-text">Create account</span>
+                </button>
+
+            </form>
+
+            <!-- DIVIDER -->
+
+            <div class="divider">
+                Or register with
+            </div>
+
+            <!-- SOCIAL REGISTER -->
+
+            <div class="social-login">
+
+                <!-- GOOGLE -->
+
+                <a href="https://accounts.google.com/" aria-label="Register with Google" title="Google" target="_blank"
+                    rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#4285F4"
+                            d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17Z" />
+                        <path fill="#34A853"
+                            d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24Z" />
+                        <path fill="#FBBC05"
+                            d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14Z" />
+                        <path fill="#EA4335"
+                            d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96Z" />
+                    </svg>
+                    Google
+                </a>
+
+                <!-- APPLE -->
+
+                <a href="https://account.apple.com/" aria-label="Register with Apple" title="Apple" target="_blank"
+                    rel="noopener noreferrer">
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+                    </svg>
+                    Apple
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- BACKGROUND IMAGE FALLBACK, SLIDER & FORM SCRIPT -->
+
+    <script>
+        const BODY_BG_URL = "https://images.stockcake.com/public/f/9/c/f9c040d1-492c-47e4-81e9-e22177898522_large/purple-mountain-reflection-stockcake.jpg";
+        const RIGHT_BG_URL = "https://i.redd.it/rxer0gciy5l91.jpg";
+
+        const leftSection = document.querySelector(".left-section");
+        const taglineEl = document.getElementById("left-tagline");
+        const sliderDots = Array.from(document.querySelectorAll(".slider-dot"));
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        const slides = [
+            {
+                tagline: "Frame Every Horizon,<br>Save Every Story",
+                imageUrl: BODY_BG_URL
+            },
+            {
+                tagline: "Night Skies Above,<br>Calm Nights Below",
+                imageUrl: RIGHT_BG_URL
+            },
+            {
+                tagline: "Capturing Moments,<br>Creating Memories",
+                imageUrl: "https://i.redd.it/zlv5bhakiv291.jpg"
+            }
+        ];
+
+        let activeSlideIndex = 2;
+        let taglineTimer = null;
+        let autoSlideTimer = null;
+
+        function applyBackgroundFallback(url, targetSelector) {
+            const target = document.querySelector(targetSelector);
+            if (!target) return;
+
+            const loader = new Image();
+            loader.referrerPolicy = "no-referrer";
+            let settled = false;
+
+            const timer = setTimeout(() => {
+                if (!settled) {
+                    settled = true;
+                    target.classList.add("bg-fallback");
+                }
+            }, 8000);
+
+            loader.onload = () => {
+                if (!settled) {
+                    settled = true;
+                    clearTimeout(timer);
+                    target.classList.remove("bg-fallback");
+                }
+            };
+
+            loader.onerror = () => {
+                if (!settled) {
+                    settled = true;
+                    clearTimeout(timer);
+                    target.classList.add("bg-fallback");
+                }
+            };
+
+            loader.src = url;
+        }
+
+        function setLeftBackgroundImage(url) {
+            if (!leftSection) return;
+            leftSection.style.backgroundImage = `
+                linear-gradient(180deg,
+                    rgba(18, 10, 36, 0.08) 0%,
+                    rgba(28, 15, 58, 0.18) 55%,
+                    rgba(16, 9, 32, 0.44) 100%),
+                url("${url}")
+            `;
+            applyBackgroundFallback(url, ".left-section");
+        }
+
+        function activateSlide(index, { restartAuto = true } = {}) {
+            const slide = slides[index];
+            if (!slide) return;
+
+            activeSlideIndex = index;
+
+            sliderDots.forEach((dot, i) => {
+                const isActive = i === index;
+                dot.classList.toggle("active", isActive);
+                dot.setAttribute("aria-selected", String(isActive));
+                dot.tabIndex = isActive ? 0 : -1;
+            });
+
+            if (taglineEl) {
+                clearTimeout(taglineTimer);
+                taglineEl.classList.add("is-fading");
+                taglineTimer = setTimeout(() => {
+                    taglineEl.innerHTML = slide.tagline;
+                    taglineEl.classList.remove("is-fading");
+                }, 120);
+            }
+
+            setLeftBackgroundImage(slide.imageUrl);
+
+            if (restartAuto) {
+                startAutoSlide();
+            }
+        }
+
+        function stopAutoSlide() {
+            clearInterval(autoSlideTimer);
+            autoSlideTimer = null;
+        }
+
+        function startAutoSlide() {
+            stopAutoSlide();
+            if (prefersReducedMotion.matches || slides.length < 2) return;
+
+            autoSlideTimer = setInterval(() => {
+                const nextIndex = (activeSlideIndex + 1) % slides.length;
+                activateSlide(nextIndex, { restartAuto: false });
+            }, 5000);
+        }
+
+        sliderDots.forEach((dot, index) => {
+            dot.addEventListener("click", () => activateSlide(index));
+            dot.addEventListener("keydown", (event) => {
+                if (event.key === "ArrowRight") {
+                    event.preventDefault();
+                    const next = (index + 1) % sliderDots.length;
+                    activateSlide(next);
+                    sliderDots[next].focus();
+                } else if (event.key === "ArrowLeft") {
+                    event.preventDefault();
+                    const prev = (index - 1 + sliderDots.length) % sliderDots.length;
+                    activateSlide(prev);
+                    sliderDots[prev].focus();
+                }
+            });
+        });
+
+        if (leftSection) {
+            leftSection.addEventListener("mouseenter", stopAutoSlide);
+            leftSection.addEventListener("mouseleave", startAutoSlide);
+            leftSection.addEventListener("focusin", stopAutoSlide);
+            leftSection.addEventListener("focusout", startAutoSlide);
+        }
+
+        if (typeof prefersReducedMotion.addEventListener === "function") {
+            prefersReducedMotion.addEventListener("change", () => {
+                if (prefersReducedMotion.matches) stopAutoSlide();
+                else startAutoSlide();
+            });
+        }
+
+        slides.forEach((slide) => {
+            const preload = new Image();
+            preload.referrerPolicy = "no-referrer";
+            preload.src = slide.imageUrl;
+        });
+
+        applyBackgroundFallback(BODY_BG_URL, "body");
+        applyBackgroundFallback(slides[activeSlideIndex].imageUrl, ".left-section");
+        applyBackgroundFallback(RIGHT_BG_URL, ".right-section");
+        startAutoSlide();
+
+        const eyeOpenMarkup = `
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+        `;
+        const eyeClosedMarkup = `
+            <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"></path>
+            <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"></path>
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+        `;
+
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+
+            const eyeIcon = button.querySelector(".eye-icon");
+            const isConfirm = inputId === "confirm-password";
+            const shouldShow = input.type === "password";
+
+            input.type = shouldShow ? "text" : "password";
+
+            if (eyeIcon) {
+                eyeIcon.innerHTML = shouldShow ? eyeClosedMarkup : eyeOpenMarkup;
+            }
+
+            if (isConfirm) {
+                button.setAttribute(
+                    "aria-label",
+                    shouldShow ? "Hide confirm password" : "Show confirm password"
+                );
+            } else {
+                button.setAttribute(
+                    "aria-label",
+                    shouldShow ? "Hide password" : "Show password"
+                );
+            }
+        }
+
+        const form = document.getElementById("signup-form");
+        const firstNameInput = document.getElementById("first-name");
+        const lastNameInput = document.getElementById("last-name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirm-password");
+        const termsInput = document.getElementById("terms");
+        const termsErrorEl = document.getElementById("terms-error");
+        const formStatusEl = document.getElementById("form-status");
+        const submitBtn = document.getElementById("submit-btn");
+        const submitBtnText = submitBtn ? submitBtn.querySelector(".btn-text") : null;
+
+        const capsWarningEl = document.getElementById("caps-warning");
+        const checklistItems = Array.from(document.querySelectorAll("#password-checklist li"));
+        const confirmMatchEl = document.getElementById("confirm-match-status");
+        const generatePasswordBtn = document.getElementById("generate-password-btn");
+        const copyPasswordBtn = document.getElementById("copy-password-btn");
+
+        const bars = [
+            document.getElementById("bar-1"),
+            document.getElementById("bar-2"),
+            document.getElementById("bar-3"),
+            document.getElementById("bar-4")
+        ];
+        const strengthHintEl = document.getElementById("strength-hint");
+        const strengthLabelEl = document.getElementById("strength-label");
+
+        let copyResetTimer = null;
+
+        function getPasswordChecks(value) {
+            return {
+                length: value.length >= 6,
+                case: /[a-z]/.test(value) && /[A-Z]/.test(value),
+                number: /\d/.test(value),
+                symbol: /[^A-Za-z0-9]/.test(value)
+            };
+        }
+
+        function getMissingPasswordRules(value) {
+            const checks = getPasswordChecks(value);
+            const missing = [];
+
+            if (!checks.length) missing.push("at least 6 characters");
+            if (!checks.case) missing.push("upper and lowercase letters");
+            if (!checks.number) missing.push("at least 1 number");
+            if (!checks.symbol) missing.push("at least 1 symbol");
+
+            return missing;
+        }
+
+        function evaluatePasswordStrength(value) {
+            const checks = getPasswordChecks(value);
+            return Object.values(checks).filter(Boolean).length;
+        }
+
+        function updateChecklist(value) {
+            const checks = getPasswordChecks(value);
+            checklistItems.forEach((item) => {
+                const rule = item.getAttribute("data-rule");
+                item.classList.toggle("met", Boolean(checks[rule]));
+            });
+        }
+
+        function updateStrengthMeter() {
+            const value = passwordInput.value;
+            const levels = [
+                { color: "rgba(255, 255, 255, 0.3)", label: "", hint: "Use 6+ chars, upper/lowercase, number & symbol" },
+                { color: "#ff6b8b", label: "Weak", hint: "Add uppercase, numbers, or symbols" },
+                { color: "#f6b955", label: "Fair", hint: "Getting better—try adding another character type" },
+                { color: "#7cc6fe", label: "Good", hint: "Solid password strength" },
+                { color: "#55d69e", label: "Strong", hint: "Great password strength" }
+            ];
+
+            if (!value) {
+                bars.forEach((bar) => {
+                    if (bar) bar.style.backgroundColor = levels[0].color;
+                });
+                if (strengthLabelEl) strengthLabelEl.textContent = levels[0].label;
+                if (strengthHintEl) strengthHintEl.textContent = levels[0].hint;
+                return;
+            }
+
+            const score = evaluatePasswordStrength(value);
+            const activeLevel = levels[score] || levels[1];
+
+            bars.forEach((bar, index) => {
+                if (!bar) return;
+                bar.style.backgroundColor = index < score ? activeLevel.color : "rgba(255, 255, 255, 0.3)";
+            });
+
+            if (strengthLabelEl) {
+                strengthLabelEl.textContent = activeLevel.label;
+                strengthLabelEl.style.color = activeLevel.color;
+            }
+            if (strengthHintEl) {
+                strengthHintEl.textContent = activeLevel.hint;
+            }
+        }
+
+        function updateCapsLockState(event) {
+            if (!capsWarningEl || typeof event.getModifierState !== "function") return;
+            const isCapsOn = event.getModifierState("CapsLock");
+            capsWarningEl.classList.toggle("visible", isCapsOn);
+        }
+
+        function updateConfirmMatchIndicator() {
+            if (!confirmMatchEl) return;
+            const confirmVal = confirmPasswordInput.value;
+            const passVal = passwordInput.value;
+
+            confirmMatchEl.classList.remove("visible", "is-match", "is-mismatch");
+            if (!confirmVal) {
+                confirmMatchEl.textContent = "";
+                return;
+            }
+
+            if (confirmVal === passVal) {
+                confirmMatchEl.textContent = "Passwords match";
+                confirmMatchEl.classList.add("visible", "is-match");
+            } else {
+                confirmMatchEl.textContent = "Passwords do not match yet";
+                confirmMatchEl.classList.add("visible", "is-mismatch");
+            }
+        }
+
+        function syncPasswordUI() {
+            const value = passwordInput.value;
+            updateChecklist(value);
+            updateStrengthMeter();
+            updateConfirmMatchIndicator();
+        }
+
+        function getRandomInt(maxExclusive) {
+            if (window.crypto && typeof window.crypto.getRandomValues === "function") {
+                const array = new Uint32Array(1);
+                const limit = Math.floor(0xffffffff / maxExclusive) * maxExclusive;
+                let value = 0;
+                do {
+                    window.crypto.getRandomValues(array);
+                    value = array[0];
+                } while (value >= limit);
+                return value % maxExclusive;
+            }
+            return Math.floor(Math.random() * maxExclusive);
+        }
+
+        function pickRandomChar(charset) {
+            return charset[getRandomInt(charset.length)];
+        }
+
+        function shuffleChars(chars) {
+            for (let i = chars.length - 1; i > 0; i--) {
+                const j = getRandomInt(i + 1);
+                [chars[i], chars[j]] = [chars[j], chars[i]];
+            }
+            return chars;
+        }
+
+        function generateStrongPassword(length = 14) {
+            const lower = "abcdefghjkmnpqrstuvwxyz";
+            const upper = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+            const digits = "23456789";
+            const symbols = "!@#$%^&*()-_=+";
+            const allChars = lower + upper + digits + symbols;
+
+            const safeLength = Math.max(length, 6);
+            const chars = [
+                pickRandomChar(lower),
+                pickRandomChar(upper),
+                pickRandomChar(digits),
+                pickRandomChar(symbols)
+            ];
+
+            while (chars.length < safeLength) {
+                chars.push(pickRandomChar(allChars));
+            }
+
+            return shuffleChars(chars).join("");
+        }
+
+        async function copyTextToClipboard(text) {
+            if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+                await navigator.clipboard.writeText(text);
+                return true;
+            }
+
+            const helper = document.createElement("textarea");
+            helper.value = text;
+            helper.setAttribute("readonly", "");
+            helper.style.position = "fixed";
+            helper.style.opacity = "0";
+            document.body.appendChild(helper);
+            helper.select();
+            const copied = document.execCommand("copy");
+            document.body.removeChild(helper);
+            return copied;
+        }
+
+        function setFieldState(input, errorId, message) {
+            const errorEl = document.getElementById(errorId);
+            if (!input || !errorEl) return true;
+
+            if (message) {
+                input.classList.remove("valid");
+                input.classList.add("invalid");
+                errorEl.textContent = message;
+                errorEl.classList.add("visible");
+                return false;
+            }
+
+            input.classList.remove("invalid");
+            if (input.value.trim().length > 0) {
+                input.classList.add("valid");
+            } else {
+                input.classList.remove("valid");
+            }
+            errorEl.textContent = "";
+            errorEl.classList.remove("visible");
+            return true;
+        }
+
+        function validateFirstName() {
+            const val = firstNameInput.value.trim();
+            if (!val) return setFieldState(firstNameInput, "first-name-error", "First name is required.");
+            return setFieldState(firstNameInput, "first-name-error", "");
+        }
+
+        function validateLastName() {
+            const val = lastNameInput.value.trim();
+            if (!val) return setFieldState(lastNameInput, "last-name-error", "Last name is required.");
+            return setFieldState(lastNameInput, "last-name-error", "");
+        }
+
+        function validateEmail() {
+            const val = emailInput.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!val) return setFieldState(emailInput, "email-error", "Email address is required.");
+            if (!emailRegex.test(val)) return setFieldState(emailInput, "email-error", "Please enter a valid email address.");
+            return setFieldState(emailInput, "email-error", "");
+        }
+
+        function validatePassword() {
+            const val = passwordInput.value;
+            if (!val) {
+                return setFieldState(passwordInput, "password-error", "Password is required.");
+            }
+
+            const missing = getMissingPasswordRules(val);
+            if (missing.length > 0) {
+                return setFieldState(
+                    passwordInput,
+                    "password-error",
+                    `Password needs: ${missing.join(", ")}.`
+                );
+            }
+
+            return setFieldState(passwordInput, "password-error", "");
+        }
+
+        function validateConfirmPassword() {
+            const val = confirmPasswordInput.value;
+            if (!val) return setFieldState(confirmPasswordInput, "confirm-password-error", "Please confirm your password.");
+            if (val !== passwordInput.value) return setFieldState(confirmPasswordInput, "confirm-password-error", "Passwords do not match.");
+            return setFieldState(confirmPasswordInput, "confirm-password-error", "");
+        }
+
+        function validateTerms() {
+            if (!termsInput.checked) {
+                termsErrorEl.textContent = "You must agree to the Terms & Conditions.";
+                termsErrorEl.classList.add("visible");
+                return false;
+            }
+            termsErrorEl.textContent = "";
+            termsErrorEl.classList.remove("visible");
+            return true;
+        }
+
+        function setFormStatus(type, message) {
+            if (!formStatusEl) return;
+            formStatusEl.classList.remove("loading", "error", "visible");
+            if (!message) {
+                formStatusEl.textContent = "";
+                return;
+            }
+            formStatusEl.textContent = message;
+            if (type) formStatusEl.classList.add(type);
+            formStatusEl.classList.add("visible");
+        }
+
+        function resetFormAfterSuccess(message) {
+            setFormStatus("", message);
+            form.reset();
+            [firstNameInput, lastNameInput, emailInput, passwordInput, confirmPasswordInput].forEach((el) => {
+                el.classList.remove("valid", "invalid");
+            });
+            syncPasswordUI();
+        }
+
+        if (generatePasswordBtn) {
+            generatePasswordBtn.addEventListener("click", () => {
+                const generated = generateStrongPassword(14);
+                passwordInput.value = generated;
+                syncPasswordUI();
+                validatePassword();
+                if (confirmPasswordInput.value) {
+                    validateConfirmPassword();
+                }
+            });
+        }
+
+        if (copyPasswordBtn) {
+            copyPasswordBtn.addEventListener("click", async () => {
+                const value = passwordInput.value;
+                if (!value) {
+                    setFormStatus("error", "Enter or generate a password first before copying.");
+                    passwordInput.focus();
+                    return;
+                }
+
+                try {
+                    const ok = await copyTextToClipboard(value);
+                    if (!ok) throw new Error("Copy failed");
+
+                    clearTimeout(copyResetTimer);
+                    copyPasswordBtn.textContent = "Copied";
+                    copyPasswordBtn.classList.add("copied");
+                    copyResetTimer = setTimeout(() => {
+                        copyPasswordBtn.textContent = "Copy";
+                        copyPasswordBtn.classList.remove("copied");
+                    }, 1800);
+                } catch (_) {
+                    setFormStatus("error", "Could not access clipboard automatically in this browser context.");
+                }
+            });
+        }
+
+        firstNameInput.addEventListener("blur", validateFirstName);
+        lastNameInput.addEventListener("blur", validateLastName);
+        emailInput.addEventListener("blur", validateEmail);
+        passwordInput.addEventListener("input", () => {
+            syncPasswordUI();
+            if (passwordInput.classList.contains("invalid")) validatePassword();
+            if (confirmPasswordInput.value) validateConfirmPassword();
+        });
+        passwordInput.addEventListener("keydown", updateCapsLockState);
+        passwordInput.addEventListener("keyup", updateCapsLockState);
+        passwordInput.addEventListener("blur", () => {
+            if (capsWarningEl) capsWarningEl.classList.remove("visible");
+            validatePassword();
+        });
+        confirmPasswordInput.addEventListener("input", () => {
+            updateConfirmMatchIndicator();
+            if (confirmPasswordInput.classList.contains("invalid") || confirmPasswordInput.value.length > 0) {
+                validateConfirmPassword();
+            }
+        });
+        confirmPasswordInput.addEventListener("blur", validateConfirmPassword);
+        termsInput.addEventListener("change", validateTerms);
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            setFormStatus("", "");
+
+            const checks = [
+                validateFirstName(),
+                validateLastName(),
+                validateEmail(),
+                validatePassword(),
+                validateConfirmPassword(),
+                validateTerms()
+            ];
+
+            if (!checks.every(Boolean)) {
+                setFormStatus("error", "Please fix the highlighted fields above.");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.classList.add("is-loading");
+            if (submitBtnText) submitBtnText.textContent = "Creating account...";
+            setFormStatus("loading", "Submitting your registration...");
+
+            const payload = {
+                first_name: firstNameInput.value.trim(),
+                last_name: lastNameInput.value.trim(),
+                email: emailInput.value.trim(),
+                password: passwordInput.value,
+                terms: termsInput.checked
+            };
+
+            try {
+                if (window.location.protocol === "file:") {
+                    await new Promise((resolve) => setTimeout(resolve, 600));
+                    resetFormAfterSuccess("Preview mode: Account form validated and submitted locally.");
+                    return;
+                }
+
+                const response = await fetch(form.action, {
+                    method: form.method || "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    resetFormAfterSuccess("Account created successfully!");
+                    return;
+                }
+
+                if (response.status === 404 || response.status === 501) {
+                    resetFormAfterSuccess("Preview mode: /api/auth/signup is not connected yet, but validation succeeded.");
+                    return;
+                }
+
+                let serverMessage = `Could not create account (${response.status}).`;
+                try {
+                    const data = await response.json();
+                    if (data && data.message) serverMessage = data.message;
+                } catch (_) {
+                    // Ignore non-JSON error bodies
+                }
+                setFormStatus("error", serverMessage);
+            } catch (err) {
+                setFormStatus(
+                    "error",
+                    "Network error while submitting registration. Check your connection or backend server."
+                );
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove("is-loading");
+                if (submitBtnText) submitBtnText.textContent = "Create account";
+            }
+        });
+    </script>
+
+</body>
+
+</html>
